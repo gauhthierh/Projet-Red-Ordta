@@ -11,14 +11,15 @@ func mainMenu(character *Character) {
 		fmt.Println("\n=== MENU PRINCIPAL ===")
 		fmt.Println("1. Afficher les informations du personnage")
 		fmt.Println("2. Accéder à l'inventaire")
-		fmt.Println("3. Quitter")
+		fmt.Println("3. Marchand")
+		fmt.Println("4. Quitter")
 		fmt.Print("Votre choix : ")
 
 		var choice int
 		_, err := fmt.Scanln(&choice)
 
 		if err != nil {
-			fmt.Println("Choix invalide. Entrez 1, 2 ou 3.")
+			fmt.Println("Choix invalide. Entrez 1, 2, 3 ou 4.")
 			clearInput()
 			continue
 		}
@@ -31,10 +32,12 @@ func mainMenu(character *Character) {
 			character.accessInventory()
 			waitForReturn()
 		case 3:
+			merchant(character)
+		case 4:
 			fmt.Println("À bientôt !")
 			return
 		default:
-			fmt.Println("Choix invalide. Entrez 1, 2 ou 3.")
+			fmt.Println("Choix invalide. Entrez 1, 2, 3 ou 4.")
 		}
 	}
 }
