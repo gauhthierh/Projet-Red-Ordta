@@ -17,11 +17,14 @@ type Character struct {
 	// Nombre maximal d'objets dans l'inventaire (T12). C'est un champ et non
 	// une constante pour pouvoir l'augmenter plus tard (T18).
 	CapaciteInventaire int
+	// Pièces d'or du joueur (T13).
+	Argent int
 }
 
 // Valeurs de départ du personnage.
 const (
 	capaciteInventaireDepart = 10
+	argentDepart             = 100
 )
 
 func initCharacter(nom string, classe string, niveau int, pvmax int, pvactuel int) Character {
@@ -39,6 +42,7 @@ func initCharacter(nom string, classe string, niveau int, pvmax int, pvactuel in
 		Skill:      []string{sortCoupDePoing},
 
 		CapaciteInventaire: capaciteInventaireDepart,
+		Argent:             argentDepart,
 	}
 }
 
@@ -48,6 +52,7 @@ func (c Character) displayInfo() {
 	fmt.Printf("Niveau : %d\n", c.Niveau)
 	fmt.Printf("Pv : %d / %d\n", c.PVActuel, c.PVMax)
 	fmt.Printf("Sorts : %s\n", strings.Join(c.Skill, ", "))
+	fmt.Printf("Argent : %d pièces d'or\n", c.Argent)
 	c.accessInventory()
 }
 
