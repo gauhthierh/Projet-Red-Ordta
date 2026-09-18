@@ -25,10 +25,10 @@ func mainMenu(character *Character) {
 
 		switch choice {
 		case 1:
-			displayInfo(Character)
+			character.displayInfo()
 			waitForReturn()
 		case 2:
-			accessInventory(Character)
+			character.accessInventory()
 			waitForReturn()
 		case 3:
 			fmt.Println("À bientôt !")

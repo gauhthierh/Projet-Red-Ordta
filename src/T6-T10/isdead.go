@@ -5,11 +5,11 @@ import (
 )
 
 func isDead(character *Character) {
-	if character.pvactuel <= 0 {
-		fmt.Println(character.nom, "est mort!")
-		character.pvactuel = character.pvmax / 2
-		fmt.Println(character.nom, "a maintenant", character.pvactuel, "points de vie")
+	if character.PVActuel <= 0 {
+		fmt.Println(character.Nom, "est mort!")
+		character.PVActuel = character.PVMax / 2
+		fmt.Println(character.Nom, "a maintenant", character.PVActuel, "points de vie")
 	} else {
-		fmt.Println(character.nom, "est vivant")
+		fmt.Println(character.Nom, "est vivant")
 	}
 }
