@@ -13,7 +13,16 @@ type Character struct {
 	PVActuel   int
 	Inventaire map[string]int
 	Skill      []string
+
+	// Nombre maximal d'objets dans l'inventaire (T12). C'est un champ et non
+	// une constante pour pouvoir l'augmenter plus tard (T18).
+	CapaciteInventaire int
 }
+
+// Valeurs de départ du personnage.
+const (
+	capaciteInventaireDepart = 10
+)
 
 func initCharacter(nom string, classe string, niveau int, pvmax int, pvactuel int) Character {
 	inventaire := map[string]int{
@@ -28,6 +37,8 @@ func initCharacter(nom string, classe string, niveau int, pvmax int, pvactuel in
 		PVActuel:   pvactuel,
 		Inventaire: inventaire,
 		Skill:      []string{sortCoupDePoing},
+
+		CapaciteInventaire: capaciteInventaireDepart,
 	}
 }
 

@@ -20,21 +20,26 @@ func (c *Character) merchant() {
 
 		switch choice {
 		case 1:
-			item := itemPotionDeVie
-			c.addInventory(item)
-			fmt.Println("Vous avez acheté :", item)
+			c.buy(itemPotionDeVie)
 		case 2:
-			item := itemPotionDePoison
-			c.addInventory(item)
-			fmt.Println("Vous avez acheté :", item)
+			c.buy(itemPotionDePoison)
 		case 3:
-			item := itemLivreBouleDeFeu
-			c.addInventory(item)
-			fmt.Println("Vous avez acheté :", item)
+			c.buy(itemLivreBouleDeFeu)
 		case 0:
 			return
 		default:
 			fmt.Println("Choix invalide. Entrez 0, 1, 2 ou 3.")
 		}
 	}
+}
+
+// buy ajoute l'objet acheté à l'inventaire, ou explique pourquoi c'est
+// impossible : « Vous avez acheté » ne s'affiche que si l'ajout a eu lieu.
+func (c *Character) buy(item string) {
+	if !c.addInventory(item) {
+		fmt.Printf("Inventaire plein (%d / %d) : impossible d'ajouter %s.\n",
+			c.totalInventaire(), c.CapaciteInventaire, item)
+		return
+	}
+	fmt.Println("Vous avez acheté :", item)
 }

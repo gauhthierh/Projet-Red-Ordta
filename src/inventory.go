@@ -20,8 +20,28 @@ func (c Character) accessInventory() {
 }
 
 // addInventory ajoute un exemplaire d'un objet dans l'inventaire.
-func (c *Character) addInventory(item string) {
+// Renvoie false, sans rien ajouter, si l'inventaire est plein.
+func (c *Character) addInventory(item string) bool {
+	if c.isInventoryFull() {
+		return false
+	}
 	c.Inventaire[item]++
+	return true
+}
+
+func (c Character) totalInventaire() int {
+	var total int
+	for _, quantite := range c.Inventaire {
+		total += quantite
+	}
+	return total
+}
+
+// isInventoryFull indique si l'inventaire a atteint sa capacité. Le nombre
+// d'objets est la somme des quantités (3 potions comptent pour 3), et non
+// le nombre de sortes d'objets.
+func (c Character) isInventoryFull() bool {
+	return c.totalInventaire() >= c.CapaciteInventaire
 }
 
 // removeInventory retire un exemplaire d'un objet de l'inventaire.
@@ -56,6 +76,9 @@ func (c Character) sortedItems() []string {
 func (c *Character) inventoryMenu() {
 	for {
 		fmt.Println("\n=== INVENTAIRE ===")
+		// La capacité est lue dans le personnage : l'affichage suivra
+		// son augmentation (T18).
+		fmt.Printf("Inventaire : %d / %d\n", c.totalInventaire(), c.CapaciteInventaire)
 		items := c.sortedItems()
 		if len(items) == 0 {
 			fmt.Println("(inventaire vide)")
