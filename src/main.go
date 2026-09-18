@@ -1,6 +1,9 @@
 package main
 
+import "fmt"
+
 func main() {
-	c1 := initCharacter("Guillaume", "Elfe", 1, 100, 40)
+	fmt.Println("=== Création de personnage ===")
+	c1 := characterCreation()
 	c1.mainMenu()
 }
