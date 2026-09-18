@@ -7,8 +7,7 @@ func characterCreation() Character {
 	// Demander le nom et le formater
 	var nom string
 	for {
-		fmt.Print("Entrez le nom de votre personnage : ")
-		fmt.Scanln(&nom)
+		nom = readLine("Entrez le nom de votre personnage : ")
 
 		tab := []rune(nom)
 		debut := true
@@ -33,8 +32,8 @@ func characterCreation() Character {
 		var pvmax, pvactuel int
 
 		for {
-			fmt.Print("Entrez la classe du personnage (1 pour Humain, 2 pour Elfe, 3 pour Nain) : ")
-			fmt.Scanln(&choixClasse)
+			// Une saisie non numérique donne 0, traité par le cas default.
+			choixClasse, _ = readChoice("Entrez la classe du personnage (1 pour Humain, 2 pour Elfe, 3 pour Nain) : ")
 
 			switch choixClasse {
 			case 1:

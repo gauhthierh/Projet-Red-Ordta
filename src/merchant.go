@@ -8,14 +8,11 @@ func (c *Character) merchant() {
 		fmt.Println("\n=== MARCHAND ===")
 		fmt.Printf("1. %s - Gratuit\n", itemPotionDeVie)
 		fmt.Println("0. Retour")
-		fmt.Print("Votre choix : ")
 
-		var choice int
-		_, err := fmt.Scanln(&choice)
+		choice, ok := readChoice("Votre choix : ")
 
-		if err != nil {
+		if !ok {
 			fmt.Println("Choix invalide. Entrez 0 ou 1.")
-			clearInput()
 			continue
 		}
 
