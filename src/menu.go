@@ -13,14 +13,11 @@ func (c *Character) mainMenu() {
 		fmt.Println("2. Accéder à l'inventaire")
 		fmt.Println("3. Marchand")
 		fmt.Println("4. Quitter")
-		fmt.Print("Votre choix : ")
 
-		var choice int
-		_, err := fmt.Scanln(&choice)
+		choice, ok := readChoice("Votre choix : ")
 
-		if err != nil {
+		if !ok {
 			fmt.Println("Choix invalide. Entrez 1, 2, 3 ou 4.")
-			clearInput()
 			continue
 		}
 
@@ -29,8 +26,7 @@ func (c *Character) mainMenu() {
 			c.displayInfo()
 			waitForReturn()
 		case 2:
-			c.accessInventory()
-			waitForReturn()
+			c.inventoryMenu()
 		case 3:
 			c.merchant()
 		case 4:
@@ -42,24 +38,15 @@ func (c *Character) mainMenu() {
 	}
 }
 
-// clearInput retire la saisie invalide avant de réafficher le menu.
-func clearInput() {
-	var invalidInput string
-	fmt.Scanln(&invalidInput)
-}
-
 // waitForReturn laisse le temps de lire l'écran avant le retour au menu.
 func waitForReturn() {
 	for {
 		fmt.Println("\n0. Retour")
-		fmt.Print("Votre choix : ")
 
-		var choice int
-		_, err := fmt.Scanln(&choice)
+		choice, ok := readChoice("Votre choix : ")
 
-		if err != nil {
+		if !ok {
 			fmt.Println("Choix invalide. Entrez 0 pour revenir au menu principal.")
-			clearInput()
 			continue
 		}
 
