@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs><style>.title{font:700 42px sans-serif;fill:#f8fafc;letter-spacing:3px}.button{font:700 22px sans-serif;fill:#f8fafc}.small{font:600 18px sans-serif;fill:#cbd5e1}.label{font:700 16px sans-serif;fill:#94a3b8}</style></defs>
+  <rect width="1280" height="720" fill="#0b1220"/>
+  <path d="M0 510L220 350L390 470L610 260L830 450L1050 300L1280 470V720H0Z" fill="#13253a"/>
+  <path d="M0 610L280 470L520 610L780 420L1030 560L1280 430V720H0Z" fill="#173148"/>
+  <rect x="34" y="28" width="1212" height="664" rx="22" fill="#101b2c" fill-opacity=".9" stroke="#ef4444" stroke-width="4"/>
+  <text x="640" y="102" text-anchor="middle" class="title">COMBAT D&#39;ENTRAINEMENT</text>
+  <path d="M440 124H840" stroke="#ef4444" stroke-width="5"/>
+  <g><path d="M130 520L315 225L500 520Z" fill="#285ca8"/><circle cx="315" cy="230" r="70" fill="#e5a978"/><path d="M780 520L965 225L1150 520Z" fill="#2f792e"/><circle cx="965" cy="230" r="76" fill="#69ad52"/></g>
+  <g><rect x="115" y="575" width="390" height="32" rx="16" fill="#321c26"/><rect x="115" y="575" width="310" height="32" rx="16" fill="#ef4444"/><rect x="775" y="575" width="390" height="32" rx="16" fill="#321c26"/><rect x="775" y="575" width="205" height="32" rx="16" fill="#ef4444"/></g>
+  <g transform="translate(480 490)"><rect width="320" height="62" rx="14" fill="#263a56"/><text x="160" y="40" text-anchor="middle" class="button">ATTAQUER</text><rect y="78" width="320" height="62" rx="14" fill="#263a56"/><text x="160" y="118" text-anchor="middle" class="button">INVENTAIRE</text></g>
+</svg>

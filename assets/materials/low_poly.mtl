@@ -1,0 +1,64 @@
+# Projet RED - palette low-poly
+newmtl skin
+Kd 0.91 0.66 0.46
+newmtl skin_dark
+Kd 0.54 0.31 0.18
+newmtl hair
+Kd 0.16 0.08 0.04
+newmtl beard
+Kd 0.72 0.28 0.06
+newmtl blue
+Kd 0.10 0.34 0.82
+newmtl green
+Kd 0.18 0.62 0.20
+newmtl dark_green
+Kd 0.08 0.28 0.09
+newmtl red
+Kd 0.82 0.10 0.10
+newmtl purple
+Kd 0.44 0.12 0.64
+newmtl cyan
+Kd 0.08 0.60 0.86
+newmtl gold
+Kd 0.96 0.66 0.08
+newmtl silver
+Kd 0.66 0.74 0.82
+newmtl iron
+Kd 0.25 0.29 0.34
+newmtl leather
+Kd 0.37 0.17 0.07
+newmtl leather_light
+Kd 0.61 0.34 0.15
+newmtl fur
+Kd 0.42 0.36 0.30
+newmtl troll
+Kd 0.25 0.42 0.22
+newmtl raven
+Kd 0.04 0.05 0.08
+newmtl wood
+Kd 0.32 0.16 0.06
+newmtl stone
+Kd 0.32 0.37 0.42
+newmtl grass
+Kd 0.16 0.38 0.18
+newmtl sand
+Kd 0.58 0.47 0.28
+newmtl glass
+Kd 0.50 0.78 0.86
+d 0.65
+newmtl fire
+Kd 1.00 0.28 0.03
+Ke 0.80 0.10 0.00
+newmtl magic
+Kd 0.15 0.60 1.00
+Ke 0.05 0.25 0.80
+newmtl heal
+Kd 0.20 1.00 0.48
+Ke 0.05 0.60 0.18
+newmtl poison
+Kd 0.52 0.10 0.72
+Ke 0.20 0.02 0.30
+newmtl white
+Kd 0.90 0.92 0.96
+newmtl black
+Kd 0.02 0.025 0.035

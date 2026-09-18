@@ -39,9 +39,12 @@ cmd/red3d/          point d'entrée
 internal/game/      logique de jeu testable sans moteur graphique
 internal/game3d/    rendu G3N, scène, HUD et contrôles
 tools/dev/          outil Go de préparation et de compilation
-assets/             futurs modèles, textures et sons
 docs/               documentation du projet
 ```
+
+## Assets
+
+Le prototype reste séparé du pack définitif. Les modèles, interfaces et icônes du projet se trouvent dans `../assets` à la racine du dépôt.
 
 ## Tests
 

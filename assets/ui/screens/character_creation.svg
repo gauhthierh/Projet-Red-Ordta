@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs><style>.title{font:700 42px sans-serif;fill:#f8fafc;letter-spacing:3px}.button{font:700 22px sans-serif;fill:#f8fafc}.small{font:600 18px sans-serif;fill:#cbd5e1}.label{font:700 16px sans-serif;fill:#94a3b8}</style></defs>
+  <rect width="1280" height="720" fill="#0b1220"/>
+  <path d="M0 510L220 350L390 470L610 260L830 450L1050 300L1280 470V720H0Z" fill="#13253a"/>
+  <path d="M0 610L280 470L520 610L780 420L1030 560L1280 430V720H0Z" fill="#173148"/>
+  <rect x="34" y="28" width="1212" height="664" rx="22" fill="#101b2c" fill-opacity=".9" stroke="#22c55e" stroke-width="4"/>
+  <text x="640" y="102" text-anchor="middle" class="title">CREATION DU PERSONNAGE</text>
+  <path d="M440 124H840" stroke="#22c55e" stroke-width="5"/>
+  <g transform="translate(110 180)">
+    <rect width="470" height="410" rx="18" fill="#17263b" stroke="#334b68" stroke-width="3"/>
+    <circle cx="235" cy="135" r="88" fill="#22c55e" opacity=".7"/>
+    <path d="M125 320Q135 230 235 230Q335 230 345 320Z" fill="#283d59"/>
+    <rect x="85" y="345" width="300" height="24" rx="12" fill="#263a56"/>
+  </g>
+  <g transform="translate(635 180)" fill="#17263b" stroke="#334b68" stroke-width="3">
+    <rect width="535" height="78" rx="14"/><rect y="96" width="535" height="78" rx="14"/><rect y="192" width="535" height="78" rx="14"/><rect y="288" width="535" height="122" rx="14"/>
+  </g>
+</svg>

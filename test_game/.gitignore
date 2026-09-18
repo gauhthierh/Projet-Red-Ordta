@@ -1,5 +1,5 @@
 .tools/
+.cache/
 bin/
 *.exe
 *.dll
-
