@@ -2,11 +2,6 @@ package main
 
 import "fmt"
 
-// addInventory ajoute un exemplaire d'un objet dans l'inventaire.
-func (c *Character) addInventory(item string) {
-	c.Inventaire[item]++
-}
-
 // merchant affiche les objets disponibles chez le marchand.
 func (c *Character) merchant() {
 	for {

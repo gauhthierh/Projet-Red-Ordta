@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
 func (c *Character) takePot() {
 	potionDeVie := c.Inventaire["potion de vie"]
@@ -13,5 +16,14 @@ func (c *Character) takePot() {
 		fmt.Printf("PV : %d / %d\n", c.PVActuel, c.PVMax)
 	} else {
 		fmt.Println("Aucunes potions dans l'inventaire")
+	}
+}
+
+func (c *Character) poisonPot() {
+	for i := 0; i < 3; i++ {
+		time.Sleep(time.Second)
+		c.PVActuel -= 10
+		fmt.Printf("%s a été empoisonné ! PV : %d / %d\n", c.Nom, c.PVActuel, c.PVMax)
+		c.isDead()
 	}
 }

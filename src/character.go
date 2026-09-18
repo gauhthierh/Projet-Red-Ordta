@@ -34,21 +34,12 @@ func (c Character) displayInfo() {
 	c.accessInventory()
 }
 
-func (c Character) accessInventory() {
-	fmt.Println("Inventaire :")
-	vide := true
-	for nom, quantite := range c.Inventaire {
-		if quantite > 0 {
-			fmt.Printf("- %s : %d\n", nom, quantite)
-			vide = false
-		}
+func (c *Character) isDead() {
+	if c.PVActuel <= 0 {
+		fmt.Println(c.Nom, "est mort!")
+		c.PVActuel = c.PVMax / 2
+		fmt.Println(c.Nom, "a maintenant", c.PVActuel, "points de vie")
+	} else {
+		fmt.Println(c.Nom, "est vivant")
 	}
-	if vide {
-		fmt.Println("(inventaire vide)")
-	}
-}
-
-func main() {
-	c1 := initCharacter("Guillaume", "Elfe", 1, 100, 40)
-	c1.mainMenu()
 }
