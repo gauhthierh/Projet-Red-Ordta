@@ -14,11 +14,12 @@ type Personnage struct {
 	Inventaire map[string]int
 }
 
-// characterCreation permet de créer un personnage en demandant son nom et sa classe
-func characterCreation() Personnage {
+// Creer est une méthode qui permet de créer un personnage
+func (p *Personnage) Creer() {
 	inventaire := map[string]int{
 		"potion de vie": 3,
 	}
+	p.Inventaire = inventaire
 
 	// Demander le nom et le formater
 	var nom string
@@ -45,7 +46,6 @@ func characterCreation() Personnage {
 
 		// Demander la classe
 		var choixClasse int
-		var classe string
 		var pvmax, pvactuel int
 
 		for {
@@ -54,15 +54,15 @@ func characterCreation() Personnage {
 
 			switch choixClasse {
 			case 1:
-				classe = "Humain"
+				p.Classe = "Humain"
 				pvmax = 100
 				pvactuel = 100
 			case 2:
-				classe = "Elfe"
+				p.Classe = "Elfe"
 				pvmax = 80
 				pvactuel = 80
 			case 3:
-				classe = "Nain"
+				p.Classe = "Nain"
 				pvmax = 120
 				pvactuel = 120
 			default:
@@ -72,19 +72,29 @@ func characterCreation() Personnage {
 			break
 		}
 
-		// Retourner le personnage créé
-		return Personnage{
-			Nom:        nom,
-			Classe:     classe,
-			Niveau:     1, // Niveau initial
-			PVMax:      pvmax,
-			PVActuel:   pvactuel,
-			Inventaire: inventaire,
-		}
+		// Initialiser les champs du personnage
+		p.Nom = nom
+		p.Niveau = 1
+		p.PVMax = pvmax
+		p.PVActuel = pvactuel
+		p.Inventaire = inventaire
+		break
 	}
 }
 
 func main() {
 	fmt.Println("=== Création de personnage ===")
 
+	// Créer un personnage en utilisant la méthode Creer()
+	var joueur Personnage
+	joueur.Creer()
+
+	// Afficher les informations du personnage
+	fmt.Printf("\nPersonnage créé :\n")
+	fmt.Printf("Nom : %s\n", joueur.Nom)
+	fmt.Printf("Classe : %s\n", joueur.Classe)
+	fmt.Printf("Niveau : %d\n", joueur.Niveau)
+	fmt.Printf("PV Max : %d\n", joueur.PVMax)
+	fmt.Printf("PV Actuel : %d\n", joueur.PVActuel)
+	fmt.Printf("Inventaire : %v\n", joueur.Inventaire)
 }
