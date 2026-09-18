@@ -11,7 +11,7 @@ type Character struct {
 	Inventaire map[string]int
 }
 
-func Initcharacter(nom string, classe string, niveau int, pvmax int, pvactuel int) Character {
+func initCharacter(nom string, classe string, niveau int, pvmax int, pvactuel int) Character {
 	inventaire := map[string]int{
 		"potion de vie": 3,
 	}
@@ -49,6 +49,6 @@ func (c Character) accessInventory() {
 }
 
 func main() {
-	c1 := Initcharacter("Guillaume", "Elfe", 1, 100, 40)
+	c1 := initCharacter("Guillaume", "Elfe", 1, 100, 40)
 	c1.mainMenu()
 }
