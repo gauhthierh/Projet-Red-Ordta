@@ -26,7 +26,25 @@ func Initcharacter(nom string, classe string, niveau int, pvmax int, pvactuel in
 	}
 }
 
+func (c Character) displayInfo() {
+	fmt.Printf("Nom : %s\n", c.Nom)
+	fmt.Printf("Classe : %s\n", c.Classe)
+	fmt.Printf("Niveau : %d\n", c.Niveau)
+	fmt.Printf("Pv : %d / %d\n", c.PVActuel, c.PVMax)
+	fmt.Println("Inventaire :")
+	vide := true
+	for nom, quantite := range c.Inventaire {
+		if quantite > 0 {
+			fmt.Printf("- %s : %d\n", nom, quantite)
+			vide = false
+		}
+	}
+	if vide {
+		fmt.Println("(inventaire vide)")
+	}
+}
+
 func main() {
 	c1 := Initcharacter("Guillaume", "Elfe", 1, 100, 40)
-	fmt.Println(c1)
+	c1.displayInfo()
 }
