@@ -8,12 +8,13 @@ func (c *Character) merchant() {
 		fmt.Println("\n=== MARCHAND ===")
 		fmt.Printf("1. %s - Gratuit\n", itemPotionDeVie)
 		fmt.Printf("2. %s - Gratuit\n", itemPotionDePoison)
+		fmt.Printf("3. %s - Gratuit\n", itemLivreBouleDeFeu)
 		fmt.Println("0. Retour")
 
 		choice, ok := readChoice("Votre choix : ")
 
 		if !ok {
-			fmt.Println("Choix invalide. Entrez 0, 1 ou 2.")
+			fmt.Println("Choix invalide. Entrez 0, 1, 2 ou 3.")
 			continue
 		}
 
@@ -26,10 +27,14 @@ func (c *Character) merchant() {
 			item := itemPotionDePoison
 			c.addInventory(item)
 			fmt.Println("Vous avez acheté :", item)
+		case 3:
+			item := itemLivreBouleDeFeu
+			c.addInventory(item)
+			fmt.Println("Vous avez acheté :", item)
 		case 0:
 			return
 		default:
-			fmt.Println("Choix invalide. Entrez 0, 1 ou 2.")
+			fmt.Println("Choix invalide. Entrez 0, 1, 2 ou 3.")
 		}
 	}
 }

@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 type Character struct {
 	Nom        string
@@ -9,6 +12,7 @@ type Character struct {
 	PVMax      int
 	PVActuel   int
 	Inventaire map[string]int
+	Skill      []string
 }
 
 func initCharacter(nom string, classe string, niveau int, pvmax int, pvactuel int) Character {
@@ -23,6 +27,7 @@ func initCharacter(nom string, classe string, niveau int, pvmax int, pvactuel in
 		PVMax:      pvmax,
 		PVActuel:   pvactuel,
 		Inventaire: inventaire,
+		Skill:      []string{sortCoupDePoing},
 	}
 }
 
@@ -31,6 +36,7 @@ func (c Character) displayInfo() {
 	fmt.Printf("Classe : %s\n", c.Classe)
 	fmt.Printf("Niveau : %d\n", c.Niveau)
 	fmt.Printf("Pv : %d / %d\n", c.PVActuel, c.PVMax)
+	fmt.Printf("Sorts : %s\n", strings.Join(c.Skill, ", "))
 	c.accessInventory()
 }
 

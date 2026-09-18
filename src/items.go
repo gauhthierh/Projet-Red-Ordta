@@ -2,14 +2,22 @@ package main
 
 import (
 	"fmt"
+	"slices"
 	"time"
 )
 
 // Noms des objets : définis une seule fois pour éviter les fautes de frappe
 // dans les clés de l'inventaire.
 const (
-	itemPotionDeVie    = "Potion de vie"
-	itemPotionDePoison = "Potion de poison"
+	itemPotionDeVie     = "Potion de vie"
+	itemPotionDePoison  = "Potion de poison"
+	itemLivreBouleDeFeu = "Livre de Sort : Boule de Feu"
+)
+
+// Noms des sorts.
+const (
+	sortCoupDePoing = "Coup de poing"
+	sortBouleDeFeu  = "Boule de Feu"
 )
 
 // useItem applique l'effet d'un objet choisi dans l'inventaire.
@@ -19,9 +27,29 @@ func (c *Character) useItem(item string) {
 		c.takePot()
 	case itemPotionDePoison:
 		c.poisonPot()
+	case itemLivreBouleDeFeu:
+		// spellBook vérifie si le sort est déjà connu AVANT que le livre
+		// soit retiré : un livre inutile reste dans l'inventaire.
+		if !c.spellBook() {
+			fmt.Printf("Vous connaissez déjà le sort %s : le livre reste dans l'inventaire.\n", sortBouleDeFeu)
+			return
+		}
+		c.removeInventory(itemLivreBouleDeFeu)
+		fmt.Printf("Vous apprenez le sort %s !\n", sortBouleDeFeu)
 	default:
 		fmt.Printf("%s n'a pas d'effet utilisable.\n", item)
 	}
+}
+
+// spellBook ajoute le sort Boule de Feu à la liste des sorts. Un même sort
+// ne s'apprend qu'une fois : renvoie false s'il est déjà connu, sans rien
+// modifier.
+func (c *Character) spellBook() bool {
+	if slices.Contains(c.Skill, sortBouleDeFeu) {
+		return false
+	}
+	c.Skill = append(c.Skill, sortBouleDeFeu)
+	return true
 }
 
 func (c *Character) takePot() {
