@@ -48,7 +48,27 @@ func (c Character) accessInventory() {
 	}
 }
 
+func (c *Character) takePot() {
+	potionDeVie := c.Inventaire["potion de vie"]
+	if potionDeVie > 0 {
+		c.Inventaire["potion de vie"]--
+		c.PVActuel += 50
+		if c.PVActuel >= c.PVMax {
+			c.PVActuel = c.PVMax
+		}
+		fmt.Printf("PV : %d / %d\n", c.PVActuel, c.PVMax)
+	} else {
+		fmt.Println("Aucunes potions dans l'inventaire")
+	}
+}
+
 func main() {
 	c1 := Initcharacter("Guillaume", "Elfe", 1, 100, 40)
 	c1.displayInfo()
+	c1.takePot()
+	c1.accessInventory()
+	c1.takePot()
+	c1.accessInventory()
+	c1.takePot()
+	c1.accessInventory()
 }
