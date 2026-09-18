@@ -31,6 +31,10 @@ func (c Character) displayInfo() {
 	fmt.Printf("Classe : %s\n", c.Classe)
 	fmt.Printf("Niveau : %d\n", c.Niveau)
 	fmt.Printf("Pv : %d / %d\n", c.PVActuel, c.PVMax)
+	c.accessInventory()
+}
+
+func (c Character) accessInventory() {
 	fmt.Println("Inventaire :")
 	vide := true
 	for nom, quantite := range c.Inventaire {
