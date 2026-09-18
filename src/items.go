@@ -11,17 +11,34 @@ const (
 	itemPotionDeVie = "Potion de vie"
 )
 
+// useItem applique l'effet d'un objet choisi dans l'inventaire.
+func (c *Character) useItem(item string) {
+	switch item {
+	case itemPotionDeVie:
+		c.takePot()
+	default:
+		fmt.Printf("%s n'a pas d'effet utilisable.\n", item)
+	}
+}
+
 func (c *Character) takePot() {
-	potionDeVie := c.Inventaire[itemPotionDeVie]
-	if potionDeVie > 0 {
-		c.Inventaire[itemPotionDeVie]--
+	// À pleins PV, la potion serait gâchée : elle est refusée et reste
+	// dans l'inventaire (même principe que le livre d'un sort déjà connu).
+	if c.Inventaire[itemPotionDeVie] > 0 && c.PVActuel >= c.PVMax {
+		fmt.Println("Vous êtes déjà en pleine santé")
+		return
+	}
+	if c.removeInventory(itemPotionDeVie) {
+		avant := c.PVActuel
 		c.PVActuel += 50
 		if c.PVActuel >= c.PVMax {
 			c.PVActuel = c.PVMax
 		}
+		// Le gain annoncé est calculé après le plafond : à 70 / 100, +30.
+		fmt.Printf("Vous buvez une %s (+%d PV)\n", itemPotionDeVie, c.PVActuel-avant)
 		fmt.Printf("PV : %d / %d\n", c.PVActuel, c.PVMax)
 	} else {
-		fmt.Println("Aucunes potions dans l'inventaire")
+		fmt.Println("Aucune potion dans l'inventaire")
 	}
 }
 

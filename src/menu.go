@@ -26,8 +26,7 @@ func (c *Character) mainMenu() {
 			c.displayInfo()
 			waitForReturn()
 		case 2:
-			c.accessInventory()
-			waitForReturn()
+			c.inventoryMenu()
 		case 3:
 			c.merchant()
 		case 4:
