@@ -6,7 +6,7 @@ import "fmt"
 func (c *Character) merchant() {
 	for {
 		fmt.Println("\n=== MARCHAND ===")
-		fmt.Println("1. Potion de vie - Gratuit")
+		fmt.Printf("1. %s - Gratuit\n", itemPotionDeVie)
 		fmt.Println("0. Retour")
 		fmt.Print("Votre choix : ")
 
@@ -21,7 +21,7 @@ func (c *Character) merchant() {
 
 		switch choice {
 		case 1:
-			item := "potion de vie"
+			item := itemPotionDeVie
 			c.addInventory(item)
 			fmt.Println("Vous avez acheté :", item)
 		case 0:

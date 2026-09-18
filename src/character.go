@@ -13,7 +13,7 @@ type Character struct {
 
 func initCharacter(nom string, classe string, niveau int, pvmax int, pvactuel int) Character {
 	inventaire := map[string]int{
-		"potion de vie": 3,
+		itemPotionDeVie: 3,
 	}
 
 	return Character{

@@ -5,10 +5,16 @@ import (
 	"time"
 )
 
+// Noms des objets : définis une seule fois pour éviter les fautes de frappe
+// dans les clés de l'inventaire.
+const (
+	itemPotionDeVie = "Potion de vie"
+)
+
 func (c *Character) takePot() {
-	potionDeVie := c.Inventaire["potion de vie"]
+	potionDeVie := c.Inventaire[itemPotionDeVie]
 	if potionDeVie > 0 {
-		c.Inventaire["potion de vie"]--
+		c.Inventaire[itemPotionDeVie]--
 		c.PVActuel += 50
 		if c.PVActuel >= c.PVMax {
 			c.PVActuel = c.PVMax
