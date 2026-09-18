@@ -12,6 +12,7 @@ type Personnage struct {
 	PVMax      int
 	PVActuel   int
 	Inventaire map[string]int
+	Argent     int
 }
 
 // Creer est une méthode qui permet de créer un personnage
@@ -78,6 +79,7 @@ func (p *Personnage) Creer() {
 		p.PVMax = pvmax
 		p.PVActuel = pvactuel
 		p.Inventaire = inventaire
+		p.Argent = 100
 		break
 	}
 }
