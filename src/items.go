@@ -8,7 +8,8 @@ import (
 // Noms des objets : définis une seule fois pour éviter les fautes de frappe
 // dans les clés de l'inventaire.
 const (
-	itemPotionDeVie = "Potion de vie"
+	itemPotionDeVie    = "Potion de vie"
+	itemPotionDePoison = "Potion de poison"
 )
 
 // useItem applique l'effet d'un objet choisi dans l'inventaire.
@@ -16,6 +17,8 @@ func (c *Character) useItem(item string) {
 	switch item {
 	case itemPotionDeVie:
 		c.takePot()
+	case itemPotionDePoison:
+		c.poisonPot()
 	default:
 		fmt.Printf("%s n'a pas d'effet utilisable.\n", item)
 	}
@@ -42,11 +45,24 @@ func (c *Character) takePot() {
 	}
 }
 
+// poisonPot boit une potion de poison : 10 dégâts par seconde pendant 3 s.
+// Le poison s'arrête si le personnage meurt.
 func (c *Character) poisonPot() {
+	if !c.removeInventory(itemPotionDePoison) {
+		fmt.Println("Aucune potion de poison dans l'inventaire")
+		return
+	}
+	fmt.Printf("Vous buvez une %s...\n", itemPotionDePoison)
 	for i := 0; i < 3; i++ {
 		time.Sleep(time.Second)
 		c.PVActuel -= 10
+		if c.PVActuel < 0 {
+			c.PVActuel = 0 // les PV ne s'affichent jamais en négatif
+		}
 		fmt.Printf("%s a été empoisonné ! PV : %d / %d\n", c.Nom, c.PVActuel, c.PVMax)
-		c.isDead()
+		if c.isDead() {
+			fmt.Println("Le poison cesse de faire effet.")
+			return
+		}
 	}
 }

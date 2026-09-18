@@ -34,12 +34,15 @@ func (c Character) displayInfo() {
 	c.accessInventory()
 }
 
-func (c *Character) isDead() {
-	if c.PVActuel <= 0 {
-		fmt.Println(c.Nom, "est mort!")
-		c.PVActuel = c.PVMax / 2
-		fmt.Println(c.Nom, "a maintenant", c.PVActuel, "points de vie")
-	} else {
-		fmt.Println(c.Nom, "est vivant")
+// isDead vérifie si le personnage est mort (PV à 0 ou moins : les dégâts
+// peuvent faire passer sous 0). Si oui, il ressuscite avec 50 % de ses PV
+// max. Renvoie true s'il est mort, pour que l'appelant puisse s'arrêter.
+func (c *Character) isDead() bool {
+	if c.PVActuel > 0 {
+		return false
 	}
+	fmt.Printf("%s est mort !\n", c.Nom)
+	c.PVActuel = c.PVMax / 2
+	fmt.Printf("%s ressuscite avec %d / %d PV.\n", c.Nom, c.PVActuel, c.PVMax)
+	return true
 }
