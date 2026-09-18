@@ -3,12 +3,12 @@ package main
 import "fmt"
 
 // addInventory ajoute un exemplaire d'un objet dans l'inventaire.
-func addInventory(character *Character, item string) {
-	character.Inventaire[item]++
+func (c *Character) addInventory(item string) {
+	c.Inventaire[item]++
 }
 
 // merchant affiche les objets disponibles chez le marchand.
-func merchant(character *Character) {
+func (c *Character) merchant() {
 	for {
 		fmt.Println("\n=== MARCHAND ===")
 		fmt.Println("1. Potion de vie - Gratuit")
@@ -27,7 +27,7 @@ func merchant(character *Character) {
 		switch choice {
 		case 1:
 			item := "potion de vie"
-			addInventory(character, item)
+			c.addInventory(item)
 			fmt.Println("Vous avez acheté :", item)
 		case 0:
 			return

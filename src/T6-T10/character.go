@@ -50,5 +50,5 @@ func (c Character) accessInventory() {
 
 func main() {
 	c1 := Initcharacter("Guillaume", "Elfe", 1, 100, 40)
-	mainMenu(&c1)
+	c1.mainMenu()
 }

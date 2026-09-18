@@ -6,7 +6,7 @@ import "fmt"
 mainMenu affiche les choix principaux du jeu.
 Le Pointeur permet aux autres menus de modifier le personnage
 */
-func mainMenu(character *Character) {
+func (c *Character) mainMenu() {
 	for {
 		fmt.Println("\n=== MENU PRINCIPAL ===")
 		fmt.Println("1. Afficher les informations du personnage")
@@ -26,13 +26,13 @@ func mainMenu(character *Character) {
 
 		switch choice {
 		case 1:
-			character.displayInfo()
+			c.displayInfo()
 			waitForReturn()
 		case 2:
-			character.accessInventory()
+			c.accessInventory()
 			waitForReturn()
 		case 3:
-			merchant(character)
+			c.merchant()
 		case 4:
 			fmt.Println("À bientôt !")
 			return
