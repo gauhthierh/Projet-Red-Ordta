@@ -1,8 +1,11 @@
 package personnages
 
 import (
+	"bytes"
+	"fmt"
 	"image"
-	imagecolor "image/color"
+	"image/draw"
+	"image/png"
 
 	"github.com/g3n/engine/gls"
 	"github.com/g3n/engine/material"
@@ -10,99 +13,43 @@ import (
 	"github.com/g3n/engine/texture"
 )
 
-// Palette et textures procédurales reprises du personnage de l'ancien jeu.
-// Elles sont produites en Go ; aucun fichier de texture n'est nécessaire.
-var (
-	bois   = couleur(.28, .15, .08)
-	acier  = couleur(.58, .66, .72)
-	or     = couleur(.92, .62, .12)
-	tissu  = couleur(.12, .29, .40)
-	peau   = couleur(.83, .58, .38)
-	sombre = couleur(.045, .035, .025)
+var textures = make(map[string]*texture.Texture2D)
 
-	textures = make(map[*math32.Color]*texture.Texture2D)
-)
+func matiere(rgb [3]float32, nomTexture string) *material.Standard {
+	couleur := &math32.Color{R: rgb[0], G: rgb[1], B: rgb[2]}
+	resultat := material.NewStandard(couleur)
 
-func couleur(rouge, vert, bleu float32) *math32.Color {
-	return &math32.Color{R: rouge, G: vert, B: bleu}
-}
-
-func matiereSurface(teinte *math32.Color) *material.Standard {
-	matiere := material.NewStandard(teinte)
-	if typeSurface := typeTexture(teinte); typeSurface != "" {
-		imageTexture := textures[teinte]
-		if imageTexture == nil {
-			imageTexture = texture.NewTexture2DFromRGBA(imageSurface(typeSurface))
-			imageTexture.SetMagFilter(gls.LINEAR)
-			textures[teinte] = imageTexture
-		}
-		matiere.AddTexture(imageTexture.Incref())
-	}
-	if teinte == acier || teinte == or {
-		matiere.SetShininess(70)
+	if nomTexture == "metal" {
+		resultat.SetShininess(70)
 	} else {
-		matiere.SetShininess(6)
-		matiere.SetSpecularColor(couleur(.10, .10, .10))
+		resultat.SetShininess(6)
+		resultat.SetSpecularColor(&math32.Color{R: .1, G: .1, B: .1})
 	}
-	return matiere
+
+	if nomTexture != "" {
+		resultat.AddTexture(chargerTexture(nomTexture).Incref())
+	}
+	return resultat
 }
 
-func typeTexture(teinte *math32.Color) string {
-	switch teinte {
-	case bois:
-		return "bois"
-	case acier, or:
-		return "metal"
-	case tissu:
-		return "tissu"
-	case peau:
-		return "peau"
-	default:
-		return ""
+func chargerTexture(nom string) *texture.Texture2D {
+	if existante := textures[nom]; existante != nil {
+		return existante
 	}
-}
 
-func imageSurface(typeSurface string) *image.RGBA {
-	const cote = 64
-	img := image.NewRGBA(image.Rect(0, 0, cote, cote))
-	for y := 0; y < cote; y++ {
-		for x := 0; x < cote; x++ {
-			bruit := int(bruit2(x, y)%27) - 13
-			valeur := 220 + bruit
-			switch typeSurface {
-			case "bois":
-				valeur = 217 + bruit/2 + ((x/5+y/23)%3)*9
-				if x%17 == 0 || (x+y/3)%29 == 0 {
-					valeur -= 36
-				}
-			case "tissu":
-				valeur = 222 + bruit/3
-				if x%4 == 0 || y%4 == 0 {
-					valeur -= 15
-				}
-			case "metal":
-				valeur = 220 + bruit/4
-				if y%8 == 0 {
-					valeur += 12
-				}
-			case "peau":
-				valeur = 231 + bruit/4
-			}
-			if valeur < 90 {
-				valeur = 90
-			}
-			if valeur > 255 {
-				valeur = 255
-			}
-			composante := uint8(valeur)
-			img.SetRGBA(x, y, imagecolor.RGBA{R: composante, G: composante, B: composante, A: 255})
-		}
+	contenu, err := fichiers.ReadFile("assets/" + nom + ".png")
+	if err != nil {
+		panic(fmt.Errorf("lire la texture %s : %w", nom, err))
 	}
-	return img
-}
+	imageLue, err := png.Decode(bytes.NewReader(contenu))
+	if err != nil {
+		panic(fmt.Errorf("décoder la texture %s : %w", nom, err))
+	}
 
-func bruit2(x, y int) uint32 {
-	valeur := uint32(x)*374761393 + uint32(y)*668265263 + 2026
-	valeur = (valeur ^ (valeur >> 13)) * 1274126177
-	return valeur ^ (valeur >> 16)
+	bitmap := image.NewRGBA(imageLue.Bounds())
+	draw.Draw(bitmap, bitmap.Bounds(), imageLue, imageLue.Bounds().Min, draw.Src)
+	tex := texture.NewTexture2DFromRGBA(bitmap)
+	tex.SetMagFilter(gls.LINEAR)
+	textures[nom] = tex
+	return tex
 }
