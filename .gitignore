@@ -1,0 +1,24 @@
+# Binaires produits par go build (module projet-red)
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+src/projet-red
+
+# Tests et couverture
+*.test
+*.out
+
+# Espace de travail Go local
+go.work
+go.work.sum
+
+# Systèmes
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Éditeurs
+.idea/
+.vscode/

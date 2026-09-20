@@ -90,13 +90,19 @@ func main() {
 		m.Atlases = append(m.Atlases, filepath.ToSlash(filepath.Join("atlases", spec.File)))
 
 		bounds := img.Bounds()
+		// The artwork rows are not exactly aligned with quarter-height cells.
+		// Use the empty gutters rather than clipping objects at an arbitrary grid.
+		rows := [5]int{0, 340, 630, 920, bounds.Dy()}
+		if spec.File == "ui_world.png" {
+			rows = [5]int{0, 345, 640, 950, bounds.Dy()}
+		}
 		for index, name := range spec.Names {
 			col, row := index%4, index/4
 			cell := image.Rect(
 				bounds.Min.X+col*bounds.Dx()/4,
-				bounds.Min.Y+row*bounds.Dy()/4,
+				bounds.Min.Y+rows[row],
 				bounds.Min.X+(col+1)*bounds.Dx()/4,
-				bounds.Min.Y+(row+1)*bounds.Dy()/4,
+				bounds.Min.Y+rows[row+1],
 			)
 			icon := extract(img, cell)
 			filename := name + ".png"
@@ -233,9 +239,46 @@ func extract(src image.Image, cell image.Rectangle) *image.NRGBA {
 			out.Set(x, y, src.At(cell.Min.X+x, cell.Min.Y+y))
 		}
 	}
-	removeConnectedCheckerboard(out)
-	clearCellBorder(out, 24)
+	// These corrected source sheets have real alpha. Never flood-fill pale
+	// artwork or erase a border: both operations destroyed parts of the sprites.
+	removeTinyFragments(out)
 	return trimWithPadding(out, 10)
+}
+
+func removeTinyFragments(img *image.NRGBA) {
+	b := img.Bounds()
+	seen := make([]bool, b.Dx()*b.Dy())
+	for y := 0; y < b.Dy(); y++ {
+		for x := 0; x < b.Dx(); x++ {
+			if seen[y*b.Dx()+x] || img.NRGBAAt(x, y).A < 32 {
+				continue
+			}
+			points := []image.Point{image.Pt(x, y)}
+			seen[y*b.Dx()+x] = true
+			for i := 0; i < len(points); i++ {
+				p := points[i]
+				for _, n := range []image.Point{image.Pt(p.X-1, p.Y), image.Pt(p.X+1, p.Y), image.Pt(p.X, p.Y-1), image.Pt(p.X, p.Y+1)} {
+					if !n.In(b) || seen[n.Y*b.Dx()+n.X] || img.NRGBAAt(n.X, n.Y).A < 32 {
+						continue
+					}
+					seen[n.Y*b.Dx()+n.X] = true
+					points = append(points, n)
+				}
+			}
+			if len(points) < 80 {
+				for _, p := range points {
+					img.SetNRGBA(p.X, p.Y, color.NRGBA{})
+				}
+			}
+		}
+	}
+	for y := 0; y < b.Dy(); y++ {
+		for x := 0; x < b.Dx(); x++ {
+			if img.NRGBAAt(x, y).A < 32 {
+				img.SetNRGBA(x, y, color.NRGBA{})
+			}
+		}
+	}
 }
 
 func clearCellBorder(img *image.NRGBA, width int) {
