@@ -1,5 +1,7 @@
 package monde
 
+import "math"
+
 type Collision struct {
 	Identifiant string  `json:"id"`
 	Categorie   string  `json:"category"`
@@ -48,21 +50,28 @@ func personnageToucheRectangle(xPersonnage float32, yPersonnage float32, rayonPe
 			continue
 		}
 
-		// Les rectangles inclinés seront traités plus tard.
-		if obstacle.Rotation != 0 {
-			continue
-		}
+		// On place temporairement le personnage dans le repère local du
+		// rectangle. Le reste du calcul reste alors identique à celui d'un
+		// rectangle droit, même pour un mur incliné.
+		angle := obstacle.Rotation * math.Pi / 180
+		cosinus := float32(math.Cos(float64(angle)))
+		sinus := float32(math.Sin(float64(angle)))
+
+		differenceCentreX := xPersonnage - obstacle.X
+		differenceCentreY := yPersonnage - obstacle.Y
+		positionLocaleX := differenceCentreX*cosinus + differenceCentreY*sinus
+		positionLocaleY := -differenceCentreX*sinus + differenceCentreY*cosinus
 
 		demiLargeur := obstacle.Largeur / 2
 		demiHauteur := obstacle.Hauteur / 2
 
-		minX := obstacle.X - demiLargeur
-		maxX := obstacle.X + demiLargeur
-		minY := obstacle.Y - demiHauteur
-		maxY := obstacle.Y + demiHauteur
+		minX := -demiLargeur
+		maxX := demiLargeur
+		minY := -demiHauteur
+		maxY := demiHauteur
 
-		plusProcheX := xPersonnage
-		plusProcheY := yPersonnage
+		plusProcheX := positionLocaleX
+		plusProcheY := positionLocaleY
 
 		if plusProcheX < minX {
 			plusProcheX = minX
@@ -76,8 +85,8 @@ func personnageToucheRectangle(xPersonnage float32, yPersonnage float32, rayonPe
 			plusProcheY = maxY
 		}
 
-		differenceX := xPersonnage - plusProcheX
-		differenceY := yPersonnage - plusProcheY
+		differenceX := positionLocaleX - plusProcheX
+		differenceY := positionLocaleY - plusProcheY
 
 		distanceCarree := differenceX*differenceX +
 			differenceY*differenceY
@@ -88,4 +97,16 @@ func personnageToucheRectangle(xPersonnage float32, yPersonnage float32, rayonPe
 	}
 
 	return false
+}
+
+func positionAutorisee(x float32, y float32, rayonPersonnage float32, donnees DonneesMonde) bool {
+	if !estDansMap(x, y, donnees.Taille, rayonPersonnage) {
+		return false
+	}
+
+	if personnageToucheObstacleRond(x, y, rayonPersonnage, donnees.Obstacles) {
+		return false
+	}
+
+	return !personnageToucheRectangle(x, y, rayonPersonnage, donnees.Obstacles)
 }

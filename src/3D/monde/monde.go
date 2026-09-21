@@ -104,17 +104,20 @@ func Lancer() {
 		nouveauX := positionActuelle.X + directionX*distance
 		nouveauY := positionActuelle.Y + directionY*distance
 
-		// Application du déplacement.
-		taillemap := donneesMonde.Taille
-		obstacles := donneesMonde.Obstacles
+		// Les deux axes sont vérifiés séparément : le personnage glisse ainsi
+		// naturellement le long d'un mur au lieu de rester bloqué en diagonale.
+		positionFinaleX := positionActuelle.X
+		positionFinaleY := positionActuelle.Y
 
-		dansMap := estDansMap(nouveauX, nouveauY, taillemap, rayonPersonnage)
-		toucheCercle := personnageToucheObstacleRond(nouveauX, nouveauY, rayonPersonnage, obstacles)
-		toucheRectangle := personnageToucheRectangle(nouveauX, nouveauY, rayonPersonnage, obstacles)
-
-		if dansMap && !toucheCercle && !toucheRectangle {
-			noeudPersonnage.SetPosition(nouveauX, nouveauY, positionActuelle.Z)
+		if positionAutorisee(nouveauX, positionActuelle.Y, rayonPersonnage, donneesMonde) {
+			positionFinaleX = nouveauX
 		}
+		if positionAutorisee(positionFinaleX, nouveauY, rayonPersonnage, donneesMonde) {
+			positionFinaleY = nouveauY
+		}
+
+		noeudPersonnage.SetPosition(positionFinaleX, positionFinaleY, positionActuelle.Z)
+		deplacementEffectue := positionFinaleX != positionActuelle.X || positionFinaleY != positionActuelle.Y
 
 		// Garder la caméra derrière et au-dessus du personnage.
 		positionCamera := noeudPersonnage.Position()
@@ -125,7 +128,7 @@ func Lancer() {
 		)
 
 		// Animations du personnage.
-		bouge := directionX != 0 || directionY != 0
+		bouge := deplacementEffectue
 
 		if bouge {
 			angle := float32(math.Atan2(float64(directionX), float64(-directionY)))

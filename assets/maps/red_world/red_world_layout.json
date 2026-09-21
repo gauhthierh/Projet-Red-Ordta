@@ -774,6 +774,106 @@
       "radius": 9
     },
     {
+      "id": "river_water_00",
+      "category": "water",
+      "shape": "rectangle",
+      "x": 2.5,
+      "y": 202.5,
+      "width": 195.06409203131162,
+      "height": 13,
+      "rotation_degrees": -88.53119928561418
+    },
+    {
+      "id": "river_water_01",
+      "category": "water",
+      "shape": "rectangle",
+      "x": -35,
+      "y": 85,
+      "width": 89.44271909999159,
+      "height": 13,
+      "rotation_degrees": -153.43494882292202
+    },
+    {
+      "id": "river_water_02",
+      "category": "water",
+      "shape": "rectangle",
+      "x": -88.5,
+      "y": 32.5,
+      "width": 70.38465741907109,
+      "height": 13,
+      "rotation_degrees": -112.55724663470565
+    },
+    {
+      "id": "river_water_03",
+      "category": "water",
+      "shape": "rectangle",
+      "x": -96.25,
+      "y": -46,
+      "width": 68.52919086053767,
+      "height": 13,
+      "rotation_degrees": -82.87498365109819
+    },
+    {
+      "id": "river_water_04",
+      "category": "water",
+      "shape": "rectangle",
+      "x": -53,
+      "y": -90.6,
+      "width": 80.82969751273352,
+      "height": 13,
+      "rotation_degrees": -15.205382795833899
+    },
+    {
+      "id": "river_water_05",
+      "category": "water",
+      "shape": "rectangle",
+      "x": 52.5,
+      "y": -96.5,
+      "width": 106.36728820459793,
+      "height": 13,
+      "rotation_degrees": 9.196655891628904
+    },
+    {
+      "id": "river_water_06",
+      "category": "water",
+      "shape": "rectangle",
+      "x": 121.5,
+      "y": -66,
+      "width": 55,
+      "height": 13,
+      "rotation_degrees": 53.13010235415598
+    },
+    {
+      "id": "river_water_07",
+      "category": "water",
+      "shape": "rectangle",
+      "x": 226.5,
+      "y": -45.5,
+      "width": 148.22280526288793,
+      "height": 13,
+      "rotation_degrees": -7.364746244982651
+    },
+    {
+      "id": "north_waterfall_south",
+      "category": "water",
+      "shape": "rectangle",
+      "x": 4,
+      "y": 129,
+      "width": 14,
+      "height": 10,
+      "rotation_degrees": 90
+    },
+    {
+      "id": "north_waterfall_north",
+      "category": "water",
+      "shape": "rectangle",
+      "x": 4,
+      "y": 159,
+      "width": 22,
+      "height": 10,
+      "rotation_degrees": 90
+    },
+    {
       "id": "village_wall_01",
       "category": "wall",
       "shape": "rectangle",
@@ -1603,6 +1703,42 @@
       "width": 52,
       "height": 0.8,
       "rotation_degrees": 90
+    },
+    {
+      "id": "forge_crate_00",
+      "category": "prop",
+      "shape": "rectangle",
+      "x": -218,
+      "y": 17,
+      "width": 4.2,
+      "height": 4.2
+    },
+    {
+      "id": "forge_crate_01",
+      "category": "prop",
+      "shape": "rectangle",
+      "x": -210,
+      "y": 19,
+      "width": 4.2,
+      "height": 4.2
+    },
+    {
+      "id": "forge_crate_02",
+      "category": "prop",
+      "shape": "rectangle",
+      "x": -182,
+      "y": 19,
+      "width": 4.2,
+      "height": 4.2
+    },
+    {
+      "id": "forge_crate_03",
+      "category": "prop",
+      "shape": "rectangle",
+      "x": -174,
+      "y": 13,
+      "width": 4.2,
+      "height": 4.2
     },
     {
       "id": "arena_post_00",
@@ -3752,6 +3888,718 @@
       "x": 228.9203462259508,
       "y": 5.888441478531293,
       "radius": 1.2
+    },
+    {
+      "id": "mana_ruin_arch_00_a",
+      "category": "ruin",
+      "shape": "rectangle",
+      "x": 241,
+      "y": 15,
+      "width": 3.4,
+      "height": 3.4
+    },
+    {
+      "id": "mana_ruin_arch_00_b",
+      "category": "ruin",
+      "shape": "rectangle",
+      "x": 241,
+      "y": 21,
+      "width": 3.4,
+      "height": 3.4
+    },
+    {
+      "id": "mana_ruin_arch_01_a",
+      "category": "ruin",
+      "shape": "rectangle",
+      "x": 210,
+      "y": 46,
+      "width": 3.4,
+      "height": 3.4
+    },
+    {
+      "id": "mana_ruin_arch_01_b",
+      "category": "ruin",
+      "shape": "rectangle",
+      "x": 204,
+      "y": 46,
+      "width": 3.4,
+      "height": 3.4
+    },
+    {
+      "id": "mana_ruin_arch_02_a",
+      "category": "ruin",
+      "shape": "rectangle",
+      "x": 179,
+      "y": 15.000000000000004,
+      "width": 3.4,
+      "height": 3.4
+    },
+    {
+      "id": "mana_ruin_arch_02_b",
+      "category": "ruin",
+      "shape": "rectangle",
+      "x": 179,
+      "y": 9.000000000000004,
+      "width": 3.4,
+      "height": 3.4
+    },
+    {
+      "id": "mana_ruin_arch_03_a",
+      "category": "ruin",
+      "shape": "rectangle",
+      "x": 210,
+      "y": -16,
+      "width": 3.4,
+      "height": 3.4
+    },
+    {
+      "id": "mana_ruin_arch_03_b",
+      "category": "ruin",
+      "shape": "rectangle",
+      "x": 216,
+      "y": -16,
+      "width": 3.4,
+      "height": 3.4
+    },
+    {
+      "id": "background_tree_000",
+      "category": "tree",
+      "shape": "circle",
+      "x": -219.5911072253406,
+      "y": -38.842574934586494,
+      "radius": 0.5525
+    },
+    {
+      "id": "background_tree_001",
+      "category": "tree",
+      "shape": "circle",
+      "x": -67.75672357928852,
+      "y": 252.05163441207813,
+      "radius": 0.7055
+    },
+    {
+      "id": "background_tree_002",
+      "category": "tree",
+      "shape": "circle",
+      "x": -102.32135948636797,
+      "y": -197.01355129244652,
+      "radius": 0.782
+    },
+    {
+      "id": "background_tree_003",
+      "category": "tree",
+      "shape": "circle",
+      "x": 226.37643241411246,
+      "y": 82.67231004065859,
+      "radius": 0.5525
+    },
+    {
+      "id": "background_tree_004",
+      "category": "tree",
+      "shape": "circle",
+      "x": -240.32984459582923,
+      "y": 99.20466620348343,
+      "radius": 0.629
+    },
+    {
+      "id": "background_tree_005",
+      "category": "tree",
+      "shape": "circle",
+      "x": 93.66996490558827,
+      "y": -200.1672742347906,
+      "radius": 0.7055
+    },
+    {
+      "id": "background_tree_006",
+      "category": "tree",
+      "shape": "circle",
+      "x": 71.8281274667695,
+      "y": 228.99938887389527,
+      "radius": 0.782
+    },
+    {
+      "id": "background_tree_007",
+      "category": "tree",
+      "shape": "circle",
+      "x": -224.08970332608652,
+      "y": -129.86456353919846,
+      "radius": 0.5525
+    },
+    {
+      "id": "background_tree_008",
+      "category": "tree",
+      "shape": "circle",
+      "x": 214.86867019819874,
+      "y": -47.23827438907672,
+      "radius": 0.629
+    },
+    {
+      "id": "background_tree_009",
+      "category": "tree",
+      "shape": "circle",
+      "x": -33.15575796814026,
+      "y": -255.8606959139252,
+      "radius": 0.782
+    },
+    {
+      "id": "background_tree_010",
+      "category": "tree",
+      "shape": "circle",
+      "x": 51.79760314214614,
+      "y": -230.2455391722687,
+      "radius": 0.782
+    },
+    {
+      "id": "background_tree_011",
+      "category": "tree",
+      "shape": "circle",
+      "x": 126.78112311615027,
+      "y": 221.2499645681498,
+      "radius": 0.5525
+    },
+    {
+      "id": "background_tree_012",
+      "category": "tree",
+      "shape": "circle",
+      "x": -205.7816398744852,
+      "y": -65.64995575449909,
+      "radius": 0.629
+    },
+    {
+      "id": "background_tree_013",
+      "category": "tree",
+      "shape": "circle",
+      "x": 213.33091639233223,
+      "y": -98.56429430177926,
+      "radius": 0.7055
+    },
+    {
+      "id": "background_tree_014",
+      "category": "tree",
+      "shape": "circle",
+      "x": -98.0595148799306,
+      "y": 234.308197768479,
+      "radius": 0.782
+    },
+    {
+      "id": "background_tree_015",
+      "category": "tree",
+      "shape": "circle",
+      "x": -72.76724008708094,
+      "y": -202.3114647520232,
+      "radius": 0.5525
+    },
+    {
+      "id": "background_tree_016",
+      "category": "tree",
+      "shape": "circle",
+      "x": 207.134328352353,
+      "y": 108.86399780469029,
+      "radius": 0.629
+    },
+    {
+      "id": "background_tree_017",
+      "category": "tree",
+      "shape": "circle",
+      "x": -244.6434113193378,
+      "y": 64.48721809814181,
+      "radius": 0.7055
+    },
+    {
+      "id": "background_tree_018",
+      "category": "tree",
+      "shape": "circle",
+      "x": 115.73927600861083,
+      "y": -180.00116663233769,
+      "radius": 0.782
+    },
+    {
+      "id": "background_tree_019",
+      "category": "tree",
+      "shape": "circle",
+      "x": 240.14485326591648,
+      "y": 65.81374818297044,
+      "radius": 0.7055
+    },
+    {
+      "id": "background_tree_020",
+      "category": "tree",
+      "shape": "circle",
+      "x": -186.83412338419066,
+      "y": 95.88018741774042,
+      "radius": 0.782
+    },
+    {
+      "id": "background_tree_021",
+      "category": "tree",
+      "shape": "circle",
+      "x": 79.6042514898111,
+      "y": -214.71880016604717,
+      "radius": 0.5525
+    },
+    {
+      "id": "background_tree_022",
+      "category": "tree",
+      "shape": "circle",
+      "x": 93.5065783331517,
+      "y": 229.6965820564733,
+      "radius": 0.629
+    },
+    {
+      "id": "background_tree_023",
+      "category": "tree",
+      "shape": "circle",
+      "x": -188.86407413546053,
+      "y": -89.50620928715094,
+      "radius": 0.7055
+    },
+    {
+      "id": "background_tree_024",
+      "category": "tree",
+      "shape": "circle",
+      "x": 217.87970847728337,
+      "y": -67.17464278918067,
+      "radius": 0.782
+    },
+    {
+      "id": "background_tree_025",
+      "category": "tree",
+      "shape": "circle",
+      "x": -124.88872171895929,
+      "y": 213.1004626635155,
+      "radius": 0.5525
+    },
+    {
+      "id": "background_tree_026",
+      "category": "tree",
+      "shape": "circle",
+      "x": -244.11151562790405,
+      "y": 30.423148059455592,
+      "radius": 0.782
+    },
+    {
+      "id": "background_tree_027",
+      "category": "tree",
+      "shape": "circle",
+      "x": 33.71594741731976,
+      "y": -241.65933644234093,
+      "radius": 0.629
+    },
+    {
+      "id": "background_tree_028",
+      "category": "tree",
+      "shape": "circle",
+      "x": -218.2957037464859,
+      "y": -50.2293313296768,
+      "radius": 0.782
+    },
+    {
+      "id": "background_tree_029",
+      "category": "tree",
+      "shape": "circle",
+      "x": 211.42506161873905,
+      "y": -119.78498787207181,
+      "radius": 0.5525
+    },
+    {
+      "id": "background_tree_030",
+      "category": "tree",
+      "shape": "circle",
+      "x": -80.8476621799971,
+      "y": 249.21407568600344,
+      "radius": 0.629
+    },
+    {
+      "id": "background_tree_031",
+      "category": "tree",
+      "shape": "circle",
+      "x": -92.54256518244303,
+      "y": -202.89128524767466,
+      "radius": 0.7055
+    },
+    {
+      "id": "background_tree_032",
+      "category": "tree",
+      "shape": "circle",
+      "x": 222.78010111221786,
+      "y": 94.51468959071909,
+      "radius": 0.782
+    },
+    {
+      "id": "background_tree_033",
+      "category": "tree",
+      "shape": "circle",
+      "x": -246.02471376210397,
+      "y": 87.13690503038767,
+      "radius": 0.5525
+    },
+    {
+      "id": "background_tree_034",
+      "category": "tree",
+      "shape": "circle",
+      "x": 104.23864002787703,
+      "y": -196.00588237381723,
+      "radius": 0.629
+    },
+    {
+      "id": "background_tree_035",
+      "category": "tree",
+      "shape": "circle",
+      "x": 60.29097229266278,
+      "y": 233.33666377148143,
+      "radius": 0.7055
+    },
+    {
+      "id": "background_tree_036",
+      "category": "tree",
+      "shape": "circle",
+      "x": -20.12494295260856,
+      "y": -258.2169372275069,
+      "radius": 0.7055
+    },
+    {
+      "id": "background_tree_037",
+      "category": "tree",
+      "shape": "circle",
+      "x": -185.07146846903441,
+      "y": 115.20656039790094,
+      "radius": 0.629
+    },
+    {
+      "id": "background_tree_038",
+      "category": "tree",
+      "shape": "circle",
+      "x": 63.75629156611082,
+      "y": -228.26330253839984,
+      "radius": 0.7055
+    },
+    {
+      "id": "background_tree_039",
+      "category": "tree",
+      "shape": "circle",
+      "x": 115.7700485057708,
+      "y": 228.32716848630056,
+      "radius": 0.782
+    },
+    {
+      "id": "background_tree_040",
+      "category": "tree",
+      "shape": "circle",
+      "x": -203.09675660654338,
+      "y": -76.42452129979276,
+      "radius": 0.5525
+    },
+    {
+      "id": "background_tree_041",
+      "category": "tree",
+      "shape": "circle",
+      "x": 219.0137096142385,
+      "y": -87.9147029853938,
+      "radius": 0.629
+    },
+    {
+      "id": "background_tree_042",
+      "category": "tree",
+      "shape": "circle",
+      "x": -110.32895344020591,
+      "y": 229.89676385888706,
+      "radius": 0.7055
+    },
+    {
+      "id": "background_tree_043",
+      "category": "tree",
+      "shape": "circle",
+      "x": -62.631441360890534,
+      "y": -206.72034866712403,
+      "radius": 0.782
+    },
+    {
+      "id": "background_tree_044",
+      "category": "tree",
+      "shape": "circle",
+      "x": -248.59594309667014,
+      "y": 52.11580447308793,
+      "radius": 0.629
+    },
+    {
+      "id": "background_tree_045",
+      "category": "tree",
+      "shape": "circle",
+      "x": 14.09568847262947,
+      "y": -251.60546807746962,
+      "radius": 0.782
+    },
+    {
+      "id": "background_tree_046",
+      "category": "tree",
+      "shape": "circle",
+      "x": -229.61533022271155,
+      "y": -33.17830807493252,
+      "radius": 0.629
+    },
+    {
+      "id": "background_tree_047",
+      "category": "tree",
+      "shape": "circle",
+      "x": -48.545767000331175,
+      "y": 206.3669268714092,
+      "radius": 0.782
+    },
+    {
+      "id": "background_tree_048",
+      "category": "tree",
+      "shape": "circle",
+      "x": -112.8878677011721,
+      "y": -201.53741420858478,
+      "radius": 0.5525
+    },
+    {
+      "id": "background_tree_049",
+      "category": "tree",
+      "shape": "circle",
+      "x": 237.4205276882364,
+      "y": 78.30385068589776,
+      "radius": 0.629
+    },
+    {
+      "id": "background_tree_050",
+      "category": "tree",
+      "shape": "circle",
+      "x": -192.39823938883026,
+      "y": 86.6251550075286,
+      "radius": 0.7055
+    },
+    {
+      "id": "background_tree_051",
+      "category": "tree",
+      "shape": "circle",
+      "x": 90.8598349263371,
+      "y": -211.2924286318816,
+      "radius": 0.782
+    },
+    {
+      "id": "background_tree_052",
+      "category": "tree",
+      "shape": "circle",
+      "x": 81.98462518344309,
+      "y": 235.1159740075743,
+      "radius": 0.5525
+    },
+    {
+      "id": "background_tree_053",
+      "category": "tree",
+      "shape": "circle",
+      "x": -184.92774541132954,
+      "y": -99.50743176809705,
+      "radius": 0.629
+    },
+    {
+      "id": "background_tree_054",
+      "category": "tree",
+      "shape": "circle",
+      "x": 221.99507377331315,
+      "y": -56.206647475020674,
+      "radius": 0.7055
+    },
+    {
+      "id": "background_tree_055",
+      "category": "tree",
+      "shape": "circle",
+      "x": -136.15656324850264,
+      "y": 207.2809452997465,
+      "radius": 0.782
+    },
+    {
+      "id": "background_tree_056",
+      "category": "tree",
+      "shape": "circle",
+      "x": -246.34391439307936,
+      "y": 17.990993343759097,
+      "radius": 0.7055
+    },
+    {
+      "id": "background_tree_057",
+      "category": "tree",
+      "shape": "circle",
+      "x": 46.20061927521742,
+      "y": -240.60445294837422,
+      "radius": 0.5525
+    },
+    {
+      "id": "background_tree_058",
+      "category": "tree",
+      "shape": "circle",
+      "x": 108.01048664398066,
+      "y": 175.4130404928051,
+      "radius": 0.629
+    },
+    {
+      "id": "background_tree_059",
+      "category": "tree",
+      "shape": "circle",
+      "x": -216.4078154459258,
+      "y": -61.584554994918335,
+      "radius": 0.7055
+    },
+    {
+      "id": "background_tree_060",
+      "category": "tree",
+      "shape": "circle",
+      "x": 218.16002831558617,
+      "y": -109.28038271045095,
+      "radius": 0.782
+    },
+    {
+      "id": "background_tree_061",
+      "category": "tree",
+      "shape": "circle",
+      "x": -73.13339498578168,
+      "y": 191.51111335338646,
+      "radius": 0.5525
+    },
+    {
+      "id": "background_tree_062",
+      "category": "tree",
+      "shape": "circle",
+      "x": -82.42938728881069,
+      "y": -208.2820110119721,
+      "radius": 0.629
+    },
+    {
+      "id": "background_tree_063",
+      "category": "tree",
+      "shape": "circle",
+      "x": 218.5625983986038,
+      "y": 106.20447533532017,
+      "radius": 0.7055
+    },
+    {
+      "id": "background_tree_064",
+      "category": "tree",
+      "shape": "circle",
+      "x": -251.1117439094991,
+      "y": 74.7455153887519,
+      "radius": 0.782
+    },
+    {
+      "id": "background_tree_065",
+      "category": "tree",
+      "shape": "circle",
+      "x": 114.62550220151863,
+      "y": -191.28511245010586,
+      "radius": 0.5525
+    },
+    {
+      "id": "background_tree_066",
+      "category": "tree",
+      "shape": "circle",
+      "x": 48.49762360225978,
+      "y": 237.09065883103352,
+      "radius": 0.629
+    },
+    {
+      "id": "background_tree_067",
+      "category": "tree",
+      "shape": "circle",
+      "x": -239.5559157931758,
+      "y": -14.593259008626509,
+      "radius": 0.782
+    },
+    {
+      "id": "background_tree_068",
+      "category": "tree",
+      "shape": "circle",
+      "x": 250.85346283602254,
+      "y": 60.30373274662409,
+      "radius": 0.782
+    },
+    {
+      "id": "background_tree_069",
+      "category": "tree",
+      "shape": "circle",
+      "x": -191.5877552570092,
+      "y": 106.09020706728941,
+      "radius": 0.5525
+    },
+    {
+      "id": "background_tree_070",
+      "category": "tree",
+      "shape": "circle",
+      "x": 75.64698823665232,
+      "y": -225.65800045804664,
+      "radius": 0.629
+    },
+    {
+      "id": "background_tree_071",
+      "category": "tree",
+      "shape": "circle",
+      "x": 104.36581492207037,
+      "y": 234.85479913268148,
+      "radius": 0.7055
+    },
+    {
+      "id": "background_tree_072",
+      "category": "tree",
+      "shape": "circle",
+      "x": -199.8459789453026,
+      "y": -87.09526220979915,
+      "radius": 0.782
+    },
+    {
+      "id": "background_tree_073",
+      "category": "tree",
+      "shape": "circle",
+      "x": 224.16309023390667,
+      "y": -76.94094473546204,
+      "radius": 0.5525
+    },
+    {
+      "id": "background_tree_074",
+      "category": "tree",
+      "shape": "circle",
+      "x": -122.40259235346196,
+      "y": 224.8412893246083,
+      "radius": 0.629
+    },
+    {
+      "id": "background_tree_075",
+      "category": "tree",
+      "shape": "circle",
+      "x": -52.23448237668692,
+      "y": -210.61946455833464,
+      "radius": 0.7055
+    },
+    {
+      "id": "background_tree_076",
+      "category": "tree",
+      "shape": "circle",
+      "x": -251.92078535335892,
+      "y": 39.508453613712526,
+      "radius": 0.5525
+    },
+    {
+      "id": "background_tree_077",
+      "category": "tree",
+      "shape": "circle",
+      "x": 27.03211851536158,
+      "y": -251.55171350752403,
+      "radius": 0.7055
+    },
+    {
+      "id": "background_tree_078",
+      "category": "tree",
+      "shape": "circle",
+      "x": -228.60268191998972,
+      "y": -45.053455128191814,
+      "radius": 0.5525
+    },
+    {
+      "id": "background_tree_079",
+      "category": "tree",
+      "shape": "circle",
+      "x": 215.22495295399077,
+      "y": -131.08096591783442,
+      "radius": 0.629
     }
   ]
 }
