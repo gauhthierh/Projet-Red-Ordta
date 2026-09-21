@@ -5,8 +5,11 @@ import (
 	"unicode"
 )
 
-// characterCreation demande le nom et la classe, puis construit le personnage
-// avec initCharacter : niveau 1, PV actuels à 50 % des PV max.
+/*
+Ce fichier gère la création du personnage, la validation de son nom et le choix de sa classe.
+
+	La fonction CharacterCreation demande les informations du personnage et l'initialise avec son niveau et ses points de vie de départ.
+*/
 func CharacterCreation() Character {
 	var nom string
 	for {
@@ -27,11 +30,7 @@ func CharacterCreation() Character {
 	return InitCharacter(nom, classe, 1, pvMax, pvMax/2)
 }
 
-// formatName vérifie que le nom ne contient que des lettres, accentuées
-// comprises, et le remet en forme : majuscule initiale, reste en minuscules.
-// Le nom est traité rune par rune (caractère par caractère) et non octet par
-// octet : en UTF-8, « é » occupe deux octets. Renvoie false si le nom est
-// vide ou contient autre chose qu'une lettre.
+/* La fonction FormatName vérifie que le nom contient uniquement des lettres et le reformate avec une majuscule suivie de minuscules. */
 func FormatName(saisie string) (string, bool) {
 	runes := []rune(saisie)
 	if len(runes) == 0 {
@@ -49,11 +48,9 @@ func FormatName(saisie string) (string, bool) {
 	return string(runes), true
 }
 
-// chooseClass demande la classe jusqu'à obtenir un choix valide, puis renvoie
-// son nom et ses PV max.
+/* La fonction ChooseClass demande au joueur de choisir une classe et renvoie son nom ainsi que ses points de vie maximum. */
 func ChooseClass() (string, int) {
 	for {
-		// Une saisie non numérique donne 0, traité par le cas default.
 		choix, _ := ReadChoice("Entrez la classe du personnage (1 pour Humain, 2 pour Elfe, 3 pour Nain) : ")
 
 		switch choix {

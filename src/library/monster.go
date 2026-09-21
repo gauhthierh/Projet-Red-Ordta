@@ -2,6 +2,9 @@ package library
 
 import "fmt"
 
+/* Ce fichier définit les monstres, leur initialisation et leur comportement pendant les combats. */
+
+/* La structure Monster contient les statistiques et les récompenses associées à un monstre. */
 type Monster struct {
 	Nom              string
 	PVMax            int
@@ -11,6 +14,7 @@ type Monster struct {
 	ExperienceDonnee int
 }
 
+/* La fonction InitGoblin crée un gobelin d'entraînement avec ses statistiques et sa récompense d'expérience. */
 func InitGoblin() Monster {
 	gobelin := Monster{
 		Nom:              "Gobelin d'entraînement",
@@ -22,6 +26,7 @@ func InitGoblin() Monster {
 	return gobelin
 }
 
+/* La méthode GoblinPattern fait attaquer le gobelin et double ses dégâts tous les trois tours. */
 func (m Monster) GoblinPattern(c *Character, tour int) {
 	degats := m.Attaque
 	if tour%3 == 0 {

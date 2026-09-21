@@ -5,6 +5,11 @@ import (
 	"strings"
 )
 
+/*
+Ce fichier définit le personnage et gère ses statistiques, son inventaire, ses équipements et ses actions pendant les combats.
+
+	La structure Character contient toutes les informations et ressources appartenant au personnage contrôlé par le joueur.
+*/
 type Character struct {
 	Nom                string
 	Classe             string
@@ -18,17 +23,14 @@ type Character struct {
 	ExperienceActuelle int
 	ExperienceMax      int
 
-	// Nombre maximal d'objets dans l'inventaire (T12). C'est un champ et non
-	// une constante pour pouvoir l'augmenter plus tard (T18).
-	CapaciteInventaire int
-	// Pièces d'or du joueur (T13).
+	CapaciteInventaire             int
 	Argent                         int
 	PotionGratuitePrise            bool
 	Equipement                     Equipment
 	AugmentationInventaireUtilisee int
 }
 
-// Valeurs de départ du personnage.
+/* Ces constantes définissent les valeurs de départ du personnage et les caractéristiques de son attaque basique. */
 const (
 	capaciteInventaireDepart    = 10
 	argentDepart                = 100
@@ -38,6 +40,7 @@ const (
 	degatsAttaqueBasique        = 5
 )
 
+/* La fonction InitCharacter crée et initialise un personnage avec ses statistiques, ses objets, son sort et ses ressources de départ. */
 func InitCharacter(nom string, classe string, niveau int, pvmax int, pvactuel int) Character {
 	inventaire := map[string]int{
 		ItemPotionDeVie: 3,
@@ -60,6 +63,7 @@ func InitCharacter(nom string, classe string, niveau int, pvmax int, pvactuel in
 	return personnage
 }
 
+/* La méthode displayInfo affiche les statistiques, les sorts, l'argent, l'inventaire et les équipements du personnage. */
 func (c Character) displayInfo() {
 	fmt.Println("\n=== PERSONNAGE ===")
 	fmt.Printf("Nom : %s\n", c.Nom)
@@ -77,9 +81,7 @@ func (c Character) displayInfo() {
 	fmt.Printf("-- Pied --\n %s\n", c.Equipement.Pied.DescriptionEquipement())
 }
 
-// isDead vérifie si le personnage est mort (PV à 0 ou moins : les dégâts
-// peuvent faire passer sous 0). Si oui, il ressuscite avec 50 % de ses PV
-// max. Renvoie true s'il est mort, pour que l'appelant puisse s'arrêter.
+/* La méthode isDead vérifie si le personnage est mort et le ressuscite avec la moitié de ses points de vie maximum. */
 func (c *Character) isDead() bool {
 	if c.PVActuel > 0 {
 		return false
@@ -90,10 +92,12 @@ func (c *Character) isDead() bool {
 	return true
 }
 
+/* La méthode CalculPvAvecBonus calcule les points de vie maximum du personnage en ajoutant les bonus de ses équipements. */
 func (c *Character) CalculPvAvecBonus() int {
 	return c.Equipement.Tete.BonusPv + c.Equipement.Torse.BonusPv + c.Equipement.Pied.BonusPv + c.PVMaxBase
 }
 
+/* La méthode MettreAJourPvMax actualise les points de vie maximum du personnage après un changement d'équipement. */
 func (c *Character) MettreAJourPvMax() {
 	c.PVMaxTotal = c.CalculPvAvecBonus()
 	if c.PVActuel > c.PVMaxTotal {
@@ -101,6 +105,7 @@ func (c *Character) MettreAJourPvMax() {
 	}
 }
 
+/* La méthode CharacterTurn permet au personnage d'attaquer, d'utiliser un objet ou de lancer un sort pendant son tour. */
 func (c *Character) CharacterTurn(m *Monster) {
 	for {
 		fmt.Println("=== COMBAT ===")
@@ -135,6 +140,7 @@ func (c *Character) CharacterTurn(m *Monster) {
 	}
 }
 
+/* La méthode ChoixInventaire affiche les objets utilisables en combat et indique si le joueur en a utilisé un. */
 func (c *Character) ChoixInventaire() bool {
 	objets := c.SortedItems()
 	if len(objets) == 0 {

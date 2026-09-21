@@ -4,10 +4,9 @@ import (
 	"fmt"
 )
 
-/*
-mainMenu affiche les choix principaux du jeu.
-Le Pointeur permet aux autres menus de modifier le personnage
-*/
+/* Ce fichier gère le menu principal du jeu et le retour depuis les différentes fonctionnalités. */
+
+/* La méthode MainMenu affiche les fonctionnalités disponibles et dirige le joueur vers celle qu'il choisit. */
 func (c *Character) MainMenu() {
 	for {
 		fmt.Println("\n=== MENU PRINCIPAL ===")
@@ -46,7 +45,7 @@ func (c *Character) MainMenu() {
 	}
 }
 
-// waitForReturn laisse le temps de lire l'écran avant le retour au menu.
+/* La fonction WaitForReturn attend que le joueur choisisse zéro avant de revenir au menu principal. */
 func WaitForReturn() {
 	for {
 		fmt.Println("\n0. Retour")

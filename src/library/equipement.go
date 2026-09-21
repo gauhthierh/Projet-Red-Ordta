@@ -2,12 +2,16 @@ package library
 
 import "fmt"
 
+/* Ce fichier gère les emplacements d'équipement, leur description et leur utilisation par le personnage. */
+
+/* La structure Equipment contient les équipements portés sur la tête, le torse et les pieds du personnage. */
 type Equipment struct {
 	Tete  Stuff
 	Torse Stuff
 	Pied  Stuff
 }
 
+/* La méthode DescriptionEquipement renvoie une description de l'équipement avec son nom et son bonus de points de vie. */
 func (s Stuff) DescriptionEquipement() string {
 	if s.Nom == "" {
 		return "Aucun équipement"
@@ -15,6 +19,7 @@ func (s Stuff) DescriptionEquipement() string {
 	return fmt.Sprintf("%s, Bonus : + %d Pv", s.Nom, s.BonusPv)
 }
 
+/* La fonction TrouverEquipement recherche un équipement dans l'armurerie à partir de son nom. */
 func TrouverEquipement(nom string) (Stuff, bool) {
 	for _, s := range Armurerie {
 		if s.Nom == nom {
@@ -24,6 +29,7 @@ func TrouverEquipement(nom string) (Stuff, bool) {
 	return Stuff{}, false
 }
 
+/* La méthode ChangerEquipement équipe un objet, replace l'ancien dans l'inventaire et actualise les points de vie maximum. */
 func (c *Character) ChangerEquipement(nouveau Stuff) {
 	if nouveau.Emplacement != EmplacementTete &&
 		nouveau.Emplacement != EmplacementTorse &&

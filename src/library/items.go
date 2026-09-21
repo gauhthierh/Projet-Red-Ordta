@@ -6,8 +6,9 @@ import (
 	"time"
 )
 
-// Noms des objets : définis une seule fois pour éviter les fautes de frappe
-// dans les clés de l'inventaire.
+/* Ce fichier définit les objets et les sorts puis applique leurs effets lorsqu'ils sont utilisés par le personnage. */
+
+/* Ces constantes définissent les noms des objets et des emplacements utilisés dans le jeu. */
 const (
 	ItemPotionDeVie            = "Potion de vie"
 	ItemPotionDePoison         = "Potion de poison"
@@ -25,13 +26,13 @@ const (
 	ItemAugmentationInventaire = "Augmentation d'inventaire"
 )
 
-// Noms des sorts.
+/* Ces constantes définissent les noms des sorts pouvant être appris par le personnage. */
 const (
 	SortCoupDePoing = "Coup de poing"
 	SortBouleDeFeu  = "Boule de Feu"
 )
 
-// useItem applique l'effet d'un objet choisi dans l'inventaire.
+/* La méthode useItem applique l'effet correspondant à l'objet sélectionné dans l'inventaire. */
 func (c *Character) useItem(item string) {
 	switch item {
 	case ItemPotionDeVie:
@@ -65,9 +66,7 @@ func (c *Character) useItem(item string) {
 	}
 }
 
-// spellBook ajoute le sort Boule de Feu à la liste des sorts. Un même sort
-// ne s'apprend qu'une fois : renvoie false s'il est déjà connu, sans rien
-// modifier.
+/* La méthode spellBook apprend le sort Boule de Feu et refuse de l'ajouter lorsqu'il est déjà connu. */
 func (c *Character) spellBook() bool {
 	if slices.Contains(c.Skill, SortBouleDeFeu) {
 		return false
@@ -76,9 +75,8 @@ func (c *Character) spellBook() bool {
 	return true
 }
 
+/* La méthode takePot consomme une potion de vie pour soigner le personnage sans dépasser ses points de vie maximum. */
 func (c *Character) takePot() {
-	// À pleins PV, la potion serait gâchée : elle est refusée et reste
-	// dans l'inventaire (même principe que le livre d'un sort déjà connu).
 	if c.Inventaire[ItemPotionDeVie] > 0 && c.PVActuel >= c.PVMaxTotal {
 		fmt.Println("Vous êtes déjà en pleine santé")
 		return
@@ -89,7 +87,6 @@ func (c *Character) takePot() {
 		if c.PVActuel >= c.PVMaxTotal {
 			c.PVActuel = c.PVMaxTotal
 		}
-		// Le gain annoncé est calculé après le plafond : à 70 / 100, +30.
 		fmt.Printf("Vous buvez une %s (+%d PV)\n", ItemPotionDeVie, c.PVActuel-avant)
 		fmt.Printf("PV : %d / %d\n", c.PVActuel, c.PVMaxTotal)
 	} else {
@@ -97,8 +94,7 @@ func (c *Character) takePot() {
 	}
 }
 
-// poisonPot boit une potion de poison : 10 dégâts par seconde pendant 3 s.
-// Le poison s'arrête si le personnage meurt.
+/* La méthode poisonPot consomme une potion de poison qui inflige dix dégâts par seconde pendant trois secondes ou jusqu'à la mort. */
 func (c *Character) poisonPot() {
 	if !c.RemoveInventory(ItemPotionDePoison) {
 		fmt.Println("Aucune potion de poison dans l'inventaire")
@@ -109,7 +105,7 @@ func (c *Character) poisonPot() {
 		time.Sleep(time.Second)
 		c.PVActuel -= 10
 		if c.PVActuel < 0 {
-			c.PVActuel = 0 // les PV ne s'affichent jamais en négatif
+			c.PVActuel = 0
 		}
 		fmt.Printf("%s a été empoisonné ! PV : %d / %d\n", c.Nom, c.PVActuel, c.PVMaxTotal)
 		if c.isDead() {
