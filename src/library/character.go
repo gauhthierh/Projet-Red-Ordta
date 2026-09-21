@@ -101,8 +101,8 @@ func (c *Character) CharacterTurn(m *Monster) {
 		fmt.Println("1. Attaquer")
 		fmt.Println("2. Inventaire")
 		choix, ok := ReadChoice("Entrez votre choix :")
-		if !ok || choix < 0 {
-			fmt.Println("Choix invalide, veuillez entrez une saisie valide !")
+		if !ok {
+			fmt.Println("Choix invalide, veuillez entrer une saisie valide !")
 			continue
 		}
 		switch choix {
@@ -115,9 +115,35 @@ func (c *Character) CharacterTurn(m *Monster) {
 			fmt.Printf("Pv de %s : %d / %d\n", m.Nom, m.PVActuel, m.PVMax)
 			return
 		case 2:
-
+			if c.ChoixInventaire() {
+				return
+			}
 		default:
-			fmt.Println("Choix invalide, veuillez entrez un choix valide")
+			fmt.Println("Choix invalide, veuillez entrer un choix valide")
 		}
+	}
+}
+
+func (c *Character) ChoixInventaire() bool {
+	objets := c.SortedItems()
+	if len(objets) == 0 {
+		fmt.Println("L'inventaire est vide !")
+		return false
+	}
+	for {
+		for indice, objet := range objets {
+			fmt.Printf("%d. %s, quantité : %d\n", indice+1, objet, c.Inventaire[objet])
+		}
+		fmt.Println("0. Retour")
+		choix, ok := ReadChoice("Votre choix : ")
+		if !ok || choix < 0 || choix > len(objets) {
+			fmt.Printf("Choix invalide. Entrez un nombre entre 0 et %d\n", len(objets))
+			continue
+		}
+		if choix == 0 {
+			return false
+		}
+		c.useItem(objets[choix-1])
+		return true
 	}
 }
