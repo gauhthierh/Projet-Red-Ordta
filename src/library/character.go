@@ -29,7 +29,7 @@ type Character struct {
 const (
 	capaciteInventaireDepart    = 10
 	argentDepart                = 100
-	maxAmeliorationsInventaire  = 3
+	maxAugmentationsInventaire  = 3
 	bonusAugmentationInventaire = 10
 )
 
