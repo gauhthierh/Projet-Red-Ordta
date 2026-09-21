@@ -3,18 +3,20 @@ package library
 import "fmt"
 
 type Monster struct {
-	Nom        string
-	PVMax      int
-	PVActuel   int
-	Attaque    int
-	Initiative int
+	Nom              string
+	PVMax            int
+	PVActuel         int
+	Attaque          int
+	Initiative       int
+	ExperienceDonnee int
 }
 
 func InitGoblin() Monster {
 	gobelin := Monster{
-		Nom:     "Gobelin d'entraînement",
-		PVMax:   40,
-		Attaque: 5,
+		Nom:              "Gobelin d'entraînement",
+		PVMax:            40,
+		Attaque:          5,
+		ExperienceDonnee: 40,
 	}
 	gobelin.PVActuel = gobelin.PVMax
 	return gobelin

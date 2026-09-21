@@ -6,15 +6,17 @@ import (
 )
 
 type Character struct {
-	Nom        string
-	Classe     string
-	Niveau     int
-	PVMaxBase  int
-	PVActuel   int
-	PVMaxTotal int
-	Inventaire map[string]int
-	Skill      []string
-	Initiative int
+	Nom                string
+	Classe             string
+	Niveau             int
+	PVMaxBase          int
+	PVActuel           int
+	PVMaxTotal         int
+	Inventaire         map[string]int
+	Skill              []string
+	Initiative         int
+	ExperienceActuelle int
+	ExperienceMax      int
 
 	// Nombre maximal d'objets dans l'inventaire (T12). C'est un champ et non
 	// une constante pour pouvoir l'augmenter plus tard (T18).
@@ -51,6 +53,8 @@ func InitCharacter(nom string, classe string, niveau int, pvmax int, pvactuel in
 		Skill:              []string{SortCoupDePoing},
 		CapaciteInventaire: capaciteInventaireDepart,
 		Argent:             argentDepart,
+		ExperienceActuelle: 0,
+		ExperienceMax:      100,
 	}
 	personnage.MettreAJourPvMax()
 	return personnage
@@ -64,6 +68,7 @@ func (c Character) displayInfo() {
 	fmt.Printf("Pv : %d / %d\n", c.PVActuel, c.PVMaxTotal)
 	fmt.Printf("Sorts : %s\n", strings.Join(c.Skill, ", "))
 	fmt.Printf("Argent : %d pièces d'or\n", c.Argent)
+	fmt.Printf("Expérience : %d / %d\n", c.ExperienceActuelle, c.ExperienceMax)
 	fmt.Println("\n=== INVENTAIRE ===")
 	c.AccessInventory()
 	fmt.Println("\n=== EQUIPEMENT ===")
