@@ -1,10 +1,16 @@
 package library
 
+/*Ce fichier gère le marchand et les achats du personnage.
+  Il contient la liste des objets vendus, leur prix et les vérifications
+  nécessaires avant un achat : argent disponible et place dans l'inventaire*/
+
 import (
 	"fmt"
 )
 
-// merchant affiche les objets disponibles chez le marchand.
+/*La fonction merchant affiche le menu du marchand et permet au joueur de choisir
+  entre acheter un objet ou revenir au menu principal*/
+
 func (c *Character) merchant() {
 	for {
 		fmt.Println("\n=== MARCHAND ===")
@@ -32,8 +38,9 @@ func (c *Character) merchant() {
 	}
 }
 
-// buy ajoute l'objet acheté à l'inventaire, ou explique pourquoi c'est
-// impossible : « Vous avez acheté » ne s'affiche que si l'ajout a eu lieu.
+/*La fonction buy ajoute gratuitement un objet à l'inventaire
+  Si l'inventaire est plein l'ajout est refusé*/
+
 func (c *Character) buy(item string) {
 	if !c.AddInventory(item) {
 		fmt.Printf("Inventaire plein (%d / %d) : impossible d'ajouter %s.\n",
@@ -43,10 +50,14 @@ func (c *Character) buy(item string) {
 	fmt.Println("Vous avez acheté :", item)
 }
 
+/* Item représente un objet vendu par le marchand avec son nom et son prix*/
+
 type Item struct {
 	Nom  string
 	Prix int
 }
+
+/* Boutique contient tous les objets disponibles chez le marchand*/
 
 var Boutique = []Item{
 	{Nom: ItemPotionDeVie, Prix: 3},
@@ -59,12 +70,18 @@ var Boutique = []Item{
 	{Nom: ItemAugmentationInventaire, Prix: 30},
 }
 
+/* La fonction PrixPour détermine le prix d'un article pour le personnage*/
+
 func (c *Character) PrixPour(i Item) int {
 	if i.Nom == ItemPotionDeVie && !c.PotionGratuitePrise {
 		return 0
 	}
 	return i.Prix
 }
+
+/* La fonction AchatMarchand tente d'acheter un article.
+   L'achat est refusé si le personnage manque d'argent ou si son inventaire
+   est plein. En cas de réussite, l'ajout à lieu et le prix est retiré*/
 
 func (c *Character) AchatMarchand(i Item) {
 	achat := c.PrixPour(i)
