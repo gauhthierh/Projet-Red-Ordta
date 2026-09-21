@@ -143,6 +143,7 @@ func (c *Character) ChoixInventaire() bool {
 		if choix == 0 {
 			return false
 		}
+		fmt.Printf("Vous utilisez %s\n", objets[choix-1])
 		c.useItem(objets[choix-1])
 		return true
 	}
