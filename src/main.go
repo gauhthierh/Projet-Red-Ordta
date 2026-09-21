@@ -1,9 +1,12 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"ordta/library"
+)
 
 func main() {
 	fmt.Println("=== Création de personnage ===")
-	c1 := characterCreation()
-	c1.mainMenu()
+	c1 := library.CharacterCreation()
+	c1.MainMenu()
 }

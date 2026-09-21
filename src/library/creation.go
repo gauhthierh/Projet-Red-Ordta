@@ -1,4 +1,4 @@
-package main
+package library
 
 import (
 	"fmt"
@@ -7,24 +7,24 @@ import (
 
 // characterCreation demande le nom et la classe, puis construit le personnage
 // avec initCharacter : niveau 1, PV actuels à 50 % des PV max.
-func characterCreation() Character {
+func CharacterCreation() Character {
 	var nom string
 	for {
-		saisie := readLine("Entrez le nom de votre personnage : ")
+		saisie := ReadLine("Entrez le nom de votre personnage : ")
 		if saisie == "" {
 			fmt.Println("Le nom ne peut pas être vide.")
 			continue
 		}
 		var ok bool
-		nom, ok = formatName(saisie)
+		nom, ok = FormatName(saisie)
 		if ok {
 			break
 		}
 		fmt.Println("Nom invalide : seules les lettres sont acceptées (sans espace, tiret, chiffre ni symbole).")
 	}
 
-	classe, pvMax := chooseClass()
-	return initCharacter(nom, classe, 1, pvMax, pvMax/2)
+	classe, pvMax := ChooseClass()
+	return InitCharacter(nom, classe, 1, pvMax, pvMax/2)
 }
 
 // formatName vérifie que le nom ne contient que des lettres, accentuées
@@ -32,7 +32,7 @@ func characterCreation() Character {
 // Le nom est traité rune par rune (caractère par caractère) et non octet par
 // octet : en UTF-8, « é » occupe deux octets. Renvoie false si le nom est
 // vide ou contient autre chose qu'une lettre.
-func formatName(saisie string) (string, bool) {
+func FormatName(saisie string) (string, bool) {
 	runes := []rune(saisie)
 	if len(runes) == 0 {
 		return "", false
@@ -51,10 +51,10 @@ func formatName(saisie string) (string, bool) {
 
 // chooseClass demande la classe jusqu'à obtenir un choix valide, puis renvoie
 // son nom et ses PV max.
-func chooseClass() (string, int) {
+func ChooseClass() (string, int) {
 	for {
 		// Une saisie non numérique donne 0, traité par le cas default.
-		choix, _ := readChoice("Entrez la classe du personnage (1 pour Humain, 2 pour Elfe, 3 pour Nain) : ")
+		choix, _ := ReadChoice("Entrez la classe du personnage (1 pour Humain, 2 pour Elfe, 3 pour Nain) : ")
 
 		switch choix {
 		case 1:

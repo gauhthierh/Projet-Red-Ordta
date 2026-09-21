@@ -1,4 +1,4 @@
-package main
+package library
 
 import "testing"
 
@@ -23,7 +23,7 @@ func TestFormatName(t *testing.T) {
 	}
 
 	for _, c := range cas {
-		obtenu, valide := formatName(c.saisie)
+		obtenu, valide := FormatName(c.saisie)
 		if valide != c.estValide || obtenu != c.attendu {
 			t.Errorf("formatName(%q) = (%q, %v), attendu (%q, %v)",
 				c.saisie, obtenu, valide, c.attendu, c.estValide)

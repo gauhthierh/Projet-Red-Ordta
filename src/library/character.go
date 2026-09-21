@@ -1,4 +1,4 @@
-package main
+package library
 
 import (
 	"fmt"
@@ -27,9 +27,9 @@ const (
 	argentDepart             = 100
 )
 
-func initCharacter(nom string, classe string, niveau int, pvmax int, pvactuel int) Character {
+func InitCharacter(nom string, classe string, niveau int, pvmax int, pvactuel int) Character {
 	inventaire := map[string]int{
-		itemPotionDeVie: 3,
+		ItemPotionDeVie: 3,
 	}
 
 	return Character{
@@ -39,7 +39,7 @@ func initCharacter(nom string, classe string, niveau int, pvmax int, pvactuel in
 		PVMax:      pvmax,
 		PVActuel:   pvactuel,
 		Inventaire: inventaire,
-		Skill:      []string{sortCoupDePoing},
+		Skill:      []string{SortCoupDePoing},
 
 		CapaciteInventaire: capaciteInventaireDepart,
 		Argent:             argentDepart,
@@ -53,7 +53,7 @@ func (c Character) displayInfo() {
 	fmt.Printf("Pv : %d / %d\n", c.PVActuel, c.PVMax)
 	fmt.Printf("Sorts : %s\n", strings.Join(c.Skill, ", "))
 	fmt.Printf("Argent : %d pièces d'or\n", c.Argent)
-	c.accessInventory()
+	c.AccessInventory()
 }
 
 // isDead vérifie si le personnage est mort (PV à 0 ou moins : les dégâts

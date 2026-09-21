@@ -1,12 +1,14 @@
-package main
+package library
 
-import "fmt"
+import (
+	"fmt"
+)
 
 /*
 mainMenu affiche les choix principaux du jeu.
 Le Pointeur permet aux autres menus de modifier le personnage
 */
-func (c *Character) mainMenu() {
+func (c *Character) MainMenu() {
 	for {
 		fmt.Println("\n=== MENU PRINCIPAL ===")
 		fmt.Println("1. Afficher les informations du personnage")
@@ -14,7 +16,7 @@ func (c *Character) mainMenu() {
 		fmt.Println("3. Marchand")
 		fmt.Println("4. Quitter")
 
-		choice, ok := readChoice("Votre choix : ")
+		choice, ok := ReadChoice("Votre choix : ")
 
 		if !ok {
 			fmt.Println("Choix invalide. Entrez 1, 2, 3 ou 4.")
@@ -24,9 +26,9 @@ func (c *Character) mainMenu() {
 		switch choice {
 		case 1:
 			c.displayInfo()
-			waitForReturn()
+			WaitForReturn()
 		case 2:
-			c.inventoryMenu()
+			c.InventoryMenu()
 		case 3:
 			c.merchant()
 		case 4:
@@ -39,11 +41,11 @@ func (c *Character) mainMenu() {
 }
 
 // waitForReturn laisse le temps de lire l'écran avant le retour au menu.
-func waitForReturn() {
+func WaitForReturn() {
 	for {
 		fmt.Println("\n0. Retour")
 
-		choice, ok := readChoice("Votre choix : ")
+		choice, ok := ReadChoice("Votre choix : ")
 
 		if !ok {
 			fmt.Println("Choix invalide. Entrez 0 pour revenir au menu principal.")

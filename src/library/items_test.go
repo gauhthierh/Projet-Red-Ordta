@@ -1,4 +1,4 @@
-package main
+package library
 
 import (
 	"io"
@@ -10,7 +10,7 @@ import (
 // capturerSortie exécute f et renvoie le texte qu'elle a affiché. Certaines
 // règles portent sur l'affichage et pas seulement sur les valeurs : on
 // redirige donc temporairement la sortie standard vers un tube.
-func capturerSortie(t *testing.T, f func()) string {
+func CapturerSortie(t *testing.T, f func()) string {
 	t.Helper()
 	ancienne := os.Stdout
 	lecture, ecriture, err := os.Pipe()
@@ -27,21 +27,21 @@ func capturerSortie(t *testing.T, f func()) string {
 
 // T5 : une potion rend 50 PV et est retirée de l'inventaire.
 func TestTakePotSoin(t *testing.T) {
-	c := nouveauPersonnage(100, 40)
+	c := NouveauPersonnage(100, 40)
 
 	c.takePot()
 
 	if c.PVActuel != 90 {
 		t.Errorf("40 + 50 : attendu 90, obtenu %d", c.PVActuel)
 	}
-	if c.Inventaire[itemPotionDeVie] != 2 {
-		t.Errorf("une potion doit être consommée : attendu 2, obtenu %d", c.Inventaire[itemPotionDeVie])
+	if c.Inventaire[ItemPotionDeVie] != 2 {
+		t.Errorf("une potion doit être consommée : attendu 2, obtenu %d", c.Inventaire[ItemPotionDeVie])
 	}
 }
 
 // T5 : les PV ne dépassent jamais les PV max.
 func TestTakePotPlafond(t *testing.T) {
-	c := nouveauPersonnage(100, 70)
+	c := NouveauPersonnage(100, 70)
 
 	c.takePot()
 
@@ -53,18 +53,18 @@ func TestTakePotPlafond(t *testing.T) {
 // Décision de l'équipe : à pleins PV, la potion est refusée et n'est pas
 // consommée, pour ne pas la gâcher.
 func TestTakePotPleineSante(t *testing.T) {
-	c := nouveauPersonnage(80, 80)
+	c := NouveauPersonnage(80, 80)
 
 	c.takePot()
 
-	if c.Inventaire[itemPotionDeVie] != 3 {
-		t.Errorf("la potion ne doit pas être consommée : attendu 3, obtenu %d", c.Inventaire[itemPotionDeVie])
+	if c.Inventaire[ItemPotionDeVie] != 3 {
+		t.Errorf("la potion ne doit pas être consommée : attendu 3, obtenu %d", c.Inventaire[ItemPotionDeVie])
 	}
 }
 
 // T5 : sans potion, rien ne change (message « Aucune potion »).
 func TestTakePotSansPotion(t *testing.T) {
-	c := nouveauPersonnage(80, 40)
+	c := NouveauPersonnage(80, 40)
 	c.Inventaire = map[string]int{}
 
 	c.takePot()
@@ -76,7 +76,7 @@ func TestTakePotSansPotion(t *testing.T) {
 
 // T10 : spellBook apprend Boule de Feu une seule fois.
 func TestSpellBookUneSeuleFois(t *testing.T) {
-	c := nouveauPersonnage(80, 40)
+	c := NouveauPersonnage(80, 40)
 
 	if !c.spellBook() {
 		t.Fatal("le premier apprentissage doit réussir")
@@ -92,20 +92,20 @@ func TestSpellBookUneSeuleFois(t *testing.T) {
 // T10 : le livre est consommé quand le sort est appris, et reste dans
 // l'inventaire si le sort est déjà connu (décision de l'équipe).
 func TestUseItemLivre(t *testing.T) {
-	c := nouveauPersonnage(80, 40)
-	c.Inventaire[itemLivreBouleDeFeu] = 2
+	c := NouveauPersonnage(80, 40)
+	c.Inventaire[ItemLivreBouleDeFeu] = 2
 
-	c.useItem(itemLivreBouleDeFeu) // apprend le sort, consomme un livre
-	c.useItem(itemLivreBouleDeFeu) // déjà connu : le livre reste
+	c.useItem(ItemLivreBouleDeFeu) // apprend le sort, consomme un livre
+	c.useItem(ItemLivreBouleDeFeu) // déjà connu : le livre reste
 
-	if c.Inventaire[itemLivreBouleDeFeu] != 1 {
-		t.Errorf("attendu 1 livre restant, obtenu %d", c.Inventaire[itemLivreBouleDeFeu])
+	if c.Inventaire[ItemLivreBouleDeFeu] != 1 {
+		t.Errorf("attendu 1 livre restant, obtenu %d", c.Inventaire[ItemLivreBouleDeFeu])
 	}
 }
 
 // Un objet sans effet l'annonce et n'est pas consommé.
 func TestUseItemObjetSansEffet(t *testing.T) {
-	c := nouveauPersonnage(80, 40)
+	c := NouveauPersonnage(80, 40)
 	c.Inventaire["Caillou"] = 1
 
 	c.useItem("Caillou")
@@ -126,15 +126,15 @@ func sautSiCourt(t *testing.T) {
 // T9 : 3 ticks de 10 dégâts, et la potion de poison est consommée.
 func TestPoisonPot(t *testing.T) {
 	sautSiCourt(t)
-	c := nouveauPersonnage(80, 80)
-	c.Inventaire[itemPotionDePoison] = 1
+	c := NouveauPersonnage(80, 80)
+	c.Inventaire[ItemPotionDePoison] = 1
 
 	c.poisonPot()
 
 	if c.PVActuel != 50 {
 		t.Errorf("80 - 3 x 10 : attendu 50, obtenu %d", c.PVActuel)
 	}
-	if c.Inventaire[itemPotionDePoison] != 0 {
+	if c.Inventaire[ItemPotionDePoison] != 0 {
 		t.Error("la potion de poison doit être consommée")
 	}
 }
@@ -143,8 +143,8 @@ func TestPoisonPot(t *testing.T) {
 // résurrection à 40. Si le poison continuait, le 3e tick donnerait 30.
 func TestPoisonPotArretALaMort(t *testing.T) {
 	sautSiCourt(t)
-	c := nouveauPersonnage(80, 20)
-	c.Inventaire[itemPotionDePoison] = 1
+	c := NouveauPersonnage(80, 20)
+	c.Inventaire[ItemPotionDePoison] = 1
 
 	c.poisonPot()
 
@@ -160,10 +160,10 @@ func TestPoisonPotArretALaMort(t *testing.T) {
 // passerait sans la remise à 0.
 func TestPoisonPotSousZero(t *testing.T) {
 	sautSiCourt(t)
-	c := nouveauPersonnage(100, 5)
-	c.Inventaire[itemPotionDePoison] = 1
+	c := NouveauPersonnage(100, 5)
+	c.Inventaire[ItemPotionDePoison] = 1
 
-	sortie := capturerSortie(t, c.poisonPot)
+	sortie := CapturerSortie(t, c.poisonPot)
 
 	if !strings.Contains(sortie, "PV : 0 / 100") || strings.Contains(sortie, "-5") {
 		t.Errorf("attendu « PV : 0 / 100 » et aucun PV négatif, affiché :\n%s", sortie)
