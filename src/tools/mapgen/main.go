@@ -8,6 +8,7 @@ import (
 	"math"
 	"os"
 	"path/filepath"
+	"strings"
 )
 
 type point struct{ x, y, z float64 }
@@ -61,6 +62,7 @@ type layout struct {
 	Spawn      [3]float64  `json:"spawn"`
 	Landmarks  []landmark  `json:"landmarks"`
 	Collisions []collision `json:"collisions"`
+	Bridges    []collision `json:"bridges"`
 }
 
 var materials = map[string][3]float64{
@@ -95,6 +97,8 @@ var materials = map[string][3]float64{
 }
 
 var materialTextures = map[string]string{
+	"leaf":        "textures/foliage_detailed.png",
+	"leaf_light":  "textures/foliage_detailed.png",
 	"grass":       "textures/grass_detailed.png",
 	"dark_grass":  "textures/grass_detailed.png",
 	"field":       "textures/grass_detailed.png",
@@ -308,7 +312,7 @@ func (w *objWriter) box(x, y, z, sx, sy, sz float64) {
 func (w *objWriter) segment(x1, y1, x2, y2, width, z, height float64) {
 	dx, dy := x2-x1, y2-y1
 	l := math.Hypot(dx, dy)
-	px, py := -dy/l*width/2, dx/l*width/2
+	px, py := dy/l*width/2, -dx/l*width/2
 	a := point{x1 + px, y1 + py, z}
 	b := point{x2 + px, y2 + py, z}
 	c := point{x2 - px, y2 - py, z}
@@ -361,6 +365,7 @@ func (w *objWriter) gableRoof(x, y, z, sx, sy, height float64) {
 	c, d := point{x1, y1, z}, point{x0, y1, z}
 	w.quad(a, r0, r1, d)
 	w.quad(b, c, r1, r0)
+	w.quad(a, d, c, b)
 	w.triangle(a, b, r0)
 	w.triangle(d, r1, c)
 }
@@ -368,45 +373,15 @@ func (w *objWriter) gableRoof(x, y, z, sx, sy, height float64) {
 func (w *objWriter) fenceRect(name string, x, y, sx, sy, gateWidth float64, gateSide string) {
 	w.object(name)
 	w.material("wood")
-	for px := x - sx/2; px <= x+sx/2+.01; px += 6 {
-		if gateSide != "south" || math.Abs(px-x) > gateWidth/2 {
-			w.cylinder(px, y-sy/2, 0, .32, 2.4, 6)
+	for _, section := range fenceSections(name, x, y, sx, sy, gateWidth, gateSide) {
+		w.segment(section[0], section[1], section[2], section[3], .28, .8, .35)
+		w.segment(section[0], section[1], section[2], section[3], .28, 1.7, .25)
+		length := math.Hypot(section[2]-section[0], section[3]-section[1])
+		steps := int(math.Ceil(length / 4))
+		for i := 0; i <= steps; i++ {
+			t := float64(i) / float64(steps)
+			w.cylinder(section[0]+t*(section[2]-section[0]), section[1]+t*(section[3]-section[1]), 0, .32, 2.4, 8)
 		}
-		if gateSide != "north" || math.Abs(px-x) > gateWidth/2 {
-			w.cylinder(px, y+sy/2, 0, .32, 2.4, 6)
-		}
-	}
-	for py := y - sy/2; py <= y+sy/2+.01; py += 6 {
-		if gateSide != "west" || math.Abs(py-y) > gateWidth/2 {
-			w.cylinder(x-sx/2, py, 0, .32, 2.4, 6)
-		}
-		if gateSide != "east" || math.Abs(py-y) > gateWidth/2 {
-			w.cylinder(x+sx/2, py, 0, .32, 2.4, 6)
-		}
-	}
-	if gateSide == "south" {
-		w.segment(x-sx/2, y-sy/2, x-gateWidth/2, y-sy/2, .28, .8, .35)
-		w.segment(x+gateWidth/2, y-sy/2, x+sx/2, y-sy/2, .28, .8, .35)
-	} else {
-		w.segment(x-sx/2, y-sy/2, x+sx/2, y-sy/2, .28, .8, .35)
-	}
-	if gateSide == "north" {
-		w.segment(x-sx/2, y+sy/2, x-gateWidth/2, y+sy/2, .28, .8, .35)
-		w.segment(x+gateWidth/2, y+sy/2, x+sx/2, y+sy/2, .28, .8, .35)
-	} else {
-		w.segment(x-sx/2, y+sy/2, x+sx/2, y+sy/2, .28, .8, .35)
-	}
-	if gateSide == "east" {
-		w.segment(x+sx/2, y-sy/2, x+sx/2, y-gateWidth/2, .28, .8, .35)
-		w.segment(x+sx/2, y+gateWidth/2, x+sx/2, y+sy/2, .28, .8, .35)
-	} else {
-		w.segment(x+sx/2, y-sy/2, x+sx/2, y+sy/2, .28, .8, .35)
-	}
-	if gateSide == "west" {
-		w.segment(x-sx/2, y-sy/2, x-sx/2, y-gateWidth/2, .28, .8, .35)
-		w.segment(x-sx/2, y+gateWidth/2, x-sx/2, y+sy/2, .28, .8, .35)
-	} else {
-		w.segment(x-sx/2, y-sy/2, x-sx/2, y+sy/2, .28, .8, .35)
 	}
 }
 
@@ -456,9 +431,14 @@ func (w *objWriter) house(name string, x, y, sx, sy, height float64, roof string
 	}
 	w.material("stone")
 	w.box(x+sx*.30, y+sy*.12, height, 1.7, 1.7, 5)
+	w.houseDetails(x, y, sx, sy, height)
 }
 
 func (w *objWriter) tree(name string, x, y, scale float64) {
+	if onRoad(x, y, 5+3.9*scale) {
+		return
+	}
+	generatedTrees = append(generatedTrees, circleCollision(name, "tree", x, y, .7*scale+.15))
 	w.object(name)
 	w.material("wood")
 	w.cylinder(x, y, 0, .7*scale, 4*scale, 7)
@@ -473,10 +453,11 @@ func (w *objWriter) tree(name string, x, y, scale float64) {
 func (w *objWriter) rock(name string, x, y, radius, height float64) {
 	w.object(name)
 	w.material("rock")
-	w.cone(x, y, 0, radius, height, 7)
+	w.boulder(x, y, 0, radius, height)
 }
 
 func writeWorld(path string) {
+	generatedTrees = nil
 	w := newOBJ(path, "red_world_map_3d.mtl", true)
 	defer w.close()
 
@@ -484,21 +465,11 @@ func writeWorld(path string) {
 	w.object("terrain_base")
 	w.material("grass")
 	w.box(0, 0, -2, 600, 600, 2)
-	for i := 0; i < 64; i++ {
-		a := float64(i) * 2 * math.Pi / 64
-		r := 280 + float64((i%4)*4)
-		x, y := math.Cos(a)*r, math.Sin(a)*r
-		radius := 11 + float64(i%5)*1.8
-		height := 22 + float64(i%6)*3
-		w.rock(fmt.Sprintf("boundary_mountain_%02d", i), x, y, radius, height)
-		w.object(fmt.Sprintf("boundary_snow_%02d", i))
-		w.material("snow")
-		w.cone(x, y, height*.66, radius*.46, height*.34, 7)
-	}
+	w.continuousBoundary()
 
 	// Rivers and bridges corresponding to the blue channels on the 2D map.
 	w.material("water")
-	for i, s := range [][4]float64{{0, 300, 5, 105}, {5, 105, -75, 65}, {-75, 65, -102, 0}, {-102, 0, -92, -80}, {-92, -80, 0, -105}, {0, -105, 105, -88}, {105, -88, 145, -35}, {145, -35, 300, -55}} {
+	for i, s := range rivers {
 		w.object(fmt.Sprintf("river_%02d", i))
 		w.segment(s[0], s[1], s[2], s[3], 15, .05, .08)
 	}
@@ -513,27 +484,19 @@ func writeWorld(path string) {
 	for i, p := range [][2]float64{{-17, 145}, {-12, 170}, {21, 148}, {18, 176}} {
 		w.rock(fmt.Sprintf("waterfall_cliff_%02d", i), p[0], p[1], 7+float64(i%2)*2, 14+float64(i%3)*4)
 	}
-	w.object("north_rope_bridge")
-	w.material("wood")
-	w.segment(-13, 142, 20, 142, 4.2, 8.2, .45)
-	w.material("wood")
-	for i, s := range [][4]float64{{-109, -6, -93, -6}, {-7, -113, -7, -97}, {138.6, -30.2, 151.4, -39.8}} {
-		w.object(fmt.Sprintf("bridge_%02d", i))
-		w.segment(s[0], s[1], s[2], s[3], 8, .25, .5)
-	}
 
 	// Main roads. They use several short sections so their silhouette follows
 	// the winding paths of the illustrated 2D map instead of straight chords.
 	w.material("path")
 	routes := [][][2]float64{
-		{{0, 0}, {-35, 5}, {-72, -2}, {-108, 8}, {-150, 4}, {-195, 0}},
-		{{0, 0}, {-18, 30}, {-48, 60}, {-78, 92}, {-112, 122}, {-150, 150}},
-		{{0, 0}, {8, 38}, {-7, 77}, {5, 105}, {-2, 158}, {0, 230}},
-		{{0, 0}, {38, 30}, {76, 62}, {112, 102}, {147, 136}, {175, 165}},
-		{{0, 0}, {44, 3}, {88, 12}, {135, 4}, {178, 11}, {210, 15}},
-		{{0, 0}, {34, -31}, {69, -65}, {105, -101}, {139, -137}, {170, -165}},
-		{{0, 0}, {-6, -42}, {5, -84}, {-8, -126}, {0, -180}},
-		{{0, 0}, {-34, -33}, {-72, -68}, {-108, -105}, {-141, -139}, {-170, -165}},
+		{{-20, 0}, {-82, 0}, {-125, 0}, {-162, 0}, {-165, -22}, {-195, -22}},
+		{{-125, 0}, {-125, 75}, {-112, 122}, {-120, 120}},
+		{{0, 25}, {-22, 30}, {-22, 72}, {0, 72}, {0, 82}, {-28, 105}, {-28, 158}, {-48, 195}, {-48, 225}},
+		{{82, 0}, {110, 20}, {112, 102}, {147, 118}},
+		{{20, 0}, {25, -16}, {70, -16}, {70, 0}, {82, 0}, {135, 4}, {178, 11}, {183, 15}},
+		{{0, -125}, {65, -125}, {105, -101}, {139, -137}, {150, -150}},
+		{{0, -20}, {10, -35}, {10, -70}, {0, -82}, {0, -125}, {0, -160}},
+		{{0, -125}, {-72, -125}, {-115, -145}, {-118, -169}},
 		{{-150, 150}, {-108, 181}, {-62, 207}, {-25, 224}, {0, 230}},
 		{{0, 230}, {48, 220}, {93, 204}, {136, 187}, {175, 165}},
 		{{175, 165}, {193, 126}, {201, 87}, {218, 50}, {210, 15}},
@@ -543,13 +506,8 @@ func writeWorld(path string) {
 		{{-170, -165}, {-187, -126}, {-195, -84}, {-188, -42}, {-195, 0}},
 		{{-195, 0}, {-193, 44}, {-184, 86}, {-166, 126}, {-150, 150}},
 	}
-	for routeIndex, route := range routes {
-		for segmentIndex := 0; segmentIndex < len(route)-1; segmentIndex++ {
-			a, b := route[segmentIndex], route[segmentIndex+1]
-			w.object(fmt.Sprintf("road_%02d_%02d", routeIndex, segmentIndex))
-			w.segment(a[0], a[1], b[0], b[1], 8, .10, .06)
-		}
-	}
+	mapRoutes = routes
+	w.connectedRoads(routes)
 
 	// Distinct biome floors make every gameplay zone readable at a glance.
 	for _, zone := range []struct {
@@ -571,8 +529,8 @@ func writeWorld(path string) {
 	// Fortified village, central plaza and four gates.
 	w.material("stone")
 	for i := 0; i < 40; i++ {
-		a0 := float64(i)*2*math.Pi/40 + .03
-		a1 := float64(i+1)*2*math.Pi/40 - .03
+		a0 := float64(i) * 2 * math.Pi / 40
+		a1 := float64(i+1) * 2 * math.Pi / 40
 		// Openings at the four cardinal gates.
 		mid := (a0 + a1) / 2
 		if math.Abs(math.Sin(mid)) < .08 || math.Abs(math.Cos(mid)) < .08 {
@@ -585,13 +543,7 @@ func writeWorld(path string) {
 			w.box(math.Cos(a)*82, math.Sin(a)*82, 6, 2.3, 2.3, 1.7)
 		}
 	}
-	for i, p := range [][2]float64{{82, 0}, {-82, 0}, {0, 82}, {0, -82}} {
-		w.object(fmt.Sprintf("gate_towers_%02d", i))
-		w.cylinder(p[0], p[1], 0, 5, 11, 10)
-		w.material("roof_blue")
-		w.cone(p[0], p[1], 11, 6, 5, 10)
-		w.material("stone")
-	}
+	w.fortifiedGates()
 	w.object("central_plaza")
 	w.material("light_stone")
 	w.cylinder(0, 0, .16, 27, .18, 32)
@@ -621,6 +573,7 @@ func writeWorld(path string) {
 	// The keep and its two towers reproduce the dominant building at the
 	// northern side of the central village.
 	w.house("village_keep", 0, 52, 25, 17, 13, "roof_blue")
+	w.keepDetails()
 	for i, x := range []float64{-15, 15} {
 		w.object(fmt.Sprintf("village_keep_tower_%02d", i))
 		w.material("stone")
@@ -705,6 +658,9 @@ func writeWorld(path string) {
 	w.material("wood")
 	for i := 0; i < 36; i++ {
 		a := float64(i) * 2 * math.Pi / 36
+		if onRoad(170+math.Cos(a)*47, -165+math.Sin(a)*47, 5.5) {
+			continue
+		}
 		w.cylinder(170+math.Cos(a)*47, -165+math.Sin(a)*47, 0, .55, 4.5, 6)
 		if i%6 == 0 {
 			w.material("cloth_red")
@@ -784,7 +740,7 @@ func writeWorld(path string) {
 		a := float64(i) * 2.399963
 		r := 22 + float64((i*17)%95)
 		x, y := -172+math.Cos(a)*r, 92+math.Sin(a)*r
-		if math.Hypot(x+150, y-150) < 32 || math.Hypot(x+195, y) < 30 {
+		if math.Hypot(x, y) < 100 || math.Hypot(x+150, y-150) < 32 || math.Hypot(x+195, y) < 30 {
 			continue
 		}
 		w.tree(fmt.Sprintf("wolf_forest_tree_%02d", i), x, y, .8+float64(i%4)*.12)
@@ -903,37 +859,8 @@ func segmentCollision(id, category string, x1, y1, x2, y2, thickness float64) co
 }
 
 func appendFenceCollisions(dst []collision, name string, x, y, sx, sy, gateWidth float64, gateSide string) []collision {
-	if gateSide == "south" {
-		dst = append(dst,
-			segmentCollision(name+"_south_west", "fence", x-sx/2, y-sy/2, x-gateWidth/2, y-sy/2, .8),
-			segmentCollision(name+"_south_east", "fence", x+gateWidth/2, y-sy/2, x+sx/2, y-sy/2, .8),
-		)
-	} else {
-		dst = append(dst, segmentCollision(name+"_south", "fence", x-sx/2, y-sy/2, x+sx/2, y-sy/2, .8))
-	}
-	if gateSide == "north" {
-		dst = append(dst,
-			segmentCollision(name+"_north_west", "fence", x-sx/2, y+sy/2, x-gateWidth/2, y+sy/2, .8),
-			segmentCollision(name+"_north_east", "fence", x+gateWidth/2, y+sy/2, x+sx/2, y+sy/2, .8),
-		)
-	} else {
-		dst = append(dst, segmentCollision(name+"_north", "fence", x-sx/2, y+sy/2, x+sx/2, y+sy/2, .8))
-	}
-	if gateSide == "east" {
-		dst = append(dst,
-			segmentCollision(name+"_east_south", "fence", x+sx/2, y-sy/2, x+sx/2, y-gateWidth/2, .8),
-			segmentCollision(name+"_east_north", "fence", x+sx/2, y+gateWidth/2, x+sx/2, y+sy/2, .8),
-		)
-	} else {
-		dst = append(dst, segmentCollision(name+"_east", "fence", x+sx/2, y-sy/2, x+sx/2, y+sy/2, .8))
-	}
-	if gateSide == "west" {
-		dst = append(dst,
-			segmentCollision(name+"_west_south", "fence", x-sx/2, y-sy/2, x-sx/2, y-gateWidth/2, .8),
-			segmentCollision(name+"_west_north", "fence", x-sx/2, y+gateWidth/2, x-sx/2, y+sy/2, .8),
-		)
-	} else {
-		dst = append(dst, segmentCollision(name+"_west", "fence", x-sx/2, y-sy/2, x-sx/2, y+sy/2, .8))
+	for i, s := range fenceSections(name, x, y, sx, sy, gateWidth, gateSide) {
+		dst = append(dst, segmentCollision(fmt.Sprintf("%s_%03d", name, i), "fence", s[0], s[1], s[2], s[3], .8))
 	}
 	return dst
 }
@@ -945,10 +872,10 @@ func worldCollisions() []collision {
 	var result []collision
 
 	// Natural border and river-bank rocks.
-	for i := 0; i < 64; i++ {
-		a := float64(i) * 2 * math.Pi / 64
-		r := 280 + float64((i%4)*4)
-		result = append(result, circleCollision(fmt.Sprintf("boundary_mountain_%02d", i), "mountain", math.Cos(a)*r, math.Sin(a)*r, 10+float64(i%5)*1.8))
+	for i, s := range boundarySegments() {
+		c := segmentCollision(fmt.Sprintf("boundary_cliff_%03d", i), "mountain", s[0], s[1], s[2], s[3], 16)
+		c.Width += 2
+		result = append(result, c)
 	}
 	for i, p := range [][2]float64{{-2, 112}, {-20, 92}, {-52, 73}, {-82, 43}, {-99, 12}, {-101, -34}, {-94, -71}, {-65, -92}, {-25, -103}, {25, -103}, {69, -96}, {108, -78}, {134, -49}, {169, -41}, {213, -46}, {258, -51}} {
 		result = append(result, circleCollision(fmt.Sprintf("river_bank_rock_%02d", i), "rock", p[0], p[1], 2+float64(i%3)))
@@ -958,12 +885,8 @@ func worldCollisions() []collision {
 	}
 	// River sections are blocking except where a visible bridge creates a
 	// deliberate opening. They remain rectangles, like walls and fences.
-	for i, s := range [][4]float64{
-		{0, 300, 5, 105}, {5, 105, -75, 65}, {-75, 65, -102, 0},
-		{-100.5, -12, -92, -80}, {-92, -80, -14, -101.2},
-		{0, -105, 105, -88}, {105, -88, 138, -44}, {153, -36, 300, -55},
-	} {
-		result = append(result, segmentCollision(fmt.Sprintf("river_water_%02d", i), "water", s[0], s[1], s[2], s[3], 13))
+	for i, s := range rivers {
+		result = append(result, segmentCollision(fmt.Sprintf("river_water_%02d", i), "river", s[0], s[1], s[2], s[3], 15))
 	}
 	result = append(result,
 		segmentCollision("north_waterfall_south", "water", 4, 122, 4, 136, 10),
@@ -972,16 +895,16 @@ func worldCollisions() []collision {
 
 	// Village wall, gate towers, fountain, houses and market.
 	for i := 0; i < 40; i++ {
-		a0 := float64(i)*2*math.Pi/40 + .03
-		a1 := float64(i+1)*2*math.Pi/40 - .03
+		a0 := float64(i) * 2 * math.Pi / 40
+		a1 := float64(i+1) * 2 * math.Pi / 40
 		mid := (a0 + a1) / 2
 		if math.Abs(math.Sin(mid)) < .08 || math.Abs(math.Cos(mid)) < .08 {
 			continue
 		}
 		result = append(result, segmentCollision(fmt.Sprintf("village_wall_%02d", i), "wall", math.Cos(a0)*82, math.Sin(a0)*82, math.Cos(a1)*82, math.Sin(a1)*82, 4))
 	}
-	for i, p := range [][2]float64{{82, 0}, {-82, 0}, {0, 82}, {0, -82}} {
-		result = append(result, circleCollision(fmt.Sprintf("gate_tower_%02d", i), "tower", p[0], p[1], 5.2))
+	for i, p := range gateTowerPositions() {
+		result = append(result, circleCollision(fmt.Sprintf("gate_tower_%02d", i), "tower", p.x, p.y, 5.2))
 	}
 	result = append(result, circleCollision("central_fountain", "fountain", 0, 0, 7.2))
 	for i := 0; i < 8; i++ {
@@ -1030,6 +953,9 @@ func worldCollisions() []collision {
 	// Arena.
 	for i := 0; i < 36; i++ {
 		a := float64(i) * 2 * math.Pi / 36
+		if onRoad(170+math.Cos(a)*47, -165+math.Sin(a)*47, 5.5) {
+			continue
+		}
 		result = append(result, circleCollision(fmt.Sprintf("arena_post_%02d", i), "fence", 170+math.Cos(a)*47, -165+math.Sin(a)*47, .75))
 	}
 	for i, p := range [][2]float64{{150, -165}, {170, -185}, {190, -165}} {
@@ -1084,7 +1010,7 @@ func worldCollisions() []collision {
 		a := float64(i) * 2.399963
 		r := 22 + float64((i*17)%95)
 		x, y := -172+math.Cos(a)*r, 92+math.Sin(a)*r
-		if math.Hypot(x+150, y-150) < 32 || math.Hypot(x+195, y) < 30 {
+		if math.Hypot(x, y) < 100 || math.Hypot(x+150, y-150) < 32 || math.Hypot(x+195, y) < 30 {
 			continue
 		}
 		result = append(result, circleCollision(fmt.Sprintf("wolf_forest_tree_%02d", i), "tree", x, y, .8+float64(i%4)*.12))
@@ -1142,6 +1068,17 @@ func worldCollisions() []collision {
 		result = append(result, circleCollision(fmt.Sprintf("background_tree_%03d", i), "tree", p.x, p.y, .85*p.z))
 	}
 
+	// Les arbres vivants proviennent directement des maillages effectivement
+	// émis, afin de ne plus désynchroniser leur position et leur collision.
+	if generatedTrees != nil {
+		filtered := result[:0]
+		for _, c := range result {
+			if c.Category != "tree" || strings.HasPrefix(c.ID, "marsh_dead_tree") {
+				filtered = append(filtered, c)
+			}
+		}
+		result = append(filtered, generatedTrees...)
+	}
 	return result
 }
 
@@ -1199,6 +1136,7 @@ func writeLayout(path string) {
 			{"mana_grove", "Bosquet de mana", 210, 15, 44, "Source magique et contenu optionnel de mana"},
 		},
 		Collisions: worldCollisions(),
+		Bridges:    bridgePassages,
 	}
 	b, err := json.MarshalIndent(data, "", "  ")
 	if err != nil {

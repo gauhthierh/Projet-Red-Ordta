@@ -21,6 +21,7 @@ type DonneesMonde struct {
 	Spawn     [3]float32  `json:"spawn"`
 	Zones     []Zone      `json:"landmarks"`
 	Obstacles []Collision `json:"collisions"`
+	Ponts     []Collision `json:"bridges"`
 	// north_axis
 	// up_axis
 	// image_width

@@ -108,5 +108,44 @@ func positionAutorisee(x float32, y float32, rayonPersonnage float32, donnees Do
 		return false
 	}
 
-	return !personnageToucheRectangle(x, y, rayonPersonnage, donnees.Obstacles)
+	surPont := false
+	for _, pont := range donnees.Ponts {
+		angle := float64(pont.Rotation) * math.Pi / 180
+		dx, dy := float64(x-pont.X), float64(y-pont.Y)
+		localX := dx*math.Cos(angle) + dy*math.Sin(angle)
+		localY := -dx*math.Sin(angle) + dy*math.Cos(angle)
+		if math.Abs(localX) <= float64(pont.Largeur/2) && math.Abs(localY) <= float64(pont.Hauteur/2-rayonPersonnage) {
+			surPont = true
+			break
+		}
+	}
+	for _, obstacle := range donnees.Obstacles {
+		if obstacle.Categorie == "river" && surPont {
+			continue
+		}
+		if personnageToucheRectangle(x, y, rayonPersonnage, []Collision{obstacle}) {
+			return false
+		}
+	}
+	return true
+}
+
+// Plusieurs petits pas évitent de sauter par-dessus un tronc lors d'une
+// image lente. On conserve le glissement le long des obstacles.
+func deplacerAvecCollisions(x, y, dx, dy, rayon float32, donnees DonneesMonde) (float32, float32) {
+	pas := int(math.Ceil(math.Hypot(float64(dx), float64(dy)) / .15))
+	if pas < 1 {
+		return x, y
+	}
+	dx /= float32(pas)
+	dy /= float32(pas)
+	for i := 0; i < pas; i++ {
+		if positionAutorisee(x+dx, y, rayon, donnees) {
+			x += dx
+		}
+		if positionAutorisee(x, y+dy, rayon, donnees) {
+			y += dy
+		}
+	}
+	return x, y
 }

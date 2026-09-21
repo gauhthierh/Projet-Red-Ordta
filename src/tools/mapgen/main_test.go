@@ -5,6 +5,7 @@ import (
 	"image"
 	"image/color"
 	"image/png"
+	"math"
 	"os"
 	"path/filepath"
 	"testing"
@@ -87,6 +88,16 @@ func TestGeneratedMapAssets(t *testing.T) {
 	for _, c := range plan.Collisions {
 		if c.ID == "" || (c.Shape != "circle" && c.Shape != "rectangle") {
 			t.Fatalf("collision invalide : %+v", c)
+		}
+		if c.Category == "fence" {
+			angle := c.RotationDegrees * math.Pi / 180
+			for j := 0; j <= 100; j++ {
+				offset := (float64(j)/100 - .5) * c.Width
+				x, y := c.X+math.Cos(angle)*offset, c.Y+math.Sin(angle)*offset
+				if onRoad(x, y, 4.5) {
+					t.Fatalf("la clôture %s bloque un chemin en %.2f, %.2f", c.ID, x, y)
+				}
+			}
 		}
 	}
 }

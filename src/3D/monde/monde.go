@@ -105,20 +105,10 @@ func Lancer() {
 		directionX, directionY := CalculerDirectionPersonnage(angleHorizontal, commandeAvant, commandeDroite)
 
 		// Calcul de la nouvelle position dans le repère du monde.
-		nouveauX := positionActuelle.X + directionX*distance
-		nouveauY := positionActuelle.Y + directionY*distance
-
-		// Les deux axes sont vérifiés séparément : le personnage glisse ainsi
-		// naturellement le long d'un mur au lieu de rester bloqué en diagonale.
-		positionFinaleX := positionActuelle.X
-		positionFinaleY := positionActuelle.Y
-
-		if positionAutorisee(nouveauX, positionActuelle.Y, rayonPersonnage, donneesMonde) {
-			positionFinaleX = nouveauX
-		}
-		if positionAutorisee(positionFinaleX, nouveauY, rayonPersonnage, donneesMonde) {
-			positionFinaleY = nouveauY
-		}
+		positionFinaleX, positionFinaleY := deplacerAvecCollisions(
+			positionActuelle.X, positionActuelle.Y,
+			directionX*distance, directionY*distance, rayonPersonnage, donneesMonde,
+		)
 
 		noeudPersonnage.SetPosition(positionFinaleX, positionFinaleY, positionActuelle.Z)
 		deplacementEffectue := positionFinaleX != positionActuelle.X || positionFinaleY != positionActuelle.Y

@@ -33,6 +33,14 @@ Le modèle 3D n'est pas généré pendant l'exécution. Le générateur Go situ�
 
 ## Collisions
 
+Les passages des ponts sont décrits par `bridges` dans le JSON. Ils permettent
+de franchir les obstacles de catégorie `river`, sans annuler les collisions
+des bâtiments, arbres ou rochers. Les tabliers sont produits sur le tracé des
+chemins, à hauteur du sol de jeu (0,20), pour rester compatibles avec le
+déplacement XY actuel. Les collisions des arbres vivants sont enregistrées
+au moment de la génération de leur géométrie. Le feuillage utilise désormais
+`textures/foliage_detailed.png`.
+
 Le tableau `collisions` du JSON reprend les empreintes solides du décor sur le plan XY. Les formes `circle` utilisent `radius`. Les formes `rectangle` utilisent `width`, `height` et, lorsque nécessaire, `rotation_degrees`. Les bâtiments, murs, clôtures, arbres, rochers, lampadaires, ruines, accessoires importants et zones d'eau sont couverts. Les collisions des rivières sont interrompues aux ponts. Les cultures, fleurs, bannières, petits buissons et autres ornements restent volontairement traversables afin de ne pas gêner les déplacements.
 
 Le déplacement contrôle séparément les axes X et Y, ce qui permet au personnage de glisser contre les obstacles. Les rectangles orientés utilisent le même test que les rectangles droits après conversion de la position dans leur repère local.

@@ -16,6 +16,8 @@ import (
 
 // Plusieurs matériaux peuvent partager la même image avec une teinte différente.
 var texturesCarte = map[string]string{
+	"leaf":        "foliage_detailed.png",
+	"leaf_light":  "foliage_detailed.png",
 	"grass":       "grass_detailed.png",
 	"dark_grass":  "grass_detailed.png",
 	"field":       "grass_detailed.png",
@@ -40,7 +42,9 @@ var texturesCarte = map[string]string{
 }
 
 var teintesCarte = map[string]math32.Color{
-	"grass":       {R: 1, G: 1, B: 1},
+	"leaf":        {R: .75, G: .85, B: .7},
+	"leaf_light":  {R: 1, G: 1, B: .85},
+	"grass":       {R: .62, G: .72, B: .54},
 	"dark_grass":  {R: .48, G: .68, B: .45},
 	"field":       {R: .72, G: .62, B: .34},
 	"marsh":       {R: 1, G: 1, B: 1},
@@ -159,6 +163,7 @@ func chargerTextureRepetee(chemin string) (*texture.Texture2D, error) {
 	imageTexture.SetWrapS(gls.REPEAT)
 	imageTexture.SetWrapT(gls.REPEAT)
 	imageTexture.SetMagFilter(gls.NEAREST)
-	imageTexture.SetMinFilter(gls.NEAREST)
+	// Les mipmaps évitent le scintillement des motifs fins vus de loin.
+	imageTexture.SetMinFilter(gls.LINEAR_MIPMAP_LINEAR)
 	return imageTexture, nil
 }

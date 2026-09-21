@@ -102,516 +102,1284 @@
   ],
   "collisions": [
     {
-      "id": "boundary_mountain_00",
+      "id": "boundary_cliff_000",
       "category": "mountain",
-      "shape": "circle",
-      "x": 280,
-      "y": 0,
-      "radius": 10
+      "shape": "rectangle",
+      "x": 285.8277502373396,
+      "y": 7.016677428820776,
+      "width": 16.037582715105827,
+      "height": 16,
+      "rotation_degrees": 91.40625000000007
     },
     {
-      "id": "boundary_mountain_01",
+      "id": "boundary_cliff_001",
       "category": "mountain",
-      "shape": "circle",
-      "x": 282.6324623749039,
-      "y": 27.836867853595212,
-      "radius": 11.8
+      "shape": "rectangle",
+      "x": 285.13916615146377,
+      "y": 21.033128495947942,
+      "width": 16.037582715105827,
+      "height": 16,
+      "rotation_degrees": 94.21874999999994
     },
     {
-      "id": "boundary_mountain_02",
+      "id": "boundary_cliff_002",
       "category": "mountain",
-      "shape": "circle",
-      "x": 282.46616075613036,
-      "y": 56.186012740644934,
-      "radius": 13.6
+      "shape": "rectangle",
+      "x": 283.76365683908784,
+      "y": 34.9989089142439,
+      "width": 16.037582715105827,
+      "height": 16,
+      "rotation_degrees": 97.03124999999991
     },
     {
-      "id": "boundary_mountain_03",
+      "id": "boundary_cliff_003",
       "category": "mountain",
-      "shape": "circle",
-      "x": 279.42657803380496,
-      "y": 84.763125758303,
-      "radius": 15.4
+      "shape": "rectangle",
+      "x": 281.70453602262563,
+      "y": 48.88037389542307,
+      "width": 16.037582715105827,
+      "height": 16,
+      "rotation_degrees": 99.84375000000018
     },
     {
-      "id": "boundary_mountain_04",
+      "id": "boundary_cliff_004",
       "category": "mountain",
-      "shape": "circle",
-      "x": 258.68626910316027,
-      "y": 107.15136106222513,
-      "radius": 17.2
+      "shape": "rectangle",
+      "x": 278.9667643044818,
+      "y": 62.64408177447308,
+      "width": 16.037582715105824,
+      "height": 16,
+      "rotation_degrees": 102.65624999999973
     },
     {
-      "id": "boundary_mountain_05",
+      "id": "boundary_cliff_005",
       "category": "mountain",
-      "shape": "circle",
-      "x": 250.46563907493282,
-      "y": 133.87667325858334,
-      "radius": 10
+      "shape": "rectangle",
+      "x": 275.5569372165257,
+      "y": 76.25687457355485,
+      "width": 16.037582715105835,
+      "height": 16,
+      "rotation_degrees": 105.46875000000018
     },
     {
-      "id": "boundary_mountain_06",
+      "id": "boundary_cliff_006",
       "category": "mountain",
-      "shape": "circle",
-      "x": 239.46324834313305,
-      "y": 160.00422710964543,
-      "radius": 11.8
+      "shape": "rectangle",
+      "x": 271.4832693308779,
+      "y": 89.68595788247558,
+      "width": 16.03758271510583,
+      "height": 16,
+      "rotation_degrees": 108.28124999999996
     },
     {
-      "id": "boundary_mountain_07",
+      "id": "boundary_cliff_007",
       "category": "mountain",
-      "shape": "circle",
-      "x": 225.7190523819192,
-      "y": 185.24283897578448,
-      "radius": 13.6
+      "shape": "rectangle",
+      "x": 266.755574470286,
+      "y": 102.89897986329531,
+      "width": 16.03758271510584,
+      "height": 16,
+      "rotation_degrees": 111.09375000000009
     },
     {
-      "id": "boundary_mountain_08",
+      "id": "boundary_cliff_008",
       "category": "mountain",
-      "shape": "circle",
-      "x": 197.9898987322333,
-      "y": 197.98989873223329,
-      "radius": 15.4
+      "shape": "rectangle",
+      "x": 261.3852420657664,
+      "y": 115.86410918873818,
+      "width": 16.037582715105813,
+      "height": 16,
+      "rotation_degrees": 113.90625000000004
     },
     {
-      "id": "boundary_mountain_09",
+      "id": "boundary_cliff_009",
       "category": "mountain",
-      "shape": "circle",
-      "x": 180.16769270247536,
-      "y": 219.53496875501727,
-      "radius": 17.2
+      "shape": "rectangle",
+      "x": 255.38520971846717,
+      "y": 128.550111726648,
+      "width": 16.037582715105827,
+      "height": 16,
+      "rotation_degrees": 116.71874999999989
     },
     {
-      "id": "boundary_mountain_10",
+      "id": "boundary_cliff_010",
       "category": "mountain",
-      "shape": "circle",
-      "x": 160.00422710964546,
-      "y": 239.46324834313302,
-      "radius": 10
+      "shape": "rectangle",
+      "x": 248.76993203185367,
+      "y": 140.92642578574836,
+      "width": 16.03758271510582,
+      "height": 16,
+      "rotation_degrees": 119.53125000000006
     },
     {
-      "id": "boundary_mountain_11",
+      "id": "boundary_cliff_011",
       "category": "mountain",
-      "shape": "circle",
-      "x": 137.64784715319135,
-      "y": 257.5210091897196,
-      "radius": 11.8
+      "shape": "rectangle",
+      "x": 241.5553457893029,
+      "y": 152.9632357414338,
+      "width": 16.037582715105806,
+      "height": 16,
+      "rotation_degrees": 122.34374999999997
     },
     {
-      "id": "boundary_mountain_12",
+      "id": "boundary_cliff_012",
       "category": "mountain",
-      "shape": "circle",
-      "x": 107.15136106222515,
-      "y": 258.68626910316027,
-      "radius": 13.6
+      "shape": "rectangle",
+      "x": 233.7588315609962,
+      "y": 164.63154386422107,
+      "width": 16.03758271510585,
+      "height": 16,
+      "rotation_degrees": 125.15624999999996
     },
     {
-      "id": "boundary_mountain_13",
+      "id": "boundary_cliff_013",
       "category": "mountain",
-      "shape": "circle",
-      "x": 82.44084834026728,
-      "y": 271.7710553479473,
-      "radius": 15.4
+      "shape": "rectangle",
+      "x": 225.39917183260363,
+      "y": 175.90324017781927,
+      "width": 16.037582715105827,
+      "height": 16,
+      "rotation_degrees": 127.96875
     },
     {
-      "id": "boundary_mountain_14",
+      "id": "boundary_cliff_014",
       "category": "mountain",
-      "shape": "circle",
-      "x": 56.186012740644955,
-      "y": 282.46616075613036,
-      "radius": 17.2
+      "shape": "rectangle",
+      "x": 216.49650575663054,
+      "y": 186.75117017852494,
+      "width": 16.037582715105827,
+      "height": 16,
+      "rotation_degrees": 130.78125000000003
     },
     {
-      "id": "boundary_mountain_15",
+      "id": "boundary_cliff_015",
       "category": "mountain",
-      "shape": "circle",
-      "x": 28.621004976231745,
-      "y": 290.59394018828146,
-      "radius": 10
+      "shape": "rectangle",
+      "x": 207.07228063543545,
+      "y": 197.14920025279991,
+      "width": 16.037582715105827,
+      "height": 16,
+      "rotation_degrees": 133.59375000000003
     },
     {
-      "id": "boundary_mountain_16",
+      "id": "boundary_cliff_016",
       "category": "mountain",
-      "shape": "circle",
-      "x": 1.714505518806292e-14,
-      "y": 280,
-      "radius": 11.8
+      "shape": "rectangle",
+      "x": 197.14920025279994,
+      "y": 207.07228063543545,
+      "width": 16.03758271510585,
+      "height": 16,
+      "rotation_degrees": 136.4062499999999
     },
     {
-      "id": "boundary_mountain_17",
+      "id": "boundary_cliff_017",
       "category": "mountain",
-      "shape": "circle",
-      "x": -27.836867853595226,
-      "y": 282.6324623749039,
-      "radius": 13.6
+      "shape": "rectangle",
+      "x": 186.75117017852494,
+      "y": 216.49650575663054,
+      "width": 16.037582715105806,
+      "height": 16,
+      "rotation_degrees": 139.21875000000006
     },
     {
-      "id": "boundary_mountain_18",
+      "id": "boundary_cliff_018",
       "category": "mountain",
-      "shape": "circle",
-      "x": -56.18601274064492,
-      "y": 282.46616075613036,
-      "radius": 15.4
+      "shape": "rectangle",
+      "x": 175.9032401778193,
+      "y": 225.3991718326036,
+      "width": 16.037582715105827,
+      "height": 16,
+      "rotation_degrees": 142.03124999999997
     },
     {
-      "id": "boundary_mountain_19",
+      "id": "boundary_cliff_019",
       "category": "mountain",
-      "shape": "circle",
-      "x": -84.76312575830296,
-      "y": 279.426578033805,
-      "radius": 17.2
+      "shape": "rectangle",
+      "x": 164.6315438642211,
+      "y": 233.75883156099619,
+      "width": 16.037582715105827,
+      "height": 16,
+      "rotation_degrees": 144.84374999999997
     },
     {
-      "id": "boundary_mountain_20",
+      "id": "boundary_cliff_020",
       "category": "mountain",
-      "shape": "circle",
-      "x": -107.15136106222512,
-      "y": 258.68626910316027,
-      "radius": 10
+      "shape": "rectangle",
+      "x": 152.96323574143383,
+      "y": 241.55534578930286,
+      "width": 16.03758271510585,
+      "height": 16,
+      "rotation_degrees": 147.65625
     },
     {
-      "id": "boundary_mountain_21",
+      "id": "boundary_cliff_021",
       "category": "mountain",
-      "shape": "circle",
-      "x": -133.87667325858334,
-      "y": 250.4656390749328,
-      "radius": 11.8
+      "shape": "rectangle",
+      "x": 140.9264257857484,
+      "y": 248.76993203185367,
+      "width": 16.037582715105785,
+      "height": 16,
+      "rotation_degrees": 150.46875
     },
     {
-      "id": "boundary_mountain_22",
+      "id": "boundary_cliff_022",
       "category": "mountain",
-      "shape": "circle",
-      "x": -160.00422710964537,
-      "y": 239.46324834313305,
-      "radius": 13.6
+      "shape": "rectangle",
+      "x": 128.55011172664805,
+      "y": 255.38520971846714,
+      "width": 16.037582715105852,
+      "height": 16,
+      "rotation_degrees": 153.28125000000003
     },
     {
-      "id": "boundary_mountain_23",
+      "id": "boundary_cliff_023",
       "category": "mountain",
-      "shape": "circle",
-      "x": -185.24283897578442,
-      "y": 225.71905238191923,
-      "radius": 15.4
+      "shape": "rectangle",
+      "x": 115.86410918873821,
+      "y": 261.3852420657664,
+      "width": 16.03758271510584,
+      "height": 16,
+      "rotation_degrees": 156.09375
     },
     {
-      "id": "boundary_mountain_24",
+      "id": "boundary_cliff_024",
       "category": "mountain",
-      "shape": "circle",
-      "x": -197.98989873223329,
-      "y": 197.9898987322333,
-      "radius": 17.2
+      "shape": "rectangle",
+      "x": 102.89897986329532,
+      "y": 266.755574470286,
+      "width": 16.037582715105856,
+      "height": 16,
+      "rotation_degrees": 158.90624999999994
     },
     {
-      "id": "boundary_mountain_25",
+      "id": "boundary_cliff_025",
       "category": "mountain",
-      "shape": "circle",
-      "x": -219.5349687550173,
-      "y": 180.1676927024753,
-      "radius": 10
+      "shape": "rectangle",
+      "x": 89.68595788247558,
+      "y": 271.4832693308779,
+      "width": 16.037582715105856,
+      "height": 16,
+      "rotation_degrees": 161.71875000000009
     },
     {
-      "id": "boundary_mountain_26",
+      "id": "boundary_cliff_026",
       "category": "mountain",
-      "shape": "circle",
-      "x": -239.46324834313305,
-      "y": 160.00422710964543,
-      "radius": 11.8
+      "shape": "rectangle",
+      "x": 76.25687457355485,
+      "y": 275.5569372165256,
+      "width": 16.037582715105763,
+      "height": 16,
+      "rotation_degrees": 164.53125
     },
     {
-      "id": "boundary_mountain_27",
+      "id": "boundary_cliff_027",
       "category": "mountain",
-      "shape": "circle",
-      "x": -257.5210091897196,
-      "y": 137.64784715319135,
-      "radius": 13.6
+      "shape": "rectangle",
+      "x": 62.644081774473094,
+      "y": 278.9667643044817,
+      "width": 16.03758271510585,
+      "height": 16,
+      "rotation_degrees": 167.34375000000006
     },
     {
-      "id": "boundary_mountain_28",
+      "id": "boundary_cliff_028",
       "category": "mountain",
-      "shape": "circle",
-      "x": -258.68626910316027,
-      "y": 107.15136106222515,
-      "radius": 15.4
+      "shape": "rectangle",
+      "x": 48.88037389542308,
+      "y": 281.70453602262563,
+      "width": 16.03758271510584,
+      "height": 16,
+      "rotation_degrees": 170.15624999999983
     },
     {
-      "id": "boundary_mountain_29",
+      "id": "boundary_cliff_029",
       "category": "mountain",
-      "shape": "circle",
-      "x": -271.7710553479473,
-      "y": 82.44084834026731,
-      "radius": 17.2
+      "shape": "rectangle",
+      "x": 34.99890891424392,
+      "y": 283.76365683908784,
+      "width": 16.037582715105778,
+      "height": 16,
+      "rotation_degrees": 172.96875000000006
     },
     {
-      "id": "boundary_mountain_30",
+      "id": "boundary_cliff_030",
       "category": "mountain",
-      "shape": "circle",
-      "x": -282.4661607561303,
-      "y": 56.18601274064503,
-      "radius": 10
+      "shape": "rectangle",
+      "x": 21.033128495947985,
+      "y": 285.13916615146377,
+      "width": 16.03758271510584,
+      "height": 16,
+      "rotation_degrees": 175.78125000000006
     },
     {
-      "id": "boundary_mountain_31",
+      "id": "boundary_cliff_031",
       "category": "mountain",
-      "shape": "circle",
-      "x": -290.59394018828146,
-      "y": 28.621004976231767,
-      "radius": 11.8
+      "shape": "rectangle",
+      "x": 7.016677428820802,
+      "y": 285.8277502373396,
+      "width": 16.037582715105845,
+      "height": 16,
+      "rotation_degrees": 178.59374999999991
     },
     {
-      "id": "boundary_mountain_32",
+      "id": "boundary_cliff_032",
       "category": "mountain",
-      "shape": "circle",
-      "x": -280,
-      "y": 3.429011037612584e-14,
-      "radius": 13.6
+      "shape": "rectangle",
+      "x": -7.016677428820766,
+      "y": 285.8277502373396,
+      "width": 16.037582715105845,
+      "height": 16,
+      "rotation_degrees": -178.59374999999991
     },
     {
-      "id": "boundary_mountain_33",
+      "id": "boundary_cliff_033",
       "category": "mountain",
-      "shape": "circle",
-      "x": -282.6324623749039,
-      "y": -27.83686785359521,
-      "radius": 15.4
+      "shape": "rectangle",
+      "x": -21.03312849594795,
+      "y": 285.13916615146377,
+      "width": 16.03758271510585,
+      "height": 16,
+      "rotation_degrees": -175.78125000000006
     },
     {
-      "id": "boundary_mountain_34",
+      "id": "boundary_cliff_034",
       "category": "mountain",
-      "shape": "circle",
-      "x": -282.46616075613036,
-      "y": -56.18601274064497,
-      "radius": 17.2
+      "shape": "rectangle",
+      "x": -34.998908914243884,
+      "y": 283.76365683908784,
+      "width": 16.03758271510577,
+      "height": 16,
+      "rotation_degrees": -172.96875000000006
     },
     {
-      "id": "boundary_mountain_35",
+      "id": "boundary_cliff_035",
       "category": "mountain",
-      "shape": "circle",
-      "x": -279.426578033805,
-      "y": -84.76312575830295,
-      "radius": 10
+      "shape": "rectangle",
+      "x": -48.88037389542305,
+      "y": 281.70453602262563,
+      "width": 16.03758271510585,
+      "height": 16,
+      "rotation_degrees": -170.15624999999983
     },
     {
-      "id": "boundary_mountain_36",
+      "id": "boundary_cliff_036",
       "category": "mountain",
-      "shape": "circle",
-      "x": -258.6862691031603,
-      "y": -107.1513610622251,
-      "radius": 11.8
+      "shape": "rectangle",
+      "x": -62.644081774473065,
+      "y": 278.9667643044818,
+      "width": 16.037582715105835,
+      "height": 16,
+      "rotation_degrees": -167.34375000000028
     },
     {
-      "id": "boundary_mountain_37",
+      "id": "boundary_cliff_037",
       "category": "mountain",
-      "shape": "circle",
-      "x": -250.46563907493282,
-      "y": -133.87667325858334,
-      "radius": 13.6
+      "shape": "rectangle",
+      "x": -76.25687457355482,
+      "y": 275.5569372165257,
+      "width": 16.037582715105792,
+      "height": 16,
+      "rotation_degrees": -164.53124999999977
     },
     {
-      "id": "boundary_mountain_38",
+      "id": "boundary_cliff_038",
       "category": "mountain",
-      "shape": "circle",
-      "x": -239.46324834313305,
-      "y": -160.00422710964537,
-      "radius": 15.4
+      "shape": "rectangle",
+      "x": -89.68595788247555,
+      "y": 271.4832693308779,
+      "width": 16.037582715105845,
+      "height": 16,
+      "rotation_degrees": -161.71875000000006
     },
     {
-      "id": "boundary_mountain_39",
+      "id": "boundary_cliff_039",
       "category": "mountain",
-      "shape": "circle",
-      "x": -225.71905238191923,
-      "y": -185.24283897578442,
-      "radius": 17.2
+      "shape": "rectangle",
+      "x": -102.89897986329528,
+      "y": 266.755574470286,
+      "width": 16.03758271510584,
+      "height": 16,
+      "rotation_degrees": -158.90624999999991
     },
     {
-      "id": "boundary_mountain_40",
+      "id": "boundary_cliff_040",
       "category": "mountain",
-      "shape": "circle",
-      "x": -197.98989873223334,
-      "y": -197.98989873223329,
-      "radius": 10
+      "shape": "rectangle",
+      "x": -115.86410918873813,
+      "y": 261.3852420657664,
+      "width": 16.037582715105763,
+      "height": 16,
+      "rotation_degrees": -156.09375000000014
     },
     {
-      "id": "boundary_mountain_41",
+      "id": "boundary_cliff_041",
       "category": "mountain",
-      "shape": "circle",
-      "x": -180.16769270247545,
-      "y": -219.53496875501722,
-      "radius": 11.8
+      "shape": "rectangle",
+      "x": -128.55011172664797,
+      "y": 255.3852097184672,
+      "width": 16.03758271510594,
+      "height": 16,
+      "rotation_degrees": -153.28124999999994
     },
     {
-      "id": "boundary_mountain_42",
+      "id": "boundary_cliff_042",
       "category": "mountain",
-      "shape": "circle",
-      "x": -160.00422710964543,
-      "y": -239.46324834313305,
-      "radius": 13.6
+      "shape": "rectangle",
+      "x": -140.92642578574836,
+      "y": 248.76993203185367,
+      "width": 16.037582715105742,
+      "height": 16,
+      "rotation_degrees": -150.46875000000006
     },
     {
-      "id": "boundary_mountain_43",
+      "id": "boundary_cliff_043",
       "category": "mountain",
-      "shape": "circle",
-      "x": -137.64784715319138,
-      "y": -257.5210091897196,
-      "radius": 15.4
+      "shape": "rectangle",
+      "x": -152.96323574143378,
+      "y": 241.55534578930292,
+      "width": 16.0375827151058,
+      "height": 16,
+      "rotation_degrees": -147.6562499999999
     },
     {
-      "id": "boundary_mountain_44",
+      "id": "boundary_cliff_044",
       "category": "mountain",
-      "shape": "circle",
-      "x": -107.15136106222529,
-      "y": -258.6862691031602,
-      "radius": 17.2
+      "shape": "rectangle",
+      "x": -164.63154386422104,
+      "y": 233.7588315609962,
+      "width": 16.037582715105877,
+      "height": 16,
+      "rotation_degrees": -144.8437500000001
     },
     {
-      "id": "boundary_mountain_45",
+      "id": "boundary_cliff_045",
       "category": "mountain",
-      "shape": "circle",
-      "x": -82.44084834026732,
-      "y": -271.7710553479473,
-      "radius": 10
+      "shape": "rectangle",
+      "x": -175.9032401778192,
+      "y": 225.39917183260366,
+      "width": 16.037582715105785,
+      "height": 16,
+      "rotation_degrees": -142.03125000000003
     },
     {
-      "id": "boundary_mountain_46",
+      "id": "boundary_cliff_046",
       "category": "mountain",
-      "shape": "circle",
-      "x": -56.186012740645054,
-      "y": -282.4661607561303,
-      "radius": 11.8
+      "shape": "rectangle",
+      "x": -186.75117017852492,
+      "y": 216.49650575663057,
+      "width": 16.03758271510591,
+      "height": 16,
+      "rotation_degrees": -139.2187500000001
     },
     {
-      "id": "boundary_mountain_47",
+      "id": "boundary_cliff_047",
       "category": "mountain",
-      "shape": "circle",
-      "x": -28.621004976231653,
-      "y": -290.59394018828146,
-      "radius": 13.6
+      "shape": "rectangle",
+      "x": -197.14920025279991,
+      "y": 207.07228063543545,
+      "width": 16.037582715105806,
+      "height": 16,
+      "rotation_degrees": -136.4062499999999
     },
     {
-      "id": "boundary_mountain_48",
+      "id": "boundary_cliff_048",
       "category": "mountain",
-      "shape": "circle",
-      "x": -5.143516556418876e-14,
-      "y": -280,
-      "radius": 15.4
+      "shape": "rectangle",
+      "x": -207.0722806354354,
+      "y": 197.14920025279997,
+      "width": 16.03758271510577,
+      "height": 16,
+      "rotation_degrees": -133.59374999999994
     },
     {
-      "id": "boundary_mountain_49",
+      "id": "boundary_cliff_049",
       "category": "mountain",
-      "shape": "circle",
-      "x": 27.836867853595066,
-      "y": -282.6324623749039,
-      "radius": 17.2
+      "shape": "rectangle",
+      "x": -216.4965057566305,
+      "y": 186.75117017852494,
+      "width": 16.037582715105927,
+      "height": 16,
+      "rotation_degrees": -130.7812500000001
     },
     {
-      "id": "boundary_mountain_50",
+      "id": "boundary_cliff_050",
       "category": "mountain",
-      "shape": "circle",
-      "x": 56.18601274064494,
-      "y": -282.46616075613036,
-      "radius": 10
+      "shape": "rectangle",
+      "x": -225.3991718326036,
+      "y": 175.90324017781927,
+      "width": 16.037582715105785,
+      "height": 16,
+      "rotation_degrees": -127.96874999999997
     },
     {
-      "id": "boundary_mountain_51",
+      "id": "boundary_cliff_051",
       "category": "mountain",
-      "shape": "circle",
-      "x": 84.76312575830293,
-      "y": -279.426578033805,
-      "radius": 11.8
+      "shape": "rectangle",
+      "x": -233.7588315609962,
+      "y": 164.6315438642211,
+      "width": 16.03758271510589,
+      "height": 16,
+      "rotation_degrees": -125.15624999999999
     },
     {
-      "id": "boundary_mountain_52",
+      "id": "boundary_cliff_052",
       "category": "mountain",
-      "shape": "circle",
-      "x": 107.1513610622252,
-      "y": -258.68626910316027,
-      "radius": 13.6
+      "shape": "rectangle",
+      "x": -241.5553457893029,
+      "y": 152.96323574143383,
+      "width": 16.037582715105785,
+      "height": 16,
+      "rotation_degrees": -122.34375000000004
     },
     {
-      "id": "boundary_mountain_53",
+      "id": "boundary_cliff_053",
       "category": "mountain",
-      "shape": "circle",
-      "x": 133.8766732585833,
-      "y": -250.46563907493282,
-      "radius": 15.4
+      "shape": "rectangle",
+      "x": -248.76993203185367,
+      "y": 140.9264257857484,
+      "width": 16.037582715105785,
+      "height": 16,
+      "rotation_degrees": -119.53125
     },
     {
-      "id": "boundary_mountain_54",
+      "id": "boundary_cliff_054",
       "category": "mountain",
-      "shape": "circle",
-      "x": 160.00422710964534,
-      "y": -239.4632483431331,
-      "radius": 17.2
+      "shape": "rectangle",
+      "x": -255.3852097184672,
+      "y": 128.55011172664803,
+      "width": 16.037582715105927,
+      "height": 16,
+      "rotation_degrees": -116.71875000000006
     },
     {
-      "id": "boundary_mountain_55",
+      "id": "boundary_cliff_055",
       "category": "mountain",
-      "shape": "circle",
-      "x": 185.2428389757845,
-      "y": -225.71905238191917,
-      "radius": 10
+      "shape": "rectangle",
+      "x": -261.3852420657664,
+      "y": 115.86410918873818,
+      "width": 16.037582715105763,
+      "height": 16,
+      "rotation_degrees": -113.90624999999987
     },
     {
-      "id": "boundary_mountain_56",
+      "id": "boundary_cliff_056",
       "category": "mountain",
-      "shape": "circle",
-      "x": 197.98989873223329,
-      "y": -197.98989873223334,
-      "radius": 11.8
+      "shape": "rectangle",
+      "x": -266.755574470286,
+      "y": 102.89897986329535,
+      "width": 16.037582715105785,
+      "height": 16,
+      "rotation_degrees": -111.09374999999993
     },
     {
-      "id": "boundary_mountain_57",
+      "id": "boundary_cliff_057",
       "category": "mountain",
-      "shape": "circle",
-      "x": 219.53496875501722,
-      "y": -180.16769270247545,
-      "radius": 13.6
+      "shape": "rectangle",
+      "x": -271.4832693308778,
+      "y": 89.6859578824756,
+      "width": 16.037582715105902,
+      "height": 16,
+      "rotation_degrees": -108.2812500000001
     },
     {
-      "id": "boundary_mountain_58",
+      "id": "boundary_cliff_058",
       "category": "mountain",
-      "shape": "circle",
-      "x": 239.46324834313305,
-      "y": -160.00422710964543,
-      "radius": 15.4
+      "shape": "rectangle",
+      "x": -275.5569372165256,
+      "y": 76.25687457355488,
+      "width": 16.037582715105778,
+      "height": 16,
+      "rotation_degrees": -105.46875
     },
     {
-      "id": "boundary_mountain_59",
+      "id": "boundary_cliff_059",
       "category": "mountain",
-      "shape": "circle",
-      "x": 257.5210091897196,
-      "y": -137.64784715319138,
-      "radius": 17.2
+      "shape": "rectangle",
+      "x": -278.9667643044817,
+      "y": 62.64408177447315,
+      "width": 16.037582715105778,
+      "height": 16,
+      "rotation_degrees": -102.65625
     },
     {
-      "id": "boundary_mountain_60",
+      "id": "boundary_cliff_060",
       "category": "mountain",
-      "shape": "circle",
-      "x": 258.6862691031602,
-      "y": -107.1513610622253,
-      "radius": 10
+      "shape": "rectangle",
+      "x": -281.70453602262563,
+      "y": 48.880373895423126,
+      "width": 16.037582715105913,
+      "height": 16,
+      "rotation_degrees": -99.84375000000011
     },
     {
-      "id": "boundary_mountain_61",
+      "id": "boundary_cliff_061",
       "category": "mountain",
-      "shape": "circle",
-      "x": 271.7710553479473,
-      "y": -82.44084834026734,
-      "radius": 11.8
+      "shape": "rectangle",
+      "x": -283.76365683908784,
+      "y": 34.99890891424394,
+      "width": 16.03758271510577,
+      "height": 16,
+      "rotation_degrees": -97.03124999999994
     },
     {
-      "id": "boundary_mountain_62",
+      "id": "boundary_cliff_062",
       "category": "mountain",
-      "shape": "circle",
-      "x": 282.4661607561303,
-      "y": -56.18601274064507,
-      "radius": 13.6
+      "shape": "rectangle",
+      "x": -285.13916615146377,
+      "y": 21.03312849594797,
+      "width": 16.037582715105906,
+      "height": 16,
+      "rotation_degrees": -94.2187499999999
     },
     {
-      "id": "boundary_mountain_63",
+      "id": "boundary_cliff_063",
       "category": "mountain",
-      "shape": "circle",
-      "x": 290.59394018828146,
-      "y": -28.62100497623167,
-      "radius": 15.4
+      "shape": "rectangle",
+      "x": -285.8277502373396,
+      "y": 7.016677428820788,
+      "width": 16.037582715105785,
+      "height": 16,
+      "rotation_degrees": -91.40625000000007
+    },
+    {
+      "id": "boundary_cliff_064",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": -285.8277502373396,
+      "y": -7.016677428820716,
+      "width": 16.03758271510578,
+      "height": 16,
+      "rotation_degrees": -88.59374999999991
+    },
+    {
+      "id": "boundary_cliff_065",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": -285.13916615146377,
+      "y": -21.0331284959479,
+      "width": 16.037582715105906,
+      "height": 16,
+      "rotation_degrees": -85.78125000000009
+    },
+    {
+      "id": "boundary_cliff_066",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": -283.76365683908784,
+      "y": -34.99890891424387,
+      "width": 16.037582715105778,
+      "height": 16,
+      "rotation_degrees": -82.96875000000006
+    },
+    {
+      "id": "boundary_cliff_067",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": -281.70453602262563,
+      "y": -48.88037389542306,
+      "width": 16.037582715105913,
+      "height": 16,
+      "rotation_degrees": -80.15624999999989
+    },
+    {
+      "id": "boundary_cliff_068",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": -278.9667643044818,
+      "y": -62.64408177447308,
+      "width": 16.037582715105763,
+      "height": 16,
+      "rotation_degrees": -77.34375000000021
+    },
+    {
+      "id": "boundary_cliff_069",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": -275.5569372165257,
+      "y": -76.25687457355481,
+      "width": 16.037582715105806,
+      "height": 16,
+      "rotation_degrees": -74.53124999999979
+    },
+    {
+      "id": "boundary_cliff_070",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": -271.4832693308779,
+      "y": -89.68595788247556,
+      "width": 16.0375827151059,
+      "height": 16,
+      "rotation_degrees": -71.71875000000014
+    },
+    {
+      "id": "boundary_cliff_071",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": -266.755574470286,
+      "y": -102.8989798632953,
+      "width": 16.03758271510577,
+      "height": 16,
+      "rotation_degrees": -68.90625000000004
+    },
+    {
+      "id": "boundary_cliff_072",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": -261.3852420657664,
+      "y": -115.86410918873813,
+      "width": 16.037582715105785,
+      "height": 16,
+      "rotation_degrees": -66.09374999999993
+    },
+    {
+      "id": "boundary_cliff_073",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": -255.3852097184672,
+      "y": -128.55011172664797,
+      "width": 16.037582715105916,
+      "height": 16,
+      "rotation_degrees": -63.28125000000002
+    },
+    {
+      "id": "boundary_cliff_074",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": -248.7699320318537,
+      "y": -140.92642578574834,
+      "width": 16.037582715105785,
+      "height": 16,
+      "rotation_degrees": -60.46875
+    },
+    {
+      "id": "boundary_cliff_075",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": -241.55534578930292,
+      "y": -152.96323574143378,
+      "width": 16.0375827151058,
+      "height": 16,
+      "rotation_degrees": -57.656249999999886
+    },
+    {
+      "id": "boundary_cliff_076",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": -233.7588315609962,
+      "y": -164.63154386422104,
+      "width": 16.037582715105877,
+      "height": 16,
+      "rotation_degrees": -54.84375000000011
+    },
+    {
+      "id": "boundary_cliff_077",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": -225.39917183260366,
+      "y": -175.9032401778192,
+      "width": 16.037582715105785,
+      "height": 16,
+      "rotation_degrees": -52.031250000000014
+    },
+    {
+      "id": "boundary_cliff_078",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": -216.49650575663057,
+      "y": -186.75117017852492,
+      "width": 16.03758271510591,
+      "height": 16,
+      "rotation_degrees": -49.21875000000012
+    },
+    {
+      "id": "boundary_cliff_079",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": -207.07228063543548,
+      "y": -197.14920025279991,
+      "width": 16.03758271510579,
+      "height": 16,
+      "rotation_degrees": -46.40624999999998
+    },
+    {
+      "id": "boundary_cliff_080",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": -197.14920025279997,
+      "y": -207.0722806354354,
+      "width": 16.03758271510577,
+      "height": 16,
+      "rotation_degrees": -43.59374999999994
+    },
+    {
+      "id": "boundary_cliff_081",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": -186.75117017852506,
+      "y": -216.49650575663046,
+      "width": 16.037582715105767,
+      "height": 16,
+      "rotation_degrees": -40.781250000000085
+    },
+    {
+      "id": "boundary_cliff_082",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": -175.90324017781933,
+      "y": -225.3991718326036,
+      "width": 16.037582715106048,
+      "height": 16,
+      "rotation_degrees": -37.968750000000036
+    },
+    {
+      "id": "boundary_cliff_083",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": -164.63154386422104,
+      "y": -233.7588315609962,
+      "width": 16.037582715105813,
+      "height": 16,
+      "rotation_degrees": -35.156249999999936
+    },
+    {
+      "id": "boundary_cliff_084",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": -152.96323574143383,
+      "y": -241.55534578930286,
+      "width": 16.037582715105742,
+      "height": 16,
+      "rotation_degrees": -32.34374999999999
+    },
+    {
+      "id": "boundary_cliff_085",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": -140.92642578574842,
+      "y": -248.76993203185364,
+      "width": 16.03758271510581,
+      "height": 16,
+      "rotation_degrees": -29.531249999999947
+    },
+    {
+      "id": "boundary_cliff_086",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": -128.55011172664808,
+      "y": -255.38520971846714,
+      "width": 16.0375827151058,
+      "height": 16,
+      "rotation_degrees": -26.71875000000021
+    },
+    {
+      "id": "boundary_cliff_087",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": -115.86410918873831,
+      "y": -261.38524206576636,
+      "width": 16.03758271510575,
+      "height": 16,
+      "rotation_degrees": -23.906249999999893
+    },
+    {
+      "id": "boundary_cliff_088",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": -102.89897986329538,
+      "y": -266.755574470286,
+      "width": 16.037582715106034,
+      "height": 16,
+      "rotation_degrees": -21.09375000000003
+    },
+    {
+      "id": "boundary_cliff_089",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": -89.68595788247558,
+      "y": -271.4832693308779,
+      "width": 16.037582715105792,
+      "height": 16,
+      "rotation_degrees": -18.281250000000004
+    },
+    {
+      "id": "boundary_cliff_090",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": -76.2568745735549,
+      "y": -275.5569372165256,
+      "width": 16.037582715105763,
+      "height": 16,
+      "rotation_degrees": -15.468750000000021
+    },
+    {
+      "id": "boundary_cliff_091",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": -62.64408177447317,
+      "y": -278.9667643044817,
+      "width": 16.037582715105785,
+      "height": 16,
+      "rotation_degrees": -12.65624999999999
+    },
+    {
+      "id": "boundary_cliff_092",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": -48.88037389542321,
+      "y": -281.7045360226256,
+      "width": 16.037582715105778,
+      "height": 16,
+      "rotation_degrees": -9.84374999999998
+    },
+    {
+      "id": "boundary_cliff_093",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": -34.998908914243955,
+      "y": -283.76365683908784,
+      "width": 16.037582715106037,
+      "height": 16,
+      "rotation_degrees": -7.031250000000042
+    },
+    {
+      "id": "boundary_cliff_094",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": -21.033128495947924,
+      "y": -285.13916615146377,
+      "width": 16.037582715105778,
+      "height": 16,
+      "rotation_degrees": -4.218749999999943
+    },
+    {
+      "id": "boundary_cliff_095",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": -7.016677428820805,
+      "y": -285.8277502373396,
+      "width": 16.03758271510578,
+      "height": 16,
+      "rotation_degrees": -1.4062500000000793
+    },
+    {
+      "id": "boundary_cliff_096",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": 7.0166774288206994,
+      "y": -285.8277502373396,
+      "width": 16.037582715105785,
+      "height": 16,
+      "rotation_degrees": 1.4062500000000793
+    },
+    {
+      "id": "boundary_cliff_097",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": 21.03312849594782,
+      "y": -285.13916615146377,
+      "width": 16.03758271510578,
+      "height": 16,
+      "rotation_degrees": 4.218749999999943
+    },
+    {
+      "id": "boundary_cliff_098",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": 34.998908914243856,
+      "y": -283.76365683908784,
+      "width": 16.037582715106034,
+      "height": 16,
+      "rotation_degrees": 7.031250000000044
+    },
+    {
+      "id": "boundary_cliff_099",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": 48.880373895423105,
+      "y": -281.7045360226256,
+      "width": 16.03758271510577,
+      "height": 16,
+      "rotation_degrees": 9.843749999999988
+    },
+    {
+      "id": "boundary_cliff_100",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": 62.64408177447306,
+      "y": -278.9667643044818,
+      "width": 16.03758271510577,
+      "height": 16,
+      "rotation_degrees": 12.656249999999764
+    },
+    {
+      "id": "boundary_cliff_101",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": 76.2568745735548,
+      "y": -275.5569372165257,
+      "width": 16.037582715105806,
+      "height": 16,
+      "rotation_degrees": 15.468750000000211
+    },
+    {
+      "id": "boundary_cliff_102",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": 89.68595788247549,
+      "y": -271.4832693308779,
+      "width": 16.037582715105756,
+      "height": 16,
+      "rotation_degrees": 18.2812499999998
+    },
+    {
+      "id": "boundary_cliff_103",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": 102.89897986329527,
+      "y": -266.755574470286,
+      "width": 16.037582715106034,
+      "height": 16,
+      "rotation_degrees": 21.09375000000003
+    },
+    {
+      "id": "boundary_cliff_104",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": 115.86410918873823,
+      "y": -261.3852420657664,
+      "width": 16.0375827151058,
+      "height": 16,
+      "rotation_degrees": 23.906250000000053
+    },
+    {
+      "id": "boundary_cliff_105",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": 128.550111726648,
+      "y": -255.38520971846717,
+      "width": 16.037582715105763,
+      "height": 16,
+      "rotation_degrees": 26.718750000000025
+    },
+    {
+      "id": "boundary_cliff_106",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": 140.92642578574834,
+      "y": -248.7699320318537,
+      "width": 16.037582715105785,
+      "height": 16,
+      "rotation_degrees": 29.531250000000007
+    },
+    {
+      "id": "boundary_cliff_107",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": 152.96323574143372,
+      "y": -241.55534578930292,
+      "width": 16.037582715105785,
+      "height": 16,
+      "rotation_degrees": 32.34375000000002
+    },
+    {
+      "id": "boundary_cliff_108",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": 164.63154386422096,
+      "y": -233.75883156099627,
+      "width": 16.03758271510577,
+      "height": 16,
+      "rotation_degrees": 35.15624999999991
+    },
+    {
+      "id": "boundary_cliff_109",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": 175.9032401778192,
+      "y": -225.39917183260366,
+      "width": 16.037582715106034,
+      "height": 16,
+      "rotation_degrees": 37.96874999999995
+    },
+    {
+      "id": "boundary_cliff_110",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": 186.75117017852494,
+      "y": -216.49650575663054,
+      "width": 16.037582715105785,
+      "height": 16,
+      "rotation_degrees": 40.78125000000001
+    },
+    {
+      "id": "boundary_cliff_111",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": 197.14920025279991,
+      "y": -207.07228063543548,
+      "width": 16.037582715105806,
+      "height": 16,
+      "rotation_degrees": 43.59374999999994
+    },
+    {
+      "id": "boundary_cliff_112",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": 207.0722806354354,
+      "y": -197.14920025279997,
+      "width": 16.03758271510577,
+      "height": 16,
+      "rotation_degrees": 46.40625000000006
+    },
+    {
+      "id": "boundary_cliff_113",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": 216.49650575663046,
+      "y": -186.75117017852506,
+      "width": 16.037582715105767,
+      "height": 16,
+      "rotation_degrees": 49.21874999999992
+    },
+    {
+      "id": "boundary_cliff_114",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": 225.3991718326036,
+      "y": -175.90324017781933,
+      "width": 16.037582715106048,
+      "height": 16,
+      "rotation_degrees": 52.031249999999964
+    },
+    {
+      "id": "boundary_cliff_115",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": 233.7588315609962,
+      "y": -164.63154386422104,
+      "width": 16.037582715105813,
+      "height": 16,
+      "rotation_degrees": 54.84375000000007
+    },
+    {
+      "id": "boundary_cliff_116",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": 241.55534578930286,
+      "y": -152.96323574143383,
+      "width": 16.037582715105742,
+      "height": 16,
+      "rotation_degrees": 57.656250000000014
+    },
+    {
+      "id": "boundary_cliff_117",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": 248.76993203185364,
+      "y": -140.92642578574845,
+      "width": 16.037582715105785,
+      "height": 16,
+      "rotation_degrees": 60.46875
+    },
+    {
+      "id": "boundary_cliff_118",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": 255.3852097184671,
+      "y": -128.5501117266481,
+      "width": 16.03758271510579,
+      "height": 16,
+      "rotation_degrees": 63.28125000000002
+    },
+    {
+      "id": "boundary_cliff_119",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": 261.3852420657663,
+      "y": -115.86410918873833,
+      "width": 16.037582715105774,
+      "height": 16,
+      "rotation_degrees": 66.0937499999999
+    },
+    {
+      "id": "boundary_cliff_120",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": 266.755574470286,
+      "y": -102.89897986329538,
+      "width": 16.037582715106034,
+      "height": 16,
+      "rotation_degrees": 68.90624999999997
+    },
+    {
+      "id": "boundary_cliff_121",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": 271.4832693308779,
+      "y": -89.68595788247559,
+      "width": 16.037582715105792,
+      "height": 16,
+      "rotation_degrees": 71.71875
+    },
+    {
+      "id": "boundary_cliff_122",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": 275.5569372165256,
+      "y": -76.25687457355491,
+      "width": 16.037582715105763,
+      "height": 16,
+      "rotation_degrees": 74.53124999999997
+    },
+    {
+      "id": "boundary_cliff_123",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": 278.9667643044817,
+      "y": -62.644081774473186,
+      "width": 16.037582715105785,
+      "height": 16,
+      "rotation_degrees": 77.34375000000001
+    },
+    {
+      "id": "boundary_cliff_124",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": 281.7045360226256,
+      "y": -48.880373895423226,
+      "width": 16.037582715105778,
+      "height": 16,
+      "rotation_degrees": 80.15625000000001
+    },
+    {
+      "id": "boundary_cliff_125",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": 283.76365683908784,
+      "y": -34.99890891424397,
+      "width": 16.037582715106034,
+      "height": 16,
+      "rotation_degrees": 82.96874999999997
+    },
+    {
+      "id": "boundary_cliff_126",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": 285.13916615146377,
+      "y": -21.033128495947942,
+      "width": 16.037582715105778,
+      "height": 16,
+      "rotation_degrees": 85.78125000000004
+    },
+    {
+      "id": "boundary_cliff_127",
+      "category": "mountain",
+      "shape": "rectangle",
+      "x": 285.8277502373396,
+      "y": -7.016677428820822,
+      "width": 16.037582715105785,
+      "height": 16,
+      "rotation_degrees": 88.59374999999991
     },
     {
       "id": "river_bank_rock_00",
@@ -775,83 +1543,83 @@
     },
     {
       "id": "river_water_00",
-      "category": "water",
+      "category": "river",
       "shape": "rectangle",
       "x": 2.5,
       "y": 202.5,
       "width": 195.06409203131162,
-      "height": 13,
+      "height": 15,
       "rotation_degrees": -88.53119928561418
     },
     {
       "id": "river_water_01",
-      "category": "water",
+      "category": "river",
       "shape": "rectangle",
       "x": -35,
       "y": 85,
       "width": 89.44271909999159,
-      "height": 13,
+      "height": 15,
       "rotation_degrees": -153.43494882292202
     },
     {
       "id": "river_water_02",
-      "category": "water",
+      "category": "river",
       "shape": "rectangle",
       "x": -88.5,
       "y": 32.5,
       "width": 70.38465741907109,
-      "height": 13,
+      "height": 15,
       "rotation_degrees": -112.55724663470565
     },
     {
       "id": "river_water_03",
-      "category": "water",
+      "category": "river",
       "shape": "rectangle",
-      "x": -96.25,
-      "y": -46,
-      "width": 68.52919086053767,
-      "height": 13,
+      "x": -97,
+      "y": -40,
+      "width": 80.62257748298549,
+      "height": 15,
       "rotation_degrees": -82.87498365109819
     },
     {
       "id": "river_water_04",
-      "category": "water",
+      "category": "river",
       "shape": "rectangle",
-      "x": -53,
-      "y": -90.6,
-      "width": 80.82969751273352,
-      "height": 13,
-      "rotation_degrees": -15.205382795833899
+      "x": -46,
+      "y": -92.5,
+      "width": 95.33624704172072,
+      "height": 15,
+      "rotation_degrees": -15.202408709176144
     },
     {
       "id": "river_water_05",
-      "category": "water",
+      "category": "river",
       "shape": "rectangle",
       "x": 52.5,
       "y": -96.5,
       "width": 106.36728820459793,
-      "height": 13,
+      "height": 15,
       "rotation_degrees": 9.196655891628904
     },
     {
       "id": "river_water_06",
-      "category": "water",
+      "category": "river",
       "shape": "rectangle",
-      "x": 121.5,
-      "y": -66,
-      "width": 55,
-      "height": 13,
-      "rotation_degrees": 53.13010235415598
+      "x": 125,
+      "y": -61.5,
+      "width": 66.40030120413611,
+      "height": 15,
+      "rotation_degrees": 52.95752522691714
     },
     {
       "id": "river_water_07",
-      "category": "water",
+      "category": "river",
       "shape": "rectangle",
-      "x": 226.5,
-      "y": -45.5,
-      "width": 148.22280526288793,
-      "height": 13,
-      "rotation_degrees": -7.364746244982651
+      "x": 222.5,
+      "y": -45,
+      "width": 156.28499608087782,
+      "height": 15,
+      "rotation_degrees": -7.3523793598923595
     },
     {
       "id": "north_waterfall_south",
@@ -877,39 +1645,39 @@
       "id": "village_wall_01",
       "category": "wall",
       "shape": "rectangle",
-      "x": 79.64042033342187,
-      "y": 19.11997328626676,
-      "width": 7.957404262278313,
+      "x": 79.48853913250194,
+      "y": 19.08350983602231,
+      "width": 12.867291699366566,
       "height": 4,
-      "rotation_degrees": 103.50000000000001
+      "rotation_degrees": 103.49999999999994
     },
     {
       "id": "village_wall_02",
       "category": "wall",
       "shape": "rectangle",
-      "x": 75.66889181079605,
-      "y": 31.34308123777415,
-      "width": 7.9574042622783105,
+      "x": 75.52458465982438,
+      "y": 31.283307258694258,
+      "width": 12.867291699366572,
       "height": 4,
-      "rotation_degrees": 112.49999999999999
+      "rotation_degrees": 112.5
     },
     {
       "id": "village_wall_03",
       "category": "wall",
       "shape": "rectangle",
-      "x": 69.83414404113446,
-      "y": 42.794418507484735,
-      "width": 7.9574042622783026,
+      "x": 69.70096426109592,
+      "y": 42.712805833312814,
+      "width": 12.867291699366577,
       "height": 4,
-      "rotation_degrees": 121.49999999999987
+      "rotation_degrees": 121.50000000000003
     },
     {
       "id": "village_wall_04",
       "category": "wall",
       "shape": "rectangle",
-      "x": 62.2798478789438,
-      "y": 53.19201516700875,
-      "width": 7.957404262278307,
+      "x": 62.16107479802129,
+      "y": 53.09057337263984,
+      "width": 12.867291699366557,
       "height": 4,
       "rotation_degrees": 130.49999999999997
     },
@@ -917,29 +1685,29 @@
       "id": "village_wall_05",
       "category": "wall",
       "shape": "rectangle",
-      "x": 53.192015167008755,
-      "y": 62.27984787894379,
-      "width": 7.957404262278312,
+      "x": 53.09057337263985,
+      "y": 62.16107479802129,
+      "width": 12.867291699366577,
       "height": 4,
-      "rotation_degrees": 139.5
+      "rotation_degrees": 139.49999999999991
     },
     {
       "id": "village_wall_06",
       "category": "wall",
       "shape": "rectangle",
-      "x": 42.79441850748474,
-      "y": 69.83414404113446,
-      "width": 7.9574042622783185,
+      "x": 42.71280583331283,
+      "y": 69.70096426109592,
+      "width": 12.867291699366568,
       "height": 4,
-      "rotation_degrees": 148.49999999999994
+      "rotation_degrees": 148.50000000000009
     },
     {
       "id": "village_wall_07",
       "category": "wall",
       "shape": "rectangle",
-      "x": 31.343081237774154,
-      "y": 75.66889181079605,
-      "width": 7.957404262278307,
+      "x": 31.283307258694265,
+      "y": 75.52458465982437,
+      "width": 12.867291699366575,
       "height": 4,
       "rotation_degrees": 157.5
     },
@@ -947,79 +1715,79 @@
       "id": "village_wall_08",
       "category": "wall",
       "shape": "rectangle",
-      "x": 19.119973286266767,
-      "y": 79.64042033342187,
-      "width": 7.957404262278309,
+      "x": 19.083509836022312,
+      "y": 79.48853913250193,
+      "width": 12.867291699366568,
       "height": 4,
-      "rotation_degrees": 166.49999999999997
+      "rotation_degrees": 166.5
     },
     {
       "id": "village_wall_11",
       "category": "wall",
       "shape": "rectangle",
-      "x": -19.11997328626675,
-      "y": 79.64042033342187,
-      "width": 7.957404262278326,
+      "x": -19.083509836022294,
+      "y": 79.48853913250196,
+      "width": 12.867291699366586,
       "height": 4,
-      "rotation_degrees": -166.5
+      "rotation_degrees": -166.50000000000003
     },
     {
       "id": "village_wall_12",
       "category": "wall",
       "shape": "rectangle",
-      "x": -31.343081237774154,
-      "y": 75.66889181079605,
-      "width": 7.957404262278326,
+      "x": -31.283307258694258,
+      "y": 75.52458465982438,
+      "width": 12.867291699366575,
       "height": 4,
-      "rotation_degrees": -157.49999999999994
+      "rotation_degrees": -157.5
     },
     {
       "id": "village_wall_13",
       "category": "wall",
       "shape": "rectangle",
-      "x": -42.79441850748473,
-      "y": 69.83414404113446,
-      "width": 7.95740426227835,
+      "x": -42.712805833312814,
+      "y": 69.70096426109593,
+      "width": 12.867291699366564,
       "height": 4,
-      "rotation_degrees": -148.49999999999997
+      "rotation_degrees": -148.5
     },
     {
       "id": "village_wall_14",
       "category": "wall",
       "shape": "rectangle",
-      "x": -53.19201516700874,
-      "y": 62.2798478789438,
-      "width": 7.9574042622783425,
+      "x": -53.09057337263984,
+      "y": 62.1610747980213,
+      "width": 12.867291699366573,
       "height": 4,
-      "rotation_degrees": -139.50000000000006
+      "rotation_degrees": -139.5
     },
     {
       "id": "village_wall_15",
       "category": "wall",
       "shape": "rectangle",
-      "x": -62.27984787894379,
-      "y": 53.19201516700875,
-      "width": 7.957404262278347,
+      "x": -62.16107479802129,
+      "y": 53.09057337263985,
+      "width": 12.867291699366577,
       "height": 4,
-      "rotation_degrees": -130.50000000000006
+      "rotation_degrees": -130.50000000000009
     },
     {
       "id": "village_wall_16",
       "category": "wall",
       "shape": "rectangle",
-      "x": -69.83414404113446,
-      "y": 42.794418507484735,
-      "width": 7.957404262278344,
+      "x": -69.70096426109592,
+      "y": 42.71280583331283,
+      "width": 12.867291699366568,
       "height": 4,
-      "rotation_degrees": -121.50000000000006
+      "rotation_degrees": -121.49999999999993
     },
     {
       "id": "village_wall_17",
       "category": "wall",
       "shape": "rectangle",
-      "x": -75.66889181079605,
-      "y": 31.34308123777416,
-      "width": 7.95740426227834,
+      "x": -75.52458465982437,
+      "y": 31.28330725869427,
+      "width": 12.867291699366568,
       "height": 4,
       "rotation_degrees": -112.5
     },
@@ -1027,193 +1795,193 @@
       "id": "village_wall_18",
       "category": "wall",
       "shape": "rectangle",
-      "x": -79.64042033342187,
-      "y": 19.11997328626677,
-      "width": 7.957404262278344,
+      "x": -79.48853913250193,
+      "y": 19.08350983602232,
+      "width": 12.86729169936657,
       "height": 4,
-      "rotation_degrees": -103.49999999999996
+      "rotation_degrees": -103.49999999999999
     },
     {
       "id": "village_wall_21",
       "category": "wall",
       "shape": "rectangle",
-      "x": -79.64042033342187,
-      "y": -19.119973286266735,
-      "width": 7.957404262278309,
+      "x": -79.48853913250196,
+      "y": -19.083509836022284,
+      "width": 12.867291699366534,
       "height": 4,
-      "rotation_degrees": -76.49999999999997
+      "rotation_degrees": -76.50000000000003
     },
     {
       "id": "village_wall_22",
       "category": "wall",
       "shape": "rectangle",
-      "x": -75.66889181079607,
-      "y": -31.343081237774125,
-      "width": 7.957404262278384,
+      "x": -75.5245846598244,
+      "y": -31.283307258694236,
+      "width": 12.867291699366605,
       "height": 4,
-      "rotation_degrees": -67.50000000000001
+      "rotation_degrees": -67.5
     },
     {
       "id": "village_wall_23",
       "category": "wall",
       "shape": "rectangle",
-      "x": -69.83414404113446,
-      "y": -42.79441850748473,
-      "width": 7.95740426227835,
+      "x": -69.70096426109593,
+      "y": -42.71280583331281,
+      "width": 12.86729169936657,
       "height": 4,
-      "rotation_degrees": -58.49999999999997
+      "rotation_degrees": -58.50000000000001
     },
     {
       "id": "village_wall_24",
       "category": "wall",
       "shape": "rectangle",
-      "x": -62.2798478789438,
-      "y": -53.19201516700874,
-      "width": 7.9574042622783425,
+      "x": -62.1610747980213,
+      "y": -53.09057337263984,
+      "width": 12.867291699366566,
       "height": 4,
-      "rotation_degrees": -49.50000000000006
+      "rotation_degrees": -49.50000000000002
     },
     {
       "id": "village_wall_25",
       "category": "wall",
       "shape": "rectangle",
-      "x": -53.192015167008776,
-      "y": -62.27984787894378,
-      "width": 7.957404262278307,
+      "x": -53.09057337263986,
+      "y": -62.16107479802129,
+      "width": 12.867291699366573,
       "height": 4,
-      "rotation_degrees": -40.50000000000003
+      "rotation_degrees": -40.5
     },
     {
       "id": "village_wall_26",
       "category": "wall",
       "shape": "rectangle",
-      "x": -42.79441850748475,
-      "y": -69.83414404113446,
-      "width": 7.957404262278272,
+      "x": -42.71280583331283,
+      "y": -69.70096426109592,
+      "width": 12.86729169936657,
       "height": 4,
-      "rotation_degrees": -31.500000000000007
+      "rotation_degrees": -31.499999999999993
     },
     {
       "id": "village_wall_27",
       "category": "wall",
       "shape": "rectangle",
-      "x": -31.343081237774165,
-      "y": -75.66889181079605,
-      "width": 7.957404262278275,
+      "x": -31.283307258694272,
+      "y": -75.52458465982437,
+      "width": 12.867291699366572,
       "height": 4,
-      "rotation_degrees": -22.500000000000092
+      "rotation_degrees": -22.500000000000004
     },
     {
       "id": "village_wall_28",
       "category": "wall",
       "shape": "rectangle",
-      "x": -19.119973286266777,
-      "y": -79.64042033342187,
-      "width": 7.957404262278271,
+      "x": -19.083509836022323,
+      "y": -79.48853913250193,
+      "width": 12.867291699366566,
       "height": 4,
-      "rotation_degrees": -13.500000000000092
+      "rotation_degrees": -13.5
     },
     {
       "id": "village_wall_31",
       "category": "wall",
       "shape": "rectangle",
-      "x": 19.11997328626675,
-      "y": -79.64042033342187,
-      "width": 7.957404262278276,
+      "x": 19.083509836022294,
+      "y": -79.48853913250196,
+      "width": 12.86729169936657,
       "height": 4,
-      "rotation_degrees": 13.500000000000078
+      "rotation_degrees": 13.499999999999996
     },
     {
       "id": "village_wall_32",
       "category": "wall",
       "shape": "rectangle",
-      "x": 31.34308123777414,
-      "y": -75.66889181079605,
-      "width": 7.957404262278276,
+      "x": 31.28330725869425,
+      "y": -75.52458465982438,
+      "width": 12.867291699366577,
       "height": 4,
-      "rotation_degrees": 22.499999999999975
+      "rotation_degrees": 22.499999999999993
     },
     {
       "id": "village_wall_33",
       "category": "wall",
       "shape": "rectangle",
-      "x": 42.79441850748472,
-      "y": -69.83414404113446,
-      "width": 7.957404262278265,
+      "x": 42.7128058333128,
+      "y": -69.70096426109593,
+      "width": 12.867291699366564,
       "height": 4,
-      "rotation_degrees": 31.499999999999915
+      "rotation_degrees": 31.500000000000007
     },
     {
       "id": "village_wall_34",
       "category": "wall",
       "shape": "rectangle",
-      "x": 53.192015167008734,
-      "y": -62.27984787894381,
-      "width": 7.957404262278267,
+      "x": 53.09057337263984,
+      "y": -62.1610747980213,
+      "width": 12.867291699366573,
       "height": 4,
-      "rotation_degrees": 40.499999999999936
+      "rotation_degrees": 40.49999999999996
     },
     {
       "id": "village_wall_35",
       "category": "wall",
       "shape": "rectangle",
-      "x": 62.279847878943784,
-      "y": -53.19201516700876,
-      "width": 7.957404262278276,
+      "x": 62.16107479802129,
+      "y": -53.09057337263986,
+      "width": 12.867291699366573,
       "height": 4,
-      "rotation_degrees": 49.499999999999986
+      "rotation_degrees": 49.50000000000001
     },
     {
       "id": "village_wall_36",
       "category": "wall",
       "shape": "rectangle",
-      "x": 69.83414404113446,
-      "y": -42.79441850748475,
-      "width": 7.957404262278272,
+      "x": 69.70096426109592,
+      "y": -42.71280583331283,
+      "width": 12.867291699366564,
       "height": 4,
-      "rotation_degrees": 58.5
+      "rotation_degrees": 58.49999999999999
     },
     {
       "id": "village_wall_37",
       "category": "wall",
       "shape": "rectangle",
-      "x": 75.66889181079605,
-      "y": -31.34308123777417,
-      "width": 7.957404262278272,
+      "x": 75.52458465982437,
+      "y": -31.28330725869428,
+      "width": 12.867291699366575,
       "height": 4,
-      "rotation_degrees": 67.50000000000001
+      "rotation_degrees": 67.5
     },
     {
       "id": "village_wall_38",
       "category": "wall",
       "shape": "rectangle",
-      "x": 79.64042033342186,
-      "y": -19.11997328626678,
-      "width": 7.957404262278271,
+      "x": 79.48853913250193,
+      "y": -19.083509836022326,
+      "width": 12.867291699366566,
       "height": 4,
-      "rotation_degrees": 76.50000000000001
+      "rotation_degrees": 76.5
     },
     {
       "id": "gate_tower_00",
       "category": "tower",
       "shape": "circle",
       "x": 82,
-      "y": 0,
+      "y": -10,
       "radius": 5.2
     },
     {
       "id": "gate_tower_01",
       "category": "tower",
       "shape": "circle",
-      "x": -82,
-      "y": 0,
+      "x": 82,
+      "y": 10,
       "radius": 5.2
     },
     {
       "id": "gate_tower_02",
       "category": "tower",
       "shape": "circle",
-      "x": 0,
+      "x": 10.000000000000005,
       "y": 82,
       "radius": 5.2
     },
@@ -1221,7 +1989,39 @@
       "id": "gate_tower_03",
       "category": "tower",
       "shape": "circle",
-      "x": 0,
+      "x": -9.999999999999995,
+      "y": 82,
+      "radius": 5.2
+    },
+    {
+      "id": "gate_tower_04",
+      "category": "tower",
+      "shape": "circle",
+      "x": -82,
+      "y": 10.00000000000001,
+      "radius": 5.2
+    },
+    {
+      "id": "gate_tower_05",
+      "category": "tower",
+      "shape": "circle",
+      "x": -82,
+      "y": -9.99999999999999,
+      "radius": 5.2
+    },
+    {
+      "id": "gate_tower_06",
+      "category": "tower",
+      "shape": "circle",
+      "x": -10.000000000000014,
+      "y": -82,
+      "radius": 5.2
+    },
+    {
+      "id": "gate_tower_07",
+      "category": "tower",
+      "shape": "circle",
+      "x": 9.999999999999986,
       "y": -82,
       "radius": 5.2
     },
@@ -1458,16 +2258,16 @@
       "height": 6
     },
     {
-      "id": "market_fence_south",
+      "id": "market_fence_000",
       "category": "fence",
       "shape": "rectangle",
-      "x": 44,
+      "x": 45,
       "y": -9,
-      "width": 35,
+      "width": 33,
       "height": 0.8
     },
     {
-      "id": "market_fence_north",
+      "id": "market_fence_001",
       "category": "fence",
       "shape": "rectangle",
       "x": 44,
@@ -1476,32 +2276,32 @@
       "height": 0.8
     },
     {
-      "id": "market_fence_east",
+      "id": "market_fence_002",
+      "category": "fence",
+      "shape": "rectangle",
+      "x": 26.5,
+      "y": -0.75,
+      "width": 4.5,
+      "height": 0.8,
+      "rotation_degrees": 90
+    },
+    {
+      "id": "market_fence_003",
+      "category": "fence",
+      "shape": "rectangle",
+      "x": 26.5,
+      "y": 15.75,
+      "width": 10.5,
+      "height": 0.8,
+      "rotation_degrees": 90
+    },
+    {
+      "id": "market_fence_004",
       "category": "fence",
       "shape": "rectangle",
       "x": 61.5,
       "y": 6,
       "width": 30,
-      "height": 0.8,
-      "rotation_degrees": 90
-    },
-    {
-      "id": "market_fence_west_south",
-      "category": "fence",
-      "shape": "rectangle",
-      "x": 26.5,
-      "y": -3.5,
-      "width": 11,
-      "height": 0.8,
-      "rotation_degrees": 90
-    },
-    {
-      "id": "market_fence_west_north",
-      "category": "fence",
-      "shape": "rectangle",
-      "x": 26.5,
-      "y": 15.5,
-      "width": 11,
       "height": 0.8,
       "rotation_degrees": 90
     },
@@ -1515,50 +2315,59 @@
       "height": 25
     },
     {
-      "id": "guild_training_fence_south",
+      "id": "guild_training_fence_000",
       "category": "fence",
       "shape": "rectangle",
-      "x": -150,
+      "x": -148,
       "y": 99,
-      "width": 52,
+      "width": 48,
       "height": 0.8
     },
     {
-      "id": "guild_training_fence_north",
+      "id": "guild_training_fence_001",
       "category": "fence",
       "shape": "rectangle",
-      "x": -150,
+      "x": -169.25,
       "y": 141,
-      "width": 52,
+      "width": 13.5,
       "height": 0.8
     },
     {
-      "id": "guild_training_fence_east_south",
+      "id": "guild_training_fence_002",
       "category": "fence",
       "shape": "rectangle",
-      "x": -124,
-      "y": 107,
-      "width": 16,
-      "height": 0.8,
-      "rotation_degrees": 90
+      "x": -136.75,
+      "y": 141,
+      "width": 25.5,
+      "height": 0.8
     },
     {
-      "id": "guild_training_fence_east_north",
-      "category": "fence",
-      "shape": "rectangle",
-      "x": -124,
-      "y": 133,
-      "width": 16,
-      "height": 0.8,
-      "rotation_degrees": 90
-    },
-    {
-      "id": "guild_training_fence_west",
+      "id": "guild_training_fence_003",
       "category": "fence",
       "shape": "rectangle",
       "x": -176,
-      "y": 120,
-      "width": 42,
+      "y": 128.75,
+      "width": 24.5,
+      "height": 0.8,
+      "rotation_degrees": 90
+    },
+    {
+      "id": "guild_training_fence_004",
+      "category": "fence",
+      "shape": "rectangle",
+      "x": -124,
+      "y": 106.75,
+      "width": 15.5,
+      "height": 0.8,
+      "rotation_degrees": 90
+    },
+    {
+      "id": "guild_training_fence_005",
+      "category": "fence",
+      "shape": "rectangle",
+      "x": -124,
+      "y": 133.25,
+      "width": 15.5,
       "height": 0.8,
       "rotation_degrees": 90
     },
@@ -1657,50 +2466,58 @@
       "height": 2.7
     },
     {
-      "id": "forge_yard_fence_south",
+      "id": "forge_yard_fence_000",
       "category": "fence",
       "shape": "rectangle",
-      "x": -195,
+      "x": -210,
       "y": -28,
-      "width": 58,
+      "width": 28,
       "height": 0.8
     },
     {
-      "id": "forge_yard_fence_north",
+      "id": "forge_yard_fence_001",
       "category": "fence",
       "shape": "rectangle",
-      "x": -195,
+      "x": -175.5,
+      "y": -28,
+      "width": 19,
+      "height": 0.8
+    },
+    {
+      "id": "forge_yard_fence_002",
+      "category": "fence",
+      "shape": "rectangle",
+      "x": -211.75,
       "y": 24,
-      "width": 58,
+      "width": 24.5,
       "height": 0.8
     },
     {
-      "id": "forge_yard_fence_east_south",
+      "id": "forge_yard_fence_003",
       "category": "fence",
       "shape": "rectangle",
-      "x": -166,
-      "y": -17.25,
-      "width": 21.5,
-      "height": 0.8,
-      "rotation_degrees": 90
+      "x": -177.25,
+      "y": 24,
+      "width": 22.5,
+      "height": 0.8
     },
     {
-      "id": "forge_yard_fence_east_north",
-      "category": "fence",
-      "shape": "rectangle",
-      "x": -166,
-      "y": 13.25,
-      "width": 21.5,
-      "height": 0.8,
-      "rotation_degrees": 90
-    },
-    {
-      "id": "forge_yard_fence_west",
+      "id": "forge_yard_fence_004",
       "category": "fence",
       "shape": "rectangle",
       "x": -224,
       "y": -2,
       "width": 52,
+      "height": 0.8,
+      "rotation_degrees": 90
+    },
+    {
+      "id": "forge_yard_fence_005",
+      "category": "fence",
+      "shape": "rectangle",
+      "x": -166,
+      "y": 13.749999999999998,
+      "width": 20.500000000000004,
       "height": 0.8,
       "rotation_degrees": 90
     },
@@ -1797,22 +2614,6 @@
       "radius": 0.75
     },
     {
-      "id": "arena_post_07",
-      "category": "fence",
-      "shape": "circle",
-      "x": 186.07494673630643,
-      "y": -120.83444682306231,
-      "radius": 0.75
-    },
-    {
-      "id": "arena_post_08",
-      "category": "fence",
-      "shape": "circle",
-      "x": 178.16146435034574,
-      "y": -118.71403560842622,
-      "radius": 0.75
-    },
-    {
       "id": "arena_post_09",
       "category": "fence",
       "shape": "circle",
@@ -1853,14 +2654,6 @@
       "radius": 0.75
     },
     {
-      "id": "arena_post_14",
-      "category": "fence",
-      "shape": "circle",
-      "x": 133.99591117340805,
-      "y": -134.78898234473263,
-      "radius": 0.75
-    },
-    {
       "id": "arena_post_15",
       "category": "fence",
       "shape": "circle",
@@ -1898,14 +2691,6 @@
       "shape": "circle",
       "x": 123.71403560842622,
       "y": -173.1614643503457,
-      "radius": 0.75
-    },
-    {
-      "id": "arena_post_20",
-      "category": "fence",
-      "shape": "circle",
-      "x": 125.83444682306231,
-      "y": -181.07494673630643,
       "radius": 0.75
     },
     {
@@ -2138,7 +2923,7 @@
       "radius": 2.5
     },
     {
-      "id": "cemetery_fence_south",
+      "id": "cemetery_fence_000",
       "category": "fence",
       "shape": "rectangle",
       "x": 0,
@@ -2147,40 +2932,60 @@
       "height": 0.8
     },
     {
-      "id": "cemetery_fence_north_west",
+      "id": "cemetery_fence_001",
       "category": "fence",
       "shape": "rectangle",
-      "x": -21.25,
+      "x": -21.5,
       "y": -168,
-      "width": 33.5,
+      "width": 33,
       "height": 0.8
     },
     {
-      "id": "cemetery_fence_north_east",
+      "id": "cemetery_fence_002",
       "category": "fence",
       "shape": "rectangle",
-      "x": 21.25,
+      "x": 21.5,
       "y": -168,
-      "width": 33.5,
+      "width": 33,
       "height": 0.8
     },
     {
-      "id": "cemetery_fence_east",
+      "id": "cemetery_fence_003",
       "category": "fence",
       "shape": "rectangle",
-      "x": 38,
-      "y": -205,
-      "width": 74,
+      "x": -38,
+      "y": -216.25,
+      "width": 51.5,
       "height": 0.8,
       "rotation_degrees": 90
     },
     {
-      "id": "cemetery_fence_west",
+      "id": "cemetery_fence_004",
       "category": "fence",
       "shape": "rectangle",
       "x": -38,
-      "y": -205,
-      "width": 74,
+      "y": -173.75,
+      "width": 11.5,
+      "height": 0.8,
+      "rotation_degrees": 90
+    },
+    {
+      "id": "cemetery_fence_005",
+      "category": "fence",
+      "shape": "rectangle",
+      "x": 38,
+      "y": -215.25,
+      "width": 53.5,
+      "height": 0.8,
+      "rotation_degrees": 90
+    },
+    {
+      "id": "cemetery_fence_006",
+      "category": "fence",
+      "shape": "rectangle",
+      "x": 38,
+      "y": -172.75,
+      "width": 9.5,
       "height": 0.8,
       "rotation_degrees": 90
     },
@@ -2502,7 +3307,7 @@
       "radius": 6.3
     },
     {
-      "id": "farm_fence_south",
+      "id": "farm_fence_000",
       "category": "fence",
       "shape": "rectangle",
       "x": -175,
@@ -2511,41 +3316,50 @@
       "height": 0.8
     },
     {
-      "id": "farm_fence_north",
+      "id": "farm_fence_001",
       "category": "fence",
       "shape": "rectangle",
-      "x": -175,
+      "x": -211,
       "y": -123,
-      "width": 108,
+      "width": 36,
       "height": 0.8
     },
     {
-      "id": "farm_fence_east_south",
+      "id": "farm_fence_002",
       "category": "fence",
       "shape": "rectangle",
-      "x": -121,
-      "y": -195,
-      "width": 40,
-      "height": 0.8,
-      "rotation_degrees": 90
+      "x": -151.5,
+      "y": -123,
+      "width": 61,
+      "height": 0.8
     },
     {
-      "id": "farm_fence_east_north",
-      "category": "fence",
-      "shape": "rectangle",
-      "x": -121,
-      "y": -143,
-      "width": 40,
-      "height": 0.8,
-      "rotation_degrees": 90
-    },
-    {
-      "id": "farm_fence_west",
+      "id": "farm_fence_003",
       "category": "fence",
       "shape": "rectangle",
       "x": -229,
       "y": -169,
       "width": 92,
+      "height": 0.8,
+      "rotation_degrees": 90
+    },
+    {
+      "id": "farm_fence_004",
+      "category": "fence",
+      "shape": "rectangle",
+      "x": -121,
+      "y": -197.5,
+      "width": 35,
+      "height": 0.8,
+      "rotation_degrees": 90
+    },
+    {
+      "id": "farm_fence_005",
+      "category": "fence",
+      "shape": "rectangle",
+      "x": -121,
+      "y": -137,
+      "width": 28,
       "height": 0.8,
       "rotation_degrees": 90
     },
@@ -2596,518 +3410,6 @@
       "x": -208,
       "y": -190,
       "radius": 2.5
-    },
-    {
-      "id": "orchard_tree_00_00",
-      "category": "tree",
-      "shape": "circle",
-      "x": -153,
-      "y": -196,
-      "radius": 1.2
-    },
-    {
-      "id": "orchard_tree_00_01",
-      "category": "tree",
-      "shape": "circle",
-      "x": -145,
-      "y": -196,
-      "radius": 1.2
-    },
-    {
-      "id": "orchard_tree_00_02",
-      "category": "tree",
-      "shape": "circle",
-      "x": -137,
-      "y": -196,
-      "radius": 1.2
-    },
-    {
-      "id": "orchard_tree_00_03",
-      "category": "tree",
-      "shape": "circle",
-      "x": -129,
-      "y": -196,
-      "radius": 1.2
-    },
-    {
-      "id": "orchard_tree_01_00",
-      "category": "tree",
-      "shape": "circle",
-      "x": -153,
-      "y": -188,
-      "radius": 1.2
-    },
-    {
-      "id": "orchard_tree_01_01",
-      "category": "tree",
-      "shape": "circle",
-      "x": -145,
-      "y": -188,
-      "radius": 1.2
-    },
-    {
-      "id": "orchard_tree_01_02",
-      "category": "tree",
-      "shape": "circle",
-      "x": -137,
-      "y": -188,
-      "radius": 1.2
-    },
-    {
-      "id": "orchard_tree_01_03",
-      "category": "tree",
-      "shape": "circle",
-      "x": -129,
-      "y": -188,
-      "radius": 1.2
-    },
-    {
-      "id": "orchard_tree_02_00",
-      "category": "tree",
-      "shape": "circle",
-      "x": -153,
-      "y": -180,
-      "radius": 1.2
-    },
-    {
-      "id": "orchard_tree_02_01",
-      "category": "tree",
-      "shape": "circle",
-      "x": -145,
-      "y": -180,
-      "radius": 1.2
-    },
-    {
-      "id": "orchard_tree_02_02",
-      "category": "tree",
-      "shape": "circle",
-      "x": -137,
-      "y": -180,
-      "radius": 1.2
-    },
-    {
-      "id": "orchard_tree_02_03",
-      "category": "tree",
-      "shape": "circle",
-      "x": -129,
-      "y": -180,
-      "radius": 1.2
-    },
-    {
-      "id": "orchard_tree_03_00",
-      "category": "tree",
-      "shape": "circle",
-      "x": -153,
-      "y": -172,
-      "radius": 1.2
-    },
-    {
-      "id": "orchard_tree_03_01",
-      "category": "tree",
-      "shape": "circle",
-      "x": -145,
-      "y": -172,
-      "radius": 1.2
-    },
-    {
-      "id": "orchard_tree_03_02",
-      "category": "tree",
-      "shape": "circle",
-      "x": -137,
-      "y": -172,
-      "radius": 1.2
-    },
-    {
-      "id": "orchard_tree_03_03",
-      "category": "tree",
-      "shape": "circle",
-      "x": -129,
-      "y": -172,
-      "radius": 1.2
-    },
-    {
-      "id": "orchard_tree_04_00",
-      "category": "tree",
-      "shape": "circle",
-      "x": -153,
-      "y": -164,
-      "radius": 1.2
-    },
-    {
-      "id": "orchard_tree_04_01",
-      "category": "tree",
-      "shape": "circle",
-      "x": -145,
-      "y": -164,
-      "radius": 1.2
-    },
-    {
-      "id": "orchard_tree_04_02",
-      "category": "tree",
-      "shape": "circle",
-      "x": -137,
-      "y": -164,
-      "radius": 1.2
-    },
-    {
-      "id": "orchard_tree_04_03",
-      "category": "tree",
-      "shape": "circle",
-      "x": -129,
-      "y": -164,
-      "radius": 1.2
-    },
-    {
-      "id": "wolf_forest_tree_00",
-      "category": "tree",
-      "shape": "circle",
-      "x": -150,
-      "y": 92,
-      "radius": 0.8
-    },
-    {
-      "id": "wolf_forest_tree_01",
-      "category": "tree",
-      "shape": "circle",
-      "x": -200.75738019305416,
-      "y": 118.34412808259434,
-      "radius": 0.92
-    },
-    {
-      "id": "wolf_forest_tree_02",
-      "category": "tree",
-      "shape": "circle",
-      "x": -167.1041850469423,
-      "y": 36.21441946214581,
-      "radius": 1.04
-    },
-    {
-      "id": "wolf_forest_tree_04",
-      "category": "tree",
-      "shape": "circle",
-      "x": -260.6242280836017,
-      "y": 76.3237059039535,
-      "radius": 0.8
-    },
-    {
-      "id": "wolf_forest_tree_05",
-      "category": "tree",
-      "shape": "circle",
-      "x": -81.71824942160282,
-      "y": 34.56999466742076,
-      "radius": 0.92
-    },
-    {
-      "id": "wolf_forest_tree_06",
-      "category": "tree",
-      "shape": "circle",
-      "x": -179.52848623981444,
-      "y": 120.00574753397818,
-      "radius": 1.04
-    },
-    {
-      "id": "wolf_forest_tree_07",
-      "category": "tree",
-      "shape": "circle",
-      "x": -193.20178878367858,
-      "y": 51.17740634927417,
-      "radius": 1.1600000000000001
-    },
-    {
-      "id": "wolf_forest_tree_08",
-      "category": "tree",
-      "shape": "circle",
-      "x": -112.82271861355599,
-      "y": 113.6113249873678,
-      "radius": 0.8
-    },
-    {
-      "id": "wolf_forest_tree_09",
-      "category": "tree",
-      "shape": "circle",
-      "x": -245.9475813796697,
-      "y": 122.52466556896444,
-      "radius": 0.92
-    },
-    {
-      "id": "wolf_forest_tree_10",
-      "category": "tree",
-      "shape": "circle",
-      "x": -130.88714031138227,
-      "y": 4.143681113854811,
-      "radius": 1.04
-    },
-    {
-      "id": "wolf_forest_tree_11",
-      "category": "tree",
-      "shape": "circle",
-      "x": -137.88136457805035,
-      "y": 200.7746234971378,
-      "radius": 1.1600000000000001
-    },
-    {
-      "id": "wolf_forest_tree_12",
-      "category": "tree",
-      "shape": "circle",
-      "x": -203.14765331207917,
-      "y": 73.94941294166522,
-      "radius": 0.8
-    },
-    {
-      "id": "wolf_forest_tree_13",
-      "category": "tree",
-      "shape": "circle",
-      "x": -120.23621798438188,
-      "y": 80.61971566965173,
-      "radius": 0.92
-    },
-    {
-      "id": "wolf_forest_tree_14",
-      "category": "tree",
-      "shape": "circle",
-      "x": -212.25887586584088,
-      "y": 149.26449959633644,
-      "radius": 1.04
-    },
-    {
-      "id": "wolf_forest_tree_16",
-      "category": "tree",
-      "shape": "circle",
-      "x": -92.47625812134105,
-      "y": 159.02219391825685,
-      "radius": 0.8
-    },
-    {
-      "id": "wolf_forest_tree_17",
-      "category": "tree",
-      "shape": "circle",
-      "x": -197.9777932085765,
-      "y": 93.07436493447852,
-      "radius": 0.92
-    },
-    {
-      "id": "wolf_forest_tree_18",
-      "category": "tree",
-      "shape": "circle",
-      "x": -141.52046060880508,
-      "y": 61.668536492602314,
-      "radius": 1.04
-    },
-    {
-      "id": "wolf_forest_tree_20",
-      "category": "tree",
-      "shape": "circle",
-      "x": -221.33487578982897,
-      "y": 32.88088269601662,
-      "radius": 0.8
-    },
-    {
-      "id": "wolf_forest_tree_21",
-      "category": "tree",
-      "shape": "circle",
-      "x": -78.83941473339338,
-      "y": 104.53416741484324,
-      "radius": 0.92
-    },
-    {
-      "id": "wolf_forest_tree_22",
-      "category": "tree",
-      "shape": "circle",
-      "x": -263.11495499858313,
-      "y": 155.39609590192578,
-      "radius": 1.04
-    },
-    {
-      "id": "wolf_forest_tree_23",
-      "category": "tree",
-      "shape": "circle",
-      "x": -164.75728492744588,
-      "y": 59.80461091432816,
-      "radius": 1.1600000000000001
-    },
-    {
-      "id": "wolf_forest_tree_25",
-      "category": "tree",
-      "shape": "circle",
-      "x": -235.8305330239363,
-      "y": 71.63672290911464,
-      "radius": 0.92
-    },
-    {
-      "id": "wolf_forest_tree_26",
-      "category": "tree",
-      "shape": "circle",
-      "x": -95.74575521603697,
-      "y": 56.76805210568897,
-      "radius": 1.04
-    },
-    {
-      "id": "wolf_forest_tree_27",
-      "category": "tree",
-      "shape": "circle",
-      "x": -210.9915914000677,
-      "y": 185.17003702956316,
-      "radius": 1.1600000000000001
-    },
-    {
-      "id": "wolf_forest_tree_28",
-      "category": "tree",
-      "shape": "circle",
-      "x": -179.78454164180928,
-      "y": 70.35742826217417,
-      "radius": 0.8
-    },
-    {
-      "id": "wolf_forest_tree_29",
-      "category": "tree",
-      "shape": "circle",
-      "x": -136.59229852752767,
-      "y": 110.60899450363402,
-      "radius": 0.92
-    },
-    {
-      "id": "wolf_forest_tree_30",
-      "category": "tree",
-      "shape": "circle",
-      "x": -227.11719016589137,
-      "y": 106.52912069662061,
-      "radius": 1.04
-    },
-    {
-      "id": "wolf_forest_tree_31",
-      "category": "tree",
-      "shape": "circle",
-      "x": -131.97845063434653,
-      "y": 29.75632091230016,
-      "radius": 1.1600000000000001
-    },
-    {
-      "id": "wolf_forest_tree_32",
-      "category": "tree",
-      "shape": "circle",
-      "x": -156.5861089983533,
-      "y": 181.68507102182252,
-      "radius": 0.8
-    },
-    {
-      "id": "wolf_forest_tree_33",
-      "category": "tree",
-      "shape": "circle",
-      "x": -257.3878042162537,
-      "y": 25.871920554678724,
-      "radius": 0.92
-    },
-    {
-      "id": "wolf_forest_tree_34",
-      "category": "tree",
-      "shape": "circle",
-      "x": -142.10244911352993,
-      "y": 89.52281389658914,
-      "radius": 1.04
-    },
-    {
-      "id": "wolf_forest_tree_35",
-      "category": "tree",
-      "shape": "circle",
-      "x": -203.91645187646503,
-      "y": 126.50130576684441,
-      "radius": 1.1600000000000001
-    },
-    {
-      "id": "wolf_forest_tree_36",
-      "category": "tree",
-      "shape": "circle",
-      "x": -171.68831955006843,
-      "y": 28.000758947491178,
-      "radius": 0.8
-    },
-    {
-      "id": "wolf_forest_tree_37",
-      "category": "tree",
-      "shape": "circle",
-      "x": -117.57679154143645,
-      "y": 151.99261938835258,
-      "radius": 0.92
-    },
-    {
-      "id": "wolf_forest_tree_38",
-      "category": "tree",
-      "shape": "circle",
-      "x": -269.5818836094628,
-      "y": 82.95699213595067,
-      "radius": 1.04
-    },
-    {
-      "id": "wolf_forest_tree_39",
-      "category": "tree",
-      "shape": "circle",
-      "x": -80.39628710140711,
-      "y": 22.474754346409057,
-      "radius": 1.1600000000000001
-    },
-    {
-      "id": "wolf_forest_tree_40",
-      "category": "tree",
-      "shape": "circle",
-      "x": -178.62205806701954,
-      "y": 128.40258709153818,
-      "radius": 0.8
-    },
-    {
-      "id": "wolf_forest_tree_41",
-      "category": "tree",
-      "shape": "circle",
-      "x": -200.76113255073446,
-      "y": 46.296638478126326,
-      "radius": 0.92
-    },
-    {
-      "id": "wolf_forest_tree_42",
-      "category": "tree",
-      "shape": "circle",
-      "x": -103.5247804544173,
-      "y": 110.76550847124177,
-      "radius": 1.04
-    },
-    {
-      "id": "wolf_forest_tree_43",
-      "category": "tree",
-      "shape": "circle",
-      "x": -250.29199766194975,
-      "y": 132.17913764755605,
-      "radius": 1.1600000000000001
-    },
-    {
-      "id": "wolf_forest_tree_44",
-      "category": "tree",
-      "shape": "circle",
-      "x": -135.50122919221616,
-      "y": -6.452220541341106,
-      "radius": 0.8
-    },
-    {
-      "id": "wolf_forest_tree_45",
-      "category": "tree",
-      "shape": "circle",
-      "x": -161.81958980708794,
-      "y": 117.00718393390292,
-      "radius": 0.92
-    },
-    {
-      "id": "wolf_forest_tree_46",
-      "category": "tree",
-      "shape": "circle",
-      "x": -211.76105683860987,
-      "y": 73.1570076931281,
-      "radius": 1.04
-    },
-    {
-      "id": "wolf_forest_tree_47",
-      "category": "tree",
-      "shape": "circle",
-      "x": -113.70781590803966,
-      "y": 74.02720740149142,
-      "radius": 1.1600000000000001
     },
     {
       "id": "wolf_forest_boulder_00",
@@ -3572,150 +3874,6 @@
       "radius": 0.9
     },
     {
-      "id": "magic_grove_tree_00",
-      "category": "tree",
-      "shape": "circle",
-      "x": 249,
-      "y": 15,
-      "radius": 1.1
-    },
-    {
-      "id": "magic_grove_tree_01",
-      "category": "tree",
-      "shape": "circle",
-      "x": 246.64801221065042,
-      "y": 26.628684873072736,
-      "radius": 1.1
-    },
-    {
-      "id": "magic_grove_tree_02",
-      "category": "tree",
-      "shape": "circle",
-      "x": 239.87573328164015,
-      "y": 36.854778729342335,
-      "radius": 1.1
-    },
-    {
-      "id": "magic_grove_tree_03",
-      "category": "tree",
-      "shape": "circle",
-      "x": 229.5,
-      "y": 44.44486372867091,
-      "radius": 1.1
-    },
-    {
-      "id": "magic_grove_tree_04",
-      "category": "tree",
-      "shape": "circle",
-      "x": 216.7722789290103,
-      "y": 48.48346360241508,
-      "radius": 1.1
-    },
-    {
-      "id": "magic_grove_tree_05",
-      "category": "tree",
-      "shape": "circle",
-      "x": 203.22772107098973,
-      "y": 48.48346360241508,
-      "radius": 1.1
-    },
-    {
-      "id": "magic_grove_tree_06",
-      "category": "tree",
-      "shape": "circle",
-      "x": 190.5,
-      "y": 44.444863728670924,
-      "radius": 1.1
-    },
-    {
-      "id": "magic_grove_tree_07",
-      "category": "tree",
-      "shape": "circle",
-      "x": 180.12426671835988,
-      "y": 36.85477872934234,
-      "radius": 1.1
-    },
-    {
-      "id": "magic_grove_tree_08",
-      "category": "tree",
-      "shape": "circle",
-      "x": 173.35198778934958,
-      "y": 26.628684873072743,
-      "radius": 1.1
-    },
-    {
-      "id": "magic_grove_tree_09",
-      "category": "tree",
-      "shape": "circle",
-      "x": 171,
-      "y": 15.000000000000004,
-      "radius": 1.1
-    },
-    {
-      "id": "magic_grove_tree_10",
-      "category": "tree",
-      "shape": "circle",
-      "x": 173.35198778934958,
-      "y": 3.371315126927266,
-      "radius": 1.1
-    },
-    {
-      "id": "magic_grove_tree_11",
-      "category": "tree",
-      "shape": "circle",
-      "x": 180.12426671835985,
-      "y": -6.854778729342325,
-      "radius": 1.1
-    },
-    {
-      "id": "magic_grove_tree_12",
-      "category": "tree",
-      "shape": "circle",
-      "x": 190.49999999999997,
-      "y": -14.444863728670903,
-      "radius": 1.1
-    },
-    {
-      "id": "magic_grove_tree_13",
-      "category": "tree",
-      "shape": "circle",
-      "x": 203.22772107098973,
-      "y": -18.48346360241508,
-      "radius": 1.1
-    },
-    {
-      "id": "magic_grove_tree_14",
-      "category": "tree",
-      "shape": "circle",
-      "x": 216.77227892901027,
-      "y": -18.48346360241508,
-      "radius": 1.1
-    },
-    {
-      "id": "magic_grove_tree_15",
-      "category": "tree",
-      "shape": "circle",
-      "x": 229.49999999999997,
-      "y": -14.444863728670931,
-      "radius": 1.1
-    },
-    {
-      "id": "magic_grove_tree_16",
-      "category": "tree",
-      "shape": "circle",
-      "x": 239.87573328164012,
-      "y": -6.854778729342346,
-      "radius": 1.1
-    },
-    {
-      "id": "magic_grove_tree_17",
-      "category": "tree",
-      "shape": "circle",
-      "x": 246.64801221065042,
-      "y": 3.3713151269272696,
-      "radius": 1.1
-    },
-    {
       "id": "mana_spring",
       "category": "water",
       "shape": "circle",
@@ -3962,12 +4120,492 @@
       "height": 3.4
     },
     {
+      "id": "orchard_tree_shape_00_00",
+      "category": "tree",
+      "shape": "circle",
+      "x": -153,
+      "y": -196,
+      "radius": 0.535
+    },
+    {
+      "id": "orchard_tree_shape_00_01",
+      "category": "tree",
+      "shape": "circle",
+      "x": -145,
+      "y": -196,
+      "radius": 0.535
+    },
+    {
+      "id": "orchard_tree_shape_00_02",
+      "category": "tree",
+      "shape": "circle",
+      "x": -137,
+      "y": -196,
+      "radius": 0.535
+    },
+    {
+      "id": "orchard_tree_shape_00_03",
+      "category": "tree",
+      "shape": "circle",
+      "x": -129,
+      "y": -196,
+      "radius": 0.535
+    },
+    {
+      "id": "orchard_tree_shape_01_00",
+      "category": "tree",
+      "shape": "circle",
+      "x": -153,
+      "y": -188,
+      "radius": 0.535
+    },
+    {
+      "id": "orchard_tree_shape_01_01",
+      "category": "tree",
+      "shape": "circle",
+      "x": -145,
+      "y": -188,
+      "radius": 0.535
+    },
+    {
+      "id": "orchard_tree_shape_01_02",
+      "category": "tree",
+      "shape": "circle",
+      "x": -137,
+      "y": -188,
+      "radius": 0.535
+    },
+    {
+      "id": "orchard_tree_shape_01_03",
+      "category": "tree",
+      "shape": "circle",
+      "x": -129,
+      "y": -188,
+      "radius": 0.535
+    },
+    {
+      "id": "orchard_tree_shape_02_00",
+      "category": "tree",
+      "shape": "circle",
+      "x": -153,
+      "y": -180,
+      "radius": 0.535
+    },
+    {
+      "id": "orchard_tree_shape_02_01",
+      "category": "tree",
+      "shape": "circle",
+      "x": -145,
+      "y": -180,
+      "radius": 0.535
+    },
+    {
+      "id": "orchard_tree_shape_02_02",
+      "category": "tree",
+      "shape": "circle",
+      "x": -137,
+      "y": -180,
+      "radius": 0.535
+    },
+    {
+      "id": "orchard_tree_shape_04_02",
+      "category": "tree",
+      "shape": "circle",
+      "x": -137,
+      "y": -164,
+      "radius": 0.535
+    },
+    {
+      "id": "orchard_tree_shape_04_03",
+      "category": "tree",
+      "shape": "circle",
+      "x": -129,
+      "y": -164,
+      "radius": 0.535
+    },
+    {
+      "id": "wolf_forest_tree_00",
+      "category": "tree",
+      "shape": "circle",
+      "x": -150,
+      "y": 92,
+      "radius": 0.71
+    },
+    {
+      "id": "wolf_forest_tree_01",
+      "category": "tree",
+      "shape": "circle",
+      "x": -200.75738019305416,
+      "y": 118.34412808259434,
+      "radius": 0.794
+    },
+    {
+      "id": "wolf_forest_tree_02",
+      "category": "tree",
+      "shape": "circle",
+      "x": -167.1041850469423,
+      "y": 36.21441946214581,
+      "radius": 0.878
+    },
+    {
+      "id": "wolf_forest_tree_04",
+      "category": "tree",
+      "shape": "circle",
+      "x": -260.6242280836017,
+      "y": 76.3237059039535,
+      "radius": 0.71
+    },
+    {
+      "id": "wolf_forest_tree_06",
+      "category": "tree",
+      "shape": "circle",
+      "x": -179.52848623981444,
+      "y": 120.00574753397818,
+      "radius": 0.878
+    },
+    {
+      "id": "wolf_forest_tree_09",
+      "category": "tree",
+      "shape": "circle",
+      "x": -245.9475813796697,
+      "y": 122.52466556896444,
+      "radius": 0.794
+    },
+    {
+      "id": "wolf_forest_tree_11",
+      "category": "tree",
+      "shape": "circle",
+      "x": -137.88136457805035,
+      "y": 200.7746234971378,
+      "radius": 0.9620000000000001
+    },
+    {
+      "id": "wolf_forest_tree_12",
+      "category": "tree",
+      "shape": "circle",
+      "x": -203.14765331207917,
+      "y": 73.94941294166522,
+      "radius": 0.71
+    },
+    {
+      "id": "wolf_forest_tree_14",
+      "category": "tree",
+      "shape": "circle",
+      "x": -212.25887586584088,
+      "y": 149.26449959633644,
+      "radius": 0.878
+    },
+    {
+      "id": "wolf_forest_tree_16",
+      "category": "tree",
+      "shape": "circle",
+      "x": -92.47625812134105,
+      "y": 159.02219391825685,
+      "radius": 0.71
+    },
+    {
+      "id": "wolf_forest_tree_17",
+      "category": "tree",
+      "shape": "circle",
+      "x": -197.9777932085765,
+      "y": 93.07436493447852,
+      "radius": 0.794
+    },
+    {
+      "id": "wolf_forest_tree_18",
+      "category": "tree",
+      "shape": "circle",
+      "x": -141.52046060880508,
+      "y": 61.668536492602314,
+      "radius": 0.878
+    },
+    {
+      "id": "wolf_forest_tree_20",
+      "category": "tree",
+      "shape": "circle",
+      "x": -221.33487578982897,
+      "y": 32.88088269601662,
+      "radius": 0.71
+    },
+    {
+      "id": "wolf_forest_tree_21",
+      "category": "tree",
+      "shape": "circle",
+      "x": -78.83941473339338,
+      "y": 104.53416741484324,
+      "radius": 0.794
+    },
+    {
+      "id": "wolf_forest_tree_22",
+      "category": "tree",
+      "shape": "circle",
+      "x": -263.11495499858313,
+      "y": 155.39609590192578,
+      "radius": 0.878
+    },
+    {
+      "id": "wolf_forest_tree_23",
+      "category": "tree",
+      "shape": "circle",
+      "x": -164.75728492744588,
+      "y": 59.80461091432816,
+      "radius": 0.9620000000000001
+    },
+    {
+      "id": "wolf_forest_tree_25",
+      "category": "tree",
+      "shape": "circle",
+      "x": -235.8305330239363,
+      "y": 71.63672290911464,
+      "radius": 0.794
+    },
+    {
+      "id": "wolf_forest_tree_26",
+      "category": "tree",
+      "shape": "circle",
+      "x": -95.74575521603697,
+      "y": 56.76805210568897,
+      "radius": 0.878
+    },
+    {
+      "id": "wolf_forest_tree_27",
+      "category": "tree",
+      "shape": "circle",
+      "x": -210.9915914000677,
+      "y": 185.17003702956316,
+      "radius": 0.9620000000000001
+    },
+    {
+      "id": "wolf_forest_tree_29",
+      "category": "tree",
+      "shape": "circle",
+      "x": -136.59229852752767,
+      "y": 110.60899450363402,
+      "radius": 0.794
+    },
+    {
+      "id": "wolf_forest_tree_30",
+      "category": "tree",
+      "shape": "circle",
+      "x": -227.11719016589137,
+      "y": 106.52912069662061,
+      "radius": 0.878
+    },
+    {
+      "id": "wolf_forest_tree_32",
+      "category": "tree",
+      "shape": "circle",
+      "x": -156.5861089983533,
+      "y": 181.68507102182252,
+      "radius": 0.71
+    },
+    {
+      "id": "wolf_forest_tree_33",
+      "category": "tree",
+      "shape": "circle",
+      "x": -257.3878042162537,
+      "y": 25.871920554678724,
+      "radius": 0.794
+    },
+    {
+      "id": "wolf_forest_tree_34",
+      "category": "tree",
+      "shape": "circle",
+      "x": -142.10244911352993,
+      "y": 89.52281389658914,
+      "radius": 0.878
+    },
+    {
+      "id": "wolf_forest_tree_35",
+      "category": "tree",
+      "shape": "circle",
+      "x": -203.91645187646503,
+      "y": 126.50130576684441,
+      "radius": 0.9620000000000001
+    },
+    {
+      "id": "wolf_forest_tree_36",
+      "category": "tree",
+      "shape": "circle",
+      "x": -171.68831955006843,
+      "y": 28.000758947491178,
+      "radius": 0.71
+    },
+    {
+      "id": "wolf_forest_tree_37",
+      "category": "tree",
+      "shape": "circle",
+      "x": -117.57679154143645,
+      "y": 151.99261938835258,
+      "radius": 0.794
+    },
+    {
+      "id": "wolf_forest_tree_38",
+      "category": "tree",
+      "shape": "circle",
+      "x": -269.5818836094628,
+      "y": 82.95699213595067,
+      "radius": 0.878
+    },
+    {
+      "id": "wolf_forest_tree_40",
+      "category": "tree",
+      "shape": "circle",
+      "x": -178.62205806701954,
+      "y": 128.40258709153818,
+      "radius": 0.71
+    },
+    {
+      "id": "wolf_forest_tree_42",
+      "category": "tree",
+      "shape": "circle",
+      "x": -103.5247804544173,
+      "y": 110.76550847124177,
+      "radius": 0.878
+    },
+    {
+      "id": "wolf_forest_tree_43",
+      "category": "tree",
+      "shape": "circle",
+      "x": -250.29199766194975,
+      "y": 132.17913764755605,
+      "radius": 0.9620000000000001
+    },
+    {
+      "id": "wolf_forest_tree_46",
+      "category": "tree",
+      "shape": "circle",
+      "x": -211.76105683860987,
+      "y": 73.1570076931281,
+      "radius": 0.878
+    },
+    {
+      "id": "wolf_forest_tree_47",
+      "category": "tree",
+      "shape": "circle",
+      "x": -113.70781590803966,
+      "y": 74.02720740149142,
+      "radius": 0.9620000000000001
+    },
+    {
+      "id": "magic_grove_tree_00",
+      "category": "tree",
+      "shape": "circle",
+      "x": 249,
+      "y": 15,
+      "radius": 0.745
+    },
+    {
+      "id": "magic_grove_tree_01",
+      "category": "tree",
+      "shape": "circle",
+      "x": 246.64801221065042,
+      "y": 26.628684873072736,
+      "radius": 0.745
+    },
+    {
+      "id": "magic_grove_tree_02",
+      "category": "tree",
+      "shape": "circle",
+      "x": 239.87573328164015,
+      "y": 36.854778729342335,
+      "radius": 0.745
+    },
+    {
+      "id": "magic_grove_tree_03",
+      "category": "tree",
+      "shape": "circle",
+      "x": 229.5,
+      "y": 44.44486372867091,
+      "radius": 0.745
+    },
+    {
+      "id": "magic_grove_tree_05",
+      "category": "tree",
+      "shape": "circle",
+      "x": 203.22772107098973,
+      "y": 48.48346360241508,
+      "radius": 0.745
+    },
+    {
+      "id": "magic_grove_tree_06",
+      "category": "tree",
+      "shape": "circle",
+      "x": 190.5,
+      "y": 44.444863728670924,
+      "radius": 0.745
+    },
+    {
+      "id": "magic_grove_tree_07",
+      "category": "tree",
+      "shape": "circle",
+      "x": 180.12426671835988,
+      "y": 36.85477872934234,
+      "radius": 0.745
+    },
+    {
+      "id": "magic_grove_tree_08",
+      "category": "tree",
+      "shape": "circle",
+      "x": 173.35198778934958,
+      "y": 26.628684873072743,
+      "radius": 0.745
+    },
+    {
+      "id": "magic_grove_tree_11",
+      "category": "tree",
+      "shape": "circle",
+      "x": 180.12426671835985,
+      "y": -6.854778729342325,
+      "radius": 0.745
+    },
+    {
+      "id": "magic_grove_tree_12",
+      "category": "tree",
+      "shape": "circle",
+      "x": 190.49999999999997,
+      "y": -14.444863728670903,
+      "radius": 0.745
+    },
+    {
+      "id": "magic_grove_tree_14",
+      "category": "tree",
+      "shape": "circle",
+      "x": 216.77227892901027,
+      "y": -18.48346360241508,
+      "radius": 0.745
+    },
+    {
+      "id": "magic_grove_tree_15",
+      "category": "tree",
+      "shape": "circle",
+      "x": 229.49999999999997,
+      "y": -14.444863728670931,
+      "radius": 0.745
+    },
+    {
+      "id": "magic_grove_tree_16",
+      "category": "tree",
+      "shape": "circle",
+      "x": 239.87573328164012,
+      "y": -6.854778729342346,
+      "radius": 0.745
+    },
+    {
+      "id": "magic_grove_tree_17",
+      "category": "tree",
+      "shape": "circle",
+      "x": 246.64801221065042,
+      "y": 3.3713151269272696,
+      "radius": 0.745
+    },
+    {
       "id": "background_tree_000",
       "category": "tree",
       "shape": "circle",
       "x": -219.5911072253406,
       "y": -38.842574934586494,
-      "radius": 0.5525
+      "radius": 0.605
     },
     {
       "id": "background_tree_001",
@@ -3975,7 +4613,7 @@
       "shape": "circle",
       "x": -67.75672357928852,
       "y": 252.05163441207813,
-      "radius": 0.7055
+      "radius": 0.731
     },
     {
       "id": "background_tree_002",
@@ -3983,7 +4621,7 @@
       "shape": "circle",
       "x": -102.32135948636797,
       "y": -197.01355129244652,
-      "radius": 0.782
+      "radius": 0.794
     },
     {
       "id": "background_tree_003",
@@ -3991,7 +4629,7 @@
       "shape": "circle",
       "x": 226.37643241411246,
       "y": 82.67231004065859,
-      "radius": 0.5525
+      "radius": 0.605
     },
     {
       "id": "background_tree_004",
@@ -3999,7 +4637,7 @@
       "shape": "circle",
       "x": -240.32984459582923,
       "y": 99.20466620348343,
-      "radius": 0.629
+      "radius": 0.668
     },
     {
       "id": "background_tree_005",
@@ -4007,7 +4645,7 @@
       "shape": "circle",
       "x": 93.66996490558827,
       "y": -200.1672742347906,
-      "radius": 0.7055
+      "radius": 0.731
     },
     {
       "id": "background_tree_006",
@@ -4015,7 +4653,7 @@
       "shape": "circle",
       "x": 71.8281274667695,
       "y": 228.99938887389527,
-      "radius": 0.782
+      "radius": 0.794
     },
     {
       "id": "background_tree_007",
@@ -4023,7 +4661,7 @@
       "shape": "circle",
       "x": -224.08970332608652,
       "y": -129.86456353919846,
-      "radius": 0.5525
+      "radius": 0.605
     },
     {
       "id": "background_tree_008",
@@ -4031,7 +4669,7 @@
       "shape": "circle",
       "x": 214.86867019819874,
       "y": -47.23827438907672,
-      "radius": 0.629
+      "radius": 0.668
     },
     {
       "id": "background_tree_009",
@@ -4039,7 +4677,7 @@
       "shape": "circle",
       "x": -33.15575796814026,
       "y": -255.8606959139252,
-      "radius": 0.782
+      "radius": 0.794
     },
     {
       "id": "background_tree_010",
@@ -4047,7 +4685,7 @@
       "shape": "circle",
       "x": 51.79760314214614,
       "y": -230.2455391722687,
-      "radius": 0.782
+      "radius": 0.794
     },
     {
       "id": "background_tree_011",
@@ -4055,7 +4693,7 @@
       "shape": "circle",
       "x": 126.78112311615027,
       "y": 221.2499645681498,
-      "radius": 0.5525
+      "radius": 0.605
     },
     {
       "id": "background_tree_012",
@@ -4063,7 +4701,7 @@
       "shape": "circle",
       "x": -205.7816398744852,
       "y": -65.64995575449909,
-      "radius": 0.629
+      "radius": 0.668
     },
     {
       "id": "background_tree_013",
@@ -4071,7 +4709,7 @@
       "shape": "circle",
       "x": 213.33091639233223,
       "y": -98.56429430177926,
-      "radius": 0.7055
+      "radius": 0.731
     },
     {
       "id": "background_tree_014",
@@ -4079,7 +4717,7 @@
       "shape": "circle",
       "x": -98.0595148799306,
       "y": 234.308197768479,
-      "radius": 0.782
+      "radius": 0.794
     },
     {
       "id": "background_tree_015",
@@ -4087,7 +4725,7 @@
       "shape": "circle",
       "x": -72.76724008708094,
       "y": -202.3114647520232,
-      "radius": 0.5525
+      "radius": 0.605
     },
     {
       "id": "background_tree_016",
@@ -4095,7 +4733,7 @@
       "shape": "circle",
       "x": 207.134328352353,
       "y": 108.86399780469029,
-      "radius": 0.629
+      "radius": 0.668
     },
     {
       "id": "background_tree_017",
@@ -4103,15 +4741,7 @@
       "shape": "circle",
       "x": -244.6434113193378,
       "y": 64.48721809814181,
-      "radius": 0.7055
-    },
-    {
-      "id": "background_tree_018",
-      "category": "tree",
-      "shape": "circle",
-      "x": 115.73927600861083,
-      "y": -180.00116663233769,
-      "radius": 0.782
+      "radius": 0.731
     },
     {
       "id": "background_tree_019",
@@ -4119,15 +4749,7 @@
       "shape": "circle",
       "x": 240.14485326591648,
       "y": 65.81374818297044,
-      "radius": 0.7055
-    },
-    {
-      "id": "background_tree_020",
-      "category": "tree",
-      "shape": "circle",
-      "x": -186.83412338419066,
-      "y": 95.88018741774042,
-      "radius": 0.782
+      "radius": 0.731
     },
     {
       "id": "background_tree_021",
@@ -4135,7 +4757,7 @@
       "shape": "circle",
       "x": 79.6042514898111,
       "y": -214.71880016604717,
-      "radius": 0.5525
+      "radius": 0.605
     },
     {
       "id": "background_tree_022",
@@ -4143,15 +4765,7 @@
       "shape": "circle",
       "x": 93.5065783331517,
       "y": 229.6965820564733,
-      "radius": 0.629
-    },
-    {
-      "id": "background_tree_023",
-      "category": "tree",
-      "shape": "circle",
-      "x": -188.86407413546053,
-      "y": -89.50620928715094,
-      "radius": 0.7055
+      "radius": 0.668
     },
     {
       "id": "background_tree_024",
@@ -4159,7 +4773,7 @@
       "shape": "circle",
       "x": 217.87970847728337,
       "y": -67.17464278918067,
-      "radius": 0.782
+      "radius": 0.794
     },
     {
       "id": "background_tree_025",
@@ -4167,7 +4781,7 @@
       "shape": "circle",
       "x": -124.88872171895929,
       "y": 213.1004626635155,
-      "radius": 0.5525
+      "radius": 0.605
     },
     {
       "id": "background_tree_026",
@@ -4175,7 +4789,7 @@
       "shape": "circle",
       "x": -244.11151562790405,
       "y": 30.423148059455592,
-      "radius": 0.782
+      "radius": 0.794
     },
     {
       "id": "background_tree_027",
@@ -4183,7 +4797,7 @@
       "shape": "circle",
       "x": 33.71594741731976,
       "y": -241.65933644234093,
-      "radius": 0.629
+      "radius": 0.668
     },
     {
       "id": "background_tree_028",
@@ -4191,7 +4805,7 @@
       "shape": "circle",
       "x": -218.2957037464859,
       "y": -50.2293313296768,
-      "radius": 0.782
+      "radius": 0.794
     },
     {
       "id": "background_tree_029",
@@ -4199,7 +4813,7 @@
       "shape": "circle",
       "x": 211.42506161873905,
       "y": -119.78498787207181,
-      "radius": 0.5525
+      "radius": 0.605
     },
     {
       "id": "background_tree_030",
@@ -4207,7 +4821,7 @@
       "shape": "circle",
       "x": -80.8476621799971,
       "y": 249.21407568600344,
-      "radius": 0.629
+      "radius": 0.668
     },
     {
       "id": "background_tree_031",
@@ -4215,7 +4829,7 @@
       "shape": "circle",
       "x": -92.54256518244303,
       "y": -202.89128524767466,
-      "radius": 0.7055
+      "radius": 0.731
     },
     {
       "id": "background_tree_032",
@@ -4223,7 +4837,7 @@
       "shape": "circle",
       "x": 222.78010111221786,
       "y": 94.51468959071909,
-      "radius": 0.782
+      "radius": 0.794
     },
     {
       "id": "background_tree_033",
@@ -4231,7 +4845,7 @@
       "shape": "circle",
       "x": -246.02471376210397,
       "y": 87.13690503038767,
-      "radius": 0.5525
+      "radius": 0.605
     },
     {
       "id": "background_tree_034",
@@ -4239,7 +4853,7 @@
       "shape": "circle",
       "x": 104.23864002787703,
       "y": -196.00588237381723,
-      "radius": 0.629
+      "radius": 0.668
     },
     {
       "id": "background_tree_035",
@@ -4247,7 +4861,7 @@
       "shape": "circle",
       "x": 60.29097229266278,
       "y": 233.33666377148143,
-      "radius": 0.7055
+      "radius": 0.731
     },
     {
       "id": "background_tree_036",
@@ -4255,7 +4869,7 @@
       "shape": "circle",
       "x": -20.12494295260856,
       "y": -258.2169372275069,
-      "radius": 0.7055
+      "radius": 0.731
     },
     {
       "id": "background_tree_037",
@@ -4263,7 +4877,7 @@
       "shape": "circle",
       "x": -185.07146846903441,
       "y": 115.20656039790094,
-      "radius": 0.629
+      "radius": 0.668
     },
     {
       "id": "background_tree_038",
@@ -4271,7 +4885,7 @@
       "shape": "circle",
       "x": 63.75629156611082,
       "y": -228.26330253839984,
-      "radius": 0.7055
+      "radius": 0.731
     },
     {
       "id": "background_tree_039",
@@ -4279,7 +4893,7 @@
       "shape": "circle",
       "x": 115.7700485057708,
       "y": 228.32716848630056,
-      "radius": 0.782
+      "radius": 0.794
     },
     {
       "id": "background_tree_040",
@@ -4287,7 +4901,7 @@
       "shape": "circle",
       "x": -203.09675660654338,
       "y": -76.42452129979276,
-      "radius": 0.5525
+      "radius": 0.605
     },
     {
       "id": "background_tree_041",
@@ -4295,7 +4909,7 @@
       "shape": "circle",
       "x": 219.0137096142385,
       "y": -87.9147029853938,
-      "radius": 0.629
+      "radius": 0.668
     },
     {
       "id": "background_tree_042",
@@ -4303,7 +4917,7 @@
       "shape": "circle",
       "x": -110.32895344020591,
       "y": 229.89676385888706,
-      "radius": 0.7055
+      "radius": 0.731
     },
     {
       "id": "background_tree_043",
@@ -4311,7 +4925,7 @@
       "shape": "circle",
       "x": -62.631441360890534,
       "y": -206.72034866712403,
-      "radius": 0.782
+      "radius": 0.794
     },
     {
       "id": "background_tree_044",
@@ -4319,7 +4933,7 @@
       "shape": "circle",
       "x": -248.59594309667014,
       "y": 52.11580447308793,
-      "radius": 0.629
+      "radius": 0.668
     },
     {
       "id": "background_tree_045",
@@ -4327,7 +4941,7 @@
       "shape": "circle",
       "x": 14.09568847262947,
       "y": -251.60546807746962,
-      "radius": 0.782
+      "radius": 0.794
     },
     {
       "id": "background_tree_046",
@@ -4335,15 +4949,7 @@
       "shape": "circle",
       "x": -229.61533022271155,
       "y": -33.17830807493252,
-      "radius": 0.629
-    },
-    {
-      "id": "background_tree_047",
-      "category": "tree",
-      "shape": "circle",
-      "x": -48.545767000331175,
-      "y": 206.3669268714092,
-      "radius": 0.782
+      "radius": 0.668
     },
     {
       "id": "background_tree_048",
@@ -4351,7 +4957,7 @@
       "shape": "circle",
       "x": -112.8878677011721,
       "y": -201.53741420858478,
-      "radius": 0.5525
+      "radius": 0.605
     },
     {
       "id": "background_tree_049",
@@ -4359,7 +4965,7 @@
       "shape": "circle",
       "x": 237.4205276882364,
       "y": 78.30385068589776,
-      "radius": 0.629
+      "radius": 0.668
     },
     {
       "id": "background_tree_050",
@@ -4367,7 +4973,7 @@
       "shape": "circle",
       "x": -192.39823938883026,
       "y": 86.6251550075286,
-      "radius": 0.7055
+      "radius": 0.731
     },
     {
       "id": "background_tree_051",
@@ -4375,7 +4981,7 @@
       "shape": "circle",
       "x": 90.8598349263371,
       "y": -211.2924286318816,
-      "radius": 0.782
+      "radius": 0.794
     },
     {
       "id": "background_tree_052",
@@ -4383,15 +4989,7 @@
       "shape": "circle",
       "x": 81.98462518344309,
       "y": 235.1159740075743,
-      "radius": 0.5525
-    },
-    {
-      "id": "background_tree_053",
-      "category": "tree",
-      "shape": "circle",
-      "x": -184.92774541132954,
-      "y": -99.50743176809705,
-      "radius": 0.629
+      "radius": 0.605
     },
     {
       "id": "background_tree_054",
@@ -4399,7 +4997,7 @@
       "shape": "circle",
       "x": 221.99507377331315,
       "y": -56.206647475020674,
-      "radius": 0.7055
+      "radius": 0.731
     },
     {
       "id": "background_tree_055",
@@ -4407,7 +5005,7 @@
       "shape": "circle",
       "x": -136.15656324850264,
       "y": 207.2809452997465,
-      "radius": 0.782
+      "radius": 0.794
     },
     {
       "id": "background_tree_056",
@@ -4415,7 +5013,7 @@
       "shape": "circle",
       "x": -246.34391439307936,
       "y": 17.990993343759097,
-      "radius": 0.7055
+      "radius": 0.731
     },
     {
       "id": "background_tree_057",
@@ -4423,7 +5021,7 @@
       "shape": "circle",
       "x": 46.20061927521742,
       "y": -240.60445294837422,
-      "radius": 0.5525
+      "radius": 0.605
     },
     {
       "id": "background_tree_058",
@@ -4431,7 +5029,7 @@
       "shape": "circle",
       "x": 108.01048664398066,
       "y": 175.4130404928051,
-      "radius": 0.629
+      "radius": 0.668
     },
     {
       "id": "background_tree_059",
@@ -4439,7 +5037,7 @@
       "shape": "circle",
       "x": -216.4078154459258,
       "y": -61.584554994918335,
-      "radius": 0.7055
+      "radius": 0.731
     },
     {
       "id": "background_tree_060",
@@ -4447,7 +5045,7 @@
       "shape": "circle",
       "x": 218.16002831558617,
       "y": -109.28038271045095,
-      "radius": 0.782
+      "radius": 0.794
     },
     {
       "id": "background_tree_061",
@@ -4455,7 +5053,7 @@
       "shape": "circle",
       "x": -73.13339498578168,
       "y": 191.51111335338646,
-      "radius": 0.5525
+      "radius": 0.605
     },
     {
       "id": "background_tree_062",
@@ -4463,7 +5061,7 @@
       "shape": "circle",
       "x": -82.42938728881069,
       "y": -208.2820110119721,
-      "radius": 0.629
+      "radius": 0.668
     },
     {
       "id": "background_tree_063",
@@ -4471,7 +5069,7 @@
       "shape": "circle",
       "x": 218.5625983986038,
       "y": 106.20447533532017,
-      "radius": 0.7055
+      "radius": 0.731
     },
     {
       "id": "background_tree_064",
@@ -4479,7 +5077,7 @@
       "shape": "circle",
       "x": -251.1117439094991,
       "y": 74.7455153887519,
-      "radius": 0.782
+      "radius": 0.794
     },
     {
       "id": "background_tree_065",
@@ -4487,7 +5085,7 @@
       "shape": "circle",
       "x": 114.62550220151863,
       "y": -191.28511245010586,
-      "radius": 0.5525
+      "radius": 0.605
     },
     {
       "id": "background_tree_066",
@@ -4495,7 +5093,7 @@
       "shape": "circle",
       "x": 48.49762360225978,
       "y": 237.09065883103352,
-      "radius": 0.629
+      "radius": 0.668
     },
     {
       "id": "background_tree_067",
@@ -4503,7 +5101,7 @@
       "shape": "circle",
       "x": -239.5559157931758,
       "y": -14.593259008626509,
-      "radius": 0.782
+      "radius": 0.794
     },
     {
       "id": "background_tree_068",
@@ -4511,7 +5109,7 @@
       "shape": "circle",
       "x": 250.85346283602254,
       "y": 60.30373274662409,
-      "radius": 0.782
+      "radius": 0.794
     },
     {
       "id": "background_tree_069",
@@ -4519,7 +5117,7 @@
       "shape": "circle",
       "x": -191.5877552570092,
       "y": 106.09020706728941,
-      "radius": 0.5525
+      "radius": 0.605
     },
     {
       "id": "background_tree_070",
@@ -4527,7 +5125,7 @@
       "shape": "circle",
       "x": 75.64698823665232,
       "y": -225.65800045804664,
-      "radius": 0.629
+      "radius": 0.668
     },
     {
       "id": "background_tree_071",
@@ -4535,15 +5133,7 @@
       "shape": "circle",
       "x": 104.36581492207037,
       "y": 234.85479913268148,
-      "radius": 0.7055
-    },
-    {
-      "id": "background_tree_072",
-      "category": "tree",
-      "shape": "circle",
-      "x": -199.8459789453026,
-      "y": -87.09526220979915,
-      "radius": 0.782
+      "radius": 0.731
     },
     {
       "id": "background_tree_073",
@@ -4551,7 +5141,7 @@
       "shape": "circle",
       "x": 224.16309023390667,
       "y": -76.94094473546204,
-      "radius": 0.5525
+      "radius": 0.605
     },
     {
       "id": "background_tree_074",
@@ -4559,7 +5149,7 @@
       "shape": "circle",
       "x": -122.40259235346196,
       "y": 224.8412893246083,
-      "radius": 0.629
+      "radius": 0.668
     },
     {
       "id": "background_tree_075",
@@ -4567,7 +5157,7 @@
       "shape": "circle",
       "x": -52.23448237668692,
       "y": -210.61946455833464,
-      "radius": 0.7055
+      "radius": 0.731
     },
     {
       "id": "background_tree_076",
@@ -4575,7 +5165,7 @@
       "shape": "circle",
       "x": -251.92078535335892,
       "y": 39.508453613712526,
-      "radius": 0.5525
+      "radius": 0.605
     },
     {
       "id": "background_tree_077",
@@ -4583,7 +5173,7 @@
       "shape": "circle",
       "x": 27.03211851536158,
       "y": -251.55171350752403,
-      "radius": 0.7055
+      "radius": 0.731
     },
     {
       "id": "background_tree_078",
@@ -4591,7 +5181,7 @@
       "shape": "circle",
       "x": -228.60268191998972,
       "y": -45.053455128191814,
-      "radius": 0.5525
+      "radius": 0.605
     },
     {
       "id": "background_tree_079",
@@ -4599,7 +5189,1259 @@
       "shape": "circle",
       "x": 215.22495295399077,
       "y": -131.08096591783442,
-      "radius": 0.629
+      "radius": 0.668
+    }
+  ],
+  "bridges": [
+    {
+      "id": "road_0_2_7",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -89.5,
+      "y": 0,
+      "width": 2,
+      "height": 8,
+      "rotation_degrees": 180
+    },
+    {
+      "id": "road_0_2_8",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -90.5,
+      "y": 0,
+      "width": 2,
+      "height": 8,
+      "rotation_degrees": 180
+    },
+    {
+      "id": "road_0_2_9",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -91.5,
+      "y": 0,
+      "width": 2,
+      "height": 8,
+      "rotation_degrees": 180
+    },
+    {
+      "id": "road_0_2_10",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -92.5,
+      "y": 0,
+      "width": 2,
+      "height": 8,
+      "rotation_degrees": 180
+    },
+    {
+      "id": "road_0_2_11",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -93.5,
+      "y": 0,
+      "width": 2,
+      "height": 8,
+      "rotation_degrees": 180
+    },
+    {
+      "id": "road_0_2_12",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -94.5,
+      "y": 0,
+      "width": 2,
+      "height": 8,
+      "rotation_degrees": 180
+    },
+    {
+      "id": "road_0_2_13",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -95.5,
+      "y": 0,
+      "width": 2,
+      "height": 8,
+      "rotation_degrees": 180
+    },
+    {
+      "id": "road_0_2_14",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -96.5,
+      "y": 0,
+      "width": 2,
+      "height": 8,
+      "rotation_degrees": 180
+    },
+    {
+      "id": "road_0_2_15",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -97.5,
+      "y": 0,
+      "width": 2,
+      "height": 8,
+      "rotation_degrees": 180
+    },
+    {
+      "id": "road_0_2_16",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -98.5,
+      "y": 0,
+      "width": 2,
+      "height": 8,
+      "rotation_degrees": 180
+    },
+    {
+      "id": "road_0_2_17",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -99.5,
+      "y": 0,
+      "width": 2,
+      "height": 8,
+      "rotation_degrees": 180
+    },
+    {
+      "id": "road_0_2_18",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -100.5,
+      "y": 0,
+      "width": 2,
+      "height": 8,
+      "rotation_degrees": 180
+    },
+    {
+      "id": "road_0_2_19",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -101.5,
+      "y": 0,
+      "width": 2,
+      "height": 8,
+      "rotation_degrees": 180
+    },
+    {
+      "id": "road_0_2_20",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -102.5,
+      "y": 0,
+      "width": 2,
+      "height": 8,
+      "rotation_degrees": 180
+    },
+    {
+      "id": "road_0_2_21",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -103.5,
+      "y": 0,
+      "width": 2,
+      "height": 8,
+      "rotation_degrees": 180
+    },
+    {
+      "id": "road_0_2_22",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -104.5,
+      "y": 0,
+      "width": 2,
+      "height": 8,
+      "rotation_degrees": 180
+    },
+    {
+      "id": "road_0_2_23",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -105.5,
+      "y": 0,
+      "width": 2,
+      "height": 8,
+      "rotation_degrees": 180
+    },
+    {
+      "id": "road_0_2_24",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -106.5,
+      "y": 0,
+      "width": 2,
+      "height": 8,
+      "rotation_degrees": 180
+    },
+    {
+      "id": "road_0_2_25",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -107.5,
+      "y": 0,
+      "width": 2,
+      "height": 8,
+      "rotation_degrees": 180
+    },
+    {
+      "id": "road_0_2_26",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -108.5,
+      "y": 0,
+      "width": 2,
+      "height": 8,
+      "rotation_degrees": 180
+    },
+    {
+      "id": "road_0_2_27",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -109.5,
+      "y": 0,
+      "width": 2,
+      "height": 8,
+      "rotation_degrees": 180
+    },
+    {
+      "id": "road_0_2_28",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -110.5,
+      "y": 0,
+      "width": 2,
+      "height": 8,
+      "rotation_degrees": 180
+    },
+    {
+      "id": "road_0_2_29",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -111.5,
+      "y": 0,
+      "width": 2,
+      "height": 8,
+      "rotation_degrees": 180
+    },
+    {
+      "id": "road_0_2_30",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -112.5,
+      "y": 0,
+      "width": 2,
+      "height": 8,
+      "rotation_degrees": 180
+    },
+    {
+      "id": "road_0_2_31",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -113.5,
+      "y": 0,
+      "width": 2,
+      "height": 8,
+      "rotation_degrees": 180
+    },
+    {
+      "id": "road_2_5_7",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -5.675675675675675,
+      "y": 86.66216216216216,
+      "width": 1.9793335638915326,
+      "height": 8,
+      "rotation_degrees": 140.59933933652093
+    },
+    {
+      "id": "road_2_5_8",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -6.432432432432433,
+      "y": 87.28378378378378,
+      "width": 1.9793335638915415,
+      "height": 8,
+      "rotation_degrees": 140.59933933652027
+    },
+    {
+      "id": "road_2_5_9",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -7.1891891891891895,
+      "y": 87.9054054054054,
+      "width": 1.9793335638915326,
+      "height": 8,
+      "rotation_degrees": 140.59933933652093
+    },
+    {
+      "id": "road_2_5_10",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -7.9459459459459465,
+      "y": 88.52702702702703,
+      "width": 1.979333563891541,
+      "height": 8,
+      "rotation_degrees": 140.59933933652027
+    },
+    {
+      "id": "road_2_5_11",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -8.702702702702702,
+      "y": 89.14864864864865,
+      "width": 1.979333563891532,
+      "height": 8,
+      "rotation_degrees": 140.5993393365209
+    },
+    {
+      "id": "road_2_5_12",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -9.45945945945946,
+      "y": 89.77027027027026,
+      "width": 1.9793335638915424,
+      "height": 8,
+      "rotation_degrees": 140.5993393365203
+    },
+    {
+      "id": "road_2_5_13",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -10.216216216216218,
+      "y": 90.3918918918919,
+      "width": 1.979333563891541,
+      "height": 8,
+      "rotation_degrees": 140.59933933652027
+    },
+    {
+      "id": "road_2_5_14",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -10.972972972972974,
+      "y": 91.01351351351352,
+      "width": 1.9793335638915333,
+      "height": 8,
+      "rotation_degrees": 140.59933933652096
+    },
+    {
+      "id": "road_2_5_15",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -11.72972972972973,
+      "y": 91.63513513513513,
+      "width": 1.979333563891541,
+      "height": 8,
+      "rotation_degrees": 140.59933933652027
+    },
+    {
+      "id": "road_2_5_16",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -12.486486486486488,
+      "y": 92.25675675675676,
+      "width": 1.979333563891532,
+      "height": 8,
+      "rotation_degrees": 140.5993393365209
+    },
+    {
+      "id": "road_2_5_17",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -13.243243243243244,
+      "y": 92.87837837837839,
+      "width": 1.9793335638915424,
+      "height": 8,
+      "rotation_degrees": 140.5993393365203
+    },
+    {
+      "id": "road_2_5_18",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -14,
+      "y": 93.5,
+      "width": 1.9793335638915304,
+      "height": 8,
+      "rotation_degrees": 140.5993393365208
+    },
+    {
+      "id": "road_2_5_19",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -14.756756756756758,
+      "y": 94.12162162162161,
+      "width": 1.9793335638915437,
+      "height": 8,
+      "rotation_degrees": 140.5993393365204
+    },
+    {
+      "id": "road_2_5_20",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -15.513513513513514,
+      "y": 94.74324324324324,
+      "width": 1.9793335638915304,
+      "height": 8,
+      "rotation_degrees": 140.5993393365208
+    },
+    {
+      "id": "road_2_5_21",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -16.27027027027027,
+      "y": 95.36486486486487,
+      "width": 1.9793335638915424,
+      "height": 8,
+      "rotation_degrees": 140.5993393365203
+    },
+    {
+      "id": "road_2_5_22",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -17.027027027027025,
+      "y": 95.98648648648648,
+      "width": 1.9793335638915304,
+      "height": 8,
+      "rotation_degrees": 140.5993393365208
+    },
+    {
+      "id": "road_2_5_23",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -17.783783783783782,
+      "y": 96.6081081081081,
+      "width": 1.9793335638915424,
+      "height": 8,
+      "rotation_degrees": 140.5993393365203
+    },
+    {
+      "id": "road_2_5_24",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -18.54054054054054,
+      "y": 97.22972972972974,
+      "width": 1.9793335638915424,
+      "height": 8,
+      "rotation_degrees": 140.5993393365203
+    },
+    {
+      "id": "road_2_5_25",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -19.2972972972973,
+      "y": 97.85135135135135,
+      "width": 1.9793335638915333,
+      "height": 8,
+      "rotation_degrees": 140.59933933652096
+    },
+    {
+      "id": "road_2_5_26",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -20.054054054054056,
+      "y": 98.47297297297297,
+      "width": 1.9793335638915304,
+      "height": 8,
+      "rotation_degrees": 140.5993393365208
+    },
+    {
+      "id": "road_2_5_27",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -20.81081081081081,
+      "y": 99.09459459459458,
+      "width": 1.9793335638915424,
+      "height": 8,
+      "rotation_degrees": 140.5993393365203
+    },
+    {
+      "id": "road_2_5_28",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -21.567567567567565,
+      "y": 99.71621621621622,
+      "width": 1.9793335638915397,
+      "height": 8,
+      "rotation_degrees": 140.59933933652016
+    },
+    {
+      "id": "road_2_5_29",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -22.324324324324323,
+      "y": 100.33783783783784,
+      "width": 1.979333563891536,
+      "height": 8,
+      "rotation_degrees": 140.5993393365211
+    },
+    {
+      "id": "road_2_5_30",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -23.08108108108108,
+      "y": 100.95945945945945,
+      "width": 1.9793335638915397,
+      "height": 8,
+      "rotation_degrees": 140.59933933652016
+    },
+    {
+      "id": "road_2_5_31",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -23.83783783783784,
+      "y": 101.5810810810811,
+      "width": 1.9793335638915424,
+      "height": 8,
+      "rotation_degrees": 140.5993393365203
+    },
+    {
+      "id": "road_2_5_32",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -24.594594594594597,
+      "y": 102.20270270270271,
+      "width": 1.9793335638915304,
+      "height": 8,
+      "rotation_degrees": 140.5993393365208
+    },
+    {
+      "id": "road_2_5_33",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -25.35135135135135,
+      "y": 102.82432432432432,
+      "width": 1.9793335638915333,
+      "height": 8,
+      "rotation_degrees": 140.59933933652096
+    },
+    {
+      "id": "road_6_4_11",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 0,
+      "y": -93.5,
+      "width": 2,
+      "height": 8,
+      "rotation_degrees": -90
+    },
+    {
+      "id": "road_6_4_12",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 0,
+      "y": -94.5,
+      "width": 2,
+      "height": 8,
+      "rotation_degrees": -90
+    },
+    {
+      "id": "road_6_4_13",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 0,
+      "y": -95.5,
+      "width": 2,
+      "height": 8,
+      "rotation_degrees": -90
+    },
+    {
+      "id": "road_6_4_14",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 0,
+      "y": -96.5,
+      "width": 2,
+      "height": 8,
+      "rotation_degrees": -90
+    },
+    {
+      "id": "road_6_4_15",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 0,
+      "y": -97.5,
+      "width": 2,
+      "height": 8,
+      "rotation_degrees": -90
+    },
+    {
+      "id": "road_6_4_16",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 0,
+      "y": -98.5,
+      "width": 2,
+      "height": 8,
+      "rotation_degrees": -90
+    },
+    {
+      "id": "road_6_4_17",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 0,
+      "y": -99.5,
+      "width": 2,
+      "height": 8,
+      "rotation_degrees": -90
+    },
+    {
+      "id": "road_6_4_18",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 0,
+      "y": -100.5,
+      "width": 2,
+      "height": 8,
+      "rotation_degrees": -90
+    },
+    {
+      "id": "road_6_4_19",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 0,
+      "y": -101.5,
+      "width": 2,
+      "height": 8,
+      "rotation_degrees": -90
+    },
+    {
+      "id": "road_6_4_20",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 0,
+      "y": -102.5,
+      "width": 2,
+      "height": 8,
+      "rotation_degrees": -90
+    },
+    {
+      "id": "road_6_4_21",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 0,
+      "y": -103.5,
+      "width": 2,
+      "height": 8,
+      "rotation_degrees": -90
+    },
+    {
+      "id": "road_6_4_22",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 0,
+      "y": -104.5,
+      "width": 2,
+      "height": 8,
+      "rotation_degrees": -90
+    },
+    {
+      "id": "road_6_4_23",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 0,
+      "y": -105.5,
+      "width": 2,
+      "height": 8,
+      "rotation_degrees": -90
+    },
+    {
+      "id": "road_6_4_24",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 0,
+      "y": -106.5,
+      "width": 2,
+      "height": 8,
+      "rotation_degrees": -90
+    },
+    {
+      "id": "road_6_4_25",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 0,
+      "y": -107.5,
+      "width": 2,
+      "height": 8,
+      "rotation_degrees": -90
+    },
+    {
+      "id": "road_6_4_26",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 0,
+      "y": -108.5,
+      "width": 2,
+      "height": 8,
+      "rotation_degrees": -90
+    },
+    {
+      "id": "road_6_4_27",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 0,
+      "y": -109.5,
+      "width": 2,
+      "height": 8,
+      "rotation_degrees": -90
+    },
+    {
+      "id": "road_6_4_28",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 0,
+      "y": -110.5,
+      "width": 2,
+      "height": 8,
+      "rotation_degrees": -90
+    },
+    {
+      "id": "road_6_4_29",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 0,
+      "y": -111.5,
+      "width": 2,
+      "height": 8,
+      "rotation_degrees": -90
+    },
+    {
+      "id": "road_6_4_30",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 0,
+      "y": -112.5,
+      "width": 2,
+      "height": 8,
+      "rotation_degrees": -90
+    },
+    {
+      "id": "road_6_4_31",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 0,
+      "y": -113.5,
+      "width": 2,
+      "height": 8,
+      "rotation_degrees": -90
+    },
+    {
+      "id": "road_6_4_32",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 0,
+      "y": -114.5,
+      "width": 2,
+      "height": 8,
+      "rotation_degrees": -90
+    },
+    {
+      "id": "road_6_4_33",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 0,
+      "y": -115.5,
+      "width": 2,
+      "height": 8,
+      "rotation_degrees": -90
+    },
+    {
+      "id": "road_6_4_34",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 0,
+      "y": -116.5,
+      "width": 2,
+      "height": 8,
+      "rotation_degrees": -90
+    },
+    {
+      "id": "road_8_4_15",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -10.096153846153847,
+      "y": 227.57692307692307,
+      "width": 1.988843087090958,
+      "height": 8,
+      "rotation_degrees": 13.495733280795541
+    },
+    {
+      "id": "road_8_4_16",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -9.134615384615383,
+      "y": 227.80769230769232,
+      "width": 1.9888430870909626,
+      "height": 8,
+      "rotation_degrees": 13.495733280797165
+    },
+    {
+      "id": "road_8_4_17",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -8.173076923076923,
+      "y": 228.03846153846155,
+      "width": 1.9888430870909546,
+      "height": 8,
+      "rotation_degrees": 13.495733280795587
+    },
+    {
+      "id": "road_8_4_18",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -7.2115384615384635,
+      "y": 228.26923076923077,
+      "width": 1.9888430870909546,
+      "height": 8,
+      "rotation_degrees": 13.495733280795587
+    },
+    {
+      "id": "road_8_4_19",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -6.25,
+      "y": 228.5,
+      "width": 1.9888430870909612,
+      "height": 8,
+      "rotation_degrees": 13.495733280795493
+    },
+    {
+      "id": "road_8_4_20",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -5.2884615384615365,
+      "y": 228.73076923076923,
+      "width": 1.9888430870909546,
+      "height": 8,
+      "rotation_degrees": 13.495733280795587
+    },
+    {
+      "id": "road_8_4_21",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -4.326923076923077,
+      "y": 228.96153846153845,
+      "width": 1.9888430870909546,
+      "height": 8,
+      "rotation_degrees": 13.495733280795587
+    },
+    {
+      "id": "road_8_4_22",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -3.3653846153846168,
+      "y": 229.19230769230768,
+      "width": 1.9888430870909612,
+      "height": 8,
+      "rotation_degrees": 13.49573328079719
+    },
+    {
+      "id": "road_8_4_23",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -2.403846153846155,
+      "y": 229.42307692307693,
+      "width": 1.988843087090958,
+      "height": 8,
+      "rotation_degrees": 13.495733280795541
+    },
+    {
+      "id": "road_8_4_24",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -1.4423076923076916,
+      "y": 229.65384615384616,
+      "width": 1.988843087090958,
+      "height": 8,
+      "rotation_degrees": 13.495733280795541
+    },
+    {
+      "id": "road_8_4_25",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -0.48076923076922995,
+      "y": 229.8846153846154,
+      "width": 1.9888430870909546,
+      "height": 8,
+      "rotation_degrees": 13.495733280795587
+    },
+    {
+      "id": "road_9_1_0",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 0.48,
+      "y": 229.9,
+      "width": 1.9806120537704985,
+      "height": 8,
+      "rotation_degrees": -11.768288932019995
+    },
+    {
+      "id": "road_9_1_1",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 1.44,
+      "y": 229.7,
+      "width": 1.9806120537705048,
+      "height": 8,
+      "rotation_degrees": -11.76828893202162
+    },
+    {
+      "id": "road_9_1_2",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 2.4,
+      "y": 229.5,
+      "width": 1.9806120537704985,
+      "height": 8,
+      "rotation_degrees": -11.768288932019995
+    },
+    {
+      "id": "road_9_1_3",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 3.36,
+      "y": 229.3,
+      "width": 1.9806120537705048,
+      "height": 8,
+      "rotation_degrees": -11.76828893202162
+    },
+    {
+      "id": "road_9_1_4",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 4.32,
+      "y": 229.1,
+      "width": 1.9806120537704994,
+      "height": 8,
+      "rotation_degrees": -11.768288932019985
+    },
+    {
+      "id": "road_9_1_5",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 5.28,
+      "y": 228.9,
+      "width": 1.980612053770498,
+      "height": 8,
+      "rotation_degrees": -11.768288932020004
+    },
+    {
+      "id": "road_9_1_6",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 6.24,
+      "y": 228.7,
+      "width": 1.9806120537705052,
+      "height": 8,
+      "rotation_degrees": -11.76828893202161
+    },
+    {
+      "id": "road_9_1_7",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 7.2,
+      "y": 228.5,
+      "width": 1.980612053770498,
+      "height": 8,
+      "rotation_degrees": -11.768288932020004
+    },
+    {
+      "id": "road_9_1_8",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 8.16,
+      "y": 228.3,
+      "width": 1.9806120537705052,
+      "height": 8,
+      "rotation_degrees": -11.76828893202161
+    },
+    {
+      "id": "road_9_1_9",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 9.120000000000001,
+      "y": 228.1,
+      "width": 1.9806120537704994,
+      "height": 8,
+      "rotation_degrees": -11.768288932019985
+    },
+    {
+      "id": "road_9_1_10",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 10.080000000000002,
+      "y": 227.9,
+      "width": 1.980612053770498,
+      "height": 8,
+      "rotation_degrees": -11.768288932020004
+    },
+    {
+      "id": "road_9_1_11",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 11.04,
+      "y": 227.7,
+      "width": 1.9806120537705036,
+      "height": 8,
+      "rotation_degrees": -11.768288932021633
+    },
+    {
+      "id": "road_9_1_12",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 12,
+      "y": 227.5,
+      "width": 1.9806120537704994,
+      "height": 8,
+      "rotation_degrees": -11.768288932019985
+    },
+    {
+      "id": "road_9_1_13",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 12.96,
+      "y": 227.3,
+      "width": 1.9806120537705052,
+      "height": 8,
+      "rotation_degrees": -11.76828893202161
+    },
+    {
+      "id": "road_11_2_1",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 206.58510638297872,
+      "y": -31.43617021276596,
+      "width": 1.99659901520258,
+      "height": 8,
+      "rotation_degrees": -106.11341823308828
+    },
+    {
+      "id": "road_11_2_2",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 206.3085106382979,
+      "y": -32.3936170212766,
+      "width": 1.9965990152025879,
+      "height": 8,
+      "rotation_degrees": -106.11341823308985
+    },
+    {
+      "id": "road_11_2_3",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 206.031914893617,
+      "y": -33.351063829787236,
+      "width": 1.9965990152025879,
+      "height": 8,
+      "rotation_degrees": -106.11341823308985
+    },
+    {
+      "id": "road_11_2_4",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 205.75531914893617,
+      "y": -34.308510638297875,
+      "width": 1.99659901520258,
+      "height": 8,
+      "rotation_degrees": -106.11341823308828
+    },
+    {
+      "id": "road_11_2_5",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 205.47872340425533,
+      "y": -35.265957446808514,
+      "width": 1.9965990152025812,
+      "height": 8,
+      "rotation_degrees": -106.11341823308996
+    },
+    {
+      "id": "road_11_2_6",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 205.20212765957447,
+      "y": -36.223404255319146,
+      "width": 1.99659901520258,
+      "height": 8,
+      "rotation_degrees": -106.11341823308828
+    },
+    {
+      "id": "road_11_2_7",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 204.9255319148936,
+      "y": -37.180851063829785,
+      "width": 1.9965990152025879,
+      "height": 8,
+      "rotation_degrees": -106.11341823308985
+    },
+    {
+      "id": "road_11_2_8",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 204.64893617021278,
+      "y": -38.138297872340424,
+      "width": 1.9965990152025879,
+      "height": 8,
+      "rotation_degrees": -106.11341823308985
+    },
+    {
+      "id": "road_11_2_9",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 204.37234042553192,
+      "y": -39.09574468085106,
+      "width": 1.99659901520258,
+      "height": 8,
+      "rotation_degrees": -106.11341823308828
+    },
+    {
+      "id": "road_11_2_10",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 204.09574468085106,
+      "y": -40.0531914893617,
+      "width": 1.9965990152025879,
+      "height": 8,
+      "rotation_degrees": -106.11341823308985
+    },
+    {
+      "id": "road_11_2_11",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 203.81914893617022,
+      "y": -41.01063829787234,
+      "width": 1.9965990152025879,
+      "height": 8,
+      "rotation_degrees": -106.11341823308985
+    },
+    {
+      "id": "road_11_2_12",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 203.54255319148936,
+      "y": -41.96808510638298,
+      "width": 1.99659901520258,
+      "height": 8,
+      "rotation_degrees": -106.11341823308828
+    },
+    {
+      "id": "road_11_2_13",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 203.2659574468085,
+      "y": -42.92553191489362,
+      "width": 1.9965990152025879,
+      "height": 8,
+      "rotation_degrees": -106.11341823308985
+    },
+    {
+      "id": "road_11_2_14",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 202.98936170212767,
+      "y": -43.88297872340426,
+      "width": 1.9965990152025879,
+      "height": 8,
+      "rotation_degrees": -106.11341823308985
+    },
+    {
+      "id": "road_11_2_15",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 202.7127659574468,
+      "y": -44.84042553191489,
+      "width": 1.9965990152025732,
+      "height": 8,
+      "rotation_degrees": -106.1134182330884
+    },
+    {
+      "id": "road_11_2_16",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 202.43617021276594,
+      "y": -45.79787234042553,
+      "width": 1.9965990152025879,
+      "height": 8,
+      "rotation_degrees": -106.11341823308985
+    },
+    {
+      "id": "road_11_2_17",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 202.1595744680851,
+      "y": -46.75531914893617,
+      "width": 1.9965990152025879,
+      "height": 8,
+      "rotation_degrees": -106.11341823308985
+    },
+    {
+      "id": "road_11_2_18",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 201.88297872340425,
+      "y": -47.712765957446805,
+      "width": 1.99659901520258,
+      "height": 8,
+      "rotation_degrees": -106.11341823308828
+    },
+    {
+      "id": "road_11_2_19",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 201.6063829787234,
+      "y": -48.670212765957444,
+      "width": 1.9965990152025879,
+      "height": 8,
+      "rotation_degrees": -106.11341823308985
+    },
+    {
+      "id": "road_11_2_20",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 201.32978723404256,
+      "y": -49.62765957446808,
+      "width": 1.99659901520258,
+      "height": 8,
+      "rotation_degrees": -106.11341823308828
+    },
+    {
+      "id": "road_11_2_21",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 201.05319148936172,
+      "y": -50.58510638297872,
+      "width": 1.9965990152025879,
+      "height": 8,
+      "rotation_degrees": -106.11341823308985
+    },
+    {
+      "id": "road_11_2_22",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 200.77659574468083,
+      "y": -51.54255319148936,
+      "width": 1.9965990152025879,
+      "height": 8,
+      "rotation_degrees": -106.11341823308985
+    },
+    {
+      "id": "road_11_2_23",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 200.5,
+      "y": -52.5,
+      "width": 1.99659901520258,
+      "height": 8,
+      "rotation_degrees": -106.11341823308828
+    },
+    {
+      "id": "road_11_2_24",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 200.22340425531917,
+      "y": -53.45744680851064,
+      "width": 1.9965990152025879,
+      "height": 8,
+      "rotation_degrees": -106.11341823308985
     }
   ]
 }
