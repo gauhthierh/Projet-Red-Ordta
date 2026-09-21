@@ -9,13 +9,16 @@ import (
 // Noms des objets : définis une seule fois pour éviter les fautes de frappe
 // dans les clés de l'inventaire.
 const (
-	ItemPotionDeVie     = "Potion de vie"
-	ItemPotionDePoison  = "Potion de poison"
-	ItemLivreBouleDeFeu = "Livre de Sort : Boule de Feu"
-	ItemFourrureDeLoup  = "Fourrure de loup"
-	ItemPeauDeTroll     = "Peau de Troll"
-	ItemCuirDeSanglier  = "Cuir de sanglier"
-	ItemPlumeDeCorbeau  = "Plume de corbeau"
+	ItemPotionDeVie       = "Potion de vie"
+	ItemPotionDePoison    = "Potion de poison"
+	ItemLivreBouleDeFeu   = "Livre de Sort : Boule de Feu"
+	ItemFourrureDeLoup    = "Fourrure de loup"
+	ItemPeauDeTroll       = "Peau de Troll"
+	ItemCuirDeSanglier    = "Cuir de sanglier"
+	ItemPlumeDeCorbeau    = "Plume de corbeau"
+	ItemChapeauAventurier = "Chapeau de l'aventurier"
+	ItemTuniqueAventurier = "Tunique de l'aventurier"
+	ItemBottesAventurier  = "Bottes de l'aventurier"
 )
 
 // Noms des sorts.

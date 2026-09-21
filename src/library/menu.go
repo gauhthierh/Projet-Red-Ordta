@@ -14,12 +14,13 @@ func (c *Character) MainMenu() {
 		fmt.Println("1. Afficher les informations du personnage")
 		fmt.Println("2. Accéder à l'inventaire")
 		fmt.Println("3. Marchand")
-		fmt.Println("4. Quitter")
+		fmt.Println("4. Forgeron")
+		fmt.Println("0. Quitter")
 
 		choice, ok := ReadChoice("Votre choix : ")
 
 		if !ok {
-			fmt.Println("Choix invalide. Entrez 1, 2, 3 ou 4.")
+			fmt.Println("Choix invalide !")
 			continue
 		}
 
@@ -32,10 +33,12 @@ func (c *Character) MainMenu() {
 		case 3:
 			c.merchant()
 		case 4:
+			c.forgeron()
+		case 0:
 			fmt.Println("À bientôt !")
 			return
 		default:
-			fmt.Println("Choix invalide. Entrez 1, 2, 3 ou 4.")
+			fmt.Println("Choix invalide !")
 		}
 	}
 }
