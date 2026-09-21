@@ -15,6 +15,7 @@ func (c *Character) MainMenu() {
 		fmt.Println("2. Accéder à l'inventaire")
 		fmt.Println("3. Marchand")
 		fmt.Println("4. Forgeron")
+		fmt.Println("5. Entrainement")
 		fmt.Println("0. Quitter")
 
 		choice, ok := ReadChoice("Votre choix : ")
@@ -34,6 +35,8 @@ func (c *Character) MainMenu() {
 			c.merchant()
 		case 4:
 			c.forgeron()
+		case 5:
+			c.trainingFight()
 		case 0:
 			fmt.Println("À bientôt !")
 			return
