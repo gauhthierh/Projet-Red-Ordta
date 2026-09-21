@@ -106,6 +106,7 @@ func (c *Character) CharacterTurn(m *Monster) {
 		fmt.Println("=== COMBAT ===")
 		fmt.Println("1. Attaquer")
 		fmt.Println("2. Inventaire")
+		fmt.Println("3. Sorts")
 		choix, ok := ReadChoice("Entrez votre choix :")
 		if !ok {
 			fmt.Println("Choix invalide, veuillez entrer une saisie valide !")
@@ -122,6 +123,10 @@ func (c *Character) CharacterTurn(m *Monster) {
 			return
 		case 2:
 			if c.ChoixInventaire() {
+				return
+			}
+		case 3:
+			if c.ChoixSort(m) {
 				return
 			}
 		default:
