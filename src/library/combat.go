@@ -38,6 +38,7 @@ func (c *Character) trainingFight() {
 			if adversaire.PVActuel <= 0 {
 				fmt.Printf("%s est vaincu !\n", adversaire.Nom)
 				fmt.Println("Vous avez gagné l'entraînement, bien joué !")
+				c.gagnerExperience(adversaire.ExperienceDonnee)
 				return
 			}
 
@@ -62,6 +63,7 @@ func (c *Character) trainingFight() {
 			if adversaire.PVActuel <= 0 {
 				fmt.Printf("%s est vaincu !\n", adversaire.Nom)
 				fmt.Println("Vous avez gagné l'entraînement, bien joué !")
+				c.gagnerExperience(adversaire.ExperienceDonnee)
 				return
 			}
 		}
