@@ -8,30 +8,27 @@ import (
 func (c *Character) merchant() {
 	for {
 		fmt.Println("\n=== MARCHAND ===")
-		fmt.Printf("1. %s - Gratuit\n", ItemPotionDeVie)
-		fmt.Printf("2. %s - Gratuit\n", ItemPotionDePoison)
-		fmt.Printf("3. %s - Gratuit\n", ItemLivreBouleDeFeu)
+		fmt.Printf("Bourse : %d Po\n", c.Argent)
+		for i, article := range Boutique {
+			prix := c.PrixPour(article)
+			if prix == 0 {
+				fmt.Printf("%d. %s - Gratuit\n", i+1, article.Nom)
+			} else {
+				fmt.Printf("%d. %s - %d Po\n", i+1, article.Nom, prix)
+			}
+		}
 		fmt.Println("0. Retour")
 
-		choice, ok := ReadChoice("Votre choix : ")
+		choix, ok := ReadChoice("Votre choix : ")
 
-		if !ok {
-			fmt.Println("Choix invalide. Entrez 0, 1, 2 ou 3.")
+		if !ok || choix < 0 || choix > len(Boutique) {
+			fmt.Printf("Choix invalide. Entrez un nombre entre 0 et %d !\n", len(Boutique))
 			continue
 		}
-
-		switch choice {
-		case 1:
-			c.buy(ItemPotionDeVie)
-		case 2:
-			c.buy(ItemPotionDePoison)
-		case 3:
-			c.buy(ItemLivreBouleDeFeu)
-		case 0:
+		if choix == 0 {
 			return
-		default:
-			fmt.Println("Choix invalide. Entrez 0, 1, 2 ou 3.")
 		}
+		c.AchatMarchand(Boutique[choix-1])
 	}
 }
 
@@ -44,4 +41,43 @@ func (c *Character) buy(item string) {
 		return
 	}
 	fmt.Println("Vous avez acheté :", item)
+}
+
+type Item struct {
+	Nom  string
+	Prix int
+}
+
+var Boutique = []Item{
+	{Nom: ItemPotionDeVie, Prix: 3},
+	{Nom: ItemPotionDePoison, Prix: 6},
+	{Nom: ItemLivreBouleDeFeu, Prix: 25},
+	{Nom: ItemFourrureDeLoup, Prix: 4},
+	{Nom: ItemPeauDeTroll, Prix: 7},
+	{Nom: ItemCuirDeSanglier, Prix: 3},
+	{Nom: ItemPlumeDeCorbeau, Prix: 1},
+}
+
+func (c *Character) PrixPour(i Item) int {
+	if i.Nom == ItemPotionDeVie && !c.PotionGratuitePrise {
+		return 0
+	}
+	return i.Prix
+}
+
+func (c *Character) AchatMarchand(i Item) {
+	achat := c.PrixPour(i)
+	if c.Argent < achat {
+		fmt.Printf("Argent insuffisant, il manque %d Po\n", achat-c.Argent)
+		return
+	}
+	if !c.AddInventory(i.Nom) {
+		fmt.Println("Plus aucune place disponible dans l'inventaire")
+		return
+	}
+	c.Argent -= achat
+	if i.Nom == ItemPotionDeVie {
+		c.PotionGratuitePrise = true
+	}
+	fmt.Printf("Vous avez acheté %s, il vous reste %d Po\n", i.Nom, c.Argent)
 }

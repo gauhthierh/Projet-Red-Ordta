@@ -12,6 +12,10 @@ const (
 	ItemPotionDeVie     = "Potion de vie"
 	ItemPotionDePoison  = "Potion de poison"
 	ItemLivreBouleDeFeu = "Livre de Sort : Boule de Feu"
+	ItemFourrureDeLoup  = "Fourrure de loup"
+	ItemPeauDeTroll     = "Peau de Troll"
+	ItemCuirDeSanglier  = "Cuir de sanglier"
+	ItemPlumeDeCorbeau  = "Plume de corbeau"
 )
 
 // Noms des sorts.

@@ -18,7 +18,8 @@ type Character struct {
 	// une constante pour pouvoir l'augmenter plus tard (T18).
 	CapaciteInventaire int
 	// Pièces d'or du joueur (T13).
-	Argent int
+	Argent              int
+	PotionGratuitePrise bool
 }
 
 // Valeurs de départ du personnage.

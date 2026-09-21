@@ -22,7 +22,7 @@ func (c Character) AccessInventory() {
 // addInventory ajoute un exemplaire d'un objet dans l'inventaire.
 // Renvoie false, sans rien ajouter, si l'inventaire est plein.
 func (c *Character) AddInventory(item string) bool {
-	if c.SsInventoryFull() {
+	if !c.VerifPlaceInventaire() {
 		return false
 	}
 	c.Inventaire[item]++
@@ -40,8 +40,8 @@ func (c Character) TotalInventaire() int {
 // isInventoryFull indique si l'inventaire a atteint sa capacité. Le nombre
 // d'objets est la somme des quantités (3 potions comptent pour 3), et non
 // le nombre de sortes d'objets.
-func (c Character) SsInventoryFull() bool {
-	return c.TotalInventaire() >= c.CapaciteInventaire
+func (c Character) VerifPlaceInventaire() bool {
+	return c.TotalInventaire() < c.CapaciteInventaire
 }
 
 // removeInventory retire un exemplaire d'un objet de l'inventaire.
