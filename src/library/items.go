@@ -19,6 +19,9 @@ const (
 	ItemChapeauAventurier = "Chapeau de l'aventurier"
 	ItemTuniqueAventurier = "Tunique de l'aventurier"
 	ItemBottesAventurier  = "Bottes de l'aventurier"
+	EmplacementTete       = "tête"
+	EmplacementTorse      = "torse"
+	EmplacementPied       = "pied"
 )
 
 // Noms des sorts.
@@ -44,6 +47,11 @@ func (c *Character) useItem(item string) {
 		c.RemoveInventory(ItemLivreBouleDeFeu)
 		fmt.Printf("Vous apprenez le sort %s !\n", SortBouleDeFeu)
 	default:
+		equipement, ok := TrouverEquipement(item)
+		if ok {
+			c.ChangerEquipement(equipement)
+			return
+		}
 		fmt.Printf("%s n'a pas d'effet utilisable.\n", item)
 	}
 }
@@ -62,19 +70,19 @@ func (c *Character) spellBook() bool {
 func (c *Character) takePot() {
 	// À pleins PV, la potion serait gâchée : elle est refusée et reste
 	// dans l'inventaire (même principe que le livre d'un sort déjà connu).
-	if c.Inventaire[ItemPotionDeVie] > 0 && c.PVActuel >= c.PVMax {
+	if c.Inventaire[ItemPotionDeVie] > 0 && c.PVActuel >= c.PVMaxTotal {
 		fmt.Println("Vous êtes déjà en pleine santé")
 		return
 	}
 	if c.RemoveInventory(ItemPotionDeVie) {
 		avant := c.PVActuel
 		c.PVActuel += 50
-		if c.PVActuel >= c.PVMax {
-			c.PVActuel = c.PVMax
+		if c.PVActuel >= c.PVMaxTotal {
+			c.PVActuel = c.PVMaxTotal
 		}
 		// Le gain annoncé est calculé après le plafond : à 70 / 100, +30.
 		fmt.Printf("Vous buvez une %s (+%d PV)\n", ItemPotionDeVie, c.PVActuel-avant)
-		fmt.Printf("PV : %d / %d\n", c.PVActuel, c.PVMax)
+		fmt.Printf("PV : %d / %d\n", c.PVActuel, c.PVMaxTotal)
 	} else {
 		fmt.Println("Aucune potion dans l'inventaire")
 	}
@@ -94,7 +102,7 @@ func (c *Character) poisonPot() {
 		if c.PVActuel < 0 {
 			c.PVActuel = 0 // les PV ne s'affichent jamais en négatif
 		}
-		fmt.Printf("%s a été empoisonné ! PV : %d / %d\n", c.Nom, c.PVActuel, c.PVMax)
+		fmt.Printf("%s a été empoisonné ! PV : %d / %d\n", c.Nom, c.PVActuel, c.PVMaxTotal)
 		if c.isDead() {
 			fmt.Println("Le poison cesse de faire effet.")
 			return

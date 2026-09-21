@@ -17,8 +17,8 @@ func NouveauPersonnage(pvMax, pvActuel int) Character {
 func TestInitCharacterValeursDeDepart(t *testing.T) {
 	c := InitCharacter("Test", "Nain", 1, 120, 60)
 
-	if c.Niveau != 1 || c.PVMax != 120 || c.PVActuel != 60 {
-		t.Errorf("niveau/PV : obtenu %d, %d/%d", c.Niveau, c.PVActuel, c.PVMax)
+	if c.Niveau != 1 || c.PVMaxBase != 120 || c.PVActuel != 60 {
+		t.Errorf("niveau/PV : obtenu %d, %d/%d", c.Niveau, c.PVActuel, c.PVMaxBase)
 	}
 	if c.Inventaire[ItemPotionDeVie] != 3 {
 		t.Errorf("3 potions de vie attendues, obtenu %d", c.Inventaire[ItemPotionDeVie])

@@ -6,7 +6,6 @@ import (
 )
 
 func (c Character) AccessInventory() {
-	fmt.Println("Inventaire :")
 	vide := true
 	// Même ordre que le menu d'inventaire : sortedItems ne garde que les
 	// objets possédés et les trie par nom.

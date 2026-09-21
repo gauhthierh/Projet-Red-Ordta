@@ -25,15 +25,17 @@ func (c *Character) forgeron() {
 }
 
 type Stuff struct {
-	Nom       string
-	Prix      int
-	Materiaux map[string]int
+	Nom         string
+	Prix        int
+	Materiaux   map[string]int
+	BonusPv     int
+	Emplacement string
 }
 
 var Armurerie = []Stuff{
-	{Nom: ItemChapeauAventurier, Prix: 5, Materiaux: map[string]int{ItemPlumeDeCorbeau: 1, ItemCuirDeSanglier: 1}},
-	{Nom: ItemTuniqueAventurier, Prix: 5, Materiaux: map[string]int{ItemFourrureDeLoup: 2, ItemPeauDeTroll: 1}},
-	{Nom: ItemBottesAventurier, Prix: 5, Materiaux: map[string]int{ItemFourrureDeLoup: 1, ItemCuirDeSanglier: 1}},
+	{Nom: ItemChapeauAventurier, Prix: 5, Materiaux: map[string]int{ItemPlumeDeCorbeau: 1, ItemCuirDeSanglier: 1}, BonusPv: 10, Emplacement: EmplacementTete},
+	{Nom: ItemTuniqueAventurier, Prix: 5, Materiaux: map[string]int{ItemFourrureDeLoup: 2, ItemPeauDeTroll: 1}, BonusPv: 25, Emplacement: EmplacementTorse},
+	{Nom: ItemBottesAventurier, Prix: 5, Materiaux: map[string]int{ItemFourrureDeLoup: 1, ItemCuirDeSanglier: 1}, BonusPv: 15, Emplacement: EmplacementPied},
 }
 
 func (c *Character) AchatForgeron(s Stuff) {
