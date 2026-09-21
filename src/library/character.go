@@ -31,6 +31,8 @@ const (
 	argentDepart                = 100
 	maxAugmentationsInventaire  = 3
 	bonusAugmentationInventaire = 10
+	attaqueBasique              = "Attaque Basique"
+	degatsAttaqueBasique        = 5
 )
 
 func InitCharacter(nom string, classe string, niveau int, pvmax int, pvactuel int) Character {
@@ -90,5 +92,32 @@ func (c *Character) MettreAJourPvMax() {
 	c.PVMaxTotal = c.CalculPvAvecBonus()
 	if c.PVActuel > c.PVMaxTotal {
 		c.PVActuel = c.PVMaxTotal
+	}
+}
+
+func (c *Character) CharacterTurn(m *Monster) {
+	for {
+		fmt.Println("=== COMBAT ===")
+		fmt.Println("1. Attaquer")
+		fmt.Println("2. Inventaire")
+		choix, ok := ReadChoice("Entrez votre choix :")
+		if !ok || choix < 0 {
+			fmt.Println("Choix invalide, veuillez entrez une saisie valide !")
+			continue
+		}
+		switch choix {
+		case 1:
+			m.PVActuel -= degatsAttaqueBasique
+			if m.PVActuel < 0 {
+				m.PVActuel = 0
+			}
+			fmt.Printf("%s lance %s sur %s et lui inflige %d dégâts !\n", c.Nom, attaqueBasique, m.Nom, degatsAttaqueBasique)
+			fmt.Printf("Pv de %s : %d / %d\n", m.Nom, m.PVActuel, m.PVMax)
+			return
+		case 2:
+
+		default:
+			fmt.Println("Choix invalide, veuillez entrez un choix valide")
+		}
 	}
 }
