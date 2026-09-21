@@ -105,3 +105,12 @@ func (c *Character) InventoryMenu() {
 		c.useItem(items[choice-1])
 	}
 }
+
+func (c *Character) UpgradeInventorySlot() bool {
+	if c.AugmentationInventaireUtilisee >= maxAugmentationsInventaire {
+		return false
+	}
+	c.AugmentationInventaireUtilisee++
+	c.CapaciteInventaire += bonusAugmentationInventaire
+	return true
+}

@@ -56,6 +56,7 @@ var Boutique = []Item{
 	{Nom: ItemPeauDeTroll, Prix: 7},
 	{Nom: ItemCuirDeSanglier, Prix: 3},
 	{Nom: ItemPlumeDeCorbeau, Prix: 1},
+	{Nom: ItemAugmentationInventaire, Prix: 30},
 }
 
 func (c *Character) PrixPour(i Item) int {

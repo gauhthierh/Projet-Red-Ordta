@@ -9,19 +9,20 @@ import (
 // Noms des objets : définis une seule fois pour éviter les fautes de frappe
 // dans les clés de l'inventaire.
 const (
-	ItemPotionDeVie       = "Potion de vie"
-	ItemPotionDePoison    = "Potion de poison"
-	ItemLivreBouleDeFeu   = "Livre de Sort : Boule de Feu"
-	ItemFourrureDeLoup    = "Fourrure de loup"
-	ItemPeauDeTroll       = "Peau de Troll"
-	ItemCuirDeSanglier    = "Cuir de sanglier"
-	ItemPlumeDeCorbeau    = "Plume de corbeau"
-	ItemChapeauAventurier = "Chapeau de l'aventurier"
-	ItemTuniqueAventurier = "Tunique de l'aventurier"
-	ItemBottesAventurier  = "Bottes de l'aventurier"
-	EmplacementTete       = "tête"
-	EmplacementTorse      = "torse"
-	EmplacementPied       = "pied"
+	ItemPotionDeVie            = "Potion de vie"
+	ItemPotionDePoison         = "Potion de poison"
+	ItemLivreBouleDeFeu        = "Livre de Sort : Boule de Feu"
+	ItemFourrureDeLoup         = "Fourrure de loup"
+	ItemPeauDeTroll            = "Peau de Troll"
+	ItemCuirDeSanglier         = "Cuir de sanglier"
+	ItemPlumeDeCorbeau         = "Plume de corbeau"
+	ItemChapeauAventurier      = "Chapeau de l'aventurier"
+	ItemTuniqueAventurier      = "Tunique de l'aventurier"
+	ItemBottesAventurier       = "Bottes de l'aventurier"
+	EmplacementTete            = "tête"
+	EmplacementTorse           = "torse"
+	EmplacementPied            = "pied"
+	ItemAugmentationInventaire = "Augmentation d'inventaire"
 )
 
 // Noms des sorts.
@@ -38,14 +39,22 @@ func (c *Character) useItem(item string) {
 	case ItemPotionDePoison:
 		c.poisonPot()
 	case ItemLivreBouleDeFeu:
-		// spellBook vérifie si le sort est déjà connu AVANT que le livre
-		// soit retiré : un livre inutile reste dans l'inventaire.
 		if !c.spellBook() {
 			fmt.Printf("Vous connaissez déjà le sort %s : le livre reste dans l'inventaire.\n", SortBouleDeFeu)
 			return
 		}
 		c.RemoveInventory(ItemLivreBouleDeFeu)
 		fmt.Printf("Vous apprenez le sort %s !\n", SortBouleDeFeu)
+	case ItemAugmentationInventaire:
+		if !c.UpgradeInventorySlot() {
+			fmt.Println("Vous avez déjà atteint la limite maximale d'améliorations d'inventaire")
+			return
+		}
+		c.RemoveInventory(ItemAugmentationInventaire)
+		fmt.Printf("Capacité d'inventaire : %d (+%d). Augmentations restantes : %d\n",
+			c.CapaciteInventaire,
+			bonusAugmentationInventaire,
+			maxAugmentationsInventaire-c.AugmentationInventaireUtilisee)
 	default:
 		equipement, ok := TrouverEquipement(item)
 		if ok {

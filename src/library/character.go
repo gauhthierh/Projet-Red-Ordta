@@ -19,15 +19,18 @@ type Character struct {
 	// une constante pour pouvoir l'augmenter plus tard (T18).
 	CapaciteInventaire int
 	// Pièces d'or du joueur (T13).
-	Argent              int
-	PotionGratuitePrise bool
-	Equipement          Equipment
+	Argent                         int
+	PotionGratuitePrise            bool
+	Equipement                     Equipment
+	AugmentationInventaireUtilisee int
 }
 
 // Valeurs de départ du personnage.
 const (
-	capaciteInventaireDepart = 10
-	argentDepart             = 100
+	capaciteInventaireDepart    = 10
+	argentDepart                = 100
+	maxAmeliorationsInventaire  = 3
+	bonusAugmentationInventaire = 10
 )
 
 func InitCharacter(nom string, classe string, niveau int, pvmax int, pvactuel int) Character {
