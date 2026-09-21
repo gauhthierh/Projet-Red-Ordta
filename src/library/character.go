@@ -14,6 +14,7 @@ type Character struct {
 	PVMaxTotal int
 	Inventaire map[string]int
 	Skill      []string
+	Initiative int
 
 	// Nombre maximal d'objets dans l'inventaire (T12). C'est un champ et non
 	// une constante pour pouvoir l'augmenter plus tard (T18).

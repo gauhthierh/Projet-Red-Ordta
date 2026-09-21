@@ -3,10 +3,11 @@ package library
 import "fmt"
 
 type Monster struct {
-	Nom      string
-	PVMax    int
-	PVActuel int
-	Attaque  int
+	Nom        string
+	PVMax      int
+	PVActuel   int
+	Attaque    int
+	Initiative int
 }
 
 func InitGoblin() Monster {
