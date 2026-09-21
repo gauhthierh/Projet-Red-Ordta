@@ -18,8 +18,8 @@ import (
 )
 
 const (
-	vitesseMarche    float32 = 4 // Unités parcourues par seconde.
-	vitesseSprint    float32 = 6
+	vitesseMarche    float32 = 6 // Unités parcourues par seconde.
+	vitesseSprint    float32 = 8
 	facteurDiagonale float32 = 0.7071
 	rayonPersonnage  float32 = 0.3
 )
@@ -55,11 +55,22 @@ func Lancer() {
 	scene.Add(noeudPersonnage)
 	noeudPersonnage.SetPosition(spawn[0], spawn[1], spawn[2])
 
-	// Caméra suiveuse et lumière générale. G3N ouvre ici une fenêtre 800 x 600.
-	vue := camera.New(800.0 / 600.0)
-	scene.Add(vue)
+	// Caméra
+	cameraSimulation := camera.New(1920.0 / 1080.0)
+
+	ConfigurerFenetreSimulation(
+		ordta,
+		cameraSimulation,
+	)
+
+	VerrouillerSourisSimulation()
+	angleHorizontal := float32(0)
+	angleVertical := float32(0)
+
+	ActiverRegardSouris(ordta, &angleHorizontal, &angleVertical)
+
+	// Lumière dans le jeu
 	scene.Add(light.NewAmbient(&math32.Color{R: 1, G: 1, B: 1}, 1))
-	haut := math32.NewVector3(0, 0, 1)
 
 	// Boucle principale : mise à jour du jeu, puis affichage de chaque image.
 	ordta.Gls().ClearColor(0.15, 0.25, 0.30, 1)
@@ -119,13 +130,8 @@ func Lancer() {
 		noeudPersonnage.SetPosition(positionFinaleX, positionFinaleY, positionActuelle.Z)
 		deplacementEffectue := positionFinaleX != positionActuelle.X || positionFinaleY != positionActuelle.Y
 
-		// Garder la caméra derrière et au-dessus du personnage.
-		positionCamera := noeudPersonnage.Position()
-		vue.SetPosition(positionCamera.X, positionCamera.Y-10, positionCamera.Z+7)
-		vue.LookAt(
-			math32.NewVector3(positionCamera.X, positionCamera.Y, positionCamera.Z+0.9),
-			haut,
-		)
+		// Caméra
+		PlacerCameraPersonnage(cameraSimulation, noeudPersonnage, angleHorizontal, angleVertical)
 
 		// Animations du personnage.
 		bouge := deplacementEffectue
@@ -139,6 +145,6 @@ func Lancer() {
 
 		// Effacer l'image précédente, puis dessiner la nouvelle scène.
 		ordta.Gls().Clear(gls.COLOR_BUFFER_BIT | gls.DEPTH_BUFFER_BIT)
-		rendu.Render(scene, vue)
+		rendu.Render(scene, cameraSimulation)
 	})
 }
