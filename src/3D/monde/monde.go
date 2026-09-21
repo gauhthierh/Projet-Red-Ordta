@@ -2,7 +2,6 @@
 package monde
 
 import (
-	"math"
 	"time"
 
 	"ordta/3D/personnages"
@@ -18,10 +17,9 @@ import (
 )
 
 const (
-	vitesseMarche    float32 = 6 // Unités parcourues par seconde.
-	vitesseSprint    float32 = 8
-	facteurDiagonale float32 = 0.7071
-	rayonPersonnage  float32 = 0.3
+	vitesseMarche   float32 = 6 // Unités parcourues par seconde.
+	vitesseSprint   float32 = 8
+	rayonPersonnage float32 = 0.3
 )
 
 // Lancer construit le monde, puis démarre sa boucle d'affichage.
@@ -82,34 +80,29 @@ func Lancer() {
 		distance := vitessePersonnage * float32(tempsImage.Seconds())
 
 		// Direction demandée par le joueur.
-		directionX, directionY := float32(0), float32(0)
+		commandeAvant, commandeDroite := float32(0), float32(0)
 
 		if ordta.KeyState().Pressed(window.KeyW) {
-			directionY += 1
+			commandeAvant += 1
 		}
 
 		if ordta.KeyState().Pressed(window.KeyS) {
-			directionY -= 1
+			commandeAvant -= 1
 		}
 
 		if ordta.KeyState().Pressed(window.KeyA) {
-			directionX -= 1
+			commandeDroite -= 1
 		}
 
 		if ordta.KeyState().Pressed(window.KeyD) {
-			directionX += 1
+			commandeDroite += 1
 		}
 		if ordta.KeyState().Pressed(window.KeyLeftShift) {
 			vitessePersonnage = vitesseSprint
 			distance = vitessePersonnage * float32(tempsImage.Seconds())
 		}
 
-		// Deux touches simultanées ne doivent pas accélérer le personnage.
-		if directionX != 0 && directionY != 0 {
-			const diagonale = float32(0.70710678) // 1 / sqrt(2)
-			directionX *= diagonale
-			directionY *= diagonale
-		}
+		directionX, directionY := CalculerDirectionPersonnage(angleHorizontal, commandeAvant, commandeDroite)
 
 		// Calcul de la nouvelle position dans le repère du monde.
 		nouveauX := positionActuelle.X + directionX*distance
@@ -135,12 +128,8 @@ func Lancer() {
 
 		// Animations du personnage.
 		bouge := deplacementEffectue
-
-		if bouge {
-			angle := float32(math.Atan2(float64(directionX), float64(-directionY)))
-			noeudPersonnage.SetRotationZ(angle)
-		}
-
+		angle := math32.Pi - angleHorizontal
+		noeudPersonnage.SetRotationZ(angle)
 		personnage3d.Animer(float32(tempsImage.Seconds()), bouge)
 
 		// Effacer l'image précédente, puis dessiner la nouvelle scène.
