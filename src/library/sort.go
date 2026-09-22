@@ -6,16 +6,6 @@ package library
 
 import "fmt"
 
-/* Ces constantes définissent les noms des sorts pouvant être appris par le personnage et leurs dégâts. */
-const (
-	SortCoupDePoing     = "Coup de poing"
-	SortBouleDeFeu      = "Boule de Feu"
-	degatsCoupDePoing   = 8
-	degatsBouleDeFeu    = 18
-	coutManaCoupDePoing = 15
-	coutManaBouleDeFeu  = 30
-)
-
 /*La fonction ChoixSort affiche les sorts connus par le personnage et lui permet
   d'en utiliser un contre le monstre.
   Elle renvoie true si un sort est utilisé et false si le joueur revient.*/

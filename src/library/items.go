@@ -8,25 +8,6 @@ import (
 
 /* Ce fichier définit les objets et les sorts puis applique leurs effets lorsqu'ils sont utilisés par le personnage. */
 
-/* Ces constantes définissent les noms des objets et des emplacements utilisés dans le jeu. */
-const (
-	ItemPotionDeVie            = "Potion de vie"
-	ItemPotionDePoison         = "Potion de poison"
-	ItemLivreBouleDeFeu        = "Livre de Sort : Boule de Feu"
-	ItemFourrureDeLoup         = "Fourrure de loup"
-	ItemPeauDeTroll            = "Peau de Troll"
-	ItemCuirDeSanglier         = "Cuir de sanglier"
-	ItemPlumeDeCorbeau         = "Plume de corbeau"
-	ItemChapeauAventurier      = "Chapeau de l'aventurier"
-	ItemTuniqueAventurier      = "Tunique de l'aventurier"
-	ItemBottesAventurier       = "Bottes de l'aventurier"
-	EmplacementTete            = "tête"
-	EmplacementTorse           = "torse"
-	EmplacementPied            = "pied"
-	ItemAugmentationInventaire = "Augmentation d'inventaire"
-	ItemPotionDeMana           = "Potion de Mana"
-)
-
 /* La méthode useItem applique l'effet correspondant à l'objet sélectionné dans l'inventaire. */
 func (c *Character) useItem(item string) {
 	switch item {
