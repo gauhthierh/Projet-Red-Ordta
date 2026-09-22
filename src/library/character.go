@@ -163,7 +163,10 @@ func (c *Character) ChoixInventaire() bool {
 			return false
 		}
 		fmt.Printf("Vous utilisez %s\n", objets[choix-1])
-		c.useItem(objets[choix-1])
-		return true
+		if c.useItem(objets[choix-1]) {
+			return true
+		} else {
+			fmt.Println("Choisissez un autre objet ou 0 pour revenir en arrière")
+		}
 	}
 }
