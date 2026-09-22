@@ -1,16 +1,32 @@
 # Materials for the static RED world map
 
-newmtl metal
-Ka 0.248 0.266 0.279
-Kd 0.550 0.590 0.620
+newmtl magic
+Ka 0.045 0.396 0.423
+Kd 0.100 0.880 0.940
 Ks 0.08 0.08 0.08
 Ns 8
 illum 2
-map_Kd textures/metal_detailed.png
+map_Kd textures/water_detailed.png
 
-newmtl black
-Ka 0.013 0.013 0.013
-Kd 0.030 0.030 0.030
+newmtl sand
+Ka 0.297 0.225 0.131
+Kd 0.660 0.500 0.290
+Ks 0.08 0.08 0.08
+Ns 8
+illum 2
+map_Kd textures/path_detailed.png
+
+newmtl cloth_red
+Ka 0.342 0.045 0.036
+Kd 0.760 0.100 0.080
+Ks 0.08 0.08 0.08
+Ns 8
+illum 2
+map_Kd textures/cloth_detailed.png
+
+newmtl flower
+Ka 0.396 0.090 0.248
+Kd 0.880 0.200 0.550
 Ks 0.08 0.08 0.08
 Ns 8
 illum 2
@@ -23,52 +39,6 @@ Ns 8
 illum 2
 map_Kd textures/path_detailed.png
 
-newmtl stone
-Ka 0.203 0.211 0.221
-Kd 0.450 0.470 0.490
-Ks 0.08 0.08 0.08
-Ns 8
-illum 2
-map_Kd textures/stone_detailed.png
-
-newmtl rock
-Ka 0.135 0.144 0.153
-Kd 0.300 0.320 0.340
-Ks 0.08 0.08 0.08
-Ns 8
-illum 2
-map_Kd textures/stone_detailed.png
-
-newmtl sand
-Ka 0.297 0.225 0.131
-Kd 0.660 0.500 0.290
-Ks 0.08 0.08 0.08
-Ns 8
-illum 2
-map_Kd textures/path_detailed.png
-
-newmtl window
-Ka 0.090 0.306 0.414
-Kd 0.200 0.680 0.920
-Ks 0.08 0.08 0.08
-Ns 8
-illum 2
-
-newmtl flower
-Ka 0.396 0.090 0.248
-Kd 0.880 0.200 0.550
-Ks 0.08 0.08 0.08
-Ns 8
-illum 2
-
-newmtl dark_grass
-Ka 0.045 0.113 0.045
-Kd 0.100 0.250 0.100
-Ks 0.08 0.08 0.08
-Ns 8
-illum 2
-map_Kd textures/grass_detailed.png
-
 newmtl wood
 Ka 0.140 0.077 0.036
 Kd 0.310 0.170 0.080
@@ -76,61 +46,6 @@ Ks 0.08 0.08 0.08
 Ns 8
 illum 2
 map_Kd textures/wood_detailed.png
-
-newmtl roof_blue
-Ka 0.045 0.113 0.194
-Kd 0.100 0.250 0.430
-Ks 0.08 0.08 0.08
-Ns 8
-illum 2
-map_Kd textures/roof_detailed.png
-
-newmtl wall
-Ka 0.288 0.266 0.216
-Kd 0.640 0.590 0.480
-Ks 0.08 0.08 0.08
-Ns 8
-illum 2
-map_Kd textures/stone_detailed.png
-
-newmtl water
-Ka 0.023 0.189 0.297
-Kd 0.050 0.420 0.660
-Ks 0.08 0.08 0.08
-Ns 8
-illum 2
-map_Kd textures/water_detailed.png
-
-newmtl magic
-Ka 0.045 0.396 0.423
-Kd 0.100 0.880 0.940
-Ks 0.08 0.08 0.08
-Ns 8
-illum 2
-map_Kd textures/water_detailed.png
-
-newmtl forge
-Ka 0.450 0.126 0.018
-Kd 1.000 0.280 0.040
-Ks 0.08 0.08 0.08
-Ns 8
-illum 2
-
-newmtl cloth_red
-Ka 0.342 0.045 0.036
-Kd 0.760 0.100 0.080
-Ks 0.08 0.08 0.08
-Ns 8
-illum 2
-map_Kd textures/cloth_detailed.png
-
-newmtl grass
-Ka 0.099 0.194 0.072
-Kd 0.220 0.430 0.160
-Ks 0.08 0.08 0.08
-Ns 8
-illum 2
-map_Kd textures/grass_detailed.png
 
 newmtl crop
 Ka 0.405 0.297 0.063
@@ -148,6 +63,13 @@ Ns 8
 illum 2
 map_Kd textures/marsh_detailed.png
 
+newmtl forge
+Ka 0.450 0.126 0.018
+Kd 1.000 0.280 0.040
+Ks 0.08 0.08 0.08
+Ns 8
+illum 2
+
 newmtl white
 Ka 0.396 0.396 0.369
 Kd 0.880 0.880 0.820
@@ -163,6 +85,53 @@ Ns 8
 illum 2
 map_Kd textures/cloth_detailed.png
 
+newmtl grass
+Ka 0.099 0.194 0.072
+Kd 0.220 0.430 0.160
+Ks 0.08 0.08 0.08
+Ns 8
+illum 2
+map_Kd textures/grass_detailed.png
+
+newmtl dark_grass
+Ka 0.045 0.113 0.045
+Kd 0.100 0.250 0.100
+Ks 0.08 0.08 0.08
+Ns 8
+illum 2
+map_Kd textures/grass_detailed.png
+
+newmtl light_stone
+Ka 0.306 0.306 0.288
+Kd 0.680 0.680 0.640
+Ks 0.08 0.08 0.08
+Ns 8
+illum 2
+map_Kd textures/stone_detailed.png
+
+newmtl wall
+Ka 0.288 0.266 0.216
+Kd 0.640 0.590 0.480
+Ks 0.08 0.08 0.08
+Ns 8
+illum 2
+map_Kd textures/stone_detailed.png
+
+newmtl leaf
+Ka 0.036 0.135 0.050
+Kd 0.080 0.300 0.110
+Ks 0.08 0.08 0.08
+Ns 8
+illum 2
+map_Kd textures/foliage_detailed.png
+
+newmtl black
+Ka 0.013 0.013 0.013
+Kd 0.030 0.030 0.030
+Ks 0.08 0.08 0.08
+Ns 8
+illum 2
+
 newmtl hay
 Ka 0.369 0.275 0.072
 Kd 0.820 0.610 0.160
@@ -171,17 +140,9 @@ Ns 8
 illum 2
 map_Kd textures/path_detailed.png
 
-newmtl snow
-Ka 0.396 0.419 0.432
-Kd 0.880 0.930 0.960
-Ks 0.08 0.08 0.08
-Ns 8
-illum 2
-map_Kd textures/stone_detailed.png
-
-newmtl light_stone
-Ka 0.306 0.306 0.288
-Kd 0.680 0.680 0.640
+newmtl stone
+Ka 0.203 0.211 0.221
+Kd 0.450 0.470 0.490
 Ks 0.08 0.08 0.08
 Ns 8
 illum 2
@@ -195,6 +156,14 @@ Ns 8
 illum 2
 map_Kd textures/roof_detailed.png
 
+newmtl water
+Ka 0.023 0.189 0.297
+Kd 0.050 0.420 0.660
+Ks 0.08 0.08 0.08
+Ns 8
+illum 2
+map_Kd textures/water_detailed.png
+
 newmtl field
 Ka 0.239 0.176 0.054
 Kd 0.530 0.390 0.120
@@ -203,14 +172,6 @@ Ns 8
 illum 2
 map_Kd textures/grass_detailed.png
 
-newmtl leaf
-Ka 0.036 0.135 0.050
-Kd 0.080 0.300 0.110
-Ks 0.08 0.08 0.08
-Ns 8
-illum 2
-map_Kd textures/foliage_detailed.png
-
 newmtl leaf_light
 Ka 0.081 0.216 0.081
 Kd 0.180 0.480 0.180
@@ -218,3 +179,42 @@ Ks 0.08 0.08 0.08
 Ns 8
 illum 2
 map_Kd textures/foliage_detailed.png
+
+newmtl metal
+Ka 0.248 0.266 0.279
+Kd 0.550 0.590 0.620
+Ks 0.08 0.08 0.08
+Ns 8
+illum 2
+map_Kd textures/metal_detailed.png
+
+newmtl window
+Ka 0.090 0.306 0.414
+Kd 0.200 0.680 0.920
+Ks 0.08 0.08 0.08
+Ns 8
+illum 2
+
+newmtl snow
+Ka 0.396 0.419 0.432
+Kd 0.880 0.930 0.960
+Ks 0.08 0.08 0.08
+Ns 8
+illum 2
+map_Kd textures/stone_detailed.png
+
+newmtl rock
+Ka 0.135 0.144 0.153
+Kd 0.300 0.320 0.340
+Ks 0.08 0.08 0.08
+Ns 8
+illum 2
+map_Kd textures/stone_detailed.png
+
+newmtl roof_blue
+Ka 0.045 0.113 0.194
+Kd 0.100 0.250 0.430
+Ks 0.08 0.08 0.08
+Ns 8
+illum 2
+map_Kd textures/roof_detailed.png

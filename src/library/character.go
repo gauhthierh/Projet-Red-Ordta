@@ -11,53 +11,56 @@ Ce fichier définit le personnage et gère ses statistiques, son inventaire, ses
 	La structure Character contient toutes les informations et ressources appartenant au personnage contrôlé par le joueur.
 */
 type Character struct {
-	Nom                string
-	Classe             string
-	Niveau             int
-	PVMaxBase          int
-	PVActuel           int
-	PVMaxTotal         int
-	Inventaire         map[string]int
-	Skill              []string
-	Initiative         int
-	ExperienceActuelle int
-	ExperienceMax      int
-
+	Nom                            string
+	Classe                         string
+	Niveau                         int
+	PVMaxBase                      int
+	PVActuel                       int
+	PVMaxTotal                     int
+	Inventaire                     map[string]int
+	Attaque                        int
+	AttaquesPhysiques              []string
+	Skill                          []string
+	Initiative                     int
+	ExperienceActuelle             int
+	ExperienceMax                  int
 	CapaciteInventaire             int
 	Argent                         int
 	PotionGratuitePrise            bool
 	Equipement                     Equipment
 	AugmentationInventaireUtilisee int
+	ManaActuel                     int
+	ManaMax                        int
+	GainPvMax                      int
+	GainManaMax                    int
+	GainAttaque                    int
 }
 
-/* Ces constantes définissent les valeurs de départ du personnage et les caractéristiques de son attaque basique. */
-const (
-	capaciteInventaireDepart    = 10
-	argentDepart                = 100
-	maxAugmentationsInventaire  = 3
-	bonusAugmentationInventaire = 10
-	attaqueBasique              = "Attaque Basique"
-	degatsAttaqueBasique        = 5
-)
-
 /* La fonction InitCharacter crée et initialise un personnage avec ses statistiques, ses objets, son sort et ses ressources de départ. */
-func InitCharacter(nom string, classe string, niveau int, pvmax int, pvactuel int) Character {
+func InitCharacter(nom string, lvl int, cl Classe) Character {
 	inventaire := map[string]int{
 		ItemPotionDeVie: 3,
 	}
 
 	personnage := Character{
 		Nom:                nom,
-		Classe:             classe,
-		Niveau:             niveau,
-		PVMaxBase:          pvmax,
-		PVActuel:           pvactuel,
+		Classe:             cl.Nom,
+		Niveau:             lvl,
+		PVMaxBase:          cl.PvMax,
+		PVActuel:           cl.PvMax / 2,
 		Inventaire:         inventaire,
+		Attaque:            cl.Attaque,
+		AttaquesPhysiques:  []string{attaqueBasique},
 		Skill:              []string{SortCoupDePoing},
 		CapaciteInventaire: capaciteInventaireDepart,
 		Argent:             argentDepart,
-		ExperienceActuelle: 0,
-		ExperienceMax:      100,
+		ExperienceActuelle: experienceinitiale,
+		ExperienceMax:      experiencemaximale,
+		ManaActuel:         cl.ManaMax,
+		ManaMax:            cl.ManaMax,
+		GainPvMax:          cl.GainPvMax,
+		GainManaMax:        cl.GainManaMax,
+		GainAttaque:        cl.GainAttaque,
 	}
 	personnage.MettreAJourPvMax()
 	return personnage
@@ -70,6 +73,9 @@ func (c Character) displayInfo() {
 	fmt.Printf("Classe : %s\n", c.Classe)
 	fmt.Printf("Niveau : %d\n", c.Niveau)
 	fmt.Printf("Pv : %d / %d\n", c.PVActuel, c.PVMaxTotal)
+	fmt.Printf("Mana : %d / %d\n", c.ManaActuel, c.ManaMax)
+	fmt.Printf("Bonus d'attaque physique : +%d dégâts\n", c.Attaque)
+	fmt.Printf("Attaques physiques : %s\n", strings.Join(c.AttaquesPhysiques, ", "))
 	fmt.Printf("Sorts : %s\n", strings.Join(c.Skill, ", "))
 	fmt.Printf("Argent : %d pièces d'or\n", c.Argent)
 	fmt.Printf("Expérience : %d / %d\n", c.ExperienceActuelle, c.ExperienceMax)
@@ -109,9 +115,9 @@ func (c *Character) MettreAJourPvMax() {
 func (c *Character) CharacterTurn(m *Monster) {
 	for {
 		fmt.Println("=== COMBAT ===")
-		fmt.Println("1. Attaquer")
-		fmt.Println("2. Inventaire")
-		fmt.Println("3. Sorts")
+		fmt.Println("1. Attaque physique")
+		fmt.Println("2. Sort")
+		fmt.Println("3. Inventaire")
 		choix, ok := ReadChoice("Entrez votre choix :")
 		if !ok {
 			fmt.Println("Choix invalide, veuillez entrer une saisie valide !")
@@ -119,19 +125,15 @@ func (c *Character) CharacterTurn(m *Monster) {
 		}
 		switch choix {
 		case 1:
-			m.PVActuel -= degatsAttaqueBasique
-			if m.PVActuel < 0 {
-				m.PVActuel = 0
+			if c.ChoixAttaquePhysique(m) {
+				return
 			}
-			fmt.Printf("%s lance %s sur %s et lui inflige %d dégâts !\n", c.Nom, attaqueBasique, m.Nom, degatsAttaqueBasique)
-			fmt.Printf("Pv de %s : %d / %d\n", m.Nom, m.PVActuel, m.PVMax)
-			return
 		case 2:
-			if c.ChoixInventaire() {
+			if c.ChoixSort(m) {
 				return
 			}
 		case 3:
-			if c.ChoixSort(m) {
+			if c.ChoixInventaire() {
 				return
 			}
 		default:

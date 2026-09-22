@@ -22,3 +22,6 @@ desktop.ini
 # Éditeurs
 .idea/
 .vscode/
+
+# Progression locale du jeu 3D
+src/sauvegardes/

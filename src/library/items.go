@@ -8,30 +8,6 @@ import (
 
 /* Ce fichier définit les objets et les sorts puis applique leurs effets lorsqu'ils sont utilisés par le personnage. */
 
-/* Ces constantes définissent les noms des objets et des emplacements utilisés dans le jeu. */
-const (
-	ItemPotionDeVie            = "Potion de vie"
-	ItemPotionDePoison         = "Potion de poison"
-	ItemLivreBouleDeFeu        = "Livre de Sort : Boule de Feu"
-	ItemFourrureDeLoup         = "Fourrure de loup"
-	ItemPeauDeTroll            = "Peau de Troll"
-	ItemCuirDeSanglier         = "Cuir de sanglier"
-	ItemPlumeDeCorbeau         = "Plume de corbeau"
-	ItemChapeauAventurier      = "Chapeau de l'aventurier"
-	ItemTuniqueAventurier      = "Tunique de l'aventurier"
-	ItemBottesAventurier       = "Bottes de l'aventurier"
-	EmplacementTete            = "tête"
-	EmplacementTorse           = "torse"
-	EmplacementPied            = "pied"
-	ItemAugmentationInventaire = "Augmentation d'inventaire"
-)
-
-/* Ces constantes définissent les noms des sorts pouvant être appris par le personnage. */
-const (
-	SortCoupDePoing = "Coup de poing"
-	SortBouleDeFeu  = "Boule de Feu"
-)
-
 /* La méthode useItem applique l'effet correspondant à l'objet sélectionné dans l'inventaire. */
 func (c *Character) useItem(item string) {
 	switch item {
@@ -39,6 +15,8 @@ func (c *Character) useItem(item string) {
 		c.takePot()
 	case ItemPotionDePoison:
 		c.poisonPot()
+	case ItemPotionDeMana:
+		c.takePotMana()
 	case ItemLivreBouleDeFeu:
 		if !c.spellBook() {
 			fmt.Printf("Vous connaissez déjà le sort %s : le livre reste dans l'inventaire.\n", SortBouleDeFeu)
@@ -90,7 +68,25 @@ func (c *Character) takePot() {
 		fmt.Printf("Vous buvez une %s (+%d PV)\n", ItemPotionDeVie, c.PVActuel-avant)
 		fmt.Printf("PV : %d / %d\n", c.PVActuel, c.PVMaxTotal)
 	} else {
-		fmt.Println("Aucune potion dans l'inventaire")
+		fmt.Println("Aucune potion de vie dans l'inventaire")
+	}
+}
+
+func (c *Character) takePotMana() {
+	if c.Inventaire[ItemPotionDeMana] > 0 && c.ManaActuel >= c.ManaMax {
+		fmt.Println("Vous avez déjà votre mana au maximum")
+		return
+	}
+	if c.RemoveInventory(ItemPotionDeMana) {
+		avant := c.ManaActuel
+		c.ManaActuel += 40
+		if c.ManaActuel >= c.ManaMax {
+			c.ManaActuel = c.ManaMax
+		}
+		fmt.Printf("Vous buvez une %s (+%d mana)\n", ItemPotionDeMana, c.ManaActuel-avant)
+		fmt.Printf("Mana : %d / %d\n", c.ManaActuel, c.ManaMax)
+	} else {
+		fmt.Println("Aucune potion de mana dans l'inventaire")
 	}
 }
 

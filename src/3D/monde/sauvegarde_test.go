@@ -1,0 +1,45 @@
+package monde
+
+import (
+	"github.com/g3n/engine/math32"
+	"ordta/library"
+	"os"
+	"path/filepath"
+	"testing"
+)
+
+func TestSauvegarde3DRetrouveProgression(t *testing.T) {
+	chemin := filepath.Join(t.TempDir(), "partie.json")
+	joueur := library.NouveauPersonnage3D("Test", "Humain")
+	joueur.Argent = 57
+	joueur.Equipement.Tete = library.Armurerie[0]
+	partie := Partie3D{Personnage: joueur, Position: math32.Vector3{X: 20, Y: 30, Z: .265}, AngleHorizontal: .4}
+	if err := SauvegarderPartie3D(chemin, partie); err != nil {
+		t.Fatal(err)
+	}
+	partie.Personnage.Argent = 42
+	if err := SauvegarderPartie3D(chemin, partie); err != nil {
+		t.Fatal("remplacement :", err)
+	}
+	relue, err := ChargerPartie3D(chemin)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if relue.Personnage.Argent != 42 || relue.Personnage.Equipement.Tete.Nom != joueur.Equipement.Tete.Nom || relue.Position != partie.Position || relue.Personnage.Inventaire[library.ItemPotionDeVie] != 3 {
+		t.Fatal("progression non conservée")
+	}
+}
+
+func TestSauvegarde3DAbsenteEtCorrompue(t *testing.T) {
+	chemin := filepath.Join(t.TempDir(), "partie.json")
+	partie, err := ChargerPartie3D(chemin)
+	if err != nil || partie != nil {
+		t.Fatal("une nouvelle partie doit rester possible")
+	}
+	if err := os.WriteFile(chemin, []byte("invalide"), 0600); err != nil {
+		t.Fatal(err)
+	}
+	if _, err := ChargerPartie3D(chemin); err == nil {
+		t.Fatal("corruption non signalée")
+	}
+}

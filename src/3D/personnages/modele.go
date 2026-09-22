@@ -13,9 +13,12 @@ type Personnage struct {
 	brasDroit   *core.Node
 
 	phasemarche float32
+	chapeau     *core.Node
+	tunique     *core.Node
+	bottes      []*core.Node
 }
 
-func Nouveau() *Personnage {
+func NouveauAncienModele() *Personnage {
 	modele := lireModele()
 	p := &Personnage{noeud: core.NewNode()}
 

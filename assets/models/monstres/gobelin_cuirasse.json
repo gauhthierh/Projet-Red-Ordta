@@ -1,0 +1,819 @@
+{
+  "nom": "Gobelin cuirassé",
+  "parties": [
+    {
+      "nom": "corps",
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "pieces": [
+        {
+          "forme": "ellipsoide",
+          "position": [
+            0,
+            0,
+            1.05
+          ],
+          "taille": [
+            0.68,
+            0.43,
+            0.7
+          ],
+          "couleur": [
+            0.42,
+            0.64,
+            0.26
+          ],
+          "texture": "peau"
+        },
+        {
+          "forme": "boite",
+          "position": [
+            0,
+            0,
+            0.74
+          ],
+          "taille": [
+            0.67,
+            0.46,
+            0.29
+          ],
+          "couleur": [
+            0.48,
+            0.28,
+            0.14
+          ],
+          "texture": "tissu"
+        },
+        {
+          "forme": "boite",
+          "position": [
+            0,
+            -0.245,
+            0.85
+          ],
+          "taille": [
+            0.7,
+            0.08,
+            0.12
+          ],
+          "couleur": [
+            0.48,
+            0.28,
+            0.14
+          ],
+          "texture": "bois"
+        },
+        {
+          "forme": "boite",
+          "position": [
+            0,
+            -0.3,
+            0.85
+          ],
+          "taille": [
+            0.13,
+            0.045,
+            0.14
+          ],
+          "couleur": [
+            0.9,
+            0.65,
+            0.16
+          ],
+          "texture": "metal"
+        },
+        {
+          "forme": "boite",
+          "position": [
+            0.19,
+            -0.23,
+            1.16
+          ],
+          "taille": [
+            0.12,
+            0.07,
+            0.54
+          ],
+          "couleur": [
+            0.48,
+            0.28,
+            0.14
+          ],
+          "texture": "tissu"
+        },
+        {
+          "forme": "boite",
+          "position": [
+            0,
+            -0.16,
+            1.16
+          ],
+          "taille": [
+            0.64,
+            0.18,
+            0.45
+          ],
+          "couleur": [
+            0.65,
+            0.72,
+            0.8
+          ],
+          "texture": "metal"
+        }
+      ]
+    },
+    {
+      "nom": "tete",
+      "pivot": [
+        0,
+        0,
+        1.5
+      ],
+      "pieces": [
+        {
+          "forme": "ellipsoide",
+          "position": [
+            0,
+            0,
+            0.16
+          ],
+          "taille": [
+            0.67,
+            0.47,
+            0.53
+          ],
+          "couleur": [
+            0.42,
+            0.64,
+            0.26
+          ],
+          "texture": "peau"
+        },
+        {
+          "forme": "ellipsoide",
+          "position": [
+            0,
+            -0.24,
+            0.04
+          ],
+          "taille": [
+            0.37,
+            0.19,
+            0.24
+          ],
+          "couleur": [
+            0.42,
+            0.64,
+            0.26
+          ],
+          "texture": "peau"
+        },
+        {
+          "forme": "ellipsoide",
+          "position": [
+            -0.39,
+            0,
+            0.2
+          ],
+          "taille": [
+            0.34,
+            0.12,
+            0.19
+          ],
+          "couleur": [
+            0.42,
+            0.64,
+            0.26
+          ],
+          "texture": "peau"
+        },
+        {
+          "forme": "ellipsoide",
+          "position": [
+            0.39,
+            0,
+            0.2
+          ],
+          "taille": [
+            0.34,
+            0.12,
+            0.19
+          ],
+          "couleur": [
+            0.42,
+            0.64,
+            0.26
+          ],
+          "texture": "peau"
+        },
+        {
+          "forme": "boite",
+          "position": [
+            -0.15,
+            -0.219,
+            0.2
+          ],
+          "taille": [
+            0.15,
+            0.06,
+            0.1
+          ],
+          "couleur": [
+            0.9,
+            0.65,
+            0.13
+          ]
+        },
+        {
+          "forme": "boite",
+          "position": [
+            0.15,
+            -0.219,
+            0.2
+          ],
+          "taille": [
+            0.15,
+            0.06,
+            0.1
+          ],
+          "couleur": [
+            0.9,
+            0.65,
+            0.13
+          ]
+        },
+        {
+          "forme": "boite",
+          "position": [
+            -0.15,
+            -0.255,
+            0.2
+          ],
+          "taille": [
+            0.035,
+            0.025,
+            0.085
+          ],
+          "couleur": [
+            0.03,
+            0.025,
+            0.02
+          ]
+        },
+        {
+          "forme": "boite",
+          "position": [
+            0.15,
+            -0.255,
+            0.2
+          ],
+          "taille": [
+            0.035,
+            0.025,
+            0.085
+          ],
+          "couleur": [
+            0.03,
+            0.025,
+            0.02
+          ]
+        },
+        {
+          "forme": "boite",
+          "position": [
+            0,
+            -0.35,
+            -0.02
+          ],
+          "taille": [
+            0.26,
+            0.035,
+            0.04
+          ],
+          "couleur": [
+            0.1,
+            0.06,
+            0.04
+          ]
+        },
+        {
+          "forme": "boite",
+          "position": [
+            -0.1,
+            -0.35,
+            0.015
+          ],
+          "taille": [
+            0.045,
+            0.06,
+            0.13
+          ],
+          "couleur": [
+            0.96,
+            0.9,
+            0.7
+          ]
+        },
+        {
+          "forme": "boite",
+          "position": [
+            0.1,
+            -0.35,
+            0.015
+          ],
+          "taille": [
+            0.045,
+            0.06,
+            0.13
+          ],
+          "couleur": [
+            0.96,
+            0.9,
+            0.7
+          ]
+        },
+        {
+          "forme": "ellipsoide",
+          "position": [
+            0,
+            -0.25,
+            0.13
+          ],
+          "taille": [
+            0.14,
+            0.21,
+            0.17
+          ],
+          "couleur": [
+            0.42,
+            0.64,
+            0.26
+          ],
+          "texture": "peau"
+        },
+        {
+          "forme": "ellipsoide",
+          "position": [
+            0,
+            0.015,
+            0.33
+          ],
+          "taille": [
+            0.72,
+            0.5,
+            0.27
+          ],
+          "couleur": [
+            0.65,
+            0.72,
+            0.8
+          ],
+          "texture": "metal"
+        },
+        {
+          "forme": "boite",
+          "position": [
+            0,
+            -0.265,
+            0.25
+          ],
+          "taille": [
+            0.08,
+            0.06,
+            0.28
+          ],
+          "couleur": [
+            0.65,
+            0.72,
+            0.8
+          ],
+          "texture": "metal"
+        }
+      ]
+    },
+    {
+      "nom": "bras_gauche",
+      "pivot": [
+        -0.4,
+        0,
+        1.35
+      ],
+      "pieces": [
+        {
+          "forme": "ellipsoide",
+          "position": [
+            0,
+            0,
+            -0.19
+          ],
+          "taille": [
+            0.23,
+            0.27,
+            0.48
+          ],
+          "couleur": [
+            0.42,
+            0.64,
+            0.26
+          ],
+          "texture": "peau"
+        },
+        {
+          "forme": "boite",
+          "position": [
+            0,
+            0,
+            -0.4
+          ],
+          "taille": [
+            0.24,
+            0.26,
+            0.13
+          ],
+          "couleur": [
+            0.48,
+            0.28,
+            0.14
+          ],
+          "texture": "tissu"
+        },
+        {
+          "forme": "ellipsoide",
+          "position": [
+            0,
+            -0.02,
+            -0.54
+          ],
+          "taille": [
+            0.25,
+            0.25,
+            0.22
+          ],
+          "couleur": [
+            0.42,
+            0.64,
+            0.26
+          ],
+          "texture": "peau"
+        },
+        {
+          "forme": "ellipsoide",
+          "position": [
+            0,
+            0,
+            0.02
+          ],
+          "taille": [
+            0.43,
+            0.43,
+            0.24
+          ],
+          "couleur": [
+            0.65,
+            0.72,
+            0.8
+          ],
+          "texture": "metal"
+        }
+      ]
+    },
+    {
+      "nom": "bras_droit",
+      "pivot": [
+        0.4,
+        0,
+        1.35
+      ],
+      "pieces": [
+        {
+          "forme": "ellipsoide",
+          "position": [
+            0,
+            0,
+            -0.19
+          ],
+          "taille": [
+            0.23,
+            0.27,
+            0.48
+          ],
+          "couleur": [
+            0.42,
+            0.64,
+            0.26
+          ],
+          "texture": "peau"
+        },
+        {
+          "forme": "boite",
+          "position": [
+            0,
+            0,
+            -0.4
+          ],
+          "taille": [
+            0.24,
+            0.26,
+            0.13
+          ],
+          "couleur": [
+            0.48,
+            0.28,
+            0.14
+          ],
+          "texture": "tissu"
+        },
+        {
+          "forme": "ellipsoide",
+          "position": [
+            0,
+            -0.02,
+            -0.54
+          ],
+          "taille": [
+            0.25,
+            0.25,
+            0.22
+          ],
+          "couleur": [
+            0.42,
+            0.64,
+            0.26
+          ],
+          "texture": "peau"
+        },
+        {
+          "forme": "ellipsoide",
+          "position": [
+            0,
+            0,
+            0.02
+          ],
+          "taille": [
+            0.43,
+            0.43,
+            0.24
+          ],
+          "couleur": [
+            0.65,
+            0.72,
+            0.8
+          ],
+          "texture": "metal"
+        }
+      ]
+    },
+    {
+      "nom": "jambe_gauche",
+      "pivot": [
+        -0.2,
+        0,
+        0.7
+      ],
+      "pieces": [
+        {
+          "forme": "ellipsoide",
+          "position": [
+            0,
+            0,
+            -0.23
+          ],
+          "taille": [
+            0.23,
+            0.26,
+            0.48
+          ],
+          "couleur": [
+            0.42,
+            0.64,
+            0.26
+          ],
+          "texture": "peau"
+        },
+        {
+          "forme": "boite",
+          "position": [
+            0,
+            -0.09,
+            -0.56
+          ],
+          "taille": [
+            0.29,
+            0.43,
+            0.28
+          ],
+          "couleur": [
+            0.48,
+            0.28,
+            0.14
+          ],
+          "texture": "tissu"
+        },
+        {
+          "forme": "boite",
+          "position": [
+            0,
+            -0.31,
+            -0.5
+          ],
+          "taille": [
+            0.22,
+            0.025,
+            0.08
+          ],
+          "couleur": [
+            0.72,
+            0.52,
+            0.22
+          ],
+          "texture": "metal"
+        }
+      ]
+    },
+    {
+      "nom": "jambe_droite",
+      "pivot": [
+        0.2,
+        0,
+        0.7
+      ],
+      "pieces": [
+        {
+          "forme": "ellipsoide",
+          "position": [
+            0,
+            0,
+            -0.23
+          ],
+          "taille": [
+            0.23,
+            0.26,
+            0.48
+          ],
+          "couleur": [
+            0.42,
+            0.64,
+            0.26
+          ],
+          "texture": "peau"
+        },
+        {
+          "forme": "boite",
+          "position": [
+            0,
+            -0.09,
+            -0.56
+          ],
+          "taille": [
+            0.29,
+            0.43,
+            0.28
+          ],
+          "couleur": [
+            0.48,
+            0.28,
+            0.14
+          ],
+          "texture": "tissu"
+        },
+        {
+          "forme": "boite",
+          "position": [
+            0,
+            -0.31,
+            -0.5
+          ],
+          "taille": [
+            0.22,
+            0.025,
+            0.08
+          ],
+          "couleur": [
+            0.72,
+            0.52,
+            0.22
+          ],
+          "texture": "metal"
+        }
+      ]
+    },
+    {
+      "nom": "bouclier",
+      "pivot": [
+        -0.4,
+        0,
+        1.35
+      ],
+      "pieces": [
+        {
+          "forme": "ellipsoide",
+          "position": [
+            -0.1,
+            -0.2,
+            -0.3
+          ],
+          "taille": [
+            0.65,
+            0.15,
+            0.82
+          ],
+          "couleur": [
+            0.65,
+            0.72,
+            0.8
+          ],
+          "texture": "metal"
+        },
+        {
+          "forme": "ellipsoide",
+          "position": [
+            -0.1,
+            -0.3,
+            -0.3
+          ],
+          "taille": [
+            0.16,
+            0.1,
+            0.16
+          ],
+          "couleur": [
+            0.48,
+            0.28,
+            0.14
+          ],
+          "texture": "bois"
+        }
+      ]
+    },
+    {
+      "nom": "arme",
+      "pivot": [
+        0.4,
+        0,
+        1.35
+      ],
+      "pieces": [
+        {
+          "forme": "boite",
+          "position": [
+            0,
+            -0.12,
+            -0.47
+          ],
+          "taille": [
+            0.08,
+            0.09,
+            0.44
+          ],
+          "couleur": [
+            0.48,
+            0.28,
+            0.14
+          ],
+          "texture": "bois"
+        },
+        {
+          "forme": "boite",
+          "position": [
+            0,
+            -0.12,
+            -0.2
+          ],
+          "taille": [
+            0.3,
+            0.1,
+            0.07
+          ],
+          "couleur": [
+            0.65,
+            0.72,
+            0.8
+          ],
+          "texture": "metal"
+        },
+        {
+          "forme": "boite",
+          "position": [
+            0,
+            -0.12,
+            0.1
+          ],
+          "taille": [
+            0.13,
+            0.055,
+            0.57
+          ],
+          "couleur": [
+            0.65,
+            0.72,
+            0.8
+          ],
+          "texture": "metal"
+        }
+      ]
+    }
+  ]
+}

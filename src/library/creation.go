@@ -7,9 +7,8 @@ import (
 
 /*
 Ce fichier gère la création du personnage, la validation de son nom et le choix de sa classe.
-
-	La fonction CharacterCreation demande les informations du personnage et l'initialise avec son niveau et ses points de vie de départ.
 */
+
 func CharacterCreation() Character {
 	var nom string
 	for {
@@ -26,8 +25,8 @@ func CharacterCreation() Character {
 		fmt.Println("Nom invalide : seules les lettres sont acceptées (sans espace, tiret, chiffre ni symbole).")
 	}
 
-	classe, pvMax := ChooseClass()
-	return InitCharacter(nom, classe, 1, pvMax, pvMax/2)
+	structureClasse := ChooseClass()
+	return InitCharacter(nom, 1, structureClasse)
 }
 
 /* La fonction FormatName vérifie que le nom contient uniquement des lettres et le reformate avec une majuscule suivie de minuscules. */
@@ -49,19 +48,29 @@ func FormatName(saisie string) (string, bool) {
 }
 
 /* La fonction ChooseClass demande au joueur de choisir une classe et renvoie son nom ainsi que ses points de vie maximum. */
-func ChooseClass() (string, int) {
+func ChooseClass() Classe {
 	for {
 		choix, _ := ReadChoice("Entrez la classe du personnage (1 pour Humain, 2 pour Elfe, 3 pour Nain) : ")
 
 		switch choix {
 		case 1:
-			return "Humain", 100
+			return Classe{Nom: "Humain", PvMax: 100, ManaMax: 100, Attaque: 5, GainPvMax: 10, GainManaMax: 10, GainAttaque: 1}
 		case 2:
-			return "Elfe", 80
+			return Classe{Nom: "Elfe", PvMax: 80, ManaMax: 120, Attaque: 0, GainPvMax: 6, GainManaMax: 15, GainAttaque: 0}
 		case 3:
-			return "Nain", 120
+			return Classe{Nom: "Nain", PvMax: 120, ManaMax: 80, Attaque: 10, GainPvMax: 15, GainManaMax: 5, GainAttaque: 2}
 		default:
 			fmt.Println("Classe invalide. Veuillez entrer 1, 2 ou 3.")
 		}
 	}
+}
+
+type Classe struct {
+	Nom         string
+	PvMax       int
+	ManaMax     int
+	Attaque     int
+	GainPvMax   int
+	GainManaMax int
+	GainAttaque int
 }

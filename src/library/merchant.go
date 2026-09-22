@@ -68,6 +68,7 @@ var Boutique = []Item{
 	{Nom: ItemCuirDeSanglier, Prix: 3},
 	{Nom: ItemPlumeDeCorbeau, Prix: 1},
 	{Nom: ItemAugmentationInventaire, Prix: 30},
+	{Nom: ItemPotionDeMana, Prix: 5},
 }
 
 /* La fonction PrixPour détermine le prix d'un article pour le personnage*/

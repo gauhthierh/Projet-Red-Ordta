@@ -1,0 +1,432 @@
+{
+  "nom": "Loup des bois",
+  "parties": [
+    {
+      "nom": "corps",
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "pieces": [
+        {
+          "forme": "ellipsoide",
+          "position": [
+            0,
+            0.2,
+            0.85
+          ],
+          "taille": [
+            0.68,
+            1.35,
+            0.7
+          ],
+          "couleur": [
+            0.48,
+            0.5,
+            0.53
+          ],
+          "texture": "peau"
+        },
+        {
+          "forme": "ellipsoide",
+          "position": [
+            0,
+            -0.28,
+            1
+          ],
+          "taille": [
+            0.77,
+            0.66,
+            0.81
+          ],
+          "couleur": [
+            0.62,
+            0.63,
+            0.62
+          ],
+          "texture": "peau"
+        }
+      ]
+    },
+    {
+      "nom": "tete",
+      "pivot": [
+        0,
+        -0.62,
+        1.12
+      ],
+      "pieces": [
+        {
+          "forme": "ellipsoide",
+          "position": [
+            0,
+            0,
+            0.06
+          ],
+          "taille": [
+            0.5,
+            0.54,
+            0.52
+          ],
+          "couleur": [
+            0.58,
+            0.6,
+            0.62
+          ],
+          "texture": "peau"
+        },
+        {
+          "forme": "ellipsoide",
+          "position": [
+            0,
+            -0.34,
+            -0.08
+          ],
+          "taille": [
+            0.29,
+            0.48,
+            0.23
+          ],
+          "couleur": [
+            0.74,
+            0.74,
+            0.69
+          ],
+          "texture": "peau"
+        },
+        {
+          "forme": "boite",
+          "position": [
+            0,
+            -0.58,
+            -0.045
+          ],
+          "taille": [
+            0.18,
+            0.13,
+            0.13
+          ],
+          "couleur": [
+            0.08,
+            0.08,
+            0.09
+          ]
+        },
+        {
+          "forme": "ellipsoide",
+          "position": [
+            -0.17,
+            0.02,
+            0.34
+          ],
+          "taille": [
+            0.16,
+            0.22,
+            0.42
+          ],
+          "couleur": [
+            0.36,
+            0.37,
+            0.4
+          ],
+          "texture": "peau"
+        },
+        {
+          "forme": "ellipsoide",
+          "position": [
+            0.17,
+            0.02,
+            0.34
+          ],
+          "taille": [
+            0.16,
+            0.22,
+            0.42
+          ],
+          "couleur": [
+            0.36,
+            0.37,
+            0.4
+          ],
+          "texture": "peau"
+        },
+        {
+          "forme": "boite",
+          "position": [
+            -0.21,
+            -0.2,
+            0.13
+          ],
+          "taille": [
+            0.075,
+            0.09,
+            0.07
+          ],
+          "couleur": [
+            0.95,
+            0.68,
+            0.12
+          ]
+        },
+        {
+          "forme": "boite",
+          "position": [
+            0.21,
+            -0.2,
+            0.13
+          ],
+          "taille": [
+            0.075,
+            0.09,
+            0.07
+          ],
+          "couleur": [
+            0.95,
+            0.68,
+            0.12
+          ]
+        },
+        {
+          "forme": "boite",
+          "position": [
+            0,
+            -0.36,
+            -0.17
+          ],
+          "taille": [
+            0.24,
+            0.33,
+            0.025
+          ],
+          "couleur": [
+            0.08,
+            0.06,
+            0.06
+          ]
+        }
+      ]
+    },
+    {
+      "nom": "queue",
+      "pivot": [
+        0,
+        0.76,
+        0.97
+      ],
+      "pieces": [
+        {
+          "forme": "ellipsoide",
+          "position": [
+            0,
+            0.32,
+            -0.08
+          ],
+          "taille": [
+            0.29,
+            0.8,
+            0.32
+          ],
+          "couleur": [
+            0.4,
+            0.42,
+            0.45
+          ],
+          "texture": "peau"
+        }
+      ]
+    },
+    {
+      "nom": "patte_avant_gauche",
+      "pivot": [
+        -0.25,
+        -0.35,
+        0.8
+      ],
+      "pieces": [
+        {
+          "forme": "ellipsoide",
+          "position": [
+            0,
+            0,
+            -0.28
+          ],
+          "taille": [
+            0.19,
+            0.24,
+            0.64
+          ],
+          "couleur": [
+            0.47,
+            0.48,
+            0.51
+          ],
+          "texture": "peau"
+        },
+        {
+          "forme": "ellipsoide",
+          "position": [
+            0,
+            -0.08,
+            -0.7
+          ],
+          "taille": [
+            0.22,
+            0.34,
+            0.2
+          ],
+          "couleur": [
+            0.65,
+            0.65,
+            0.63
+          ],
+          "texture": "peau"
+        }
+      ]
+    },
+    {
+      "nom": "patte_avant_droite",
+      "pivot": [
+        0.25,
+        -0.35,
+        0.8
+      ],
+      "pieces": [
+        {
+          "forme": "ellipsoide",
+          "position": [
+            0,
+            0,
+            -0.28
+          ],
+          "taille": [
+            0.19,
+            0.24,
+            0.64
+          ],
+          "couleur": [
+            0.47,
+            0.48,
+            0.51
+          ],
+          "texture": "peau"
+        },
+        {
+          "forme": "ellipsoide",
+          "position": [
+            0,
+            -0.08,
+            -0.7
+          ],
+          "taille": [
+            0.22,
+            0.34,
+            0.2
+          ],
+          "couleur": [
+            0.65,
+            0.65,
+            0.63
+          ],
+          "texture": "peau"
+        }
+      ]
+    },
+    {
+      "nom": "patte_arriere_gauche",
+      "pivot": [
+        -0.25,
+        0.6,
+        0.8
+      ],
+      "pieces": [
+        {
+          "forme": "ellipsoide",
+          "position": [
+            0,
+            0,
+            -0.28
+          ],
+          "taille": [
+            0.19,
+            0.24,
+            0.64
+          ],
+          "couleur": [
+            0.47,
+            0.48,
+            0.51
+          ],
+          "texture": "peau"
+        },
+        {
+          "forme": "ellipsoide",
+          "position": [
+            0,
+            -0.08,
+            -0.7
+          ],
+          "taille": [
+            0.22,
+            0.34,
+            0.2
+          ],
+          "couleur": [
+            0.65,
+            0.65,
+            0.63
+          ],
+          "texture": "peau"
+        }
+      ]
+    },
+    {
+      "nom": "patte_arriere_droite",
+      "pivot": [
+        0.25,
+        0.6,
+        0.8
+      ],
+      "pieces": [
+        {
+          "forme": "ellipsoide",
+          "position": [
+            0,
+            0,
+            -0.28
+          ],
+          "taille": [
+            0.19,
+            0.24,
+            0.64
+          ],
+          "couleur": [
+            0.47,
+            0.48,
+            0.51
+          ],
+          "texture": "peau"
+        },
+        {
+          "forme": "ellipsoide",
+          "position": [
+            0,
+            -0.08,
+            -0.7
+          ],
+          "taille": [
+            0.22,
+            0.34,
+            0.2
+          ],
+          "couleur": [
+            0.65,
+            0.65,
+            0.63
+          ],
+          "texture": "peau"
+        }
+      ]
+    }
+  ]
+}

@@ -2558,352 +2558,816 @@
       "height": 4.2
     },
     {
-      "id": "arena_post_00",
-      "category": "fence",
-      "shape": "circle",
-      "x": 217,
-      "y": -165,
-      "radius": 0.75
+      "id": "arena_stand_00",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 208.47938661784008,
+      "y": -163.74031531136163,
+      "width": 2.820384939237103,
+      "height": 9.3,
+      "rotation_degrees": 91.875
     },
     {
-      "id": "arena_post_01",
-      "category": "fence",
-      "shape": "circle",
-      "x": 216.28596439157377,
-      "y": -156.83853564965426,
-      "radius": 0.75
+      "id": "arena_stand_01",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 208.31461197687958,
+      "y": -161.22634009731192,
+      "width": 2.820384939237103,
+      "height": 9.3,
+      "rotation_degrees": 95.625
     },
     {
-      "id": "arena_post_02",
-      "category": "fence",
-      "shape": "circle",
-      "x": 214.1655531769377,
-      "y": -148.92505326369357,
-      "radius": 0.75
+      "id": "arena_stand_02",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 207.98576828526785,
+      "y": -158.72852427430834,
+      "width": 2.820384939237104,
+      "height": 9.3,
+      "rotation_degrees": 99.375
     },
     {
-      "id": "arena_post_03",
-      "category": "fence",
-      "shape": "circle",
-      "x": 210.70319397786864,
-      "y": -141.5,
-      "radius": 0.75
+      "id": "arena_stand_03",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 207.49426370217734,
+      "y": -156.25756387317662,
+      "width": 2.8203849392371025,
+      "height": 9.3,
+      "rotation_degrees": 103.125
     },
     {
-      "id": "arena_post_04",
-      "category": "fence",
-      "shape": "circle",
-      "x": 206.00408882659198,
-      "y": -134.78898234473266,
-      "radius": 0.75
+      "id": "arena_stand_04",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 206.84220292569003,
+      "y": -153.8240399257032,
+      "width": 2.8203849392371048,
+      "height": 9.3,
+      "rotation_degrees": 106.875
     },
     {
-      "id": "arena_post_05",
-      "category": "fence",
-      "shape": "circle",
-      "x": 200.21101765526734,
-      "y": -128.99591117340805,
-      "radius": 0.75
+      "id": "arena_stand_05",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 206.03237818015702,
+      "y": -151.4383731550325,
+      "width": 2.8203849392371025,
+      "height": 9.3,
+      "rotation_degrees": 110.625
     },
     {
-      "id": "arena_post_06",
-      "category": "fence",
-      "shape": "circle",
-      "x": 193.5,
-      "y": -124.29680602213139,
-      "radius": 0.75
+      "id": "arena_stand_06",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 205.06825725946527,
+      "y": -149.1107793525308,
+      "width": 2.8203849392371025,
+      "height": 9.3,
+      "rotation_degrees": 114.375
     },
     {
-      "id": "arena_post_09",
-      "category": "fence",
-      "shape": "circle",
+      "id": "arena_stand_07",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 203.95396867741167,
+      "y": -146.8512256321991,
+      "width": 2.8203849392371025,
+      "height": 9.3,
+      "rotation_degrees": 118.125
+    },
+    {
+      "id": "arena_stand_08",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 202.6942839887733,
+      "y": -144.66938774996083,
+      "width": 2.8203849392371048,
+      "height": 9.3,
+      "rotation_degrees": 121.875
+    },
+    {
+      "id": "arena_stand_09",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 201.2945973567772,
+      "y": -142.5746086705896,
+      "width": 2.8203849392371048,
+      "height": 9.3,
+      "rotation_degrees": 125.625
+    },
+    {
+      "id": "arena_stand_10",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 199.76090245446537,
+      "y": -140.57585855969964,
+      "width": 2.8203849392371,
+      "height": 9.3,
+      "rotation_degrees": 129.375
+    },
+    {
+      "id": "arena_stand_11",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 198.09976679886668,
+      "y": -138.68169637211946,
+      "width": 2.8203849392371048,
+      "height": 9.3,
+      "rotation_degrees": 133.125
+    },
+    {
+      "id": "arena_stand_12",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 196.31830362788054,
+      "y": -136.90023320113335,
+      "width": 2.8203849392371048,
+      "height": 9.3,
+      "rotation_degrees": 136.875
+    },
+    {
+      "id": "arena_stand_13",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 194.42414144030036,
+      "y": -135.23909754553463,
+      "width": 2.8203849392371,
+      "height": 9.3,
+      "rotation_degrees": 140.625
+    },
+    {
+      "id": "arena_stand_14",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 192.4253913294104,
+      "y": -133.7054026432228,
+      "width": 2.8203849392371,
+      "height": 9.3,
+      "rotation_degrees": 144.375
+    },
+    {
+      "id": "arena_stand_15",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 190.33061225003917,
+      "y": -132.3057160112267,
+      "width": 2.8203849392371048,
+      "height": 9.3,
+      "rotation_degrees": 148.125
+    },
+    {
+      "id": "arena_stand_16",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 188.1487743678009,
+      "y": -131.04603132258833,
+      "width": 2.8203849392371096,
+      "height": 9.3,
+      "rotation_degrees": 151.875
+    },
+    {
+      "id": "arena_stand_23",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 171.2596846886384,
+      "y": -126.52061338215992,
+      "width": 2.8203849392371096,
+      "height": 9.3,
+      "rotation_degrees": 178.125
+    },
+    {
+      "id": "arena_stand_24",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 168.74031531136163,
+      "y": -126.52061338215992,
+      "width": 2.8203849392371096,
+      "height": 9.3,
+      "rotation_degrees": 181.875
+    },
+    {
+      "id": "arena_stand_25",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 166.22634009731192,
+      "y": -126.68538802312042,
+      "width": 2.8203849392371,
+      "height": 9.3,
+      "rotation_degrees": 185.625
+    },
+    {
+      "id": "arena_stand_26",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 163.72852427430834,
+      "y": -127.01423171473215,
+      "width": 2.8203849392371,
+      "height": 9.3,
+      "rotation_degrees": 189.375
+    },
+    {
+      "id": "arena_stand_27",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 161.25756387317662,
+      "y": -127.50573629782265,
+      "width": 2.8203849392371,
+      "height": 9.3,
+      "rotation_degrees": 193.125
+    },
+    {
+      "id": "arena_stand_28",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 158.8240399257032,
+      "y": -128.15779707430994,
+      "width": 2.8203849392371096,
+      "height": 9.3,
+      "rotation_degrees": 196.875
+    },
+    {
+      "id": "arena_stand_29",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 156.4383731550325,
+      "y": -128.96762181984298,
+      "width": 2.8203849392370905,
+      "height": 9.3,
+      "rotation_degrees": 200.625
+    },
+    {
+      "id": "arena_stand_30",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 154.1107793525308,
+      "y": -129.93174274053473,
+      "width": 2.8203849392371096,
+      "height": 9.3,
+      "rotation_degrees": 204.37499999999997
+    },
+    {
+      "id": "arena_stand_31",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 151.8512256321991,
+      "y": -131.04603132258833,
+      "width": 2.8203849392371,
+      "height": 9.3,
+      "rotation_degrees": 208.125
+    },
+    {
+      "id": "arena_stand_32",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 149.66938774996083,
+      "y": -132.3057160112267,
+      "width": 2.8203849392371194,
+      "height": 9.3,
+      "rotation_degrees": 211.875
+    },
+    {
+      "id": "arena_stand_33",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 147.5746086705896,
+      "y": -133.7054026432228,
+      "width": 2.8203849392371,
+      "height": 9.3,
+      "rotation_degrees": 215.625
+    },
+    {
+      "id": "arena_stand_41",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 134.93174274053473,
+      "y": -149.11077935253078,
+      "width": 2.8203849392371194,
+      "height": 9.3,
+      "rotation_degrees": 245.625
+    },
+    {
+      "id": "arena_stand_42",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 133.96762181984298,
+      "y": -151.4383731550325,
+      "width": 2.8203849392371,
+      "height": 9.3,
+      "rotation_degrees": 249.375
+    },
+    {
+      "id": "arena_stand_43",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 133.15779707430997,
+      "y": -153.8240399257032,
+      "width": 2.8203849392371,
+      "height": 9.3,
+      "rotation_degrees": 253.125
+    },
+    {
+      "id": "arena_stand_44",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 132.50573629782266,
+      "y": -156.25756387317662,
+      "width": 2.8203849392371194,
+      "height": 9.3,
+      "rotation_degrees": 256.875
+    },
+    {
+      "id": "arena_stand_45",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 132.01423171473215,
+      "y": -158.72852427430834,
+      "width": 2.820384939237081,
+      "height": 9.3,
+      "rotation_degrees": 260.625
+    },
+    {
+      "id": "arena_stand_46",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 131.68538802312042,
+      "y": -161.22634009731192,
+      "width": 2.8203849392371194,
+      "height": 9.3,
+      "rotation_degrees": 264.375
+    },
+    {
+      "id": "arena_stand_47",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 131.52061338215992,
+      "y": -163.7403153113616,
+      "width": 2.8203849392371,
+      "height": 9.3,
+      "rotation_degrees": 268.125
+    },
+    {
+      "id": "arena_stand_48",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 131.52061338215992,
+      "y": -166.25968468863837,
+      "width": 2.8203849392371,
+      "height": 9.3,
+      "rotation_degrees": 271.875
+    },
+    {
+      "id": "arena_stand_49",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 131.68538802312042,
+      "y": -168.77365990268808,
+      "width": 2.8203849392371194,
+      "height": 9.3,
+      "rotation_degrees": 275.625
+    },
+    {
+      "id": "arena_stand_56",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 137.3057160112267,
+      "y": -185.33061225003914,
+      "width": 2.8203849392371,
+      "height": 9.3,
+      "rotation_degrees": 301.875
+    },
+    {
+      "id": "arena_stand_57",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 138.7054026432228,
+      "y": -187.4253913294104,
+      "width": 2.8203849392371194,
+      "height": 9.3,
+      "rotation_degrees": 305.625
+    },
+    {
+      "id": "arena_stand_58",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 140.23909754553463,
+      "y": -189.42414144030036,
+      "width": 2.8203849392371,
+      "height": 9.3,
+      "rotation_degrees": 309.375
+    },
+    {
+      "id": "arena_stand_59",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 141.90023320113332,
+      "y": -191.31830362788054,
+      "width": 2.820384939237081,
+      "height": 9.3,
+      "rotation_degrees": 313.125
+    },
+    {
+      "id": "arena_stand_60",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 143.68169637211943,
+      "y": -193.09976679886665,
+      "width": 2.8203849392371194,
+      "height": 9.3,
+      "rotation_degrees": 316.875
+    },
+    {
+      "id": "arena_stand_61",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 145.57585855969964,
+      "y": -194.76090245446537,
+      "width": 2.8203849392371,
+      "height": 9.3,
+      "rotation_degrees": 320.625
+    },
+    {
+      "id": "arena_stand_62",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 147.5746086705896,
+      "y": -196.2945973567772,
+      "width": 2.8203849392371194,
+      "height": 9.3,
+      "rotation_degrees": 324.375
+    },
+    {
+      "id": "arena_stand_63",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 149.6693877499608,
+      "y": -197.69428398877326,
+      "width": 2.820384939237081,
+      "height": 9.3,
+      "rotation_degrees": 328.125
+    },
+    {
+      "id": "arena_stand_64",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 151.8512256321991,
+      "y": -198.95396867741167,
+      "width": 2.8203849392371194,
+      "height": 9.3,
+      "rotation_degrees": 331.875
+    },
+    {
+      "id": "arena_stand_65",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 154.1107793525308,
+      "y": -200.06825725946527,
+      "width": 2.8203849392371194,
+      "height": 9.3,
+      "rotation_degrees": 335.625
+    },
+    {
+      "id": "arena_stand_66",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 156.43837315503254,
+      "y": -201.03237818015705,
+      "width": 2.820384939237081,
+      "height": 9.3,
+      "rotation_degrees": 339.375
+    },
+    {
+      "id": "arena_stand_67",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 158.8240399257032,
+      "y": -201.84220292569003,
+      "width": 2.8203849392371194,
+      "height": 9.3,
+      "rotation_degrees": 343.125
+    },
+    {
+      "id": "arena_stand_68",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 161.25756387317662,
+      "y": -202.49426370217734,
+      "width": 2.820384939237081,
+      "height": 9.3,
+      "rotation_degrees": 346.875
+    },
+    {
+      "id": "arena_stand_69",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 163.7285242743083,
+      "y": -202.98576828526785,
+      "width": 2.8203849392371194,
+      "height": 9.3,
+      "rotation_degrees": 350.625
+    },
+    {
+      "id": "arena_stand_70",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 166.22634009731192,
+      "y": -203.31461197687958,
+      "width": 2.8203849392371194,
+      "height": 9.3,
+      "rotation_degrees": 354.375
+    },
+    {
+      "id": "arena_stand_71",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 168.74031531136163,
+      "y": -203.47938661784008,
+      "width": 2.820384939237081,
+      "height": 9.3,
+      "rotation_degrees": 358.12500000000006
+    },
+    {
+      "id": "arena_stand_72",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 171.25968468863834,
+      "y": -203.47938661784008,
+      "width": 2.820384939237081,
+      "height": 9.3,
+      "rotation_degrees": 361.87499999999994
+    },
+    {
+      "id": "arena_stand_73",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 173.77365990268805,
+      "y": -203.31461197687958,
+      "width": 2.8203849392371194,
+      "height": 9.3,
+      "rotation_degrees": 365.62499999999994
+    },
+    {
+      "id": "arena_stand_74",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 176.27147572569166,
+      "y": -202.98576828526785,
+      "width": 2.8203849392371194,
+      "height": 9.3,
+      "rotation_degrees": 369.375
+    },
+    {
+      "id": "arena_stand_75",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 178.74243612682338,
+      "y": -202.49426370217734,
+      "width": 2.820384939237081,
+      "height": 9.3,
+      "rotation_degrees": 373.12500000000006
+    },
+    {
+      "id": "arena_stand_76",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 181.1759600742968,
+      "y": -201.84220292569006,
+      "width": 2.8203849392371194,
+      "height": 9.3,
+      "rotation_degrees": 376.875
+    },
+    {
+      "id": "arena_stand_77",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 183.56162684496746,
+      "y": -201.03237818015705,
+      "width": 2.820384939237081,
+      "height": 9.3,
+      "rotation_degrees": 380.62499999999994
+    },
+    {
+      "id": "arena_stand_78",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 185.8892206474692,
+      "y": -200.06825725946527,
+      "width": 2.8203849392371194,
+      "height": 9.3,
+      "rotation_degrees": 384.375
+    },
+    {
+      "id": "arena_stand_79",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 188.1487743678009,
+      "y": -198.95396867741167,
+      "width": 2.8203849392371194,
+      "height": 9.3,
+      "rotation_degrees": 388.125
+    },
+    {
+      "id": "arena_stand_80",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 190.33061225003917,
+      "y": -197.6942839887733,
+      "width": 2.820384939237081,
+      "height": 9.3,
+      "rotation_degrees": 391.875
+    },
+    {
+      "id": "arena_stand_81",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 192.42539132941033,
+      "y": -196.29459735677722,
+      "width": 2.820384939237081,
+      "height": 9.3,
+      "rotation_degrees": 395.62499999999994
+    },
+    {
+      "id": "arena_stand_82",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 194.42414144030033,
+      "y": -194.7609024544654,
+      "width": 2.8203849392371576,
+      "height": 9.3,
+      "rotation_degrees": 399.37499999999994
+    },
+    {
+      "id": "arena_stand_83",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 196.31830362788054,
+      "y": -193.09976679886668,
+      "width": 2.820384939237081,
+      "height": 9.3,
+      "rotation_degrees": 403.125
+    },
+    {
+      "id": "arena_stand_84",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 198.09976679886668,
+      "y": -191.31830362788054,
+      "width": 2.8203849392371194,
+      "height": 9.3,
+      "rotation_degrees": 406.875
+    },
+    {
+      "id": "arena_stand_85",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 199.7609024544654,
+      "y": -189.42414144030033,
+      "width": 2.820384939237081,
+      "height": 9.3,
+      "rotation_degrees": 410.62500000000006
+    },
+    {
+      "id": "arena_stand_86",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 201.29459735677716,
+      "y": -187.42539132941042,
+      "width": 2.820384939237081,
+      "height": 9.3,
+      "rotation_degrees": 414.37499999999994
+    },
+    {
+      "id": "arena_stand_87",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 202.69428398877326,
+      "y": -185.3306122500392,
+      "width": 2.8203849392371194,
+      "height": 9.3,
+      "rotation_degrees": 418.125
+    },
+    {
+      "id": "arena_stand_88",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 203.95396867741167,
+      "y": -183.1487743678009,
+      "width": 2.8203849392371194,
+      "height": 9.3,
+      "rotation_degrees": 421.875
+    },
+    {
+      "id": "arena_stand_89",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 205.06825725946527,
+      "y": -180.8892206474692,
+      "width": 2.8203849392371194,
+      "height": 9.3,
+      "rotation_degrees": 425.62500000000006
+    },
+    {
+      "id": "arena_stand_90",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 206.03237818015705,
+      "y": -178.56162684496746,
+      "width": 2.820384939237081,
+      "height": 9.3,
+      "rotation_degrees": 429.375
+    },
+    {
+      "id": "arena_stand_91",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 206.84220292569003,
+      "y": -176.17596007429682,
+      "width": 2.820384939237081,
+      "height": 9.3,
+      "rotation_degrees": 433.12499999999994
+    },
+    {
+      "id": "arena_stand_92",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 207.49426370217734,
+      "y": -173.7424361268234,
+      "width": 2.8203849392371194,
+      "height": 9.3,
+      "rotation_degrees": 436.875
+    },
+    {
+      "id": "arena_stand_93",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 207.98576828526785,
+      "y": -171.2714757256917,
+      "width": 2.8203849392371194,
+      "height": 9.3,
+      "rotation_degrees": 440.62499999999994
+    },
+    {
+      "id": "arena_stand_94",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 208.31461197687958,
+      "y": -168.77365990268808,
+      "width": 2.8203849392371194,
+      "height": 9.3,
+      "rotation_degrees": 444.375
+    },
+    {
+      "id": "arena_stand_95",
+      "category": "stand",
+      "shape": "rectangle",
+      "x": 208.47938661784008,
+      "y": -166.25968468863837,
+      "width": 2.820384939237081,
+      "height": 9.3,
+      "rotation_degrees": 448.12500000000006
+    },
+    {
+      "id": "arena_pavilion_0",
+      "category": "prop",
+      "shape": "rectangle",
       "x": 170,
-      "y": -118,
-      "radius": 0.75
+      "y": -211,
+      "width": 6,
+      "height": 5
     },
     {
-      "id": "arena_post_10",
-      "category": "fence",
-      "shape": "circle",
-      "x": 161.83853564965426,
-      "y": -118.71403560842622,
-      "radius": 0.75
-    },
-    {
-      "id": "arena_post_11",
-      "category": "fence",
-      "shape": "circle",
-      "x": 153.92505326369357,
-      "y": -120.83444682306231,
-      "radius": 0.75
-    },
-    {
-      "id": "arena_post_12",
-      "category": "fence",
-      "shape": "circle",
-      "x": 146.5,
-      "y": -124.29680602213138,
-      "radius": 0.75
-    },
-    {
-      "id": "arena_post_13",
-      "category": "fence",
-      "shape": "circle",
-      "x": 139.78898234473266,
-      "y": -128.99591117340802,
-      "radius": 0.75
-    },
-    {
-      "id": "arena_post_15",
-      "category": "fence",
-      "shape": "circle",
-      "x": 129.2968060221314,
-      "y": -141.5,
-      "radius": 0.75
-    },
-    {
-      "id": "arena_post_16",
-      "category": "fence",
-      "shape": "circle",
-      "x": 125.83444682306231,
-      "y": -148.92505326369357,
-      "radius": 0.75
-    },
-    {
-      "id": "arena_post_17",
-      "category": "fence",
-      "shape": "circle",
-      "x": 123.71403560842622,
-      "y": -156.8385356496543,
-      "radius": 0.75
-    },
-    {
-      "id": "arena_post_18",
-      "category": "fence",
-      "shape": "circle",
-      "x": 123,
+      "id": "arena_pavilion_1",
+      "category": "prop",
+      "shape": "rectangle",
+      "x": 216,
       "y": -165,
-      "radius": 0.75
+      "width": 6,
+      "height": 5
     },
     {
-      "id": "arena_post_19",
-      "category": "fence",
-      "shape": "circle",
-      "x": 123.71403560842622,
-      "y": -173.1614643503457,
-      "radius": 0.75
-    },
-    {
-      "id": "arena_post_21",
-      "category": "fence",
-      "shape": "circle",
-      "x": 129.2968060221314,
-      "y": -188.5,
-      "radius": 0.75
-    },
-    {
-      "id": "arena_post_22",
-      "category": "fence",
-      "shape": "circle",
-      "x": 133.99591117340802,
-      "y": -195.21101765526734,
-      "radius": 0.75
-    },
-    {
-      "id": "arena_post_23",
-      "category": "fence",
-      "shape": "circle",
-      "x": 139.78898234473263,
-      "y": -201.00408882659195,
-      "radius": 0.75
-    },
-    {
-      "id": "arena_post_24",
-      "category": "fence",
-      "shape": "circle",
-      "x": 146.49999999999997,
-      "y": -205.7031939778686,
-      "radius": 0.75
-    },
-    {
-      "id": "arena_post_25",
-      "category": "fence",
-      "shape": "circle",
-      "x": 153.92505326369357,
-      "y": -209.1655531769377,
-      "radius": 0.75
-    },
-    {
-      "id": "arena_post_26",
-      "category": "fence",
-      "shape": "circle",
-      "x": 161.83853564965426,
-      "y": -211.28596439157377,
-      "radius": 0.75
-    },
-    {
-      "id": "arena_post_27",
-      "category": "fence",
-      "shape": "circle",
-      "x": 170,
-      "y": -212,
-      "radius": 0.75
-    },
-    {
-      "id": "arena_post_28",
-      "category": "fence",
-      "shape": "circle",
-      "x": 178.1614643503457,
-      "y": -211.28596439157377,
-      "radius": 0.75
-    },
-    {
-      "id": "arena_post_29",
-      "category": "fence",
-      "shape": "circle",
-      "x": 186.07494673630646,
-      "y": -209.1655531769377,
-      "radius": 0.75
-    },
-    {
-      "id": "arena_post_30",
-      "category": "fence",
-      "shape": "circle",
-      "x": 193.49999999999997,
-      "y": -205.70319397786864,
-      "radius": 0.75
-    },
-    {
-      "id": "arena_post_31",
-      "category": "fence",
-      "shape": "circle",
-      "x": 200.21101765526734,
-      "y": -201.00408882659198,
-      "radius": 0.75
-    },
-    {
-      "id": "arena_post_32",
-      "category": "fence",
-      "shape": "circle",
-      "x": 206.00408882659195,
-      "y": -195.21101765526737,
-      "radius": 0.75
-    },
-    {
-      "id": "arena_post_33",
-      "category": "fence",
-      "shape": "circle",
-      "x": 210.70319397786864,
-      "y": -188.5,
-      "radius": 0.75
-    },
-    {
-      "id": "arena_post_34",
-      "category": "fence",
-      "shape": "circle",
-      "x": 214.1655531769377,
-      "y": -181.07494673630643,
-      "radius": 0.75
-    },
-    {
-      "id": "arena_post_35",
-      "category": "fence",
-      "shape": "circle",
-      "x": 216.28596439157377,
-      "y": -173.16146435034574,
-      "radius": 0.75
-    },
-    {
-      "id": "training_dummy_00",
+      "id": "arena_dummy_0",
       "category": "training",
       "shape": "circle",
-      "x": 150,
-      "y": -165,
-      "radius": 1.1
+      "x": 151,
+      "y": -186,
+      "radius": 0.8
     },
     {
-      "id": "training_dummy_01",
+      "id": "arena_dummy_1",
       "category": "training",
       "shape": "circle",
-      "x": 170,
-      "y": -185,
-      "radius": 1.1
+      "x": 155,
+      "y": -190,
+      "radius": 0.8
     },
     {
-      "id": "training_dummy_02",
+      "id": "arena_dummy_2",
       "category": "training",
       "shape": "circle",
-      "x": 190,
-      "y": -165,
-      "radius": 1.1
-    },
-    {
-      "id": "arena_watchtower_00",
-      "category": "tower",
-      "shape": "rectangle",
-      "x": 133,
-      "y": -195,
-      "width": 6.2,
-      "height": 6.2
-    },
-    {
-      "id": "arena_watchtower_01",
-      "category": "tower",
-      "shape": "rectangle",
-      "x": 207,
-      "y": -195,
-      "width": 6.2,
-      "height": 6.2
-    },
-    {
-      "id": "arena_watchtower_02",
-      "category": "tower",
-      "shape": "rectangle",
-      "x": 133,
-      "y": -135,
-      "width": 6.2,
-      "height": 6.2
-    },
-    {
-      "id": "arena_watchtower_03",
-      "category": "tower",
-      "shape": "rectangle",
-      "x": 207,
-      "y": -135,
-      "width": 6.2,
-      "height": 6.2
-    },
-    {
-      "id": "arena_tent_00",
-      "category": "tent",
-      "shape": "circle",
-      "x": 125,
-      "y": -178,
-      "radius": 4.7
-    },
-    {
-      "id": "arena_tent_01",
-      "category": "tent",
-      "shape": "circle",
-      "x": 215,
-      "y": -178,
-      "radius": 4.7
-    },
-    {
-      "id": "arena_tent_02",
-      "category": "tent",
-      "shape": "circle",
-      "x": 128,
-      "y": -151,
-      "radius": 4.7
-    },
-    {
-      "id": "arena_tent_03",
-      "category": "tent",
-      "shape": "circle",
-      "x": 212,
-      "y": -151,
-      "radius": 4.7
+      "x": 159,
+      "y": -193,
+      "radius": 0.8
     },
     {
       "id": "resurrection_shrine",

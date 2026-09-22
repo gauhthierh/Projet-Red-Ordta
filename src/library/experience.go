@@ -11,16 +11,21 @@ import "fmt"
 
 func (c *Character) gagnerExperience(gain int) {
 	fmt.Printf("%s gagne %d points d'expérience !\n", c.Nom, gain)
-
 	c.ExperienceActuelle += gain
-
 	for c.ExperienceActuelle >= c.ExperienceMax {
 		c.ExperienceActuelle -= c.ExperienceMax
 		c.Niveau++
-		c.ExperienceMax += 50
+		c.ExperienceMax = c.ExperienceMax * augmentationExperienceNumerateur / augmentationExperienceDenominateur
+		c.PVMaxBase += c.GainPvMax
+		c.MettreAJourPvMax()
+		c.ManaMax += c.GainManaMax
+		c.Attaque += c.GainAttaque
 
 		fmt.Printf("%s passe au niveau %d !\n", c.Nom, c.Niveau)
+		fmt.Println("Nouvelles Stats :")
+		fmt.Printf("PV : %d / %d\n", c.PVActuel, c.PVMaxTotal)
+		fmt.Printf("Mana : %d / %d\n", c.ManaActuel, c.ManaMax)
+		fmt.Printf("Bonus Attaque physique : +%d dégâts\n", c.Attaque)
 	}
-
 	fmt.Printf("Expérience : %d / %d\n", c.ExperienceActuelle, c.ExperienceMax)
 }

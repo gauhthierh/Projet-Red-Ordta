@@ -164,6 +164,11 @@ func main() {
 	if err := os.MkdirAll(output, 0755); err != nil {
 		panic(err)
 	}
+	// Permet de mettre à jour le décor sans remplacer les collisions ni le JSON.
+	if len(os.Args) > 2 && os.Args[2] == "obj-only" {
+		writeWorld(filepath.Join(output, "red_world_map_3d.obj"))
+		return
+	}
 
 	writeMaterials(filepath.Join(output, "red_world_map_3d.mtl"))
 	writeWorld(filepath.Join(output, "red_world_map_3d.obj"))
@@ -582,6 +587,11 @@ func writeWorld(path string) {
 		w.cone(x, 53, 17, 5.5, 5, 10)
 	}
 	for i, p := range [][2]float64{{35, 14}, {48, 10}, {39, 1}, {55, -2}} {
+		// Les deux vendeurs ont des cabanons ouverts créés dans monde/cabanons.go.
+		// Ne pas générer ici les anciens blocs qui masqueraient leurs comptoirs.
+		if i < 2 {
+			continue
+		}
 		w.object(fmt.Sprintf("market_stall_%02d", i))
 		w.material("wood")
 		w.box(p[0], p[1], .15, 7, 5, 3)
@@ -651,40 +661,8 @@ func writeWorld(path string) {
 		w.cylinder(-220+float64(i)*2.2, -10, .2, .75, 5, 8)
 	}
 
-	// Training arena and goblin practice zone (southeast).
-	w.object("training_arena")
-	w.material("sand")
-	w.cylinder(170, -165, .10, 45, .12, 36)
-	w.material("wood")
-	for i := 0; i < 36; i++ {
-		a := float64(i) * 2 * math.Pi / 36
-		if onRoad(170+math.Cos(a)*47, -165+math.Sin(a)*47, 5.5) {
-			continue
-		}
-		w.cylinder(170+math.Cos(a)*47, -165+math.Sin(a)*47, 0, .55, 4.5, 6)
-		if i%6 == 0 {
-			w.material("cloth_red")
-			w.box(170+math.Cos(a)*47, -165+math.Sin(a)*47, 3.2, 2.8, .22, 3.5)
-			w.material("wood")
-		}
-	}
-	for i, p := range [][2]float64{{150, -165}, {170, -185}, {190, -165}} {
-		w.object(fmt.Sprintf("training_dummy_%02d", i))
-		w.cylinder(p[0], p[1], 0, .7, 5, 7)
-		w.box(p[0], p[1], 4, 4.5, .5, .5)
-	}
-	for i, p := range [][2]float64{{133, -195}, {207, -195}, {133, -135}, {207, -135}} {
-		w.object(fmt.Sprintf("arena_watchtower_%02d", i))
-		w.material("wood")
-		w.box(p[0], p[1], 0, 6, 6, 8)
-		w.material("roof_red")
-		w.cone(p[0], p[1], 8, 5, 4, 4)
-	}
-	for i, p := range [][2]float64{{125, -178}, {215, -178}, {128, -151}, {212, -151}} {
-		w.object(fmt.Sprintf("arena_tent_%02d", i))
-		w.material([]string{"cloth_red", "white"}[i%2])
-		w.cone(p[0], p[1], 0, 5, 7, 4)
-	}
+	// Toute l'arène partage un seul plan pour le décor et les collisions.
+	w.arenaDetails()
 
 	// Cemetery and resurrection shrine (south).
 	w.house("resurrection_shrine", 0, -180, 24, 18, 11, "roof_blue")
@@ -950,23 +928,7 @@ func worldCollisions() []collision {
 		result = append(result, rectangleCollision(fmt.Sprintf("forge_crate_%02d", i), "prop", p[0], p[1], 4.2, 4.2, 0))
 	}
 
-	// Arena.
-	for i := 0; i < 36; i++ {
-		a := float64(i) * 2 * math.Pi / 36
-		if onRoad(170+math.Cos(a)*47, -165+math.Sin(a)*47, 5.5) {
-			continue
-		}
-		result = append(result, circleCollision(fmt.Sprintf("arena_post_%02d", i), "fence", 170+math.Cos(a)*47, -165+math.Sin(a)*47, .75))
-	}
-	for i, p := range [][2]float64{{150, -165}, {170, -185}, {190, -165}} {
-		result = append(result, circleCollision(fmt.Sprintf("training_dummy_%02d", i), "training", p[0], p[1], 1.1))
-	}
-	for i, p := range [][2]float64{{133, -195}, {207, -195}, {133, -135}, {207, -135}} {
-		result = append(result, rectangleCollision(fmt.Sprintf("arena_watchtower_%02d", i), "tower", p[0], p[1], 6.2, 6.2, 0))
-	}
-	for i, p := range [][2]float64{{125, -178}, {215, -178}, {128, -151}, {212, -151}} {
-		result = append(result, circleCollision(fmt.Sprintf("arena_tent_%02d", i), "tent", p[0], p[1], 4.7))
-	}
+	result = append(result, arenaDetailCollisions()...)
 
 	// Cemetery.
 	result = append(result,
