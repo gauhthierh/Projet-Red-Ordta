@@ -1,42 +1,46 @@
 package library
 
+/*Ce fichier gère le marchand et les achats du personnage.
+  Il contient la liste des objets vendus, leur prix et les vérifications
+  nécessaires avant un achat : argent disponible et place dans l'inventaire*/
+
 import (
 	"fmt"
 )
 
-// merchant affiche les objets disponibles chez le marchand.
+/*La fonction merchant affiche le menu du marchand et permet au joueur de choisir
+  entre acheter un objet ou revenir au menu principal*/
+
 func (c *Character) merchant() {
 	for {
 		fmt.Println("\n=== MARCHAND ===")
-		fmt.Printf("1. %s - Gratuit\n", ItemPotionDeVie)
-		fmt.Printf("2. %s - Gratuit\n", ItemPotionDePoison)
-		fmt.Printf("3. %s - Gratuit\n", ItemLivreBouleDeFeu)
+		fmt.Printf("Bourse : %d Po\n", c.Argent)
+		for i, article := range Boutique {
+			prix := c.PrixPour(article)
+			if prix == 0 {
+				fmt.Printf("%d. %s - Gratuit\n", i+1, article.Nom)
+			} else {
+				fmt.Printf("%d. %s - %d Po\n", i+1, article.Nom, prix)
+			}
+		}
 		fmt.Println("0. Retour")
 
-		choice, ok := ReadChoice("Votre choix : ")
+		choix, ok := ReadChoice("Votre choix : ")
 
-		if !ok {
-			fmt.Println("Choix invalide. Entrez 0, 1, 2 ou 3.")
+		if !ok || choix < 0 || choix > len(Boutique) {
+			fmt.Printf("Choix invalide. Entrez un nombre entre 0 et %d !\n", len(Boutique))
 			continue
 		}
-
-		switch choice {
-		case 1:
-			c.buy(ItemPotionDeVie)
-		case 2:
-			c.buy(ItemPotionDePoison)
-		case 3:
-			c.buy(ItemLivreBouleDeFeu)
-		case 0:
+		if choix == 0 {
 			return
-		default:
-			fmt.Println("Choix invalide. Entrez 0, 1, 2 ou 3.")
 		}
+		c.AchatMarchand(Boutique[choix-1])
 	}
 }
 
-// buy ajoute l'objet acheté à l'inventaire, ou explique pourquoi c'est
-// impossible : « Vous avez acheté » ne s'affiche que si l'ajout a eu lieu.
+/*La fonction buy ajoute gratuitement un objet à l'inventaire
+  Si l'inventaire est plein l'ajout est refusé*/
+
 func (c *Character) buy(item string) {
 	if !c.AddInventory(item) {
 		fmt.Printf("Inventaire plein (%d / %d) : impossible d'ajouter %s.\n",
@@ -44,4 +48,54 @@ func (c *Character) buy(item string) {
 		return
 	}
 	fmt.Println("Vous avez acheté :", item)
+}
+
+/* Item représente un objet vendu par le marchand avec son nom et son prix*/
+
+type Item struct {
+	Nom  string
+	Prix int
+}
+
+/* Boutique contient tous les objets disponibles chez le marchand*/
+
+var Boutique = []Item{
+	{Nom: ItemPotionDeVie, Prix: 3},
+	{Nom: ItemPotionDePoison, Prix: 6},
+	{Nom: ItemLivreBouleDeFeu, Prix: 25},
+	{Nom: ItemFourrureDeLoup, Prix: 4},
+	{Nom: ItemPeauDeTroll, Prix: 7},
+	{Nom: ItemCuirDeSanglier, Prix: 3},
+	{Nom: ItemPlumeDeCorbeau, Prix: 1},
+	{Nom: ItemAugmentationInventaire, Prix: 30},
+}
+
+/* La fonction PrixPour détermine le prix d'un article pour le personnage*/
+
+func (c *Character) PrixPour(i Item) int {
+	if i.Nom == ItemPotionDeVie && !c.PotionGratuitePrise {
+		return 0
+	}
+	return i.Prix
+}
+
+/* La fonction AchatMarchand tente d'acheter un article.
+   L'achat est refusé si le personnage manque d'argent ou si son inventaire
+   est plein. En cas de réussite, l'ajout à lieu et le prix est retiré*/
+
+func (c *Character) AchatMarchand(i Item) {
+	achat := c.PrixPour(i)
+	if c.Argent < achat {
+		fmt.Printf("Argent insuffisant, il manque %d Po\n", achat-c.Argent)
+		return
+	}
+	if !c.AddInventory(i.Nom) {
+		fmt.Println("Plus aucune place disponible dans l'inventaire")
+		return
+	}
+	c.Argent -= achat
+	if i.Nom == ItemPotionDeVie {
+		c.PotionGratuitePrise = true
+	}
+	fmt.Printf("Vous avez acheté %s, il vous reste %d Po\n", i.Nom, c.Argent)
 }

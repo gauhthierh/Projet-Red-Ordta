@@ -8,29 +8,23 @@ import (
 	"strings"
 )
 
-// reader est l'unique lecteur de l'entrée standard. Toutes les saisies
-// passent par lui : le mélanger avec les fonctions Scan du package fmt
-// ferait perdre des saisies, car bufio garde en mémoire une partie de ce
-// qui a déjà été tapé.
+/* Ce fichier centralise la lecture et la conversion des saisies entrées par le joueur. */
+
+/* La variable Reader est l'unique lecteur utilisé pour récupérer les saisies du joueur. */
 var Reader = bufio.NewReader(os.Stdin)
 
-// readLine affiche l'invite puis lit la ligne entière, jusqu'à Entrée.
-// Les espaces en début et fin de ligne sont retirés, ainsi que le \r
-// ajouté par Windows.
+/* La fonction ReadLine affiche une demande, lit une ligne entière et retire les espaces inutiles. */
 func ReadLine(prompt string) string {
 	fmt.Print(prompt)
 	line, err := Reader.ReadString('\n')
 	if err != nil && line == "" {
-		// Entrée fermée (Ctrl+D, Ctrl+Z ou fin d'un fichier redirigé) :
-		// plus rien ne pourra être lu, on quitte au lieu de boucler.
 		fmt.Println("\nFin de la saisie, à bientôt !")
 		os.Exit(0)
 	}
 	return strings.TrimSpace(line)
 }
 
-// readChoice lit une ligne et la convertit en nombre entier.
-// Le booléen vaut false si la ligne n'est pas exactement un nombre.
+/* La fonction ReadChoice lit une saisie et indique si elle peut être convertie en nombre entier. */
 func ReadChoice(prompt string) (int, bool) {
 	choice, err := strconv.Atoi(ReadLine(prompt))
 	return choice, err == nil
