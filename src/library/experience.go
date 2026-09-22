@@ -15,7 +15,7 @@ func (c *Character) gagnerExperience(gain int) {
 	for c.ExperienceActuelle >= c.ExperienceMax {
 		c.ExperienceActuelle -= c.ExperienceMax
 		c.Niveau++
-		c.ExperienceMax += experiencesupplementairerequise
+		c.ExperienceMax *= augmentationExperienceNumerateur / augmentationExperienceDenominateur
 
 		fmt.Printf("%s passe au niveau %d !\n", c.Nom, c.Niveau)
 	}

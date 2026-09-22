@@ -33,15 +33,16 @@ type Character struct {
 
 /* Ces constantes définissent les valeurs de départ du personnage et les caractéristiques de son attaque basique. */
 const (
-	capaciteInventaireDepart        = 10
-	argentDepart                    = 100
-	maxAugmentationsInventaire      = 3
-	bonusAugmentationInventaire     = 10
-	attaqueBasique                  = "Attaque Basique"
-	degatsAttaqueBasique            = 5
-	experienceinitiale              = 0
-	experiencemaximale              = 100
-	experiencesupplementairerequise = 50
+	capaciteInventaireDepart           = 10
+	argentDepart                       = 100
+	maxAugmentationsInventaire         = 3
+	bonusAugmentationInventaire        = 10
+	attaqueBasique                     = "Attaque Basique"
+	degatsAttaqueBasique               = 5
+	experienceinitiale                 = 0
+	experiencemaximale                 = 100
+	augmentationExperienceNumerateur   = 13
+	augmentationExperienceDenominateur = 10
 )
 
 /* La fonction InitCharacter crée et initialise un personnage avec ses statistiques, ses objets, son sort et ses ressources de départ. */
