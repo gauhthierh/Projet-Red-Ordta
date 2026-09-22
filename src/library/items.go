@@ -18,7 +18,7 @@ func (c *Character) useItem(item string) {
 	case ItemPotionDeMana:
 		c.takePotMana()
 	case ItemLivreBouleDeFeu:
-		if !c.spellBook() {
+		if !c.spellBook(SortBouleDeFeu) {
 			fmt.Printf("Vous connaissez déjà le sort %s : le livre reste dans l'inventaire.\n", SortBouleDeFeu)
 			return
 		}
@@ -34,6 +34,34 @@ func (c *Character) useItem(item string) {
 			c.CapaciteInventaire,
 			bonusAugmentationInventaire,
 			maxAugmentationsInventaire-c.AugmentationInventaireUtilisee)
+	case ItemLivreLameDuDestin:
+		if !c.spellBook(SortLameDuDestin) {
+			fmt.Printf("Vous connaissez déjà le sort %s : le livre reste dans l'inventaire.\n", SortLameDuDestin)
+			return
+		}
+		c.RemoveInventory(ItemLivreLameDuDestin)
+		fmt.Printf("Vous apprenez le sort %s !\n", SortLameDuDestin)
+	case ItemLivreEclatsDuGardien:
+		if !c.spellBook(SortEclatDuGardien) {
+			fmt.Printf("Vous connaissez déjà le sort %s : le livre reste dans l'inventaire.\n", SortEclatDuGardien)
+			return
+		}
+		c.RemoveInventory(ItemLivreEclatsDuGardien)
+		fmt.Printf("Vous apprenez le sort %s !\n", SortEclatDuGardien)
+	case ItemLivreFlecheDeLumiere:
+		if !c.spellBook(SortFlecheDeLumiere) {
+			fmt.Printf("Vous connaissez déjà le sort %s : le livre reste dans l'inventaire.\n", SortFlecheDeLumiere)
+			return
+		}
+		c.RemoveInventory(ItemLivreFlecheDeLumiere)
+		fmt.Printf("Vous apprenez le sort %s !\n", SortFlecheDeLumiere)
+	case ItemLivreJugementDesGeants:
+		if !c.spellBook(SortJugementDesGeants) {
+			fmt.Printf("Vous connaissez déjà le sort %s : le livre reste dans l'inventaire.\n", SortJugementDesGeants)
+			return
+		}
+		c.RemoveInventory(ItemLivreJugementDesGeants)
+		fmt.Printf("Vous apprenez le sort %s !\n", SortJugementDesGeants)
 	default:
 		equipement, ok := TrouverEquipement(item)
 		if ok {
@@ -45,11 +73,11 @@ func (c *Character) useItem(item string) {
 }
 
 /* La méthode spellBook apprend le sort Boule de Feu et refuse de l'ajouter lorsqu'il est déjà connu. */
-func (c *Character) spellBook() bool {
-	if slices.Contains(c.Skill, SortBouleDeFeu) {
+func (c *Character) spellBook(sort string) bool {
+	if slices.Contains(c.Skill, sort) {
 		return false
 	}
-	c.Skill = append(c.Skill, SortBouleDeFeu)
+	c.Skill = append(c.Skill, sort)
 	return true
 }
 

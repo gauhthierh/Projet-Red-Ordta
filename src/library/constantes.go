@@ -16,7 +16,7 @@ const (
 const (
 	ItemPotionDeVie            = "Potion de vie"
 	ItemPotionDePoison         = "Potion de poison"
-	ItemLivreBouleDeFeu        = "Livre de Sort : Boule de Feu"
+	ItemLivreBouleDeFeu        = "Livre de sort : Boule de feu"
 	ItemFourrureDeLoup         = "Fourrure de loup"
 	ItemPeauDeTroll            = "Peau de Troll"
 	ItemCuirDeSanglier         = "Cuir de sanglier"
@@ -29,15 +29,19 @@ const (
 	EmplacementPied            = "pied"
 	ItemAugmentationInventaire = "Augmentation d'inventaire"
 	ItemPotionDeMana           = "Potion de Mana"
+	ItemLivreLameDuDestin      = "Livre de sort : Lame du destin"
+	ItemLivreEclatsDuGardien   = "Livre de sort : Éclats du gardien"
+	ItemLivreFlecheDeLumiere   = "Livre de sort : Flèche de lumière"
+	ItemLivreJugementDesGeants = "Livre de sort : Jugement des géants"
 )
 
 const (
 	SortCoupDePoing       = "Coup de poing"
 	SortBouleDeFeu        = "Boule de feu"
 	SortLameDuDestin      = "Lame du destin"
-	SortEclateDuGardien   = "Éclats du gardien"
+	SortEclatDuGardien    = "Éclats du gardien"
 	SortFlecheDeLumiere   = "Flèche de lumière"
-	SortFoudreCeleste     = "Foudre Célèste"
+	SortFoudreCeleste     = "Foudre Céleste"
 	SortSoinDuCoeur       = "Soin du coeur"
 	SortBouclier          = "Bouclier"
 	SortDevotion          = "Dévotion"
@@ -45,15 +49,15 @@ const (
 	SortJugementDesGeants = "Jugement des géants"
 	degatsCoupDePoing     = 8
 	degatsBouleDeFeu      = 22
-	degatLameDuDestin     = 10
-	degatEclatDuGardien   = 12
-	degatFlecheDeLumiere  = 12
+	degatsLameDuDestin    = 10
+	degatsEclatDuGardien  = 12
+	degatsFlecheDeLumiere = 12
 	// degatFoudreCeleste = 10 par tour pendant 3 tours
 	// soinDuCoeur = 20% de pv restauré
 	// bouclier contre la prochaine attaque
 	// devotion inflige entre 20 et 30 dégats et peut infliger 8 de dégats au lanceur
 	// dernier espoir ne peut être lancé qu'a moins de 30% PV et fait 40 de dégâts
-	degatJugementDesGeants    = 60
+	degatsJugementDesGeants   = 60
 	coutManaCoupDePoing       = 5
 	coutManaBouleDeFeu        = 30
 	coutManaLameDuDestin      = 10

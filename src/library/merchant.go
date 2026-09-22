@@ -53,22 +53,27 @@ func (c *Character) buy(item string) {
 /* Item représente un objet vendu par le marchand avec son nom et son prix*/
 
 type Item struct {
-	Nom  string
-	Prix int
+	Nom       string
+	Prix      int
+	NiveauMin int
 }
 
 /* Boutique contient tous les objets disponibles chez le marchand*/
 
 var Boutique = []Item{
-	{Nom: ItemPotionDeVie, Prix: 3},
-	{Nom: ItemPotionDePoison, Prix: 6},
-	{Nom: ItemLivreBouleDeFeu, Prix: 25},
-	{Nom: ItemFourrureDeLoup, Prix: 4},
-	{Nom: ItemPeauDeTroll, Prix: 7},
-	{Nom: ItemCuirDeSanglier, Prix: 3},
-	{Nom: ItemPlumeDeCorbeau, Prix: 1},
-	{Nom: ItemAugmentationInventaire, Prix: 30},
-	{Nom: ItemPotionDeMana, Prix: 5},
+	{Nom: ItemPotionDeVie, Prix: 3, NiveauMin: 1},
+	{Nom: ItemPotionDePoison, Prix: 6, NiveauMin: 1},
+	{Nom: ItemLivreBouleDeFeu, Prix: 25, NiveauMin: 1},
+	{Nom: ItemFourrureDeLoup, Prix: 4, NiveauMin: 1},
+	{Nom: ItemPeauDeTroll, Prix: 7, NiveauMin: 1},
+	{Nom: ItemCuirDeSanglier, Prix: 3, NiveauMin: 1},
+	{Nom: ItemPlumeDeCorbeau, Prix: 1, NiveauMin: 1},
+	{Nom: ItemAugmentationInventaire, Prix: 30, NiveauMin: 1},
+	{Nom: ItemPotionDeMana, Prix: 5, NiveauMin: 1},
+	{Nom: ItemLivreLameDuDestin, Prix: 15, NiveauMin: 1},
+	{Nom: ItemLivreEclatsDuGardien, Prix: 30, NiveauMin: 2},
+	{Nom: ItemLivreFlecheDeLumiere, Prix: 30, NiveauMin: 3},
+	{Nom: ItemLivreJugementDesGeants, Prix: 150, NiveauMin: 6},
 }
 
 /* La fonction PrixPour détermine le prix d'un article pour le personnage*/
@@ -86,6 +91,10 @@ func (c *Character) PrixPour(i Item) int {
 
 func (c *Character) AchatMarchand(i Item) {
 	achat := c.PrixPour(i)
+	if c.Niveau < i.NiveauMin {
+		fmt.Printf("Vous n'avez pas le niveau requis pour l'achat : %d / %d\n", c.Niveau, i.NiveauMin)
+		return
+	}
 	if c.Argent < achat {
 		fmt.Printf("Argent insuffisant, il manque %d Po\n", achat-c.Argent)
 		return

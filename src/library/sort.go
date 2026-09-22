@@ -63,13 +63,13 @@ func InfosSort(sort string) (int, int, bool) {
 	case SortBouleDeFeu:
 		return degatsBouleDeFeu, coutManaBouleDeFeu, true
 	case SortLameDuDestin:
-		return degatLameDuDestin, coutManaLameDuDestin, true
-	case SortEclateDuGardien:
-		return degatEclatDuGardien, coutManaEclatDuGardien, true
+		return degatsLameDuDestin, coutManaLameDuDestin, true
+	case SortEclatDuGardien:
+		return degatsEclatDuGardien, coutManaEclatDuGardien, true
 	case SortFlecheDeLumiere:
-		return degatFlecheDeLumiere, coutManaFlecheDeLumiere, true
+		return degatsFlecheDeLumiere, coutManaFlecheDeLumiere, true
 	case SortJugementDesGeants:
-		return degatJugementDesGeants, coutManaJugementDesGeants, true
+		return degatsJugementDesGeants, coutManaJugementDesGeants, true
 	default:
 		return 0, 0, false
 	}
