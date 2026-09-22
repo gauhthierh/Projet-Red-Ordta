@@ -11,37 +11,41 @@ Ce fichier définit le personnage et gère ses statistiques, son inventaire, ses
 	La structure Character contient toutes les informations et ressources appartenant au personnage contrôlé par le joueur.
 */
 type Character struct {
-	Nom                string
-	Classe             string
-	Niveau             int
-	PVMaxBase          int
-	PVActuel           int
-	PVMaxTotal         int
-	Inventaire         map[string]int
-	Skill              []string
-	Initiative         int
-	ExperienceActuelle int
-	ExperienceMax      int
-
+	Nom                            string
+	Classe                         string
+	Niveau                         int
+	PVMaxBase                      int
+	PVActuel                       int
+	PVMaxTotal                     int
+	Inventaire                     map[string]int
+	Skill                          []string
+	Initiative                     int
+	ExperienceActuelle             int
+	ExperienceMax                  int
 	CapaciteInventaire             int
 	Argent                         int
 	PotionGratuitePrise            bool
 	Equipement                     Equipment
 	AugmentationInventaireUtilisee int
+	ManaActuel                     int
+	ManaMax                        int
 }
 
 /* Ces constantes définissent les valeurs de départ du personnage et les caractéristiques de son attaque basique. */
 const (
-	capaciteInventaireDepart    = 10
-	argentDepart                = 100
-	maxAugmentationsInventaire  = 3
-	bonusAugmentationInventaire = 10
-	attaqueBasique              = "Attaque Basique"
-	degatsAttaqueBasique        = 5
+	capaciteInventaireDepart        = 10
+	argentDepart                    = 100
+	maxAugmentationsInventaire      = 3
+	bonusAugmentationInventaire     = 10
+	attaqueBasique                  = "Attaque Basique"
+	degatsAttaqueBasique            = 5
+	experienceinitiale              = 0
+	experiencemaximale              = 100
+	experiencesupplementairerequise = 50
 )
 
 /* La fonction InitCharacter crée et initialise un personnage avec ses statistiques, ses objets, son sort et ses ressources de départ. */
-func InitCharacter(nom string, classe string, niveau int, pvmax int, pvactuel int) Character {
+func InitCharacter(nom string, classe string, niveau int, pvmax int, pvactuel int, manamax int) Character {
 	inventaire := map[string]int{
 		ItemPotionDeVie: 3,
 	}
@@ -56,8 +60,10 @@ func InitCharacter(nom string, classe string, niveau int, pvmax int, pvactuel in
 		Skill:              []string{SortCoupDePoing},
 		CapaciteInventaire: capaciteInventaireDepart,
 		Argent:             argentDepart,
-		ExperienceActuelle: 0,
-		ExperienceMax:      100,
+		ExperienceActuelle: experienceinitiale,
+		ExperienceMax:      experiencemaximale,
+		ManaActuel:         manamax,
+		ManaMax:            manamax,
 	}
 	personnage.MettreAJourPvMax()
 	return personnage

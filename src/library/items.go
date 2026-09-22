@@ -26,12 +26,6 @@ const (
 	ItemAugmentationInventaire = "Augmentation d'inventaire"
 )
 
-/* Ces constantes définissent les noms des sorts pouvant être appris par le personnage. */
-const (
-	SortCoupDePoing = "Coup de poing"
-	SortBouleDeFeu  = "Boule de Feu"
-)
-
 /* La méthode useItem applique l'effet correspondant à l'objet sélectionné dans l'inventaire. */
 func (c *Character) useItem(item string) {
 	switch item {

@@ -26,8 +26,8 @@ func CharacterCreation() Character {
 		fmt.Println("Nom invalide : seules les lettres sont acceptées (sans espace, tiret, chiffre ni symbole).")
 	}
 
-	classe, pvMax := ChooseClass()
-	return InitCharacter(nom, classe, 1, pvMax, pvMax/2)
+	classe, pvMax, manamax := ChooseClass()
+	return InitCharacter(nom, classe, 1, pvMax, pvMax/2, manamax)
 }
 
 /* La fonction FormatName vérifie que le nom contient uniquement des lettres et le reformate avec une majuscule suivie de minuscules. */
@@ -49,17 +49,17 @@ func FormatName(saisie string) (string, bool) {
 }
 
 /* La fonction ChooseClass demande au joueur de choisir une classe et renvoie son nom ainsi que ses points de vie maximum. */
-func ChooseClass() (string, int) {
+func ChooseClass() (string, int, int) {
 	for {
 		choix, _ := ReadChoice("Entrez la classe du personnage (1 pour Humain, 2 pour Elfe, 3 pour Nain) : ")
 
 		switch choix {
 		case 1:
-			return "Humain", 100
+			return "Humain", 100, 80
 		case 2:
-			return "Elfe", 80
+			return "Elfe", 80, 100
 		case 3:
-			return "Nain", 120
+			return "Nain", 120, 50
 		default:
 			fmt.Println("Classe invalide. Veuillez entrer 1, 2 ou 3.")
 		}

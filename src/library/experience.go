@@ -11,16 +11,13 @@ import "fmt"
 
 func (c *Character) gagnerExperience(gain int) {
 	fmt.Printf("%s gagne %d points d'expérience !\n", c.Nom, gain)
-
 	c.ExperienceActuelle += gain
-
 	for c.ExperienceActuelle >= c.ExperienceMax {
 		c.ExperienceActuelle -= c.ExperienceMax
 		c.Niveau++
-		c.ExperienceMax += 50
+		c.ExperienceMax += experiencesupplementairerequise
 
 		fmt.Printf("%s passe au niveau %d !\n", c.Nom, c.Niveau)
 	}
-
 	fmt.Printf("Expérience : %d / %d\n", c.ExperienceActuelle, c.ExperienceMax)
 }
