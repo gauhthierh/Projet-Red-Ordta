@@ -31,6 +31,9 @@ type Character struct {
 	AugmentationInventaireUtilisee int
 	ManaActuel                     int
 	ManaMax                        int
+	GainPvMax                      int
+	GainManaMax                    int
+	GainAttaque                    int
 }
 
 /* La fonction InitCharacter crée et initialise un personnage avec ses statistiques, ses objets, son sort et ses ressources de départ. */
@@ -55,6 +58,9 @@ func InitCharacter(nom string, lvl int, cl Classe) Character {
 		ExperienceMax:      experiencemaximale,
 		ManaActuel:         cl.ManaMax,
 		ManaMax:            cl.ManaMax,
+		GainPvMax:          cl.GainPvMax,
+		GainManaMax:        cl.GainManaMax,
+		GainAttaque:        cl.GainAttaque,
 	}
 	personnage.MettreAJourPvMax()
 	return personnage
