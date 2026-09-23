@@ -14,18 +14,25 @@ type Monster struct {
 	Attaque          int
 	Initiative       int
 	ExperienceDonnee int
+	OrMin            int
+	OrMax            int
+	Niveau           int
 }
 
 // Crée le gobelin d'entraînement avec ses statistiques de départ //
-func InitGoblin() Monster {
-	gobelin := Monster{
+func InitGoblin(niveau int) Monster {
+	bonus := niveau - 1
+	pv := PvGobelin + GainPvGobelin*bonus
+	return Monster{
 		Nom:              "Gobelin d'entraînement",
-		PvMax:            40,
-		Attaque:          5,
-		ExperienceDonnee: 40,
+		Niveau:           niveau,
+		PvMax:            pv,
+		PvActuel:         pv,
+		Attaque:          AttaqueGobelin + GainAttaqueGobelin*bonus,
+		ExperienceDonnee: ExperienceGobelin + GainExperienceGobelin*bonus,
+		OrMin:            OrMinGobelin + GainOrMinGobelin*bonus,
+		OrMax:            OrMaxGobelin + GainOrMaxGobelin*bonus,
 	}
-	gobelin.PvActuel = gobelin.PvMax
-	return gobelin
 }
 
 // Fait attaquer le gobelin selon son schéma de combat //

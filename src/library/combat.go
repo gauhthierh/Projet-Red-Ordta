@@ -12,11 +12,11 @@ import (
 // Lance un combat d'entraînement contre un gobelin //
 // Le combat est au tour par tour //
 func (c *Character) TrainingFight() {
-	adversaire := InitGoblin()
+	adversaire := InitGoblin(c.Niveau)
 	tour := 1
 	c.Initiative = rand.Intn(10) + 1
 	adversaire.Initiative = rand.Intn(10) + 1
-	fmt.Printf("\nDébut du combat contre %s !\n", adversaire.Nom)
+	fmt.Printf("\nDébut du combat contre %s (niveau %d) !\n", adversaire.Nom, adversaire.Niveau)
 	fmt.Printf("Initiative de %s : %d\n", c.Nom, c.Initiative)
 	fmt.Printf("Initiative de %s : %d\n", adversaire.Nom, adversaire.Initiative)
 	personnageCommence := c.Initiative >= adversaire.Initiative
@@ -88,6 +88,9 @@ func (c *Character) FinCombat(m *Monster) bool {
 	if m.PvActuel <= 0 {
 		fmt.Printf("%s est vaincu !\n", m.Nom)
 		fmt.Println("Vous avez gagné l'entraînement, bien joué !")
+		gainOr := m.OrMin + rand.Intn(m.OrMax-m.OrMin+1)
+		c.Argent += gainOr
+		fmt.Printf("Vous trouvez %d pièces d'or. Bourse : %d Po\n", gainOr, c.Argent)
 		c.GagnerExperience(m.ExperienceDonnee)
 		return true
 	}

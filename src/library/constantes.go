@@ -16,6 +16,25 @@ const (
 )
 
 // ------------------------------------------------ //
+// --- Monstres                                 --- //
+// ------------------------------------------------ //
+
+// Gobelin : valeurs au niveau 1 //
+const (
+	PvGobelin         = 40
+	AttaqueGobelin    = 5
+	ExperienceGobelin = 50
+	OrMinGobelin      = 5
+	OrMaxGobelin      = 10
+	// Gain par niveau supplémentaire //
+	GainPvGobelin         = 10
+	GainAttaqueGobelin    = 2
+	GainExperienceGobelin = 20
+	GainOrMinGobelin      = 3
+	GainOrMaxGobelin      = 5
+)
+
+// ------------------------------------------------ //
 // --- Expérience                               --- //
 // ------------------------------------------------ //
 
