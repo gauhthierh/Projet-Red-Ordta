@@ -24,7 +24,7 @@ func (c *Character) trainingFight() {
 	} else {
 		fmt.Printf("%s commence le combat !\n", adversaire.Nom)
 	}
-	for c.PVActuel > 0 && adversaire.PVActuel > 0 {
+	for {
 		fmt.Printf("\n=== TOUR %d ===\n", tour)
 		if personnageCommence {
 			c.CharacterTurn(&adversaire)
@@ -50,13 +50,13 @@ func (c *Character) trainingFight() {
 }
 
 func (c *Character) FinCombat(m *Monster) bool {
-	if m.PVActuel <= 0 {
+	if m.PvActuel <= 0 {
 		fmt.Printf("%s est vaincu !\n", m.Nom)
 		fmt.Println("Vous avez gagné l'entraînement, bien joué !")
 		c.GagnerExperience(m.ExperienceDonnee)
 		return true
 	}
-	if c.PVActuel <= 0 {
+	if c.PvActuel <= 0 {
 		c.IsDead()
 		fmt.Println("Le combat d'entraînement est terminé.")
 		return true

@@ -14,9 +14,9 @@ type Character struct {
 	Nom                            string
 	Classe                         string
 	Niveau                         int
-	PVMaxBase                      int
-	PVActuel                       int
-	PVMaxTotal                     int
+	PvMaxBase                      int
+	PvActuel                       int
+	PvMaxTotal                     int
 	Inventaire                     map[string]int
 	Attaque                        int
 	AttaquesPhysiques              []string
@@ -46,16 +46,16 @@ func InitCharacter(nom string, lvl int, cl Classe) Character {
 		Nom:                nom,
 		Classe:             cl.Nom,
 		Niveau:             lvl,
-		PVMaxBase:          cl.PvMax,
-		PVActuel:           cl.PvMax / 2,
+		PvMaxBase:          cl.PvMax,
+		PvActuel:           cl.PvMax / 2,
 		Inventaire:         inventaire,
 		Attaque:            cl.Attaque,
-		AttaquesPhysiques:  []string{attaqueBasique},
+		AttaquesPhysiques:  []string{AttaqueBasique},
 		Skill:              []string{SortCoupDePoing},
-		CapaciteInventaire: capaciteInventaireDepart,
-		Argent:             argentDepart,
-		ExperienceActuelle: experienceinitiale,
-		ExperienceMax:      experiencemaximale,
+		CapaciteInventaire: CapaciteInventaireDepart,
+		Argent:             ArgentDepart,
+		ExperienceActuelle: Experienceinitiale,
+		ExperienceMax:      Experiencemaximale,
 		ManaActuel:         cl.ManaMax,
 		ManaMax:            cl.ManaMax,
 		GainPvMax:          cl.GainPvMax,
@@ -72,7 +72,7 @@ func (c Character) displayInfo() {
 	fmt.Printf("Nom : %s\n", c.Nom)
 	fmt.Printf("Classe : %s\n", c.Classe)
 	fmt.Printf("Niveau : %d\n", c.Niveau)
-	fmt.Printf("Pv : %d / %d\n", c.PVActuel, c.PVMaxTotal)
+	fmt.Printf("Pv : %d / %d\n", c.PvActuel, c.PvMaxTotal)
 	fmt.Printf("Mana : %d / %d\n", c.ManaActuel, c.ManaMax)
 	fmt.Printf("Bonus d'attaque physique : +%d dégâts\n", c.Attaque)
 	fmt.Printf("Attaques physiques : %s\n", strings.Join(c.AttaquesPhysiques, ", "))
@@ -81,33 +81,33 @@ func (c Character) displayInfo() {
 	fmt.Printf("Expérience : %d / %d\n", c.ExperienceActuelle, c.ExperienceMax)
 	fmt.Println("\n=== INVENTAIRE ===")
 	c.AccessInventory()
-	fmt.Println("\n=== EQUIPEMENT ===")
+	fmt.Println("\n=== ÉQUIPEMENT ===")
 	fmt.Printf("-- Tête --\n %s\n", c.Equipement.Tete.DescriptionEquipement())
 	fmt.Printf("-- Torse --\n %s\n", c.Equipement.Torse.DescriptionEquipement())
 	fmt.Printf("-- Pied --\n %s\n", c.Equipement.Pied.DescriptionEquipement())
 }
 
-/* La méthode isDead vérifie si le personnage est mort et le ressuscite avec la moitié de ses points de vie maximum. */
-func (c *Character) isDead() bool {
-	if c.PVActuel > 0 {
+/* La méthode IsDead vérifie si le personnage est mort et le ressuscite avec la moitié de ses points de vie maximum. */
+func (c *Character) IsDead() bool {
+	if c.PvActuel > 0 {
 		return false
 	}
 	fmt.Printf("%s est mort !\n", c.Nom)
-	c.PVActuel = c.PVMaxTotal / 2
-	fmt.Printf("%s ressuscite avec %d / %d PV.\n", c.Nom, c.PVActuel, c.PVMaxTotal)
+	c.PvActuel = c.PvMaxTotal / 2
+	fmt.Printf("%s ressuscite avec %d / %d Pv.\n", c.Nom, c.PvActuel, c.PvMaxTotal)
 	return true
 }
 
 /* La méthode CalculPvAvecBonus calcule les points de vie maximum du personnage en ajoutant les bonus de ses équipements. */
 func (c *Character) CalculPvAvecBonus() int {
-	return c.Equipement.Tete.BonusPv + c.Equipement.Torse.BonusPv + c.Equipement.Pied.BonusPv + c.PVMaxBase
+	return c.Equipement.Tete.BonusPv + c.Equipement.Torse.BonusPv + c.Equipement.Pied.BonusPv + c.PvMaxBase
 }
 
 /* La méthode MettreAJourPvMax actualise les points de vie maximum du personnage après un changement d'équipement. */
 func (c *Character) MettreAJourPvMax() {
-	c.PVMaxTotal = c.CalculPvAvecBonus()
-	if c.PVActuel > c.PVMaxTotal {
-		c.PVActuel = c.PVMaxTotal
+	c.PvMaxTotal = c.CalculPvAvecBonus()
+	if c.PvActuel > c.PvMaxTotal {
+		c.PvActuel = c.PvMaxTotal
 	}
 }
 
@@ -144,21 +144,17 @@ func (c *Character) CharacterTurn(m *Monster) {
 
 /* La méthode ChoixInventaire affiche les objets utilisables en combat et indique si le joueur en a utilisé un. */
 func (c *Character) ChoixInventaire() bool {
-	objets := c.SortedItems()
-	if len(objets) == 0 {
-		fmt.Println("L'inventaire est vide !")
-		return false
-	}
 	for {
+		objets := c.SortedItems()
+		if len(objets) == 0 {
+			fmt.Println("L'inventaire est vide !")
+			return false
+		}
 		for indice, objet := range objets {
 			fmt.Printf("%d. %s, quantité : %d\n", indice+1, objet, c.Inventaire[objet])
 		}
 		fmt.Println("0. Retour")
-		choix, ok := ReadChoice("Votre choix : ")
-		if !ok || choix < 0 || choix > len(objets) {
-			fmt.Printf("Choix invalide. Entrez un nombre entre 0 et %d\n", len(objets))
-			continue
-		}
+		choix := ReadChoiceEntre("Votre choix : ", len(objets))
 		if choix == 0 {
 			return false
 		}
@@ -168,5 +164,12 @@ func (c *Character) ChoixInventaire() bool {
 		} else {
 			fmt.Println("Choisissez un autre objet ou 0 pour revenir en arrière")
 		}
+	}
+}
+
+func (c *Character) SubirDegats(degats int) {
+	c.PvActuel -= degats
+	if c.PvActuel < 0 {
+		c.PvActuel = 0
 	}
 }

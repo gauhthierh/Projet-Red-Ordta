@@ -15,15 +15,15 @@ func (c *Character) GagnerExperience(gain int) {
 	for c.ExperienceActuelle >= c.ExperienceMax {
 		c.ExperienceActuelle -= c.ExperienceMax
 		c.Niveau++
-		c.ExperienceMax = c.ExperienceMax * augmentationExperienceNumerateur / augmentationExperienceDenominateur
-		c.PVMaxBase += c.GainPvMax
+		c.ExperienceMax = c.ExperienceMax * AugmentationExperienceNumerateur / AugmentationExperienceDenominateur
+		c.PvMaxBase += c.GainPvMax
 		c.MettreAJourPvMax()
 		c.ManaMax += c.GainManaMax
 		c.Attaque += c.GainAttaque
 
 		fmt.Printf("%s passe au niveau %d !\n", c.Nom, c.Niveau)
-		fmt.Println("Nouvelles Stats :")
-		fmt.Printf("PV : %d / %d\n", c.PVActuel, c.PVMaxTotal)
+		fmt.Println("Nouvelles Statistiques :")
+		fmt.Printf("Pv : %d / %d\n", c.PvActuel, c.PvMaxTotal)
 		fmt.Printf("Mana : %d / %d\n", c.ManaActuel, c.ManaMax)
 		fmt.Printf("Bonus Attaque physique : +%d dégâts\n", c.Attaque)
 	}

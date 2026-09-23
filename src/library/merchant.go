@@ -19,18 +19,14 @@ func (c *Character) merchant() {
 			prix := c.PrixPour(article)
 			if prix == 0 {
 				fmt.Printf("%d. %s - Gratuit\n", i+1, article.Nom)
+			} else if article.NiveauMin > 1 {
+				fmt.Printf("%d. %s - %d Po (Niveau %d requis)\n", i+1, article.Nom, prix, article.NiveauMin)
 			} else {
 				fmt.Printf("%d. %s - %d Po\n", i+1, article.Nom, prix)
 			}
 		}
 		fmt.Println("0. Retour")
-
-		choix, ok := ReadChoice("Votre choix : ")
-
-		if !ok || choix < 0 || choix > len(Boutique) {
-			fmt.Printf("Choix invalide. Entrez un nombre entre 0 et %d !\n", len(Boutique))
-			continue
-		}
+		choix := ReadChoiceEntre("Votre choix : ", len(Boutique))
 		if choix == 0 {
 			return
 		}
@@ -63,7 +59,7 @@ type Item struct {
 var Boutique = []Item{
 	{Nom: ItemPotionDeVie, Prix: 3, NiveauMin: 1},
 	{Nom: ItemPotionDePoison, Prix: 6, NiveauMin: 1},
-	{Nom: ItemLivreBouleDeFeu, Prix: 25, NiveauMin: 1},
+	{Nom: ItemLivreGrosseBouleDeFeu, Prix: 25, NiveauMin: 1},
 	{Nom: ItemFourrureDeLoup, Prix: 4, NiveauMin: 1},
 	{Nom: ItemPeauDeTroll, Prix: 7, NiveauMin: 1},
 	{Nom: ItemCuirDeSanglier, Prix: 3, NiveauMin: 1},
@@ -74,6 +70,11 @@ var Boutique = []Item{
 	{Nom: ItemLivreEclatsDuGardien, Prix: 30, NiveauMin: 2},
 	{Nom: ItemLivreFlecheDeLumiere, Prix: 30, NiveauMin: 3},
 	{Nom: ItemLivreJugementDesGeants, Prix: 150, NiveauMin: 6},
+	{Nom: ItemLivreAttaquePichenette, Prix: 20, NiveauMin: 1},
+	{Nom: ItemLivreAttaqueClaquounette, Prix: 40, NiveauMin: 2},
+	{Nom: ItemLivreAttaqueCoupsDePied, Prix: 70, NiveauMin: 3},
+	{Nom: ItemLivreAttaqueMorsure, Prix: 120, NiveauMin: 5},
+	{Nom: ItemLivreAttaqueUppercut, Prix: 200, NiveauMin: 7},
 }
 
 /* La fonction PrixPour détermine le prix d'un article pour le personnage*/

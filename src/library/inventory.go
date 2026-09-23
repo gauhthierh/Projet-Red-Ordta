@@ -79,15 +79,7 @@ func (c *Character) InventoryMenu() {
 			fmt.Printf("%d. %s : %d\n", i+1, item, c.Inventaire[item])
 		}
 		fmt.Println("0. Retour")
-		choice, ok := ReadChoice("Votre choix : ")
-		if !ok || choice < 0 || choice > len(items) {
-			if len(items) == 0 {
-				fmt.Println("Choix invalide. Entrez 0 pour revenir au menu principal.")
-			} else {
-				fmt.Printf("Choix invalide. Entrez un nombre entre 0 et %d.\n", len(items))
-			}
-			continue
-		}
+		choice := ReadChoiceEntre("Votre choix : ", len(items))
 		if choice == 0 {
 			return
 		}
@@ -98,10 +90,10 @@ func (c *Character) InventoryMenu() {
 
 /* La méthode UpgradeInventorySlot augmente la capacité de l'inventaire tant que la limite d'améliorations n'est pas atteinte. */
 func (c *Character) UpgradeInventorySlot() bool {
-	if c.AugmentationInventaireUtilisee >= maxAugmentationsInventaire {
+	if c.AugmentationInventaireUtilisee >= MaxAugmentationsInventaire {
 		return false
 	}
 	c.AugmentationInventaireUtilisee++
-	c.CapaciteInventaire += bonusAugmentationInventaire
+	c.CapaciteInventaire += BonusAugmentationInventaire
 	return true
 }

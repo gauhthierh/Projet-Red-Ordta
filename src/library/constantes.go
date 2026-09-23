@@ -1,24 +1,22 @@
 package library
 
 const (
-	capaciteInventaireDepart           = 10
-	argentDepart                       = 100
-	maxAugmentationsInventaire         = 3
-	bonusAugmentationInventaire        = 10
-	attaqueBasique                     = "Attaque Basique"
-	degatsAttaqueBasique               = 5
-	experienceinitiale                 = 0
-	experiencemaximale                 = 100
-	augmentationExperienceNumerateur   = 13
-	augmentationExperienceDenominateur = 10
+	CapaciteInventaireDepart           = 10
+	ArgentDepart                       = 100
+	MaxAugmentationsInventaire         = 3
+	BonusAugmentationInventaire        = 10
+	Experienceinitiale                 = 0
+	Experiencemaximale                 = 100
+	AugmentationExperienceNumerateur   = 13
+	AugmentationExperienceDenominateur = 10
 )
 
 const (
 	ItemPotionDeVie            = "Potion de vie"
 	ItemPotionDePoison         = "Potion de poison"
-	ItemLivreBouleDeFeu        = "Livre de sort : Boule de feu"
+	ItemLivreGrosseBouleDeFeu  = "Livre de sort : Grosse boule de feu"
 	ItemFourrureDeLoup         = "Fourrure de loup"
-	ItemPeauDeTroll            = "Peau de Troll"
+	ItemPeauDeTroll            = "Peau de troll"
 	ItemCuirDeSanglier         = "Cuir de sanglier"
 	ItemPlumeDeCorbeau         = "Plume de corbeau"
 	ItemChapeauAventurier      = "Chapeau de l'aventurier"
@@ -28,7 +26,7 @@ const (
 	EmplacementTorse           = "torse"
 	EmplacementPied            = "pied"
 	ItemAugmentationInventaire = "Augmentation d'inventaire"
-	ItemPotionDeMana           = "Potion de Mana"
+	ItemPotionDeMana           = "Potion de mana"
 	ItemLivreLameDuDestin      = "Livre de sort : Lame du destin"
 	ItemLivreEclatsDuGardien   = "Livre de sort : Éclats du gardien"
 	ItemLivreFlecheDeLumiere   = "Livre de sort : Flèche de lumière"
@@ -36,37 +34,52 @@ const (
 )
 
 const (
-	SortCoupDePoing       = "Coup de poing"
-	SortBouleDeFeu        = "Boule de feu"
-	SortLameDuDestin      = "Lame du destin"
-	SortEclatDuGardien    = "Éclats du gardien"
-	SortFlecheDeLumiere   = "Flèche de lumière"
-	SortFoudreCeleste     = "Foudre Céleste"
-	SortSoinDuCoeur       = "Soin du coeur"
-	SortBouclier          = "Bouclier"
-	SortDevotion          = "Dévotion"
-	SortDernierEspoir     = "Dernier espoir"
-	SortJugementDesGeants = "Jugement des géants"
-	degatsCoupDePoing     = 8
-	degatsBouleDeFeu      = 22
-	degatsLameDuDestin    = 10
-	degatsEclatDuGardien  = 12
-	degatsFlecheDeLumiere = 12
-	// degatFoudreCeleste = 10 par tour pendant 3 tours
-	// soinDuCoeur = 20% de pv restauré
-	// bouclier contre la prochaine attaque
-	// devotion inflige entre 20 et 30 dégats et peut infliger 8 de dégats au lanceur
-	// dernier espoir ne peut être lancé qu'a moins de 30% PV et fait 40 de dégâts
-	degatsJugementDesGeants   = 60
-	coutManaCoupDePoing       = 5
-	coutManaBouleDeFeu        = 30
-	coutManaLameDuDestin      = 10
-	coutManaEclatDuGardien    = 15
-	coutManaFlecheDeLumiere   = 20
-	coutManaFoudreCeleste     = 20
-	coutManaSoinDuCoeur       = 25
-	coutManaBouclier          = 30
-	coutManaDevotion          = 35
-	coutManaDernierEspoir     = 50
-	coutManaJugementDesGeants = 60
+	SortCoupDePoing           = "Coup de poing"
+	SortGrosseBouleDeFeu      = "Grosse boule de feu"
+	SortLameDuDestin          = "Lame du destin"
+	SortEclatsDuGardien       = "Éclats du gardien"
+	SortFlecheDeLumiere       = "Flèche de lumière"
+	SortSoinDuCoeur           = "Soin du coeur"
+	SortBouclier              = "Bouclier"
+	SortJugementDesGeants     = "Jugement des géants"
+	DegatsCoupDePoing         = 8
+	DegatsGrosseBouleDeFeu    = 22
+	DegatsLameDuDestin        = 10
+	DegatsEclatsDuGardien     = 12
+	DegatsFlecheDeLumiere     = 12
+	DegatsJugementDesGeants   = 60
+	CoutManaCoupDePoing       = 5
+	CoutManaGrosseBouleDeFeu  = 30
+	CoutManaLameDuDestin      = 10
+	CoutManaEclatsDuGardien   = 15
+	CoutManaFlecheDeLumiere   = 20
+	CoutManaSoinDuCoeur       = 25
+	CoutManaBouclier          = 30
+	CoutManaJugementDesGeants = 60
+)
+
+const (
+	AttaqueBasique      = "Attaque basique"
+	AttaqueCoupsDePied  = "Coups de pied"
+	AttaqueMorsure      = "Morsure"
+	AttaqueClaquounette = "Claquounette"
+	AttaquePichenette   = "Pichenette"
+	AttaqueUppercut     = "Uppercut"
+)
+
+const (
+	DegatsAttaqueBasique = 5
+	DegatsCoupsDePied    = 11
+	DegatsMorsure        = 13
+	DegatsClaquounette   = 9
+	DegatsPichenette     = 7
+	DegatsUppercut       = 16
+)
+
+const (
+	ItemLivreAttaqueCoupsDePied  = "Manuel de combat : Coups de pied"
+	ItemLivreAttaqueMorsure      = "Manuel de combat : Morsure"
+	ItemLivreAttaqueClaquounette = "Manuel de combat : Claquounette"
+	ItemLivreAttaquePichenette   = "Manuel de combat : Pichenette"
+	ItemLivreAttaqueUppercut     = "Manuel de combat : Uppercut"
 )

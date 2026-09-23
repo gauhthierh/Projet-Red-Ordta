@@ -17,13 +17,6 @@ func (c *Character) useItem(item string) bool {
 		return c.poisonPot()
 	case ItemPotionDeMana:
 		return c.takePotMana()
-	case ItemLivreBouleDeFeu:
-		if !c.spellBook(SortBouleDeFeu) {
-			fmt.Printf("Vous connaissez déjà le sort %s : le livre reste dans l'inventaire.\n", SortBouleDeFeu)
-			return false
-		}
-		c.RemoveInventory(ItemLivreBouleDeFeu)
-		fmt.Printf("Vous apprenez le sort %s !\n", SortBouleDeFeu)
 	case ItemAugmentationInventaire:
 		if !c.UpgradeInventorySlot() {
 			fmt.Println("Vous avez déjà atteint la limite maximale d'améliorations d'inventaire")
@@ -32,37 +25,29 @@ func (c *Character) useItem(item string) bool {
 		c.RemoveInventory(ItemAugmentationInventaire)
 		fmt.Printf("Capacité d'inventaire : %d (+%d). Augmentations restantes : %d\n",
 			c.CapaciteInventaire,
-			bonusAugmentationInventaire,
-			maxAugmentationsInventaire-c.AugmentationInventaireUtilisee)
-	case ItemLivreLameDuDestin:
-		if !c.spellBook(SortLameDuDestin) {
-			fmt.Printf("Vous connaissez déjà le sort %s : le livre reste dans l'inventaire.\n", SortLameDuDestin)
-			return false
-		}
-		c.RemoveInventory(ItemLivreLameDuDestin)
-		fmt.Printf("Vous apprenez le sort %s !\n", SortLameDuDestin)
-	case ItemLivreEclatsDuGardien:
-		if !c.spellBook(SortEclatDuGardien) {
-			fmt.Printf("Vous connaissez déjà le sort %s : le livre reste dans l'inventaire.\n", SortEclatDuGardien)
-			return false
-		}
-		c.RemoveInventory(ItemLivreEclatsDuGardien)
-		fmt.Printf("Vous apprenez le sort %s !\n", SortEclatDuGardien)
-	case ItemLivreFlecheDeLumiere:
-		if !c.spellBook(SortFlecheDeLumiere) {
-			fmt.Printf("Vous connaissez déjà le sort %s : le livre reste dans l'inventaire.\n", SortFlecheDeLumiere)
-			return false
-		}
-		c.RemoveInventory(ItemLivreFlecheDeLumiere)
-		fmt.Printf("Vous apprenez le sort %s !\n", SortFlecheDeLumiere)
-	case ItemLivreJugementDesGeants:
-		if !c.spellBook(SortJugementDesGeants) {
-			fmt.Printf("Vous connaissez déjà le sort %s : le livre reste dans l'inventaire.\n", SortJugementDesGeants)
-			return false
-		}
-		c.RemoveInventory(ItemLivreJugementDesGeants)
-		fmt.Printf("Vous apprenez le sort %s !\n", SortJugementDesGeants)
+			BonusAugmentationInventaire,
+			MaxAugmentationsInventaire-c.AugmentationInventaireUtilisee)
 	default:
+		sort, estUnLivre := SortDuLivre(item)
+		if estUnLivre {
+			if !c.spellBook(sort) {
+				fmt.Printf("Vous connaissez déjà le sort %s : le livre reste dans l'inventaire.\n", sort)
+				return false
+			}
+			c.RemoveInventory(item)
+			fmt.Printf("Vous apprenez le sort %s !\n", sort)
+			return true
+		}
+		attaque, estUnManuel := AttaqueDuManuel(item)
+		if estUnManuel {
+			if !c.ApprentissageAttaque(attaque) {
+				fmt.Printf("Vous connaissez déjà l'attaque %s : le manuel reste dans l'inventaire.\n", attaque)
+				return false
+			}
+			c.RemoveInventory(item)
+			fmt.Printf("Vous apprenez l'attaque %s !\n", attaque)
+			return true
+		}
 		equipement, ok := TrouverEquipement(item)
 		if ok {
 			c.ChangerEquipement(equipement)
@@ -85,18 +70,18 @@ func (c *Character) spellBook(sort string) bool {
 
 /* La méthode takePot consomme une potion de vie pour soigner le personnage sans dépasser ses points de vie maximum. */
 func (c *Character) takePot() bool {
-	if c.Inventaire[ItemPotionDeVie] > 0 && c.PVActuel >= c.PVMaxTotal {
+	if c.Inventaire[ItemPotionDeVie] > 0 && c.PvActuel >= c.PvMaxTotal {
 		fmt.Println("Vous êtes déjà en pleine santé")
 		return false
 	}
 	if c.RemoveInventory(ItemPotionDeVie) {
-		avant := c.PVActuel
-		c.PVActuel += 50
-		if c.PVActuel >= c.PVMaxTotal {
-			c.PVActuel = c.PVMaxTotal
+		avant := c.PvActuel
+		c.PvActuel += 50
+		if c.PvActuel >= c.PvMaxTotal {
+			c.PvActuel = c.PvMaxTotal
 		}
-		fmt.Printf("Vous buvez une %s (+%d PV)\n", ItemPotionDeVie, c.PVActuel-avant)
-		fmt.Printf("PV : %d / %d\n", c.PVActuel, c.PVMaxTotal)
+		fmt.Printf("Vous buvez une %s (+%d Pv)\n", ItemPotionDeVie, c.PvActuel-avant)
+		fmt.Printf("Pv : %d / %d\n", c.PvActuel, c.PvMaxTotal)
 		return true
 	} else {
 		fmt.Println("Aucune potion de vie dans l'inventaire")
@@ -133,12 +118,9 @@ func (c *Character) poisonPot() bool {
 	fmt.Printf("Vous buvez une %s...\n", ItemPotionDePoison)
 	for i := 0; i < 3; i++ {
 		time.Sleep(time.Second)
-		c.PVActuel -= 10
-		if c.PVActuel < 0 {
-			c.PVActuel = 0
-		}
-		fmt.Printf("%s a été empoisonné ! PV : %d / %d\n", c.Nom, c.PVActuel, c.PVMaxTotal)
-		if c.PVActuel <= 0 {
+		c.SubirDegats(10)
+		fmt.Printf("%s a été empoisonné ! Pv : %d / %d\n", c.Nom, c.PvActuel, c.PvMaxTotal)
+		if c.PvActuel <= 0 {
 			fmt.Println("Le poison cesse de faire effet.")
 			return true
 		}
