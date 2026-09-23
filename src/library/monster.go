@@ -7,8 +7,8 @@ import "fmt"
 /* La structure Monster contient les statistiques et les récompenses associées à un monstre. */
 type Monster struct {
 	Nom              string
-	PVMax            int
-	PVActuel         int
+	PvMax            int
+	PvActuel         int
 	Attaque          int
 	Initiative       int
 	ExperienceDonnee int
@@ -18,11 +18,11 @@ type Monster struct {
 func InitGoblin() Monster {
 	gobelin := Monster{
 		Nom:              "Gobelin d'entraînement",
-		PVMax:            40,
+		PvMax:            40,
 		Attaque:          5,
 		ExperienceDonnee: 40,
 	}
-	gobelin.PVActuel = gobelin.PVMax
+	gobelin.PvActuel = gobelin.PvMax
 	return gobelin
 }
 
@@ -33,10 +33,14 @@ func (m Monster) GoblinPattern(c *Character, tour int) {
 		fmt.Printf("%s charge son attaque !!!\n", m.Nom)
 		degats *= 2
 	}
-	c.PVActuel -= degats
-	if c.PVActuel < 0 {
-		c.PVActuel = 0
+	c.SubirDegats(degats)
+	fmt.Printf("%s inflige %d dégâts à %s\n", m.Nom, degats, c.Nom)
+	fmt.Printf("Pv de %s : %d / %d\n", c.Nom, c.PvActuel, c.PvMaxTotal)
+}
+
+func (m *Monster) SubirDegats(degats int) {
+	m.PvActuel -= degats
+	if m.PvActuel < 0 {
+		m.PvActuel = 0
 	}
-	fmt.Printf("%s inflige à %s %d de dégâts\n", m.Nom, c.Nom, degats)
-	fmt.Printf("Pv de %s : %d / %d\n", c.Nom, c.PVActuel, c.PVMaxTotal)
 }

@@ -1,6 +1,9 @@
 package library
 
-import "fmt"
+import (
+	"fmt"
+	"slices"
+)
 
 func (c *Character) ChoixAttaquePhysique(m *Monster) bool {
 	if len(c.AttaquesPhysiques) == 0 {
@@ -18,11 +21,7 @@ func (c *Character) ChoixAttaquePhysique(m *Monster) bool {
 			}
 		}
 		fmt.Println("0. Retour")
-		choix, ok := ReadChoice("Votre choix : ")
-		if !ok || choix < 0 || choix > len(c.AttaquesPhysiques) {
-			fmt.Printf("Choix invalide. Entrez un nombre entre 0 et %d.\n", len(c.AttaquesPhysiques))
-			continue
-		}
+		choix := ReadChoiceEntre("Votre choix : ", len(c.AttaquesPhysiques))
 		if choix == 0 {
 			return false
 		}
@@ -32,20 +31,27 @@ func (c *Character) ChoixAttaquePhysique(m *Monster) bool {
 			fmt.Println("Cette attaque ne peut pas être utilisée.")
 			continue
 		}
-		m.PVActuel -= degats
-		if m.PVActuel < 0 {
-			m.PVActuel = 0
-		}
+		m.SubirDegats(degats)
 		fmt.Printf("%s utilise %s sur %s et lui inflige %d dégâts !\n", c.Nom, attaqueChoisi, m.Nom, degats)
-		fmt.Printf("PV de %s : %d / %d\n", m.Nom, m.PVActuel, m.PVMax)
+		fmt.Printf("Pv de %s : %d / %d\n", m.Nom, m.PvActuel, m.PvMax)
 		return true
 	}
 }
 
 func InfosAttaquePhysique(attaque string) (int, bool) {
 	switch attaque {
-	case attaqueBasique:
-		return degatsAttaqueBasique, true
+	case AttaqueBasique:
+		return DegatsAttaqueBasique, true
+	case AttaqueClaquounette:
+		return DegatsClaquounette, true
+	case AttaqueCoupsDePied:
+		return DegatsCoupsDePied, true
+	case AttaquePichenette:
+		return DegatsPichenette, true
+	case AttaqueMorsure:
+		return DegatsMorsure, true
+	case AttaqueUppercut:
+		return DegatsUppercut, true
 	default:
 		return 0, false
 	}
@@ -57,5 +63,30 @@ func (c *Character) CalculerDegatsPhysique(attaque string) (int, bool) {
 		return 0, false
 	} else {
 		return degats + c.Attaque, existe
+	}
+}
+
+func (c *Character) ApprentissageAttaque(attaque string) bool {
+	if slices.Contains(c.AttaquesPhysiques, attaque) {
+		return false
+	}
+	c.AttaquesPhysiques = append(c.AttaquesPhysiques, attaque)
+	return true
+}
+
+func AttaqueDuManuel(objet string) (string, bool) {
+	switch objet {
+	case ItemLivreAttaqueClaquounette:
+		return AttaqueClaquounette, true
+	case ItemLivreAttaqueCoupsDePied:
+		return AttaqueCoupsDePied, true
+	case ItemLivreAttaquePichenette:
+		return AttaquePichenette, true
+	case ItemLivreAttaqueMorsure:
+		return AttaqueMorsure, true
+	case ItemLivreAttaqueUppercut:
+		return AttaqueUppercut, true
+	default:
+		return "", false
 	}
 }

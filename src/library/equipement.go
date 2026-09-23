@@ -68,5 +68,5 @@ func (c *Character) ChangerEquipement(nouveau Stuff) {
 	} else {
 		fmt.Printf("Vous équipez %s\n", nouveau.Nom)
 	}
-	fmt.Printf("Vos nouveaux Pv : %d / %d\n", c.PVActuel, c.PVMaxTotal)
+	fmt.Printf("Vos nouveaux Pv : %d / %d\n", c.PvActuel, c.PvMaxTotal)
 }

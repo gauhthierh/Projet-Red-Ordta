@@ -26,11 +26,7 @@ func (c *Character) ChoixSort(m *Monster) bool {
 			}
 		}
 		fmt.Println("0. Retour")
-		choix, ok := ReadChoice("Votre choix : ")
-		if !ok || choix < 0 || choix > len(c.Skill) {
-			fmt.Printf("Choix invalide. Entrez un nombre entre 0 et %d.\n", len(c.Skill))
-			continue
-		}
+		choix := ReadChoiceEntre("Votre choix : ", len(c.Skill))
 		if choix == 0 {
 			return false
 		}
@@ -41,16 +37,13 @@ func (c *Character) ChoixSort(m *Monster) bool {
 			continue
 		}
 		if c.ManaActuel < coutMana {
-			fmt.Printf("Impossible de lancer %s il vous manque %d de mana\n", sortChoisi, coutMana-c.ManaActuel)
+			fmt.Printf("Impossible de lancer %s : il vous manque %d de mana.\n", sortChoisi, coutMana-c.ManaActuel)
 			continue
 		}
-		m.PVActuel -= degats
 		c.ManaActuel -= coutMana
-		if m.PVActuel < 0 {
-			m.PVActuel = 0
-		}
+		m.SubirDegats(degats)
 		fmt.Printf("%s utilise %s sur %s et lui inflige %d dégâts !\n", c.Nom, sortChoisi, m.Nom, degats)
-		fmt.Printf("PV de %s : %d / %d\n", m.Nom, m.PVActuel, m.PVMax)
+		fmt.Printf("Pv de %s : %d / %d\n", m.Nom, m.PvActuel, m.PvMax)
 		fmt.Printf("Mana de %s : %d / %d\n", c.Nom, c.ManaActuel, c.ManaMax)
 		return true
 	}
@@ -59,18 +52,35 @@ func (c *Character) ChoixSort(m *Monster) bool {
 func InfosSort(sort string) (int, int, bool) {
 	switch sort {
 	case SortCoupDePoing:
-		return degatsCoupDePoing, coutManaCoupDePoing, true
-	case SortBouleDeFeu:
-		return degatsBouleDeFeu, coutManaBouleDeFeu, true
+		return DegatsCoupDePoing, CoutManaCoupDePoing, true
+	case SortGrosseBouleDeFeu:
+		return DegatsGrosseBouleDeFeu, CoutManaGrosseBouleDeFeu, true
 	case SortLameDuDestin:
-		return degatLameDuDestin, coutManaLameDuDestin, true
-	case SortEclateDuGardien:
-		return degatEclatDuGardien, coutManaEclatDuGardien, true
+		return DegatsLameDuDestin, CoutManaLameDuDestin, true
+	case SortEclatsDuGardien:
+		return DegatsEclatsDuGardien, CoutManaEclatsDuGardien, true
 	case SortFlecheDeLumiere:
-		return degatFlecheDeLumiere, coutManaFlecheDeLumiere, true
+		return DegatsFlecheDeLumiere, CoutManaFlecheDeLumiere, true
 	case SortJugementDesGeants:
-		return degatJugementDesGeants, coutManaJugementDesGeants, true
+		return DegatsJugementDesGeants, CoutManaJugementDesGeants, true
 	default:
 		return 0, 0, false
+	}
+}
+
+func SortDuLivre(objet string) (string, bool) {
+	switch objet {
+	case ItemLivreGrosseBouleDeFeu:
+		return SortGrosseBouleDeFeu, true
+	case ItemLivreLameDuDestin:
+		return SortLameDuDestin, true
+	case ItemLivreEclatsDuGardien:
+		return SortEclatsDuGardien, true
+	case ItemLivreFlecheDeLumiere:
+		return SortFlecheDeLumiere, true
+	case ItemLivreJugementDesGeants:
+		return SortJugementDesGeants, true
+	default:
+		return "", false
 	}
 }

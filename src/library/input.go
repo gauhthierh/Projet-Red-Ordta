@@ -29,3 +29,14 @@ func ReadChoice(prompt string) (int, bool) {
 	choice, err := strconv.Atoi(ReadLine(prompt))
 	return choice, err == nil
 }
+
+func ReadChoiceEntre(prompt string, maximum int) int {
+	for {
+		choix, ok := ReadChoice(prompt)
+		if !ok || choix < 0 || choix > maximum {
+			fmt.Printf("Choix invalide. Entrez un nombre entre 0 et %d\n", maximum)
+			continue
+		}
+		return choix
+	}
+}

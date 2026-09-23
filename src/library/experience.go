@@ -9,21 +9,21 @@ import "fmt"
    Lorsque le maximum est atteint, le personnage gagne un niveau.
    L'expérience dépassant le maximum est conservée pour le niveau suivant.*/
 
-func (c *Character) gagnerExperience(gain int) {
+func (c *Character) GagnerExperience(gain int) {
 	fmt.Printf("%s gagne %d points d'expérience !\n", c.Nom, gain)
 	c.ExperienceActuelle += gain
 	for c.ExperienceActuelle >= c.ExperienceMax {
 		c.ExperienceActuelle -= c.ExperienceMax
 		c.Niveau++
-		c.ExperienceMax = c.ExperienceMax * augmentationExperienceNumerateur / augmentationExperienceDenominateur
-		c.PVMaxBase += c.GainPvMax
+		c.ExperienceMax = c.ExperienceMax * AugmentationExperienceNumerateur / AugmentationExperienceDenominateur
+		c.PvMaxBase += c.GainPvMax
 		c.MettreAJourPvMax()
 		c.ManaMax += c.GainManaMax
 		c.Attaque += c.GainAttaque
 
 		fmt.Printf("%s passe au niveau %d !\n", c.Nom, c.Niveau)
-		fmt.Println("Nouvelles Stats :")
-		fmt.Printf("PV : %d / %d\n", c.PVActuel, c.PVMaxTotal)
+		fmt.Println("Nouvelles Statistiques :")
+		fmt.Printf("Pv : %d / %d\n", c.PvActuel, c.PvMaxTotal)
 		fmt.Printf("Mana : %d / %d\n", c.ManaActuel, c.ManaMax)
 		fmt.Printf("Bonus Attaque physique : +%d dégâts\n", c.Attaque)
 	}

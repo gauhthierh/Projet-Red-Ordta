@@ -14,17 +14,14 @@ func (c *Character) MainMenu() {
 		fmt.Println("2. Accéder à l'inventaire")
 		fmt.Println("3. Marchand")
 		fmt.Println("4. Forgeron")
-		fmt.Println("5. Entrainement")
-		fmt.Println("6. Qui sont ils ?")
+		fmt.Println("5. Entraînement")
+		fmt.Println("6. Qui sont-ils ?")
 		fmt.Println("0. Quitter")
-
 		choice, ok := ReadChoice("Votre choix : ")
-
 		if !ok {
 			fmt.Println("Choix invalide !")
 			continue
 		}
-
 		switch choice {
 		case 1:
 			c.displayInfo()
@@ -53,18 +50,14 @@ func (c *Character) MainMenu() {
 func WaitForReturn() {
 	for {
 		fmt.Println("\n0. Retour")
-
 		choice, ok := ReadChoice("Votre choix : ")
-
 		if !ok {
 			fmt.Println("Choix invalide. Entrez 0 pour revenir au menu principal.")
 			continue
 		}
-
 		if choice == 0 {
 			return
 		}
-
 		fmt.Println("Choix invalide. Entrez 0 pour revenir au menu principal.")
 	}
 }

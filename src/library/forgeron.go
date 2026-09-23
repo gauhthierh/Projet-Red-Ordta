@@ -13,13 +13,7 @@ func (c *Character) forgeron() {
 			fmt.Printf("%d. %s - %d Po\n", i+1, equipement.Nom, equipement.Prix)
 		}
 		fmt.Println("0. Retour")
-
-		choix, ok := ReadChoice("Votre choix : ")
-
-		if !ok || choix < 0 || choix > len(Armurerie) {
-			fmt.Printf("Choix invalide. Entrez un nombre entre 0 et %d !\n", len(Armurerie))
-			continue
-		}
+		choix := ReadChoiceEntre("Votre choix : ", len(Armurerie))
 		if choix == 0 {
 			return
 		}
