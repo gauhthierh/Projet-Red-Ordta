@@ -33,6 +33,13 @@ func lancer3D() error {
 	commande.Stdin, commande.Stdout, commande.Stderr = os.Stdin, os.Stdout, os.Stderr
 	commande.Env = append(os.Environ(), "CGO_ENABLED=1")
 	if runtime.GOOS == "windows" {
+		cibleGCC, err := exec.Command("gcc", "-dumpmachine").Output()
+		if err != nil || !strings.HasPrefix(strings.TrimSpace(string(cibleGCC)), "x86_64-") {
+			return fmt.Errorf("la 3D demande GCC 64 bits : placez C:\\msys64\\ucrt64\\bin en premier dans le Path, puis rouvrez le terminal")
+		}
+		// G3N v0.2.0 utilise des constantes qui débordent les int en 32 bits.
+		// Ne changer que le processus 3D, même si GOARCH=386 est enregistré dans Go.
+		commande.Env = append(commande.Env, "GOOS=windows", "GOARCH=amd64", "CC=gcc")
 		// Au premier lancement, G3N peut ne pas encore être dans le cache Go.
 		// Ce téléchargement fournit également ses DLL audio ; ensuite le cache est réutilisé.
 		telechargement := exec.Command("go", "mod", "download", "github.com/g3n/engine")

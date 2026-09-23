@@ -99,7 +99,7 @@ Le menu propose :
 
 Taper **1**, puis Entrée. Le premier lancement peut prendre plus de temps : Go télécharge les dépendances et compile le jeu. **Une connexion Internet est nécessaire pour ces premiers téléchargements.**
 
-Le lanceur active automatiquement CGO pour la 3D, récupère G3N et ajoute ses bibliothèques audio au processus du jeu. **Pas de commande CGO à taper, pas de DLL audio à télécharger ou copier à la main.** Seul le Path de GCC doit avoir été configuré à l’étape 3.
+Le lanceur active automatiquement CGO pour la 3D, impose la compilation Windows **64 bits**, vérifie que GCC est en 64 bits, récupère G3N et ajoute ses bibliothèques audio au processus du jeu. Cela évite notamment l’erreur G3N `uintUndef ... overflows` causée par une cible Go 32 bits. **Pas de commande CGO à taper, pas de DLL audio à télécharger ou copier à la main.** Seul le Path de GCC doit avoir été configuré à l’étape 3. Ces réglages concernent le processus 3D, sans changer la configuration globale de Go.
 
 Pour les lancements suivants : ouvrir un terminal dans `src`, taper **`go run .`**, puis choisir **1**. Ne pas déplacer `src` ou supprimer `assets` : le jeu a besoin de l’arborescence complète.
 
@@ -127,6 +127,7 @@ go run .
 
 ```powershell
 $env:CGO_ENABLED = "1"
+$env:GOARCH = "amd64"
 go mod download github.com/g3n/engine
 $dossierG3N = go list -m -f '{{.Dir}}' github.com/g3n/engine
 $env:PATH = "$dossierG3N/audio/windows/bin;$env:PATH"
@@ -159,12 +160,19 @@ Une sauvegarde illisible est conservée et le démarrage est bloqué avec un mes
 | ZQSD sur AZERTY / WASD sur QWERTY | Déplacement relatif à la caméra |
 | Maj gauche | Sprint |
 | TAB | Ouvrir ou fermer l’inventaire |
+| M | Ouvrir ou fermer la carte 2D avec votre position |
 | E | Interagir avec un PNJ proche |
 | Échap | Pause / reprise après le démarrage |
 | F5 | Sauvegarder hors combat |
 | Clic gauche | Boutons, objets, choix d’attaque et cible |
 
 La souris est libérée dans les menus, le commerce, l’inventaire et l’arène. La pause suspend les déplacements, les animations et les effets. Le menu permet aussi de quitter et d’afficher « Qui sont-ils ? ».
+
+### Carte du monde
+
+Appuyer sur **M** après le démarrage pour afficher la carte pixel art. Le carré rouge bordé de blanc indique votre position, avec vos coordonnées X/Y en bas. Le nord est en haut ; le marqueur utilise le repère et la taille du monde définis dans le JSON de la carte.
+
+Fermer avec **M**, **Échap** ou le bouton **Fermer**. Pendant la consultation, les déplacements, combats et effets sont suspendus et la souris est libre. L’inventaire ou le commerce précédemment ouvert est retrouvé à la fermeture. L’illustration reste un plan artistique : les détails dessinés ne représentent pas les collisions au pixel près.
 
 ## Personnage, objets et équipements
 
@@ -399,7 +407,7 @@ La page 6 autorise des valeurs différentes tant que le principe des tâches est
 ## Limites et dépannage
 
 - La carte est finie ; pas de génération infinie, saut, nage ou physique verticale.
-- Le plan pixel art existe, mais pas encore d’écran de carte avec marqueur du joueur.
+- Le plan pixel art est accessible avec M et un marqueur ; il n’affiche pas les ennemis ni les collisions.
 - De nombreux panneaux sont dimensionnés pour 1920 × 1080. Le plein écran utilise les dimensions de l’écran, sans imposer cette résolution.
 - Les nouveaux livres et manuels réutilisent une icône de livre ; ils n’ont pas chacun une illustration dédiée.
 - Les sorts Soin du cœur et Bouclier ont encore des constantes dans le backend mais ne sont pas proposés par `InfosSort` ni vendus sous forme de livres ; ils ne sont pas des sorts jouables de cette version.
@@ -411,6 +419,7 @@ La page 6 autorise des valeurs différentes tant que le principe des tâches est
 | `exit status 0xc0000135` | DLL native absente : PATH audio G3N et dépendances GCC. |
 | Asset introuvable | Lancer depuis `src/`, avec `assets/` à la racine. |
 | Échec OpenGL | Pilote graphique et session graphique locale disponibles. |
+| G3N : `uintUndef ... overflows` | Compilation en 32 bits. Le lanceur corrigé impose `GOARCH=amd64` uniquement pour la 3D Windows et vérifie GCC 64 bits. Relancer avec `go run .`. En lancement direct, définir aussi `$env:GOARCH = "amd64"`. |
 | Sauvegarde illisible | Ne pas la supprimer : conserver une copie avant de la renommer ou de la réparer. |
 | Audio indisponible | Vérifier les WAV de `assets/audio/`. |
 | Échec des anciens tests library | Adapter leurs anciennes références côté backend ; voir « Vérifications ». |

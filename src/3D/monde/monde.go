@@ -129,6 +129,11 @@ func Lancer() {
 
 	largeurMenu, hauteurMenu := ordta.GetSize()
 	menu := NouveauMenuJeu(scene, float32(largeurMenu), float32(hauteurMenu))
+	carte, err := NouvelleCarteInterface(scene, float32(largeurMenu), float32(hauteurMenu), donneesMonde.Taille)
+	if err != nil {
+		panic(err)
+	}
+	mEtaitAppuye := false
 	creation := NouvelleCreationPersonnage(scene, float32(largeurMenu), float32(hauteurMenu))
 	if partieChargee != nil {
 		menu.BoutonDemarrer.Label.SetText("CONTINUER")
@@ -220,8 +225,19 @@ func Lancer() {
 	PlacerCameraPersonnage(cameraSimulation, noeudPersonnage, angleHorizontal, angleVertical)
 
 	ActiverRegardSouris(ordta, &angleHorizontal, &angleVertical, func() bool {
-		return !menu.Ouvert && !combatEnCours && !interfaceInventaire.Ouvert && !interfaceCommerce.Ouvert
+		return !carte.Ouverte && !menu.Ouvert && !combatEnCours && !interfaceInventaire.Ouvert && !interfaceCommerce.Ouvert
 	})
+
+	fermerCarte := func() {
+		carte.Ouverte = false
+		carte.Panneau.SetVisible(false)
+		interfaceJeu.SetVisible(true)
+		gui.Manager().Set(interfaceJeu)
+		if !combatEnCours && !interfaceInventaire.Ouvert && !interfaceCommerce.Ouvert {
+			VerrouillerSourisSimulation()
+		}
+	}
+	carte.Fermer.Subscribe(gui.OnClick, func(_ string, _ interface{}) { fermerCarte() })
 
 	fermerInventaire := func() {
 		interfaceInventaire.Fermer()
@@ -481,10 +497,26 @@ func Lancer() {
 	// Boucle principale : mise à jour du jeu, puis affichage de chaque image.
 	ordta.Gls().ClearColor(0.15, 0.25, 0.30, 1)
 	ordta.Run(func(rendu *renderer.Renderer, tempsImage time.Duration) {
+		mAppuye := ordta.KeyState().Pressed(window.KeySemicolon)
+		if mAppuye && !mEtaitAppuye && menu.Demarre && !menu.Ouvert {
+			if carte.Ouverte {
+				fermerCarte()
+			} else {
+				carte.Ouverte = true
+				carte.Actualiser(noeudPersonnage.Position())
+				interfaceJeu.SetVisible(false)
+				carte.Panneau.SetVisible(true)
+				gui.Manager().Set(carte.Panneau)
+				LibererSourisSimulation()
+			}
+		}
+		mEtaitAppuye = mAppuye
 		// Échap ne démarre pas une partie depuis l'accueil ; il bascule la pause.
 		echapAppuye := ordta.KeyState().Pressed(window.KeyEscape)
 		if echapAppuye && !echapEtaitAppuye && menu.Demarre {
-			if menu.Ouvert {
+			if carte.Ouverte {
+				fermerCarte()
+			} else if menu.Ouvert {
 				reprendreJeu()
 			} else {
 				menu.Pause()
@@ -511,7 +543,7 @@ func Lancer() {
 			}
 		}
 		sons.Ambiance(ambiance, float32(tempsImage.Seconds()))
-		if menu.Ouvert {
+		if menu.Ouvert || carte.Ouverte {
 			// Rien ne progresse : déplacement, animations, effets et tours de combat.
 			// Mémoriser les touches empêche TAB/E/F5 de se déclencher à la reprise.
 			tabEtaitAppuye = ordta.KeyState().Pressed(window.KeyTab)
