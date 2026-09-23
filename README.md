@@ -4,6 +4,10 @@ Ordta est un RPG médiéval-fantastique développé en Go pour le Projet RED. Il
 
 Les deux interfaces utilisent le package `library`. L’adaptateur `library_3d.go` expose les actions à la 3D sans attendre de saisie terminal ni bloquer la boucle graphique. Les règles et catalogues du backend font référence.
 
+## Lore et histoire
+
+Le [lore d’Ordta est disponible ici](docs/Lore_Ordta.txt). Sa lecture est importante pour comprendre l’histoire, l’univers et les enjeux de l’aventure. Ce document constitue la référence narrative du projet ; il ne signifie pas que tous les événements décrits sont déjà jouables.
+
 ## Installation et lancement
 
 ### Windows : le minimum pour jouer en 3D
@@ -110,7 +114,53 @@ Pour le CLI seulement, choisir **2** : GCC et les dépendances graphiques ne son
 - La 3D nécessite une carte graphique et un pilote compatibles OpenGL. Si la création de la fenêtre échoue, vérifier le pilote graphique.
 - L’interface est principalement conçue pour 1920 × 1080.
 - Le code est en Go, mais G3N utilise des composants natifs : Go seul ne suffit pas pour compiler la 3D.
-- Cette procédure concerne Windows 64 bits sur processeur Intel/AMD. La configuration Linux/macOS n’est pas automatisée ici.
+- Cette procédure concerne Windows 64 bits sur processeur Intel/AMD. Pour macOS, suivre la section suivante. La configuration Linux n’est pas automatisée ici.
+
+### Installation sur Mac (Intel ou Apple Silicon)
+
+**Prise en charge préparée dans le code, mais pas encore vérifiée sur un Mac réel.** Les tests effectués sous Windows ne garantissent pas le fonctionnement du rendu et de l’audio sur toutes les versions de macOS.
+
+Sur Mac, **ne pas installer MinGW/MSYS2** : le compilateur utilisé est **Clang**, fourni par Apple.
+
+1. Installer Go depuis [go.dev/dl](https://go.dev/dl/) : choisir **macOS ARM64** pour une puce Apple Silicon (M1, M2, etc.), ou **macOS x86-64** pour un Mac Intel. Le type de puce est indiqué dans le menu Apple → À propos de ce Mac.
+2. Ouvrir Terminal et installer les outils de compilation Apple :
+
+```sh
+xcode-select --install
+```
+
+Attendre la fin de l’installation. Si les outils sont déjà installés, passer à la suite.
+
+3. Installer [Homebrew depuis son site officiel](https://brew.sh/). Suivre les indications **Next steps** affichées par l’installateur pour rendre la commande `brew` accessible, puis rouvrir Terminal.
+4. Installer les dépendances audio :
+
+```sh
+brew install openal-soft libvorbis
+```
+
+Homebrew installe également libogg, nécessaire à Vorbis. Ces dépendances sont celles indiquées par la [documentation G3N pour macOS](https://github.com/g3n/engine/wiki#macos).
+
+5. Vérifier :
+
+```sh
+go version
+xcrun --find clang
+brew --prefix openal-soft
+brew --prefix libvorbis
+```
+
+Go doit indiquer `darwin/arm64` sur Apple Silicon ou `darwin/amd64` sur Intel. **Ne pas mélanger Go Intel sous Rosetta avec les bibliothèques Homebrew ARM64.** Utiliser un Terminal natif et les installations correspondant à la puce.
+
+6. Télécharger et extraire le projet complet, comme sous Windows. Dans Terminal, taper `cd ` (avec un espace), glisser le dossier **src** depuis Finder, puis appuyer sur Entrée.
+7. Lancer :
+
+```sh
+go run .
+```
+
+Choisir **1** pour la 3D ou **2** pour le CLI. Le lanceur active CGO, choisit Clang et récupère les chemins des bibliothèques avec Homebrew : pas de DLL Windows à copier ni de variables audio à configurer à chaque lancement.
+
+Le CLI seul nécessite uniquement Go. Pour la 3D, le Mac doit aussi fournir un contexte OpenGL compatible avec G3N. Si une erreur de compilation ou de création de fenêtre persiste, transmettre le message complet avec la version de macOS et le type de puce.
 
 <details>
 <summary>Développeurs uniquement : Git, lancement direct et environnement de test</summary>
@@ -289,6 +339,7 @@ Projet-Red/
 ├── assets/                   Carte, modèles, textures, icônes et audio
 ├── src/
 │   ├── main.go               Choix terminal CLI / 3D
+│   ├── lancement/            Préparation macOS (macos.go) et ses tests
 │   ├── go.mod, go.sum        Dépendances
 │   ├── library/              Règles du jeu et interface CLI
 │   │   └── library_3d.go     Adaptateur non bloquant pour la 3D
@@ -304,6 +355,8 @@ Projet-Red/
 ```
 
 Les fonctions terminal interactives du backend ne doivent pas être appelées depuis la boucle graphique. L’adaptateur utilise les structures, catalogues et fonctions de calcul disponibles, puis renvoie des résultats affichables. Les changements de noms ou de règles doivent également être répercutés dans cet adaptateur.
+
+La préparation macOS est regroupée dans `src/lancement/`, pas dans des fichiers à la racine de `src`. Les deux points d’entrée sont conservés : `src/main.go` pour le choix CLI/3D et `src/3D/main.go` pour le jeu graphique. Le lancement habituel reste `go run .` depuis `src/`. Les tests de préparation macOS se lancent avec `go test ./lancement`.
 
 ## Vérifications
 
@@ -402,7 +455,7 @@ Le [sujet](docs/Projet%20RED%20-%20Sujet.pdf) demande un jeu CLI, un dossier `sr
 
 La page 6 autorise des valeurs différentes tant que le principe des tâches est respecté. Ce README décrit les valeurs du code, pas une garantie de note ou de conformité totale.
 
-À compléter par l’équipe : le document de gestion de projet n’a pas été trouvé dans `docs/` (qui contient le sujet). Vérifier également le nom de dépôt demandé, `projet-red_NOM-DU-PROJET`, et le dépôt du lien sur Moodle avant l’échéance fixée par les encadrants.
+À compléter par l’équipe : le document de gestion de projet n’a pas été trouvé dans `docs/` (qui contient le sujet et le lore). Le lore ne remplace pas ce livrable. Vérifier également le nom de dépôt demandé, `projet-red_NOM-DU-PROJET`, et le dépôt du lien sur Moodle avant l’échéance fixée par les encadrants.
 
 ## Limites et dépannage
 
@@ -419,6 +472,9 @@ La page 6 autorise des valeurs différentes tant que le principe des tâches est
 | `exit status 0xc0000135` | DLL native absente : PATH audio G3N et dépendances GCC. |
 | Asset introuvable | Lancer depuis `src/`, avec `assets/` à la racine. |
 | Échec OpenGL | Pilote graphique et session graphique locale disponibles. |
+| Mac : Clang introuvable | Installer les outils Apple avec `xcode-select --install`. |
+| Mac : `al.h`, `codec.h` ou bibliothèque audio introuvable | Installer `brew install openal-soft libvorbis`, puis utiliser le lanceur `go run .`. |
+| Mac : architecture incompatible | Go, Terminal et Homebrew doivent utiliser la même architecture : ARM64 sur Apple Silicon, x86-64 sur Intel. |
 | G3N : `uintUndef ... overflows` | Compilation en 32 bits. Le lanceur corrigé impose `GOARCH=amd64` uniquement pour la 3D Windows et vérifie GCC 64 bits. Relancer avec `go run .`. En lancement direct, définir aussi `$env:GOARCH = "amd64"`. |
 | Sauvegarde illisible | Ne pas la supprimer : conserver une copie avant de la renommer ou de la réparer. |
 | Audio indisponible | Vérifier les WAV de `assets/audio/`. |
@@ -426,8 +482,17 @@ La page 6 autorise des valeurs différentes tant que le principe des tâches est
 
 ## Équipe et ressources
 
-Crédits conservés du README précédent : **gauhthierh, GuillaumeLarre, lalie-droid et quent1206**, sans attribution de rôles non documentés.
+Contributeurs du projet :
+
+- **Gautier** : frontend 3D.
+- **Guillaume** : backend.
+- **Quentin** : backend.
+- **Lalie** : lore et backend.
 
 G3N v0.2.0 utilise notamment GLFW pour la fenêtre, OpenGL pour le rendu et OpenAL pour l’audio. Les dépendances sont déclarées dans `src/go.mod` et `src/go.sum`.
+
+**G3N** est le moteur 3D écrit en Go : il fournit les outils pour construire la scène, placer les modèles, gérer les caméras, matériaux, lumières et interfaces graphiques. Les règles de combat et d’inventaire restent dans notre propre code.
+
+**GLFW** est une bibliothèque utilisée par le moteur pour créer la fenêtre et recevoir les événements du clavier et de la souris. Elle permet notamment de gérer le plein écran et la capture du curseur ; ce n’est pas elle qui dessine les modèles 3D.
 
 Aucune licence globale n’est déclarée dans le dépôt. Les licences des dépendances ne constituent pas une autorisation de redistribution de tous les assets.

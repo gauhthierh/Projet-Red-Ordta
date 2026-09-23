@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"ordta/lancement"
 	"ordta/library"
 	"os"
 	"os/exec"
@@ -26,12 +27,17 @@ func main() {
 
 // Le CLI reste indépendant de G3N et de ses dépendances natives.
 func lancer3D() error {
-	if _, err := exec.LookPath("gcc"); err != nil {
+	if _, err := exec.LookPath("gcc"); err != nil && runtime.GOOS != "darwin" {
 		return fmt.Errorf("GCC est introuvable. Installez GCC via https://www.msys2.org/, ajoutez C:\\msys64\\ucrt64\\bin au Path Windows, puis rouvrez le terminal (voir README)")
 	}
 	commande := exec.Command("go", "run", "./3D")
 	commande.Stdin, commande.Stdout, commande.Stderr = os.Stdin, os.Stdout, os.Stderr
 	commande.Env = append(os.Environ(), "CGO_ENABLED=1")
+	if runtime.GOOS == "darwin" {
+		if err := lancement.PreparerMac(commande); err != nil {
+			return err
+		}
+	}
 	if runtime.GOOS == "windows" {
 		cibleGCC, err := exec.Command("gcc", "-dumpmachine").Output()
 		if err != nil || !strings.HasPrefix(strings.TrimSpace(string(cibleGCC)), "x86_64-") {
