@@ -7,6 +7,7 @@ import (
 	"github.com/g3n/engine/math32"
 )
 
+// TestAncienPersonnageZDirect : Vérifie le repère Z vertical et les pivots de l'ancien modèle sans conversion globale.
 func TestAncienPersonnageZDirect(t *testing.T) {
 	p := NouveauAncienModele()
 	if p.Noeud() == nil || p.jambeGauche == nil || p.jambeDroite == nil || p.brasGauche == nil || p.brasDroit == nil {

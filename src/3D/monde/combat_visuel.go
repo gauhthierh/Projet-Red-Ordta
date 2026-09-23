@@ -9,6 +9,7 @@ import (
 	"github.com/g3n/engine/math32"
 )
 
+// ChargerMontres : Charge un modèle par ennemi, dans le même ordre que le backend, et nettoie les ajouts en cas d'échec.
 func ChargerMontres(scene *core.Node, concurrents []library.EnnemiCombat) ([]*monstres.Monstre, error) {
 	modeles := []*monstres.Monstre{}
 

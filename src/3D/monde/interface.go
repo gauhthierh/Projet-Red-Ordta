@@ -10,6 +10,7 @@ import (
 	"github.com/g3n/engine/math32"
 )
 
+// InterfaceCombat : Regroupe les commandes visibles et les options du sous-menu courant.
 type InterfaceCombat struct {
 	Panneau          *gui.Panel
 	BoutonAttaquer   *gui.Button
@@ -23,6 +24,7 @@ type InterfaceCombat struct {
 	OptionsChoix     []string
 }
 
+// InterfacePersonnage : Regroupe les éléments d'affichage du joueur ; les valeurs restent dans library.Character.
 type InterfacePersonnage struct {
 	Panneau *gui.Panel
 
@@ -39,6 +41,7 @@ type InterfacePersonnage struct {
 	Argent     *gui.Label
 }
 
+// InterfaceMonstre : Représente une fiche cliquable liée à l'indice d'un ennemi.
 type InterfaceMonstre struct {
 	Panneau *gui.Panel
 
@@ -52,11 +55,13 @@ type InterfaceMonstre struct {
 	LargeurVieMax  float32
 }
 
+// InterfaceMonstres : Conserve les fiches réutilisées pour les ennemis de la vague.
 type InterfaceMonstres struct {
 	Panneau  *gui.Panel
 	Monstres []*InterfaceMonstre
 }
 
+// InterfaceEtatCombat : Affiche la progression du combat et le dernier événement.
 type InterfaceEtatCombat struct {
 	Panneau *gui.Panel
 	Vague   *gui.Label
@@ -66,6 +71,7 @@ type InterfaceEtatCombat struct {
 	Butin   *gui.Label
 }
 
+// NouvelleInterfaceCombat : Construit les commandes ; leurs clics seront reliés aux actions du backend dans monde.go.
 func NouvelleInterfaceCombat(scene *core.Node) *InterfaceCombat {
 	panneau := gui.NewPanel(800, 230)
 	panneau.SetPosition(560, 830)
@@ -132,6 +138,7 @@ func NouvelleInterfaceCombat(scene *core.Node) *InterfaceCombat {
 	}
 }
 
+// AfficherChoix : Remplit les boutons d'attaques ou de sorts avec les options connues du joueur.
 func (i *InterfaceCombat) AfficherChoix(mode string, options []string) {
 	if i == nil {
 		return
@@ -151,6 +158,7 @@ func (i *InterfaceCombat) AfficherChoix(mode string, options []string) {
 	}
 }
 
+// MasquerChoix : Efface le sous-menu pour ne pas conserver un choix d'un tour précédent.
 func (i *InterfaceCombat) MasquerChoix() {
 	if i == nil {
 		return
@@ -162,6 +170,7 @@ func (i *InterfaceCombat) MasquerChoix() {
 	}
 }
 
+// NouvelleInterfacePersonnage : Crée le panneau de statistiques et la barre de vie sans modifier le personnage.
 func NouvelleInterfacePersonnage(scene *core.Node) *InterfacePersonnage {
 	// Panneau principal de l'interface
 	panneau := gui.NewPanel(380, 230)
@@ -253,6 +262,7 @@ func NouvelleInterfacePersonnage(scene *core.Node) *InterfacePersonnage {
 	}
 }
 
+// MettreAJourPersonnage : Recopie les valeurs du backend et borne la largeur de la barre entre zéro et son maximum.
 func (i *InterfacePersonnage) MettreAJourPersonnage(p *library.Character) {
 	if i == nil || p == nil {
 		return
@@ -308,6 +318,7 @@ func (i *InterfacePersonnage) MettreAJourPersonnage(p *library.Character) {
 	)
 }
 
+// NouvelleFicheMonstre : Construit une fiche à la hauteur demandée ; son ajout à la scène est fait par l'appelant.
 func NouvelleFicheMonstre(positionY float32) *InterfaceMonstre {
 	// Conteneur de la fiche
 	panneau := gui.NewPanel(320, 100)
@@ -375,6 +386,7 @@ func NouvelleFicheMonstre(positionY float32) *InterfaceMonstre {
 	}
 }
 
+// NouvelleInterfaceMonstres : Prépare les fiches réutilisées d'une vague à l'autre.
 func NouvelleInterfaceMonstres(scene *core.Node, nombreMaximum int) *InterfaceMonstres {
 	// Conteneur général placé à droite de l'écran.
 	hauteur := float32(nombreMaximum) * 115
@@ -406,6 +418,7 @@ func NouvelleInterfaceMonstres(scene *core.Node, nombreMaximum int) *InterfaceMo
 	}
 }
 
+// MettreAJourMonstres : Actualise les fiches dans l'ordre des ennemis et masque les emplacements inutilisés.
 func (i *InterfaceMonstres) MettreAJourMonstres(ennemis []library.EnnemiCombat) {
 	if i == nil {
 		return
@@ -447,7 +460,7 @@ func (i *InterfaceMonstres) MettreAJourMonstres(ennemis []library.EnnemiCombat) 
 		fiche.RemplissageVie.SetSize(largeurVie, 20)
 
 		// Mise à jour des informations.
-		fiche.Nom.SetText(monstre.Nom)
+		fiche.Nom.SetText(fmt.Sprintf("%s — niv. %d", monstre.Nom, monstre.Niveau))
 
 		fiche.TexteVie.SetText(
 			fmt.Sprintf("PV : %d / %d", monstre.PvActuel, monstre.PvMax),
@@ -459,6 +472,7 @@ func (i *InterfaceMonstres) MettreAJourMonstres(ennemis []library.EnnemiCombat) 
 	}
 }
 
+// NouvelleInterfaceEtatCombat : Crée le panneau de vague, de tour et de dernier événement.
 func NouvelleInterfaceEtatCombat(scene *core.Node) *InterfaceEtatCombat {
 	panneau := gui.NewPanel(780, 235)
 	panneau.SetPosition(660, 30)
@@ -502,6 +516,7 @@ func NouvelleInterfaceEtatCombat(scene *core.Node) *InterfaceEtatCombat {
 	}
 }
 
+// textePhaseCombat : Transforme les valeurs internes de phase en libellés destinés au joueur.
 func textePhaseCombat(phase library.PhaseCombat) string {
 	switch phase {
 	case library.PhaseTourJoueur:
@@ -518,12 +533,33 @@ func textePhaseCombat(phase library.PhaseCombat) string {
 
 	case library.PhaseDefaite:
 		return "Défaite"
+	case library.PhaseAbandon:
+		return "Combat quitté"
 
 	default:
 		return "Phase inconnue"
 	}
 }
 
+// ActualiserVisibilite garde les commandes cohérentes avec le tour et les menus.
+// Les options d'une ancienne attaque disparaissent dès que le joueur ne peut plus agir.
+func (i *InterfaceCombat) ActualiserVisibilite(combat *library.CombatArene, inventaireOuvert, animationActive bool) {
+	visible := combat != nil && !inventaireOuvert
+	agir := visible && !animationActive && combat.Phase == library.PhaseTourJoueur
+	termine := visible && !animationActive &&
+		(combat.Phase == library.PhaseVictoire || combat.Phase == library.PhaseDefaite)
+	i.Panneau.SetVisible(visible)
+	for _, bouton := range []*gui.Button{i.BoutonAttaquer, i.BoutonSorts, i.BoutonInventaire, i.BoutonDefendre} {
+		bouton.SetVisible(agir)
+	}
+	i.BoutonQuitter.SetVisible(visible)
+	i.BoutonRejouer.SetVisible(termine)
+	if !agir {
+		i.MasquerChoix()
+	}
+}
+
+// MettreAJour : Affiche la progression et le dernier résultat, ou masque le panneau en l'absence de combat.
 func (i *InterfaceEtatCombat) MettreAJour(combat *library.CombatArene, dernierMessage string) {
 	if i == nil {
 		return

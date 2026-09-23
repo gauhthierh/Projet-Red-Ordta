@@ -22,6 +22,7 @@ func PlacerCameraArene(vue *camera.Camera) {
 	vue.LookAt(&math32.Vector3{X: 170, Y: -165, Z: 1.5}, &math32.Vector3{Z: 1})
 }
 
+// EstDansArene : Teste la zone circulaire dans le plan XY, sans tenir compte de la hauteur.
 func EstDansArene(positionX float32, positionY float32) bool {
 	centreX := float32(170)
 	centreY := float32(-165)

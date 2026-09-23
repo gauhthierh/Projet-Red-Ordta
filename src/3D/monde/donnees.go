@@ -6,6 +6,7 @@ import (
 	"os"
 )
 
+// Zone : Décrit un lieu du plan ; ce repère ne constitue pas à lui seul un obstacle.
 type Zone struct {
 	Identifiant string  `json:"id"`
 	Nom         string  `json:"name"`
@@ -15,6 +16,7 @@ type Zone struct {
 	Description string  `json:"description"`
 }
 
+// DonneesMonde : Contient les informations du JSON, dans le même repère XY au sol et Z vertical que les modèles.
 type DonneesMonde struct {
 	Nom       string      `json:"name"`
 	Taille    float32     `json:"world_size"`
@@ -22,12 +24,11 @@ type DonneesMonde struct {
 	Zones     []Zone      `json:"landmarks"`
 	Obstacles []Collision `json:"collisions"`
 	Ponts     []Collision `json:"bridges"`
-	// north_axis
-	// up_axis
-	// image_width
-	// image_to_world
+	// Les métadonnées de projection supplémentaires du JSON ne sont pas lues ici.
+	// Le jeu utilise directement le repère XY au sol, avec Z pour la hauteur.
 }
 
+// ChargerZones : Lit les repères et collisions du JSON ; le décor visible est chargé depuis l'OBJ.
 func ChargerZones(cheminJSON string) (DonneesMonde, error) {
 	var plan DonneesMonde
 

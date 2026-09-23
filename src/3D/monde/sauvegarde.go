@@ -11,6 +11,7 @@ import (
 
 const cheminSauvegarde = "sauvegardes/partie_3d.json"
 
+// Partie3D : Enregistre la progression et le point de vue, mais pas un combat en cours.
 type Partie3D struct {
 	Version         int
 	Personnage      library.Character
@@ -19,6 +20,7 @@ type Partie3D struct {
 	AngleVertical   float32
 }
 
+// ChargerPartie3D : Distingue une sauvegarde absente d'un fichier invalide, puis adapte les anciennes données.
 func ChargerPartie3D(chemin string) (*Partie3D, error) {
 	contenu, err := os.ReadFile(chemin)
 	if os.IsNotExist(err) {

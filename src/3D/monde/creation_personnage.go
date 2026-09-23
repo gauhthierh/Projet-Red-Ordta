@@ -17,6 +17,7 @@ type CreationPersonnage struct {
 	Classe          string
 }
 
+// NouvelleCreationPersonnage : Prépare la saisie du nom et le choix de classe ; la validation est branchée dans monde.go.
 func NouvelleCreationPersonnage(scene *core.Node, largeur, hauteur float32) *CreationPersonnage {
 	c := &CreationPersonnage{Panneau: gui.NewPanel(760, 520), Classe: "Humain"}
 	c.Panneau.SetPosition((largeur-760)/2, (hauteur-520)/2)

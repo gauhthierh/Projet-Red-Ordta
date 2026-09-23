@@ -21,6 +21,7 @@ type AudioJeu struct {
 	ambiance      string
 }
 
+// NouvelAudioJeu : Charge les pistes disponibles et permet au jeu de continuer si l'audio échoue.
 func NouvelAudioJeu(dossier string) *AudioJeu {
 	a := &AudioJeu{buffers: map[string]uint32{}, musiques: map[string]uint32{}, volumes: map[string]float32{}}
 	for _, nom := range []string{"menu", "monde", "combat", "boss", "victoire", "defaite", "attaque", "impact", "sort", "potion"} {
@@ -30,7 +31,7 @@ func NouvelAudioJeu(dossier string) *AudioJeu {
 			fmt.Println("Audio indisponible :", nom, err)
 			continue
 		}
-		if string(data[:4]) != "RIFF" || string(data[8:16]) != "WAVEfmt " || string(data[36:40]) != "data" || binary.LittleEndian.Uint16(data[20:]) != 1 || binary.LittleEndian.Uint16(data[22:]) != 1 || binary.LittleEndian.Uint16(data[34:]) != 16 || binary.LittleEndian.Uint32(data[24:]) != 32000 || len(data[44:])%2 != 0 {
+		if !formatAudioValide(data) {
 			fmt.Println("Format audio non pris en charge :", nom)
 			continue
 		}
@@ -39,7 +40,10 @@ func NouvelAudioJeu(dossier string) *AudioJeu {
 		if err := al.GetError(); err != nil {
 			al.DeleteBuffers([]uint32{buffer})
 			fmt.Println("Audio désactivé :", err)
-			continue
+			// Une panne OpenAL concerne le périphérique, pas chaque piste.
+			// Libérer les buffers déjà chargés et continuer le jeu sans audio.
+			a.Fermer()
+			return &AudioJeu{}
 		}
 		a.buffers[nom] = buffer
 	}
@@ -69,6 +73,23 @@ func NouvelAudioJeu(dossier string) *AudioJeu {
 	return a
 }
 
+// formatAudioValide reconnaît uniquement le WAV simple produit par musicgen.
+// Un fichier tronqué ou contenant des blocs supplémentaires n'est pas envoyé à OpenAL.
+func formatAudioValide(data []byte) bool {
+	if len(data) < 46 || string(data[:4]) != "RIFF" ||
+		string(data[8:16]) != "WAVEfmt " || string(data[36:40]) != "data" {
+		return false
+	}
+	return binary.LittleEndian.Uint32(data[16:20]) == 16 &&
+		binary.LittleEndian.Uint16(data[20:22]) == 1 &&
+		binary.LittleEndian.Uint16(data[22:24]) == 1 &&
+		binary.LittleEndian.Uint32(data[24:28]) == 32000 &&
+		binary.LittleEndian.Uint16(data[34:36]) == 16 &&
+		uint64(binary.LittleEndian.Uint32(data[40:44])) == uint64(len(data)-44) &&
+		len(data[44:])%2 == 0
+}
+
+// Ambiance : Fait évoluer l'ambiance avec le temps écoulé, exprimé en secondes.
 func (a *AudioJeu) Ambiance(nom string, delta float32) {
 	if a.ambiance != nom {
 		a.ambiance = nom
@@ -103,6 +124,7 @@ func (a *AudioJeu) Ambiance(nom string, delta float32) {
 	}
 }
 
+// Effet : Déclenche un effet court sans interrompre la boucle de jeu.
 func (a *AudioJeu) Effet(nom string) {
 	if a.buffers[nom] == 0 || len(a.effets) == 0 {
 		return
@@ -114,12 +136,14 @@ func (a *AudioJeu) Effet(nom string) {
 	al.SourcePlay(source)
 }
 
+// ArreterEffets : Arrête les sons d'action, notamment lorsque le jeu passe en pause.
 func (a *AudioJeu) ArreterEffets() {
 	for _, s := range a.effets {
 		al.SourceStop(s)
 	}
 }
 
+// Fermer : Libère les ressources audio avant la fermeture du périphérique.
 func (a *AudioJeu) Fermer() {
 	for _, s := range a.musiques {
 		al.SourceStop(s)

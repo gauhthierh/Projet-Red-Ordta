@@ -17,6 +17,7 @@ type MenuJeu struct {
 	Demarre         bool
 }
 
+// NouveauMenuJeu : Prépare le menu commun à l'accueil et à la pause.
 func NouveauMenuJeu(scene *core.Node, largeur, hauteur float32) *MenuJeu {
 	fond := gui.NewPanel(largeur, hauteur)
 	fond.SetColor4(&math32.Color4{R: .025, G: .035, B: .055, A: .94})
@@ -50,12 +51,14 @@ func NouveauMenuJeu(scene *core.Node, largeur, hauteur float32) *MenuJeu {
 	return &MenuJeu{Panneau: fond, Titre: titre, BoutonDemarrer: demarrer, BoutonReprendre: reprendre, BoutonQuitter: quitter, Ouvert: true}
 }
 
+// Reprendre : Masque le menu et marque la partie comme démarrée.
 func (m *MenuJeu) Reprendre() {
 	m.Demarre = true
 	m.Ouvert = false
 	m.Panneau.SetVisible(false)
 }
 
+// Pause : Affiche le menu de reprise ; la boucle principale suspend alors la simulation.
 func (m *MenuJeu) Pause() {
 	m.Ouvert = true
 	m.Titre.SetText("PAUSE")

@@ -15,6 +15,7 @@ import (
 
 var textures = make(map[string]*texture.Texture2D)
 
+// matiere : Crée le matériau d'une pièce et partage sa texture avec les autres pièces qui l'utilisent.
 func matiere(rgb [3]float32, nomTexture string) *material.Standard {
 	couleur := &math32.Color{R: rgb[0], G: rgb[1], B: rgb[2]}
 	resultat := material.NewStandard(couleur)
@@ -32,6 +33,7 @@ func matiere(rgb [3]float32, nomTexture string) *material.Standard {
 	return resultat
 }
 
+// chargerTexture : Décode une texture embarquée une seule fois puis la conserve en mémoire.
 func chargerTexture(nom string) *texture.Texture2D {
 	if existante := textures[nom]; existante != nil {
 		return existante

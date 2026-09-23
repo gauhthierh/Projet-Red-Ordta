@@ -5,6 +5,7 @@ import (
 	"testing"
 )
 
+// TestArmuresDetailleesEtEmplacements : Vérifie les pièces d'armure, leur rattachement et leur visibilité par emplacement.
 func TestArmuresDetailleesEtEmplacements(t *testing.T) {
 	p := Nouveau()
 	if p.noeud.Rotation() != (math32.Vector3{}) || p.jambeDroite.Position().Z != .8 || p.brasDroit.Position().Z != 1.43 {
@@ -35,6 +36,7 @@ func TestArmuresDetailleesEtEmplacements(t *testing.T) {
 	}
 }
 
+// TestTenuesPNJConservees : Vérifie que les tenues du marchand et du forgeron restent présentes.
 func TestTenuesPNJConservees(t *testing.T) {
 	for _, nom := range []string{"marchand", "forgeron"} {
 		p := NouveauAvecTenue(nom)

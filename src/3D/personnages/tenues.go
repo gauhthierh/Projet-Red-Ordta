@@ -16,8 +16,10 @@ func boite(parent *core.Node, x, y, z, largeur, profondeur, hauteur float32, cou
 	parent.Add(mesh)
 }
 
+// Nouveau : Crée le personnage joueur avec la tenue par défaut.
 func Nouveau() *Personnage { return NouveauAvecTenue("joueur") }
 
+// NouveauAvecTenue : Construit le corps et ses pivots, puis ajoute les détails propres au joueur ou au PNJ.
 func NouveauAvecTenue(tenue string) *Personnage {
 	p := &Personnage{noeud: core.NewNode()}
 	chemise := uint32(0xd5c8a8)
@@ -92,6 +94,7 @@ func NouveauAvecTenue(tenue string) *Personnage {
 	return p
 }
 
+// Equiper : Change uniquement la visibilité des pièces 3D ; les statistiques restent gérées dans library.
 func (p *Personnage) Equiper(tete, torse, pieds bool) {
 	p.chapeau.SetVisible(tete)
 	p.tunique.SetVisible(torse)

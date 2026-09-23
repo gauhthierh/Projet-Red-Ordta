@@ -1,14 +1,13 @@
 package library
 
-/* Ce fichier gère le gain d'expérience et les montées de niveau
-   du personnage après une victoire*/
-
 import "fmt"
 
-/* La fonction gagnerExperience ajoute des points d'expérience au personnage.
-   Lorsque le maximum est atteint, le personnage gagne un niveau.
-   L'expérience dépassant le maximum est conservée pour le niveau suivant.*/
+// =================================================== //
+// === Ce fichier gère l'expérience et les niveaux === //
+// =================================================== //
 
+// Ajoute de l'expérience au joueur et le fait monter de niveau si besoin //
+// Chaque niveau augmente ses statistiques selon sa classe //
 func (c *Character) GagnerExperience(gain int) {
 	fmt.Printf("%s gagne %d points d'expérience !\n", c.Nom, gain)
 	c.ExperienceActuelle += gain
@@ -20,7 +19,6 @@ func (c *Character) GagnerExperience(gain int) {
 		c.MettreAJourPvMax()
 		c.ManaMax += c.GainManaMax
 		c.Attaque += c.GainAttaque
-
 		fmt.Printf("%s passe au niveau %d !\n", c.Nom, c.Niveau)
 		fmt.Println("Nouvelles Statistiques :")
 		fmt.Printf("Pv : %d / %d\n", c.PvActuel, c.PvMaxTotal)

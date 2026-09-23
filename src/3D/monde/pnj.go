@@ -12,6 +12,7 @@ import (
 	"github.com/g3n/engine/math32"
 )
 
+// TypePNJ : Identifie le service proposé par un personnage non joueur.
 type TypePNJ string
 
 const (
@@ -20,6 +21,7 @@ const (
 	rayonDialogue         = float32(4.5)
 )
 
+// PNJ : Associe une position d'interaction, un service et un modèle visuel.
 type PNJ struct {
 	Type     TypePNJ
 	Nom      string
@@ -27,11 +29,13 @@ type PNJ struct {
 	Modele   *personnages.Personnage
 }
 
+// InterfaceInteraction : Porte l'indication affichée lorsqu'un PNJ est à portée.
 type InterfaceInteraction struct {
 	Panneau *gui.Panel
 	Texte   *gui.Label
 }
 
+// InterfaceCommerce : Relie les boutons de la boutique au même personnage que celui utilisé par le jeu.
 type InterfaceCommerce struct {
 	Panneau *gui.Panel
 	Titre   *gui.Label
@@ -47,6 +51,7 @@ type InterfaceCommerce struct {
 	Joueur     *library.Character
 }
 
+// AjouterPNJMarche : Installe le marchand et le forgeron avec leur tenue propre aux coordonnées de leurs cabanons.
 func AjouterPNJMarche(scene *core.Node) []*PNJ {
 	definitions := []struct {
 		typePNJ  TypePNJ
@@ -72,6 +77,7 @@ func AjouterPNJMarche(scene *core.Node) []*PNJ {
 	return pnjs
 }
 
+// PNJLePlusProche : Cherche le PNJ le plus proche dans le rayon d'interaction, en ignorant la hauteur.
 func PNJLePlusProche(position math32.Vector3, pnjs []*PNJ) *PNJ {
 	var proche *PNJ
 	meilleureDistance := rayonDialogue * rayonDialogue
@@ -87,6 +93,7 @@ func PNJLePlusProche(position math32.Vector3, pnjs []*PNJ) *PNJ {
 	return proche
 }
 
+// NouvelleInterfaceInteraction : Crée l'indication de proximité invitant à parler avec E.
 func NouvelleInterfaceInteraction(scene *core.Node) *InterfaceInteraction {
 	panneau := gui.NewPanel(440, 55)
 	panneau.SetPosition(740, 760)
@@ -100,6 +107,7 @@ func NouvelleInterfaceInteraction(scene *core.Node) *InterfaceInteraction {
 	return &InterfaceInteraction{Panneau: panneau, Texte: texte}
 }
 
+// Afficher : Affiche le nom du PNJ disponible, ou cache l'indication si aucun n'est à portée.
 func (i *InterfaceInteraction) Afficher(pnj *PNJ) {
 	if pnj == nil {
 		i.Panneau.SetVisible(false)
@@ -109,6 +117,7 @@ func (i *InterfaceInteraction) Afficher(pnj *PNJ) {
 	i.Panneau.SetVisible(true)
 }
 
+// NouvelleInterfaceCommerce : Construit la boutique et branche les achats ou fabrications sur library_3d.
 func NouvelleInterfaceCommerce(scene *core.Node, joueur *library.Character) *InterfaceCommerce {
 	panneau := gui.NewPanel(800, 720)
 	panneau.SetPosition(560, 170)
@@ -193,6 +202,7 @@ func NouvelleInterfaceCommerce(scene *core.Node, joueur *library.Character) *Int
 	return commerce
 }
 
+// Ouvrir : Choisit la boutique du PNJ, revient à la première page et actualise son contenu.
 func (i *InterfaceCommerce) Ouvrir(typePNJ TypePNJ) {
 	if i == nil {
 		return
@@ -208,6 +218,7 @@ func (i *InterfaceCommerce) Ouvrir(typePNJ TypePNJ) {
 	i.MettreAJour()
 }
 
+// FermerMenu : Masque la boutique sans changer les objets ni l'or du joueur.
 func (i *InterfaceCommerce) FermerMenu() {
 	if i == nil {
 		return
@@ -216,6 +227,7 @@ func (i *InterfaceCommerce) FermerMenu() {
 	i.Panneau.SetVisible(false)
 }
 
+// MettreAJour : Relit les prix, les recettes et l'état du joueur sans effectuer d'achat.
 func (i *InterfaceCommerce) MettreAJour() {
 	if i == nil || !i.Ouvert || i.Joueur == nil {
 		return
@@ -271,6 +283,7 @@ func (i *InterfaceCommerce) MettreAJour() {
 	}
 }
 
+// texteMateriaux : Trie les matériaux par nom afin que les recettes gardent un affichage stable.
 func texteMateriaux(materiaux map[string]int) string {
 	noms := make([]string, 0, len(materiaux))
 	for nom := range materiaux {

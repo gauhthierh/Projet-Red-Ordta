@@ -12,12 +12,13 @@ import (
 	"github.com/g3n/engine/math32"
 )
 
-// Les maillages et les textures sont des fichiers fixes : rien n'est généré
-// pendant que le jeu tourne.
+// Ce chargeur utilise des maillages et textures fixes, embarqués dans le programme.
+// Les tenues construites dans tenues.go suivent un autre chemin de création.
 //
 //go:embed assets/*
 var fichiers embed.FS
 
+// piece : Contient les données d'un maillage : positions, normales, UV et indices de triangles.
 type piece struct {
 	Sommets  []float32  `json:"vertices"`
 	Normales []float32  `json:"normals"`
@@ -27,6 +28,7 @@ type piece struct {
 	Texture  string     `json:"texture"`
 }
 
+// modeleFichier : Range les maillages de l'ancien personnage par membre articulé.
 type modeleFichier struct {
 	Corps       []piece `json:"body"`
 	JambeGauche []piece `json:"left_leg"`
@@ -35,6 +37,7 @@ type modeleFichier struct {
 	BrasDroit   []piece `json:"right_arm"`
 }
 
+// lireModele : Décode le modèle embarqué ; une erreur signifie que l'asset livré avec le programme est invalide.
 func lireModele() modeleFichier {
 	contenu, err := fichiers.ReadFile("assets/personnage.json")
 	if err != nil {

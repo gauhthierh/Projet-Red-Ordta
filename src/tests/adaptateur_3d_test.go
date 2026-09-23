@@ -112,11 +112,11 @@ func TestEntrainementExperienceSansRestauration(t *testing.T) {
 	}
 	r := c.Attaquer(0)
 	pv := p.PvActuel
-	if !r.Victoire || r.ExperienceGagnee != 40 || r.OrGagne != 0 {
+	if !r.Victoire || r.ExperienceGagnee != library.ExperienceGobelin || r.OrGagne < library.OrMinGobelin || r.OrGagne > library.OrMaxGobelin {
 		t.Fatalf("%+v", r)
 	}
 	c.Quitter3D()
-	if p.ExperienceActuelle != 40 || p.PvActuel != pv {
+	if p.ExperienceActuelle != library.ExperienceGobelin || p.PvActuel != pv {
 		t.Fatal("progression restaurée à tort")
 	}
 }

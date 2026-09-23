@@ -5,6 +5,12 @@ import (
 	"slices"
 )
 
+// ============================================== //
+// === Ce fichier gère les attaques physiques === //
+// ============================================== //
+
+// Affiche les attaques physiques connues et attaque le monstre avec celle choisie //
+// Renvoie true si une attaque a été lancée //
 func (c *Character) ChoixAttaquePhysique(m *Monster) bool {
 	if len(c.AttaquesPhysiques) == 0 {
 		fmt.Println("Vous ne connaissez aucune attaque physique.")
@@ -38,6 +44,8 @@ func (c *Character) ChoixAttaquePhysique(m *Monster) bool {
 	}
 }
 
+// Renvoie les dégâts de base d'une attaque physique //
+// false si l'attaque est inconnue //
 func InfosAttaquePhysique(attaque string) (int, bool) {
 	switch attaque {
 	case AttaqueBasique:
@@ -57,6 +65,8 @@ func InfosAttaquePhysique(attaque string) (int, bool) {
 	}
 }
 
+// Renvoie les dégâts d'une attaque physique //
+// et ajoute le bonus d'attaque du joueur //
 func (c *Character) CalculerDegatsPhysique(attaque string) (int, bool) {
 	degats, existe := InfosAttaquePhysique(attaque)
 	if !existe {
@@ -66,6 +76,8 @@ func (c *Character) CalculerDegatsPhysique(attaque string) (int, bool) {
 	}
 }
 
+// Apprend une attaque physique au joueur //
+// renvoie false s'il la connaît déjà //
 func (c *Character) ApprentissageAttaque(attaque string) bool {
 	if slices.Contains(c.AttaquesPhysiques, attaque) {
 		return false
@@ -74,6 +86,8 @@ func (c *Character) ApprentissageAttaque(attaque string) bool {
 	return true
 }
 
+// Renvoie l'attaque enseignée par un manuel de combat //
+// false si l'objet n'est pas un manuel //
 func AttaqueDuManuel(objet string) (string, bool) {
 	switch objet {
 	case ItemLivreAttaqueClaquounette:

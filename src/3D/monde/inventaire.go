@@ -21,6 +21,7 @@ type CaseGraphique struct {
 	Nom     string
 }
 
+// InterfaceInventaire : Conserve l'état de navigation ; les objets sont relus depuis le personnage.
 type InterfaceInventaire struct {
 	Panneau *gui.Panel
 	Ouvert  bool
@@ -42,6 +43,7 @@ type InterfaceInventaire struct {
 	BoutonFermer   *gui.Button
 }
 
+// NouvelleInterfaceInventaire : Dispose les statistiques, dix cases par page et les emplacements d'armure.
 func NouvelleInterfaceInventaire(scene *core.Node) *InterfaceInventaire {
 	panneau := gui.NewPanel(1800, 930)
 	panneau.SetPosition(60, 75)
@@ -148,6 +150,7 @@ func NouvelleInterfaceInventaire(scene *core.Node) *InterfaceInventaire {
 	return interfaceInventaire
 }
 
+// nouvelleCaseGraphique : Crée une case dont l'icône garde une taille fixe, indépendante de celle du PNG.
 func nouvelleCaseGraphique(largeur, hauteur, x, y float32) *CaseGraphique {
 	fond := gui.NewPanel(largeur, hauteur)
 	fond.SetPosition(x, y)
@@ -169,6 +172,7 @@ func nouvelleCaseGraphique(largeur, hauteur, x, y float32) *CaseGraphique {
 	return &CaseGraphique{Panneau: fond, Image: imageObjet, Texte: texte}
 }
 
+// AbonnerClic : Rend cliquables le fond, l'image et le texte d'une même case.
 func (c *CaseGraphique) AbonnerClic(action func()) {
 	declencher := func(nomEvenement string, evenement interface{}) {
 		action()
@@ -178,6 +182,7 @@ func (c *CaseGraphique) AbonnerClic(action func()) {
 	c.Texte.Subscribe(gui.OnMouseDown, declencher)
 }
 
+// MettreAJour : Actualise le texte et recharge l'image seulement lorsque le nom de l'objet change.
 func (c *CaseGraphique) MettreAJour(nom, texte, cheminImage string) {
 	c.Texte.SetText(texte)
 	if c.Nom == nom {
@@ -189,6 +194,7 @@ func (c *CaseGraphique) MettreAJour(nom, texte, cheminImage string) {
 	c.Nom = nom
 }
 
+// Ouvrir : Affiche l'inventaire avec une sélection vide ; monde.go s'occupe de la caméra et de la souris.
 func (i *InterfaceInventaire) Ouvrir() {
 	if i == nil {
 		return
@@ -199,6 +205,7 @@ func (i *InterfaceInventaire) Ouvrir() {
 	i.Message.SetText("Sélectionnez un objet.")
 }
 
+// Fermer : Masque l'inventaire et annule la sélection sans consommer d'objet.
 func (i *InterfaceInventaire) Fermer() {
 	if i == nil {
 		return
@@ -208,6 +215,7 @@ func (i *InterfaceInventaire) Fermer() {
 	i.Panneau.SetVisible(false)
 }
 
+// SelectionnerCase : Mémorise un index dans la liste complète des objets, et non seulement dans la page visible.
 func (i *InterfaceInventaire) SelectionnerCase(index int) {
 	if i == nil || index < 0 || index >= len(i.ObjetsAffiches) {
 		return
@@ -217,6 +225,7 @@ func (i *InterfaceInventaire) SelectionnerCase(index int) {
 	i.Message.SetText(objet.Nom)
 }
 
+// ObjetSelectionne : Retourne le nom sélectionné et indique si la sélection est encore valide.
 func (i *InterfaceInventaire) ObjetSelectionne() (string, bool) {
 	if i == nil || i.CaseChoisie < 0 || i.CaseChoisie >= len(i.ObjetsAffiches) {
 		return "", false
@@ -224,6 +233,7 @@ func (i *InterfaceInventaire) ObjetSelectionne() (string, bool) {
 	return i.ObjetsAffiches[i.CaseChoisie].Nom, true
 }
 
+// AfficherMessage : Affiche le résultat d'une action et annule la sélection, car l'inventaire peut avoir changé d'ordre.
 func (i *InterfaceInventaire) AfficherMessage(message string) {
 	if i != nil {
 		i.CaseChoisie = -1 // Le tri peut changer après consommation : sélectionner à nouveau.
@@ -231,6 +241,7 @@ func (i *InterfaceInventaire) AfficherMessage(message string) {
 	}
 }
 
+// MettreAJour : Relit le personnage pour rafraîchir les statistiques, la page d'objets et les armures portées.
 func (i *InterfaceInventaire) MettreAJour(personnage *library.Character) {
 	if i == nil || personnage == nil || !i.Ouvert {
 		return
@@ -279,6 +290,7 @@ func (i *InterfaceInventaire) MettreAJour(personnage *library.Character) {
 	mettreAJourCaseArmure(i.ArmurePieds, "PIEDS", personnage.Equipement.Pied)
 }
 
+// mettreAJourCaseArmure : Affiche l'équipement porté et son bonus, ou un emplacement vide.
 func mettreAJourCaseArmure(caseArmure *CaseGraphique, titre string, equipement library.Stuff) {
 	if equipement.Nom == "" {
 		caseArmure.MettreAJour("", titre+" — Vide", "../assets/ui/icons/png/inventory.png")
@@ -291,6 +303,7 @@ func mettreAJourCaseArmure(caseArmure *CaseGraphique, titre string, equipement l
 	)
 }
 
+// texteCourtObjet : Raccourcit les libellés en comptant les caractères Unicode pour conserver les accents.
 func texteCourtObjet(nom string) string {
 	nom = strings.TrimPrefix(nom, "Livre de sort : ")
 	nom = strings.TrimPrefix(nom, "Manuel de combat : ")

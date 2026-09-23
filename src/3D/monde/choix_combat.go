@@ -8,6 +8,7 @@ import (
 	"ordta/library"
 )
 
+// ChoixCombat : Rassemble les boutons qui précèdent le démarrage d'un combat.
 type ChoixCombat struct {
 	Panneau                            *gui.Panel
 	Message                            *gui.Label
@@ -15,8 +16,9 @@ type ChoixCombat struct {
 	Creatures                          map[library.TypeMonstre]*gui.Button
 }
 
-const aideChoixCombat = "CHOISIR UN COMBAT\nEntraînement : gobelin, expérience gagnée, consommations conservées.\nArène : vagues actuelles. Duel : un seul monstre pour les matériaux.\nVous pouvez quitter à tout moment. Prévoyez des places pour le butin."
+const aideChoixCombat = "CHOISIR UN COMBAT\nEntraînement : gobelin, expérience et or gagnés.\nArène : vagues. Duel : un monstre pour les matériaux.\nEnnemis adaptés à votre niveau. Vous pouvez quitter à tout moment."
 
+// NouveauChoixCombat : Construit le choix des modes et des créatures ; le démarrage est raccordé dans monde.go.
 func NouveauChoixCombat(scene *core.Node) *ChoixCombat {
 	c := &ChoixCombat{Panneau: gui.NewPanel(860, 550), Creatures: map[library.TypeMonstre]*gui.Button{}}
 	c.Panneau.SetPosition(530, 240)
@@ -56,9 +58,13 @@ func NouveauChoixCombat(scene *core.Node) *ChoixCombat {
 	return c
 }
 
-func (c *ChoixCombat) Ouvrir() {
+// Ouvrir : Réinitialise le panneau de choix avant une nouvelle session de combat.
+func (c *ChoixCombat) Ouvrir(niveau int) {
 	c.Message.SetText(aideChoixCombat)
-	for _, b := range c.Creatures {
+	for genre, b := range c.Creatures {
+		ennemi, _ := library.EnnemiDuel3D(genre)
+		m := library.AdapterEnnemiNiveau3D(ennemi, niveau).Monstre
+		b.Label.SetText(fmt.Sprintf("%s niv. %d — %d PV — %d–%d or", m.Nom, m.Niveau, m.PvMax, m.OrMin, m.OrMax))
 		b.SetVisible(false)
 	}
 	c.Panneau.SetVisible(true)
