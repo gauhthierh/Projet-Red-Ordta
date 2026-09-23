@@ -72,10 +72,7 @@ func Lancer() {
 
 	// Personnage
 	PersonnageBackend := library.NouveauPersonnage3D("Joueur", "Humain")
-	partieChargee, err := ChargerPartie3D(cheminSauvegarde)
-	if err != nil {
-		panic(err)
-	}
+	partieChargee, erreurSauvegarde := ChargerPartie3D(cheminSauvegarde)
 	if partieChargee != nil {
 		PersonnageBackend = partieChargee.Personnage
 		position := partieChargee.Position
@@ -85,6 +82,7 @@ func Lancer() {
 	}
 
 	var combatBackend *library.CombatArene
+	effetsPersonnage := library.EffetsPersonnage3D{Joueur: &PersonnageBackend}
 	cibleSelectionnee := 0
 	tabEtaitAppuye := false
 	eEtaitAppuye := false
@@ -131,6 +129,17 @@ func Lancer() {
 
 	largeurMenu, hauteurMenu := ordta.GetSize()
 	menu := NouveauMenuJeu(scene, float32(largeurMenu), float32(hauteurMenu))
+	creation := NouvelleCreationPersonnage(scene, float32(largeurMenu), float32(hauteurMenu))
+	if partieChargee != nil {
+		menu.BoutonDemarrer.Label.SetText("CONTINUER")
+	}
+	if erreurSauvegarde != nil {
+		menu.BoutonDemarrer.SetEnabled(false)
+		message := gui.NewLabel("Sauvegarde illisible : elle est conservée. Consultez le terminal.")
+		message.SetPosition(30, 40)
+		menu.Panneau.Add(message)
+		fmt.Println(erreurSauvegarde)
+	}
 	interfaceJeu.SetVisible(false)
 	gui.Manager().Set(menu.Panneau)
 	LibererSourisSimulation()
@@ -144,7 +153,7 @@ func Lancer() {
 	tempsSauvegarde := time.Duration(0)
 	f5EtaitAppuye := false
 	sauvegarder := func() {
-		if combatEnCours || !menu.Demarre {
+		if combatEnCours || !menu.Demarre || effetsPersonnage.Actif() {
 			return
 		}
 		err := SauvegarderPartie3D(cheminSauvegarde, Partie3D{
@@ -155,7 +164,10 @@ func Lancer() {
 			fmt.Println("Échec sauvegarde :", err)
 		}
 	}
-	defer sauvegarder()
+	defer func() {
+		effetsPersonnage.MettreAJour(3 * time.Second)
+		sauvegarder()
+	}()
 
 	// Reprendre conserve l'inventaire ou le commerce qui était ouvert.
 	reprendreJeu := func() {
@@ -172,7 +184,35 @@ func Lancer() {
 		reprendreJeu()
 	})
 	menu.BoutonDemarrer.Subscribe(gui.OnClick, func(_ string, _ interface{}) {
+		if erreurSauvegarde != nil {
+			return
+		}
+		if partieChargee != nil {
+			reprendreJeu()
+			return
+		}
+		menu.Panneau.SetVisible(false)
+		creation.Panneau.SetVisible(true)
+		gui.Manager().Set(creation.Panneau)
+		gui.Manager().SetKeyFocus(creation.Nom)
+	})
+	creation.Retour.Subscribe(gui.OnClick, func(_ string, _ interface{}) {
+		creation.Panneau.SetVisible(false)
+		menu.Panneau.SetVisible(true)
+		gui.Manager().SetKeyFocus(nil)
+		gui.Manager().Set(menu.Panneau)
+	})
+	creation.Valider.Subscribe(gui.OnClick, func(_ string, _ interface{}) {
+		personnage, err := library.CreerPersonnage3D(creation.Nom.Text(), creation.Classe)
+		if err != nil {
+			creation.Message.SetText(err.Error())
+			return
+		}
+		PersonnageBackend = personnage
+		creation.Panneau.SetVisible(false)
+		gui.Manager().SetKeyFocus(nil)
 		reprendreJeu()
+		sauvegarder()
 	})
 	menu.BoutonQuitter.Subscribe(gui.OnClick, func(_ string, _ interface{}) {
 		ordta.Exit() // La sauvegarde normale est effectuée par defer.
@@ -238,7 +278,7 @@ func Lancer() {
 			if combatBackend == nil || indexMonstre >= len(combatBackend.Ennemis) {
 				return
 			}
-			if combatBackend.Ennemis[indexMonstre].Monstre.PVActuel <= 0 {
+			if combatBackend.Ennemis[indexMonstre].Monstre.PvActuel <= 0 {
 				return
 			}
 			cibleSelectionnee = indexMonstre
@@ -284,7 +324,7 @@ func Lancer() {
 				return
 			}
 			if cibleSelectionnee >= len(combatBackend.Ennemis) ||
-				combatBackend.Ennemis[cibleSelectionnee].Monstre.PVActuel <= 0 {
+				combatBackend.Ennemis[cibleSelectionnee].Monstre.PvActuel <= 0 {
 				cibleSelectionnee = cibles[0]
 			}
 
@@ -341,7 +381,7 @@ func Lancer() {
 			return
 		}
 
-		resultat := PersonnageBackend.UtiliserObjet3D(nomObjet)
+		resultat := effetsPersonnage.Utiliser(nomObjet)
 		if resultat.Reussite {
 			sons.Effet("potion")
 		}
@@ -403,6 +443,10 @@ func Lancer() {
 		choixCombat.Ouvrir()
 	})
 	demarrerCombat := func(mode library.ModeCombat, genre library.TypeMonstre) {
+		if effetsPersonnage.Actif() {
+			choixCombat.Message.SetText("Attendez la fin du poison.")
+			return
+		}
 		if combatBackend != nil {
 			return
 		}
@@ -422,7 +466,7 @@ func Lancer() {
 		journalCombat.Etat(nouveau)
 		modelesAdversaires = modeles
 		choixCombat.Panneau.SetVisible(false)
-		dernierMessageCombat = "À vous de jouer. Vous pouvez quitter à tout moment."
+		dernierMessageCombat = "L’initiative détermine le premier tour. Vous pouvez quitter à tout moment."
 	}
 	choixCombat.Entrainement.Subscribe(gui.OnClick, func(_ string, _ interface{}) { demarrerCombat(library.ModeEntrainement, library.TypeGobelin) })
 	choixCombat.Arene.Subscribe(gui.OnClick, func(_ string, _ interface{}) { demarrerCombat(library.ModeArene, library.TypeGobelin) })
@@ -478,6 +522,9 @@ func Lancer() {
 			return
 		}
 		deplacementEffectue := false
+		for _, resultat := range effetsPersonnage.MettreAJour(tempsImage) {
+			interfaceInventaire.AfficherMessage(resultat.Message)
+		}
 		personnage3d.Equiper(PersonnageBackend.Equipement.Tete.Nom != "", PersonnageBackend.Equipement.Torse.Nom != "", PersonnageBackend.Equipement.Pied.Nom != "")
 		tempsSauvegarde += tempsImage
 		f5Appuye := ordta.KeyState().Pressed(window.KeyF5)
@@ -604,14 +651,14 @@ func Lancer() {
 		// Mise à jour du combat à chaque image.
 		if combatEnCours &&
 			combatBackend != nil &&
-			combatBackend.Phase == library.PhaseTourMonstres &&
+			combatBackend.Phase == library.PhaseTourMonstres && !combatBackend.EffetEnCours3D() &&
 			!interfaceInventaire.Ouvert && !animationCombat.Active {
 
 			tempsAvantActionMonstre += tempsImage
 
 			if tempsAvantActionMonstre >= time.Second {
 				indexActeur := combatBackend.IndexMonstreActif
-				for indexActeur < len(combatBackend.Ennemis) && combatBackend.Ennemis[indexActeur].Monstre.PVActuel <= 0 {
+				for indexActeur < len(combatBackend.Ennemis) && combatBackend.Ennemis[indexActeur].Monstre.PvActuel <= 0 {
 					indexActeur++
 				}
 				defenseAvant := combatBackend.DefenseActive
@@ -652,9 +699,9 @@ func Lancer() {
 				fmt.Println(resultat.Message)
 				fmt.Println(
 					"Vie :",
-					PersonnageBackend.PVActuel,
+					PersonnageBackend.PvActuel,
 					"/",
-					PersonnageBackend.PVMaxTotal,
+					PersonnageBackend.PvMaxTotal,
 				)
 
 				tempsAvantActionMonstre = 0
@@ -687,8 +734,7 @@ func Lancer() {
 					panic(err)
 				}
 
-				// Comme à l'entrée de l'arène, le joueur commence la vague.
-				combatBackend.Phase = library.PhaseTourJoueur
+				// L’initiative choisie par le backend est conservée.
 				combatBackend.IndexMonstreActif = 0
 				cibleSelectionnee = 0
 				interfaceCombat.MasquerChoix()
@@ -700,7 +746,7 @@ func Lancer() {
 				modelesAdversaires = nouveauxModeles
 
 				dernierMessageCombat = fmt.Sprintf(
-					"Vague %d : à vous de jouer.",
+					"Vague %d : début du combat.",
 					combatBackend.NumeroVague,
 				)
 				tempsAvantVagueSuivante = 0

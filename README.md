@@ -1,218 +1,169 @@
 # Ordta — Projet RED
 
-Ordta est un RPG médiéval-fantastique développé en **Go** dans le cadre du Projet RED d’Ynov. Le joueur gère un personnage, son inventaire et ses équipements, achète des objets, fabrique des armures et combat au tour par tour.
+Ordta est un RPG médiéval-fantastique développé en Go pour le Projet RED. Il propose un jeu dans le terminal (CLI), demandé par le sujet, et une extension 3D avec G3N : exploration, marchands, fabrication, équipements visibles et combats au tour par tour.
 
-Le dépôt propose deux versions partageant les structures du package `library` :
-
-- **CLI** : jeu dans le terminal, avec création du personnage et menus numérotés, correspondant au format demandé dans le sujet.
-- **3D** : extension graphique avec **G3N v0.2.0**, exploration à la première personne, village, PNJ, inventaire graphique et arène vue de côté.
-
-Le code du jeu et des outils est en Go. La 3D utilise néanmoins des composants natifs via CGO : compilateur C, OpenGL et bibliothèques audio. Elle n’est donc pas indépendante des bibliothèques système.
-
-## Sommaire
-
-- [Installation et lancement](#installation-et-lancement)
-- [Comment jouer](#comment-jouer)
-- [Personnage et inventaire](#personnage-et-inventaire)
-- [Marchand et forgeron](#marchand-et-forgeron)
-- [Combats 3D](#combats-3d)
-- [Sauvegarde](#sauvegarde)
-- [Organisation du dépôt](#organisation-du-dépôt)
-- [Tests et outils](#tests-et-outils)
-- [Correspondance avec le sujet](#correspondance-avec-le-sujet)
-- [Limites actuelles](#limites-actuelles)
-- [Dépannage](#dépannage)
+Les deux interfaces utilisent le package `library`. L’adaptateur `library_3d.go` expose les actions à la 3D sans attendre de saisie terminal ni bloquer la boucle graphique. Les règles et catalogues du backend font référence.
 
 ## Installation et lancement
 
-### Récupérer le projet
+### Prérequis
 
-Prérequis communs : **Go 1.21 minimum**, conformément à `src/go.mod`, et Git pour cloner le dépôt. Une connexion est nécessaire au téléchargement initial des dépendances.
+- Go 1.21 minimum, conformément à `src/go.mod`.
+- Git pour cloner le dépôt ; connexion au premier téléchargement des dépendances.
+- Pour la 3D sous Windows : GCC/MinGW-w64 64 bits accessible dans le terminal, un pilote OpenGL et les bibliothèques audio de G3N. L’interface est principalement prévue pour 1920 × 1080.
+
+Le code du jeu est en Go, mais G3N utilise aussi des composants natifs via CGO. Installer une nouvelle version de Go ne remplace pas l’installation de GCC.
+
+### Une seule commande depuis src
 
 ```powershell
 git clone https://github.com/gauhthierh/Projet-Red-Ordta.git
 cd Projet-Red-Ordta/src
-go version
-```
-
-Les commandes suivantes sont à exécuter depuis **`src/`**, sauf indication contraire. La 3D charge notamment `../assets/` : conserver ce dossier à côté de `src/`.
-
-### Lancer le CLI
-
-```powershell
 go run .
 ```
 
-Le point d’entrée est `src/main.go`. Le CLI n’importe pas G3N et ne nécessite ni GCC, ni fenêtre OpenGL, ni bibliothèques audio natives.
+Le terminal propose :
 
-Pour compiler et lancer un exécutable Windows :
-
-```powershell
-go build -o ordta-cli.exe .
-.\ordta-cli.exe
+```text
+1 — Jouer en 3D
+2 — Jouer dans le terminal
+0 — Quitter
 ```
 
-### Préparer la 3D sous Windows
+Le CLI ne charge pas G3N : il fonctionne sans les dépendances natives de la 3D.
 
-Prévoir Windows 64 bits, Go pour `windows/amd64`, un compilateur **GCC compatible MinGW-w64 en 64 bits** et un pilote graphique prenant en charge OpenGL. L’interface actuelle est conçue principalement pour **1920 × 1080**.
-
-Installer GCC/MinGW-w64, par exemple via MSYS2, puis rendre son dossier `bin` accessible au terminal utilisé pour lancer Go. Vérifier dans PowerShell :
+Pour le choix 3D, le lanceur active CGO uniquement pour le processus enfant et ajoute les DLL audio livrées avec G3N à son environnement Windows. Il ne modifie pas la configuration globale du PC. GCC doit déjà être accessible :
 
 ```powershell
-go env GOOS GOARCH
 where.exe gcc
 gcc --version
 ```
 
-Si GCC est installé mais introuvable, ajouter son véritable dossier `bin` au `PATH`. Exemple uniquement pour une installation MSYS2 UCRT64 située à cet emplacement :
+Avec MSYS2, ajouter le dossier correspondant à votre installation, par exemple `C:\msys64\ucrt64\bin`, au PATH du terminal. Les architectures Go et GCC doivent correspondre.
 
-```powershell
-$env:Path = "C:\msys64\ucrt64\bin;$env:Path"
-```
+**Toujours lancer depuis `src/`** et conserver `assets/` à côté : les chemins des modèles, textures et sons en dépendent.
 
-Activer CGO dans ce terminal, télécharger les dépendances déclarées par le projet et ajouter les DLL audio fournies par G3N :
+### Lancement direct de la 3D et tests graphiques
+
+Le lanceur principal effectue cette préparation automatiquement. Pour lancer directement `./3D` ou exécuter ses tests sous PowerShell :
 
 ```powershell
 $env:CGO_ENABLED = "1"
-$env:CC = "gcc"
-go mod download
-$dossierMoteur = go list -m -f '{{.Dir}}' github.com/g3n/engine
-$dossierAudio = Join-Path $dossierMoteur "audio\windows\bin"
-$env:Path = "$dossierAudio;$env:Path"
-go env CGO_ENABLED
-```
-
-La dernière commande doit afficher `1`. Le dossier audio de G3N v0.2.0 contient `OpenAL32.dll`, `libogg.dll`, `libvorbis.dll` et `libvorbisfile.dll`.
-
-Ces réglages `$env:...` concernent uniquement le terminal courant : les refaire après sa fermeture, ou configurer les variables Windows correspondantes. Ne pas mélanger les outils 32 et 64 bits.
-
-### Lancer la 3D
-
-Depuis `src/`, dans le terminal préparé ci-dessus :
-
-```powershell
+$dossierG3N = go list -m -f '{{.Dir}}' github.com/g3n/engine
+$env:PATH = "$dossierG3N/audio/windows/bin;$env:PATH"
 go run ./3D
 ```
 
-Le point d’entrée est `src/3D/main.go`, qui appelle `monde.Lancer()`. Aucun ancien lanceur de `archive_gpt/` n’est nécessaire.
+La configuration native Linux/macOS n’est pas automatisée par ce lanceur. Les dépendances OpenGL, GLFW, OpenAL et Vorbis adaptées au système restent nécessaires.
 
-Pour compiler puis lancer :
+Un exécutable du lanceur peut être compilé avec `go build -o ordta.exe .`, mais son choix 3D appelle encore Go : ce n’est pas une distribution autonome du jeu.
 
-```powershell
-go build -o ordta-3d.exe ./3D
-.\ordta-3d.exe
-```
+## Démarrer une partie
 
-Garder `src/` comme répertoire de travail, même avec l’exécutable : tous les assets ne sont pas intégrés au binaire.
+### CLI
 
-G3N fournit aussi des instructions pour Linux et macOS dans son README. Les exemples de ce dépôt ciblent Windows ; le fonctionnement graphique sur les autres systèmes reste à valider.
+Après le choix 2, saisir un nom et une classe. Les menus donnent accès au personnage, à l’inventaire, au marchand, au forgeron et à l’entraînement. Le choix 0 permet de revenir ou quitter. Le CLI ne conserve pas de sauvegarde entre deux exécutions.
 
-## Comment jouer
+### 3D
 
-### Version terminal
+Au premier démarrage, cliquer sur **Démarrer**, saisir le nom puis choisir Humain, Elfe ou Nain. Le nom ne doit contenir que des lettres, accents acceptés. Il est normalisé avec une majuscule initiale et le reste en minuscules.
 
-Saisir le numéro du choix puis **Entrée**. Le menu principal propose les informations du personnage, l’inventaire, le marchand, le forgeron, l’entraînement et « Qui sont-ils ? ». `0` permet de revenir ou de quitter selon le menu.
+La validation crée et sauvegarde le personnage. Revenir à l’accueil sans valider ne crée pas de partie. Si une sauvegarde existe, **Continuer** reprend ce personnage : aucun nouveau choix de classe n’est demandé.
 
-La création demande un nom composé uniquement de lettres, accents acceptés, sans espaces, chiffres ou tirets. Il est normalisé avec une majuscule initiale. Choisir ensuite Humain, Elfe ou Nain.
+Une sauvegarde illisible est conservée et le démarrage est bloqué avec un message, plutôt que de l’écraser silencieusement.
 
-### Version 3D
-
-Cliquer sur **Démarrer** dans l’accueil. La sauvegarde existante est chargée automatiquement ; sans sauvegarde, le personnage est un Humain nommé « Joueur ».
+### Commandes 3D
 
 | Commande | Action |
 |---|---|
-| W / A / S / D | Avancer, aller à gauche, reculer, aller à droite, relativement à la caméra |
-| Maj gauche | Courir en maintenant une direction |
-| Souris | Orienter la vue en exploration |
+| Souris | Regarder autour de soi en exploration |
+| ZQSD sur AZERTY / WASD sur QWERTY | Déplacement relatif à la caméra |
+| Maj gauche | Sprint |
 | TAB | Ouvrir ou fermer l’inventaire |
-| E | Parler au marchand ou au forgeron proche ; fermer le commerce ouvert |
-| Échap | Mettre en pause ou reprendre une partie démarrée |
-| F5 | Sauvegarder hors arène |
-| Clic sur les boutons | Acheter, fabriquer, utiliser un objet, choisir une cible ou une action |
+| E | Interagir avec un PNJ proche |
+| Échap | Pause / reprise après le démarrage |
+| F5 | Sauvegarder hors combat |
+| Clic gauche | Boutons, objets, choix d’attaque et cible |
 
-Le code utilise `KeyW`, `KeyA`, `KeyS`, `KeyD` ; aucun réglage des touches n’est proposé dans les menus. La souris est capturée en exploration et libérée dans les interfaces et l’arène.
+La souris est libérée dans les menus, le commerce, l’inventaire et l’arène. La pause suspend les déplacements, les animations et les effets. Le menu permet aussi de quitter et d’afficher « Qui sont-ils ? ».
 
-Pour découvrir le jeu :
+## Personnage, objets et équipements
 
-1. Ouvrir l’inventaire avec TAB et utiliser une potion : le personnage démarre à la moitié de ses PV.
-2. Rejoindre le marché à l’est de la place centrale. Marchand et forgeron occupent deux cabanons distincts ; s’approcher jusqu’à l’indication **E**.
-3. Rejoindre l’arène au sud-est. Entrer dans sa zone centrale ouvre le choix du combat.
-4. Essayer l’entraînement, puis les duels pour obtenir matériaux et or.
-5. Revenir au forgeron, fabriquer une pièce et l’équiper depuis l’inventaire.
-
-## Personnage et inventaire
-
-### Statistiques de départ
-
-| Classe | PV maximum | Mana maximum | Bonus d’attaque physique |
+| Classe | PV maximum initiaux | Mana maximum initial | Bonus d’attaque |
 |---|---:|---:|---:|
 | Humain | 100 | 100 | 5 |
 | Elfe | 80 | 120 | 0 |
 | Nain | 120 | 80 | 10 |
 
-Le personnage commence au niveau 1, avec 50 % de ses PV, son mana plein, 100 pièces d’or, 3 potions de vie, l’attaque basique et Coup de poing. L’attaque basique inflige **5 + le bonus d’attaque**.
+Le personnage commence au niveau 1 avec la moitié de ses PV, tout son mana, 100 or, trois potions de vie, l’attaque basique et le sort Coup de poing.
 
-Le premier seuil d’expérience est de 100. Il augmente ensuite de 30 %, avec arrondi entier ; l’excédent est conservé. Les gains de PV maximum, de mana maximum et d’attaque dépendent de la classe.
+- Potion de vie : jusqu’à +50 PV, sans dépasser le maximum.
+- Potion de mana : jusqu’à +40 mana.
+- Potion de poison : inflige au buveur 10 dégâts par seconde pendant trois secondes, ou jusqu’à sa mort. En 3D, le chronomètre ne bloque pas l’affichage.
+- Mort : résurrection à la moitié des PV maximum ; après une défaite en arène, sortir ou choisir un autre combat.
+- Livres et manuels : apprennent un sort ou une attaque une seule fois. Un doublon reste dans l’inventaire.
+- L’expérience excédentaire est conservée après un niveau. Le seuil suivant est multiplié par 13/10, avec calcul entier, et les gains de statistiques dépendent de la classe.
 
-### Objets et capacité
+### Inventaire
 
-- **Un exemplaire = une place** : quatre potions occupent quatre cases.
-- La capacité initiale est de 10 objets. Trois améliorations de 10 places sont prévues par les règles, jusqu’à 40. Voir la limite d’affichage 3D plus bas.
-- Une potion de vie restaure jusqu’à 50 PV ; une potion de mana jusqu’à 40 points, sans dépasser le maximum.
-- Le livre apprend Boule de feu une seule fois. Un livre supplémentaire n’est pas consommé si le sort est déjà connu.
-- La potion de poison **blesse son utilisateur** de 10 PV par seconde pendant trois secondes. Ce n’est pas une attaque à lancer sur l’ennemi. En 3D, elle s’utilise uniquement en combat.
+Un exemplaire occupe une place : quatre potions occupent quatre places. La capacité commence à 10, puis augmente de 10 par extension, au maximum trois fois, soit 40.
 
-## Marchand et forgeron
+L’inventaire 3D affiche **dix cases par page**, avec navigation pour les extensions. Les statistiques, l’aperçu du personnage et les trois emplacements d’équipement restent visibles. Sélectionner un objet puis cliquer sur « Utiliser / équiper ». Après une action, sélectionner à nouveau l’objet souhaité.
 
-### Achats
+Les emplacements du backend sont tête, torse et pieds. La protection des jambes du modèle est un complément visuel, pas un quatrième emplacement ou un bonus de statistiques indépendant.
 
-| Article commun aux deux marchands | Prix en or |
-|---|---:|
-| Potion de vie | Première offerte, puis 3 |
-| Potion de poison | 6 |
-| Potion de mana | 5 |
-| Livre de Boule de feu | 25 |
-| Augmentation d’inventaire | 30 |
+### Marchand
 
-Le marchand CLI vend également la fourrure de loup (4 or), la peau de troll (7), le cuir de sanglier (3) et la plume de corbeau (1). **En 3D, ces quatre matériaux viennent exclusivement du butin des combats.**
+La boutique 3D reprend tous les articles de `library.Boutique`, avec leur prix et leur niveau minimum, sur plusieurs pages. Elle contient potions, matériaux, extensions, livres de sorts et manuels d’attaques physiques. La première potion de vie est offerte ; les suivantes coûtent 3 or.
 
-### Fabrication
+Les matériaux peuvent donc être **achetés ou obtenus en combat 3D**. Le niveau, l’or et la place disponible sont vérifiés avant l’achat. Le niveau exigé est affiché sur chaque article.
 
-| Équipement | Matériaux | Coût | Bonus de PV maximum |
-|---|---|---:|---:|
-| Chapeau de l’aventurier | 1 plume de corbeau + 1 cuir de sanglier | 5 or | +10 |
-| Tunique de l’aventurier | 2 fourrures de loup + 1 peau de troll | 5 or | +25 |
-| Bottes de l’aventurier | 1 fourrure de loup + 1 cuir de sanglier | 5 or | +15 |
+### Forgeron
 
-La fabrication consomme les matériaux. Équiper une pièce la retire du sac ; remplacer une pièce remet l’ancienne dans l’inventaire.
+Chaque fabrication coûte 5 or en plus des matériaux :
 
-En 3D, sélectionner l’objet puis **Utiliser / Équiper**. Cliquer sur un emplacement équipé permet de retirer la pièce si une place est libre. Les changements d’équipement sont interdits pendant le combat.
+| Équipement | Matériaux | Bonus |
+|---|---|---:|
+| Chapeau de l’aventurier | 1 plume de corbeau + 1 cuir de sanglier | +10 PV maximum |
+| Tunique de l’aventurier | 2 fourrures de loup + 1 peau de troll | +25 PV maximum |
+| Bottes de l’aventurier | 1 fourrure de loup + 1 cuir de sanglier | +15 PV maximum |
 
-Le personnage dispose d’une tenue sans armure et de pièces 3D visibles : chapeau, plastron, épaulières, brassards, bottes, genouillères et jambières. Les protections de jambes sont liées aux bottes, sans quatrième emplacement indépendant.
+Équiper retire l’objet du sac ; remplacer une pièce y remet l’ancienne. Le bonus augmente le maximum de vie, pas les PV actuels. Hors combat, cliquer sur une pièce équipée permet de la retirer si le sac a une place libre.
 
-## Combats 3D
+## Combats
 
-### Modes
+L’entrée dans l’arène ouvre le choix du mode. La caméra devient latérale et surélevée ; sélectionner les actions avec la souris.
 
-| Mode | Déroulement | Progression |
-|---|---|---|
-| Entraînement | Un gobelin de 40 PV | Aucun gain ; personnage, PV, mana et inventaire restaurés lorsqu’on quitte ce combat |
-| Arène | Quatre vagues | XP, or et éventuels matériaux par ennemi vaincu |
-| Duel | Un corbeau, sanglier, loup ou troll au choix | Récolte répétable d’XP, d’or et de matériaux |
+- **Entraînement** : gobelin de 40 PV, attaque 5, 40 XP en cas de victoire. Les dégâts, le mana dépensé et les objets consommés sont conservés, comme dans le CLI. Pas d’or ni de matériau.
+- **Arène** : quatre vagues — gobelin ; loup et gobelin ; gobelin cuirassé et chaman ; troll.
+- **Duel** : un corbeau, sanglier, loup ou troll, pour gagner de l’expérience, de l’or et éventuellement des matériaux.
 
-Les vagues sont : **gobelin → loup et gobelin → gobelin cuirassé et chaman → troll final**.
+L’initiative est tirée entre 1 et 10. Le camp à la valeur la plus élevée commence, égalité en faveur du joueur ; en groupe, la plus haute initiative ennemie représente le camp adverse. Le compteur avance après les deux camps, quel que soit le premier attaquant.
 
-La caméra prend une vue latérale surélevée. Le joueur commence chaque vague en 3D. Choisir une cible sur sa fiche, puis une attaque physique, un sort, une potion ou **Défendre**. Une action valide consomme le tour ; une action refusée ne le consomme pas.
+Le gobelin et le troll doublent leurs dégâts tous les trois tours. Le chaman peut soigner ses alliés. La défense 3D réduit de moitié, arrondi au supérieur, la prochaine attaque reçue.
 
-La défense réduit de moitié les dégâts de la prochaine attaque reçue, avec arrondi supérieur. Gobelins et troll doublent leur attaque tous les trois tours ; le chaman tente alors de soigner un allié blessé.
+Attaquer, lancer un sort ou utiliser un objet valide consomme le tour. Une action refusée ne dépense ni tour ni mana. Les livres, manuels et équipements peuvent aussi être utilisés depuis le sac pendant le tour du joueur. Le poison finit ses dégâts avant l’action ennemie.
 
-Les animations différencient attaques, sorts et créatures. Le journal consultable conserve actions, dégâts, soins, variations de mana, protections, récompenses et changements de tour. Les fiches affichent les PV et statistiques.
+Le journal présente les actions, dégâts, PV, dépenses de mana et récompenses. Les animations sont visuelles : les calculs restent dans l’adaptateur.
 
-**Quitter l’arène** reste possible pendant le combat. Hors entraînement, les récompenses déjà obtenues sont conservées ; un ennemi vivant ne rapporte rien. Après une défaite, quitter le combat ou en choisir un autre ressuscite le personnage à la moitié de ses PV maximum.
+### Sorts disponibles
 
-### Récompenses hors entraînement
+| Sort | Dégâts | Mana |
+|---|---:|---:|
+| Coup de poing | 8 | 5 |
+| Grosse boule de feu | 22 | 30 |
+| Lame du destin | 10 | 10 |
+| Éclats du gardien | 12 | 15 |
+| Flèche de lumière | 12 | 20 |
+| Jugement des géants | 60 | 60 |
 
-| Créature | Or par élimination | Matériau possible | Probabilité |
+Coup de poing est connu au départ ; les cinq autres sorts s’apprennent grâce aux livres vendus selon le niveau requis. Les anciens sorts supprimés du backend ne sont plus exécutables.
+
+Les attaques physiques disponibles sont l’attaque basique puis Pichenette, Claquounette, Coups de pied, Morsure et Uppercut, apprises avec les manuels. Les dégâts sont ceux de `InfosAttaquePhysique` plus le bonus d’attaque du personnage.
+
+### Récompenses 3D hors entraînement
+
+| Créature | Or | Matériau possible | Probabilité |
 |---|---:|---|---:|
 | Corbeau | 2 | Plume de corbeau | 75 % |
 | Sanglier | 3 | Cuir de sanglier | 70 % |
@@ -222,168 +173,173 @@ Les animations différencient attaques, sorts et créatures. Le journal consulta
 | Gobelin cuirassé | 8 | Aucun | — |
 | Troll | 20 | Peau de troll | 45 % |
 
-Le matériau est perdu si le sac est plein, ce que le journal signale. L’or n’occupe aucune case.
+L’or n’occupe aucune case. Un matériau est perdu si le sac est plein, avec un message dans le journal. Quitter l’arène est possible à tout moment ; seules les créatures déjà vaincues rapportent quelque chose.
 
-### Sorts pris en charge par l’adaptateur 3D
+## Sauvegarde 3D
 
-| Sort | Mana | Effet |
-|---|---:|---|
-| Coup de poing | 5 | 8 dégâts |
-| Boule de feu | 30 | 22 dégâts |
-| Lame du destin | 10 | 10 dégâts |
-| Éclats du gardien | 15 | 12 dégâts |
-| Flèche de lumière | 20 | 12 dégâts |
-| Foudre Célèste | 20 | 30 dégâts immédiats actuellement |
-| Soin du cœur | 25 | Restaure jusqu’à 20 % des PV maximum |
-| Bouclier | 30 | Protège contre la prochaine attaque |
-| Dévotion | 35 | 20 à 30 dégâts ; 25 % de risque de subir 8 dégâts en retour |
-| Dernier espoir | 50 | 40 dégâts, à 30 % des PV maximum ou moins |
-| Jugement des géants | 60 | 60 dégâts |
+Fichier : `src/sauvegardes/partie_3d.json`, exclu de Git.
 
-Cette table décrit les effets codés, **pas des sorts tous obtenables actuellement**. Coup de poing est connu au départ et Boule de feu s’apprend grâce au livre. Les autres sorts nécessitent encore un système d’apprentissage raccordé au jeu.
+Sont conservés : identité, classe, statistiques, expérience, or, inventaire, équipements, attaques, sorts, position et orientation de la caméra.
 
-## Sauvegarde
+- Première sauvegarde après validation de la création.
+- Toutes les 15 secondes hors arène, avec F5, à la fermeture du commerce ou de l’inventaire et à la sortie de l’arène.
+- À la fermeture normale du jeu après démarrage, hors combat.
+- Pas de sauvegarde au milieu d’un effet de poison en exploration ; à la fermeture normale, ses dégâts restants sont résolus avant l’écriture.
+- Écriture dans un fichier temporaire puis remplacement du fichier de partie.
+- Migration des anciens noms courants d’objets, du sort Boule de feu et de l’attaque basique à la lecture.
 
-La sauvegarde concerne **uniquement la 3D**. Depuis le répertoire de lancement `src/`, elle se trouve dans `src/sauvegardes/partie_3d.json`.
+**Le combat en cours n’est pas sauvegardé. Quitter l’arène avant de fermer le jeu pour conserver sa progression.** Une interruption brutale reprend la dernière sauvegarde réussie.
 
-Elle contient le personnage, ses statistiques, inventaire, équipements et sorts, ainsi que sa position et l’orientation de la caméra. Elle est chargée automatiquement au démarrage.
+Pour recommencer, fermer le jeu puis déplacer ou renommer le fichier de sauvegarde en conservant une copie. Il n’existe pas encore de gestion de plusieurs parties dans le menu.
 
-- Sauvegarde automatique toutes les 15 secondes de jeu hors arène.
-- Sauvegarde manuelle avec F5 hors arène.
-- Sauvegarde à la fermeture de l’inventaire ou du commerce hors arène, à la sortie de l’arène et à la fermeture normale du jeu hors arène, après démarrage de la partie.
-- **Aucun combat en cours n’est sauvegardé. Quitter l’arène avant de fermer le jeu pour conserver la progression du combat.**
-
-Le dossier est exclu de Git. Pour recommencer, fermer le jeu et déplacer ou renommer `partie_3d.json` en conservant une copie. Le CLI n’a pas de sauvegarde persistante.
-
-## Organisation du dépôt
+## Organisation
 
 ```text
-Projet-Red-Ordta/
+Projet-Red/
 ├── README.md
 ├── Projet RED - Sujet.pdf
-├── docs/
-│   └── Projet RED - Sujet.pdf
-├── assets/
-│   ├── maps/red_world/       OBJ/MTL, plan 2D, textures et collisions JSON
-│   ├── models/monstres/     Sept modèles articulés JSON et textures
-│   ├── ui/                 Icônes, composants et maquettes
-│   ├── pixel_art/          Planches et icônes pixel art
-│   ├── audio/              Musiques et effets WAV
-│   └── ...                 Autres modèles et illustrations
+├── docs/                     Sujet et documents du projet
+├── assets/                   Carte, modèles, textures, icônes et audio
 ├── src/
-│   ├── go.mod / go.sum     Module ordta et dépendances
-│   ├── main.go             Entrée CLI
-│   ├── library/            Règles et menus textuels
-│   │   └── library_3d.go   Adaptateur sans saisie terminal pour la 3D
+│   ├── main.go               Choix terminal CLI / 3D
+│   ├── go.mod, go.sum        Dépendances
+│   ├── library/              Règles du jeu et interface CLI
+│   │   └── library_3d.go     Adaptateur non bloquant pour la 3D
 │   ├── 3D/
-│   │   ├── main.go         Entrée graphique
-│   │   ├── monde/         Scène, caméra, collisions, interfaces, audio, sauvegarde
-│   │   ├── personnages/   Joueur, PNJ, armures et marche
-│   │   └── monstres/      Chargement des modèles articulés
-│   ├── tools/
-│   │   ├── mapgen/        Générateur de fichiers statiques de carte
-│   │   └── musicgen/      Générateur de musiques et effets en Go
-│   └── sauvegardes/       Créé à l’exécution, non versionné
-└── archive_gpt/            Ancienne implémentation, hors du jeu actuel
+│   │   ├── main.go           Entrée graphique
+│   │   ├── monde/            Scène, interfaces, caméra, audio, sauvegarde
+│   │   ├── personnages/      Personnage et équipements visibles
+│   │   └── monstres/         Modèles et articulations des ennemis
+│   ├── tests/                Vérifications de compatibilité de l’adaptateur
+│   ├── tools/                Générateurs de carte et de musique
+│   └── sauvegardes/          Créé à l’exécution, non versionné
+└── test_game/                Ancien exemple, non utilisé et laissé intact
 ```
 
-`library_3d.go` expose des résultats exploitables par les interfaces sans bloquer sur une saisie terminal. `src/3D/monde/monde.go` relie les entrées, les actions, l’affichage et les animations.
+Les fonctions terminal interactives du backend ne doivent pas être appelées depuis la boucle graphique. L’adaptateur utilise les structures, catalogues et fonctions de calcul disponibles, puis renvoie des résultats affichables. Les changements de noms ou de règles doivent également être répercutés dans cet adaptateur.
 
-La carte est un monde **fini et semi-ouvert de 600 × 600 unités**, chargé depuis des fichiers statiques. Le déplacement se fait dans le plan XY ; Z représente la hauteur. Le JSON décrit zones, point de départ, obstacles et passages des ponts.
+## Vérifications
 
-Village, remparts, guilde, forge extérieure, champs, forêt, falaises, marais, sanctuaire et bosquet de mana composent le décor. Les descriptions du JSON contiennent aussi des intentions de conception : elles ne déclenchent pas automatiquement une quête ou une interaction.
+### À quoi servent les fichiers `_test.go` ?
 
-Les musiques et effets WAV sont synthétisés par l’outil Go. Les ressources graphiques comprennent des créations assistées par génération d’images ; certains prompts sont conservés dans `assets/pixel_art/PROMPTS.md` et la documentation des textures.
+Les fichiers dont le nom se termine par `_test.go` contiennent des **tests automatiques**. Ils vérifient qu’une fonction donne le résultat attendu et permettent de repérer une régression : une modification qui casse un comportement auparavant correct.
 
-Les documents de `archive_gpt/` décrivent une ancienne version : leurs lanceurs et commandes ne s’appliquent pas au jeu actuel. Certains README locaux d’assets sont également historiques ; le présent README décrit les fonctionnalités raccordées aux points d’entrée actuels.
+Un test prépare une situation, appelle le code du jeu puis compare le résultat obtenu au résultat attendu. Par exemple :
 
-## Tests et outils
+- Donner une potion à un personnage blessé, l’utiliser et vérifier que ses PV augmentent sans dépasser leur maximum.
+- Tenter un achat avec un niveau insuffisant et vérifier que l’objet n’est pas acheté et que l’or est conservé.
+- Lancer un sort et vérifier les dégâts ainsi que le mana consommé.
+- Enregistrer une partie dans un dossier temporaire, la relire et vérifier que les informations sont conservées.
 
-Depuis `src/`, pour vérifier les règles sans les dépendances graphiques :
+Ces fichiers ne constituent pas une autre version du jeu. **Ils ne sont pas exécutés avec `go run .` et ne sont pas inclus dans l’exécutable produit par `go build`.** Go les prend en compte lors de la commande `go test`, qui construit et exécute un programme de vérification séparé.
+
+Il est utile de les conserver et de les relancer après une modification. Lorsqu’une règle change volontairement, il faut également mettre à jour les résultats attendus par les tests concernés.
+
+### Où se trouvent-ils ?
+
+| Emplacement | Rôle |
+|---|---|
+| `src/tests/` | Vérifier la compatibilité de l’adaptateur 3D avec les règles du backend, sans charger le moteur graphique. |
+| Fichiers `_test.go` dans `src/3D/` | Vérifier notamment les modèles, animations, sauvegardes et données du monde. |
+| Fichiers `_test.go` dans `src/library/` | Anciens tests du backend et de l’adaptateur ; certains nécessitent une mise à jour, expliquée ci-dessous. |
+| `test_game/` | Ancien exemple de jeu indépendant : ce dossier n’est pas une suite de tests automatiques et n’est pas utilisé par le jeu actuel. |
+
+### Comment les lancer ?
+
+Depuis `src/` :
 
 ```powershell
-go test ./library
+go test ./tests
 ```
 
-Après préparation de l’environnement 3D :
+Cette suite vérifie notamment création, classes, niveaux d’achat, apprentissage, doublons, initiative, tours, mana, poison, capacité et récompenses d’entraînement, sans importer G3N.
+
+Après préparation de l’environnement natif décrite plus haut :
 
 ```powershell
-go test ./...
+go test ./3D/...
+go build -o "$env:TEMP/ordta-verification.exe" ./3D
 ```
 
-La suite comprend des vérifications du combat, du butin, de l’or, de l’inventaire, des sauvegardes, des modèles, armures, animations, textures, chemins, collisions et fichiers audio. Les tests de carte peuvent être plus longs : ils reconstruisent des assets dans des répertoires temporaires.
+Ces tests couvrent notamment modèles, animations, sauvegardes et données du monde. Ils ne remplacent pas un essai visuel et sonore.
 
-Cette commande couvre le module `src/`, pas celui de l’archive. Ajouter `-v` pour voir les noms des tests. Les tests ne remplacent pas une vérification visuelle et sonore en jeu.
-
-Compilation des tests du monde sans ouvrir le jeu sous Windows :
+Pour afficher le nom et le résultat de chaque test, ajouter `-v` :
 
 ```powershell
-go test -c -o "$env:TEMP/ordta-monde.test.exe" ./3D/monde
+go test -v ./tests
 ```
 
-Les assets sont déjà livrés ; leur régénération n’est **pas nécessaire pour jouer**. Pour les développeurs, depuis `src/` :
+Pour forcer une nouvelle exécution sans réutiliser un résultat de test en cache :
+
+```powershell
+go test -count=1 ./tests
+```
+
+### Comment lire le résultat ?
+
+- `ok` : les tests du package ont réussi.
+- `PASS` : réussite d’un test ou de la suite, notamment dans l’affichage détaillé.
+- `FAIL` : un test a échoué ou le programme de test n’a pas pu être compilé. Lire les messages précédents pour identifier le fichier, la ligne et la cause.
+- `[no test files]` : aucun fichier de test dans ce package ; cela ne signifie pas que son fonctionnement a été vérifié.
+- `(cached)` : Go a réutilisé un résultat réussi encore valide.
+
+Un échec ne signifie donc pas toujours que le jeu est inutilisable : le test peut lui-même employer un ancien nom de champ, comme dans le cas ci-dessous. Inversement, des tests réussis ne garantissent pas l’absence de tous les bugs, notamment visuels ou sonores.
+
+**Limite actuelle des anciens tests :** les fichiers `src/library/*_test.go` référencent encore des champs et constantes supprimés ou renommés par la dernière révision du backend. Ils ont été laissés intacts. `go test ./library` et donc `go test ./...` échouent tant que ces tests ne sont pas adaptés ; cela n’empêche pas la compilation du jeu ni les suites ciblées ci-dessus.
+
+### Outils de génération : à ne pas confondre avec les tests
+
+Les assets sont déjà livrés. Pour les développeurs seulement :
 
 ```powershell
 go run ./tools/mapgen
 go run ./tools/musicgen
 ```
 
-**Attention :** ces commandes remplacent respectivement les OBJ/MTL/JSON de la carte et les WAV de `assets/audio/`. Conserver ses retouches avant de les exécuter. Le générateur de carte ne recrée ni l’illustration 2D ni les textures PNG.
+Attention : ces commandes remplacent les fichiers générés de la carte ou de la musique. Sauvegarder ses retouches avant de les utiliser. Elles ne sont pas nécessaires pour jouer.
 
 ## Correspondance avec le sujet
 
-Le [sujet fourni](docs/Projet%20RED%20-%20Sujet.pdf), page 3, demande :
+Le [sujet](docs/Projet%20RED%20-%20Sujet.pdf) demande un jeu CLI, un dossier `src`, un dossier `docs` avec le document de gestion de projet et un README présentant le jeu, son installation et son lancement. La 3D complète le CLI, elle ne le remplace pas.
 
-- Un dossier `src` contenant le code source.
-- Un dossier `docs` contenant le document de gestion de projet complété.
-- Un `README.md` avec une courte présentation et les instructions d’installation et de lancement.
-- Un dépôt nommé `projet-red_NOM-DU-PROJET`, dont le lien doit être déposé sur Moodle avant l’échéance donnée par les encadrants.
-
-Ce README documente les deux versions sans présenter la 3D comme un remplacement du CLI demandé. La page 6 précise que les valeurs du sujet sont indicatives ; les tableaux ci-dessus décrivent celles du code actuel.
-
-| Partie du sujet | Fichiers principaux dans src/library/ |
+| Exigences | Implémentation principale |
 |---|---|
-| Tâches 1 à 3 : structure, initialisation et informations | `character.go` |
-| Tâches 4 à 7 : inventaire, potion, menu et marchand | `inventory.go`, `items.go`, `menu.go`, `merchant.go` |
-| Tâches 8 à 10 : mort, poison et apprentissage | `character.go`, `items.go` |
-| Tâches 11 à 14 : création, capacité, argent et achats | `creation.go`, `inventory.go`, `character.go`, `merchant.go` |
-| Tâches 15 à 18 : fabrication, équipement et extensions | `forgeron.go`, `equipement.go`, `inventory.go` |
-| Tâches 19 à 22 : monstres, comportement et combat | `monster.go`, `character.go`, `attaquesphysiques.go`, `combat.go` |
-| Bonus initiative, expérience, sorts et mana | `combat.go`, `experience.go`, `sort.go`, `items.go` |
-| « Qui sont-ils ? » | `menu.go` : ABBA et Steven Spielberg |
-| Extension graphique, vagues, duels et butin | `library_3d.go` et `src/3D/` |
+| Personnage, création, classes, statistiques | `library/character.go`, `creation.go` |
+| Inventaire, potions, limite et extensions | `inventory.go`, `items.go` |
+| Argent et marchand | `merchant.go`, `constantes.go` |
+| Fabrication et équipement | `forgeron.go`, `equipement.go` |
+| Gobelin, tours, initiative | `monster.go`, `combat.go` |
+| Expérience, attaques, sorts et mana | `experience.go`, `attaquesphysiques.go`, `sort.go` |
+| « Qui sont-ils ? » : ABBA et Steven Spielberg | Menu CLI et menu 3D |
+| Interface graphique des règles | `library_3d.go` et `3D/monde/` |
 
-Cette correspondance indique où examiner les fonctionnalités, **pas une certification de conformité ou une note**. Actuellement, `docs/` contient une copie du sujet, mais aucun document de gestion de projet complété n’a été trouvé. Ce livrable reste à ajouter par l’équipe ; le README ne le remplace pas.
+La page 6 autorise des valeurs différentes tant que le principe des tâches est respecté. Ce README décrit les valeurs du code, pas une garantie de note ou de conformité totale.
 
-## Limites actuelles
+À compléter par l’équipe : le document de gestion de projet n’a pas été trouvé dans `docs/` (qui contient le sujet). Vérifier également le nom de dépôt demandé, `projet-red_NOM-DU-PROJET`, et le dépôt du lien sur Moodle avant l’échéance fixée par les encadrants.
 
-- **Création 3D** : pas encore de saisie du nom ni de choix de classe dans l’accueil, contrairement au CLI. La 3D utilise « Joueur », Humain, ou le personnage sauvegardé.
-- **Inventaire 3D** : les règles permettent 40 objets après extensions, mais l’interface n’affiche que les dix premiers exemplaires, sans pagination. Les suivants ne sont pas sélectionnables tant qu’ils ne reviennent pas dans ces dix cases.
-- **Sorts** : plusieurs effets sont codés sans moyen d’acquisition raccordé. Le CLI ne prend pas en charge tous les sorts de soutien de la 3D.
-- **Entraînement et initiative** : le CLI détermine le premier attaquant par l’initiative et donne de l’XP en cas de victoire. L’entraînement 3D restaure l’état à la sortie et ne récompense pas ; la 3D fait commencer le joueur à chaque vague.
-- **Carte 2D** : l’image pixel art existe, mais aucun écran de carte avec marqueur du joueur n’est raccordé.
-- **Monde** : pas de génération infinie, saut, nage ou physique verticale. Les combats et la récolte passent par l’arène, pas par des créatures libres dans les biomes.
-- **Affichage** : beaucoup de panneaux ont des dimensions fixes adaptées au 1920 × 1080. Le plein écran utilise les dimensions de l’écran, sans forcer cette résolution ni garantir une interface adaptée aux autres formats.
-- **Sauvegarde** : un seul emplacement 3D, sans sauvegarde de combat ni menu de gestion des parties. Une sauvegarde invalide interrompt actuellement le démarrage.
+## Limites et dépannage
 
-## Dépannage
+- La carte est finie ; pas de génération infinie, saut, nage ou physique verticale.
+- Le plan pixel art existe, mais pas encore d’écran de carte avec marqueur du joueur.
+- De nombreux panneaux sont dimensionnés pour 1920 × 1080. Le plein écran utilise les dimensions de l’écran, sans imposer cette résolution.
+- Les nouveaux livres et manuels réutilisent une icône de livre ; ils n’ont pas chacun une illustration dédiée.
+- Les sorts Soin du cœur et Bouclier ont encore des constantes dans le backend mais ne sont pas proposés par `InfosSort` ni vendus sous forme de livres ; ils ne sont pas des sorts jouables de cette version.
 
-| Problème | Vérification |
+| Problème | À vérifier |
 |---|---|
-| `build constraints exclude all Go files` dans `audio/al` ou `audio/vorbis` | Vérifier que `go env CGO_ENABLED` vaut `1` et que GCC est accessible dans le même terminal. |
-| `gcc` introuvable | Ajouter le bon dossier `bin` de MinGW-w64 au `PATH`, puis vérifier avec `where.exe gcc`. |
-| `exit status 0xc0000135` | Une DLL native manque. Ajouter `audio/windows/bin` de G3N au `PATH`, ainsi que les éventuelles dépendances de la chaîne GCC. |
-| OBJ, JSON, texture ou icône introuvable | Lancer depuis `src/` et conserver tout `assets/` à la racine. |
-| Échec du contexte graphique | Vérifier le pilote OpenGL et l’accès à une session graphique locale. |
-| Interface coupée | Utiliser si possible un affichage 1920 × 1080 ; la mise en page n’est pas entièrement adaptative. |
-| Sauvegarde illisible | Jeu fermé, conserver une copie puis renommer `src/sauvegardes/partie_3d.json` pour recommencer. |
-| Combat non retrouvé après fermeture | Revenir à l’exploration avant de quitter : les combats ne sont pas sauvegardés. |
-| `Audio indisponible` | Vérifier les WAV dans `assets/audio/`. Un fichier manquant est signalé sans arrêter le jeu. |
+| GCC introuvable | Vérifier `where.exe gcc` dans le terminal de lancement. |
+| `build constraints exclude all Go files` | En lancement direct 3D, activer CGO ; le lanceur le fait automatiquement. |
+| `exit status 0xc0000135` | DLL native absente : PATH audio G3N et dépendances GCC. |
+| Asset introuvable | Lancer depuis `src/`, avec `assets/` à la racine. |
+| Échec OpenGL | Pilote graphique et session graphique locale disponibles. |
+| Sauvegarde illisible | Ne pas la supprimer : conserver une copie avant de la renommer ou de la réparer. |
+| Audio indisponible | Vérifier les WAV de `assets/audio/`. |
+| Échec des anciens tests library | Adapter leurs anciennes références côté backend ; voir « Vérifications ». |
 
 ## Équipe et ressources
 
-L’ancien README mentionne **gauhthierh, GuillaumeLarre, lalie-droid et quent1206**. Ces crédits sont conservés sans attribuer de rôles non documentés.
+Crédits conservés du README précédent : **gauhthierh, GuillaumeLarre, lalie-droid et quent1206**, sans attribution de rôles non documentés.
 
-Le moteur est **G3N v0.2.0** ; GLFW assure la fenêtre et les entrées, OpenGL le rendu et OpenAL l’audio. Les versions des dépendances Go sont déclarées dans `src/go.mod` et vérifiées par `src/go.sum`.
+G3N v0.2.0 utilise notamment GLFW pour la fenêtre, OpenGL pour le rendu et OpenAL pour l’audio. Les dépendances sont déclarées dans `src/go.mod` et `src/go.sum`.
 
-Aucune licence globale du projet n’est déclarée dans le dépôt actuel. Les licences des dépendances ne constituent pas une autorisation de redistribution de tous les assets du jeu.
+Aucune licence globale n’est déclarée dans le dépôt. Les licences des dépendances ne constituent pas une autorisation de redistribution de tous les assets.

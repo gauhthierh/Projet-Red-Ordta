@@ -28,9 +28,11 @@ type InterfaceInventaire struct {
 	Statistiques *gui.Label
 	Message      *gui.Label
 
-	Cases          []*CaseGraphique
-	ObjetsAffiches []library.ObjetInventaire3D
-	CaseChoisie    int
+	Cases             []*CaseGraphique
+	ObjetsAffiches    []library.ObjetInventaire3D
+	CaseChoisie       int
+	Page, NombrePages int
+	Pagination        *gui.Label
 
 	ArmureTete  *CaseGraphique
 	ArmureTorse *CaseGraphique
@@ -62,7 +64,7 @@ func NouvelleInterfaceInventaire(scene *core.Node) *InterfaceInventaire {
 
 	statistiques := gui.NewLabel("")
 	statistiques.SetPosition(30, 70)
-	statistiques.SetFontSize(18)
+	statistiques.SetFontSize(15)
 	panneau.Add(statistiques)
 
 	message := gui.NewLabel("Sélectionnez un objet.")
@@ -116,10 +118,31 @@ func NouvelleInterfaceInventaire(scene *core.Node) *InterfaceInventaire {
 	for index, caseObjet := range interfaceInventaire.Cases {
 		indexCase := index
 		caseObjet.AbonnerClic(func() {
-			interfaceInventaire.SelectionnerCase(indexCase)
+			interfaceInventaire.SelectionnerCase(interfaceInventaire.Page*nombreCasesInventaire + indexCase)
 		})
 	}
 
+	interfaceInventaire.Pagination = gui.NewLabel("")
+	interfaceInventaire.Pagination.SetPosition(1100, 400)
+	panneau.Add(interfaceInventaire.Pagination)
+	for index, sens := range []int{-1, 1} {
+		direction := sens
+		texte := "PRÉCÉDENT"
+		if sens > 0 {
+			texte = "SUIVANT"
+		}
+		bouton := gui.NewButton(texte)
+		bouton.SetSize(180, 35)
+		bouton.SetPosition(800+float32(index)*700, 395)
+		bouton.Subscribe(gui.OnClick, func(_ string, _ interface{}) {
+			nouvelle := interfaceInventaire.Page + direction
+			if nouvelle >= 0 && nouvelle < interfaceInventaire.NombrePages {
+				interfaceInventaire.Page = nouvelle
+				interfaceInventaire.CaseChoisie = -1
+			}
+		})
+		panneau.Add(bouton)
+	}
 	panneau.SetVisible(false)
 	scene.Add(panneau)
 	return interfaceInventaire
@@ -203,6 +226,7 @@ func (i *InterfaceInventaire) ObjetSelectionne() (string, bool) {
 
 func (i *InterfaceInventaire) AfficherMessage(message string) {
 	if i != nil {
+		i.CaseChoisie = -1 // Le tri peut changer après consommation : sélectionner à nouveau.
 		i.Message.SetText(message)
 	}
 }
@@ -217,8 +241,8 @@ func (i *InterfaceInventaire) MettreAJour(personnage *library.Character) {
 		personnage.Nom,
 		personnage.Classe,
 		personnage.Niveau,
-		personnage.PVActuel,
-		personnage.PVMaxTotal,
+		personnage.PvActuel,
+		personnage.PvMaxTotal,
 		personnage.ManaActuel,
 		personnage.ManaMax,
 		personnage.Attaque,
@@ -228,12 +252,15 @@ func (i *InterfaceInventaire) MettreAJour(personnage *library.Character) {
 		personnage.Argent,
 		personnage.TotalInventaire(),
 		personnage.CapaciteInventaire,
-		strings.Join(personnage.AttaquesPhysiques, ", "),
-		strings.Join(personnage.Skill, ", "),
+		strings.Join(personnage.AttaquesPhysiques, "\n"),
+		strings.Join(personnage.Skill, "\n"),
 	))
 
 	i.ObjetsAffiches = personnage.Inventaire3D()
-	for index, caseObjet := range i.Cases {
+	i.NombrePages = (personnage.CapaciteInventaire + nombreCasesInventaire - 1) / nombreCasesInventaire
+	i.Pagination.SetText(fmt.Sprintf("Page %d / %d", i.Page+1, i.NombrePages))
+	for caseIndex, caseObjet := range i.Cases {
+		index := i.Page*nombreCasesInventaire + caseIndex
 		if index >= len(i.ObjetsAffiches) {
 			caseObjet.MettreAJour("", "Vide", "../assets/ui/icons/png/inventory.png")
 			continue
@@ -242,7 +269,7 @@ func (i *InterfaceInventaire) MettreAJour(personnage *library.Character) {
 		objet := i.ObjetsAffiches[index]
 		caseObjet.MettreAJour(
 			objet.Nom,
-			objet.Nom,
+			texteCourtObjet(objet.Nom),
 			"../assets/ui/icons/png/"+objet.Icone,
 		)
 	}
@@ -262,4 +289,14 @@ func mettreAJourCaseArmure(caseArmure *CaseGraphique, titre string, equipement l
 		fmt.Sprintf("%s — %s  +%d PV", titre, equipement.Nom, equipement.BonusPv),
 		"../assets/ui/icons/png/"+library.IconeObjet3D(equipement.Nom),
 	)
+}
+
+func texteCourtObjet(nom string) string {
+	nom = strings.TrimPrefix(nom, "Livre de sort : ")
+	nom = strings.TrimPrefix(nom, "Manuel de combat : ")
+	runes := []rune(nom)
+	if len(runes) > 20 {
+		return string(runes[:17]) + "..."
+	}
+	return nom
 }

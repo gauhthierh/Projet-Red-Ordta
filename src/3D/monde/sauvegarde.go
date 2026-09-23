@@ -31,11 +31,40 @@ func ChargerPartie3D(chemin string) (*Partie3D, error) {
 	if err = json.Unmarshal(contenu, &partie); err != nil {
 		return nil, fmt.Errorf("sauvegarde illisible : %w", err)
 	}
-	if partie.Version != 1 || partie.Personnage.Inventaire == nil || partie.Personnage.ExperienceMax <= 0 || partie.Personnage.PVMaxBase <= 0 {
+	if partie.Version != 1 || partie.Personnage.Inventaire == nil || partie.Personnage.ExperienceMax <= 0 || partie.Personnage.PvMaxBase <= 0 {
 		return nil, fmt.Errorf("sauvegarde 3D invalide ou incompatible")
 	}
 	partie.Personnage.MettreAJourPvMax()
+	migrerNomsSauvegarde(&partie.Personnage)
 	return &partie, nil
+}
+
+// Les anciennes parties restent utilisables après les renommages du backend.
+func migrerNomsSauvegarde(p *library.Character) {
+	for ancien, nouveau := range map[string]string{
+		"Potion de Mana":               library.ItemPotionDeMana,
+		"Peau de Troll":                library.ItemPeauDeTroll,
+		"Livre de sort : Boule de feu": library.ItemLivreGrosseBouleDeFeu,
+		"Livre de Sort : Boule de Feu": library.ItemLivreGrosseBouleDeFeu,
+	} {
+		if ancien != nouveau && p.Inventaire[ancien] > 0 {
+			p.Inventaire[nouveau] += p.Inventaire[ancien]
+			delete(p.Inventaire, ancien)
+		}
+	}
+	for index, nom := range p.Skill {
+		if nom == "Boule de feu" || nom == "Boule de Feu" {
+			p.Skill[index] = library.SortGrosseBouleDeFeu
+		}
+		if nom == "Éclate du gardien" {
+			p.Skill[index] = library.SortEclatsDuGardien
+		}
+	}
+	for index, nom := range p.AttaquesPhysiques {
+		if nom == "Attaque Basique" {
+			p.AttaquesPhysiques[index] = library.AttaqueBasique
+		}
+	}
 }
 
 // Écriture temporaire puis remplacement : une écriture interrompue ne tronque pas la sauvegarde.

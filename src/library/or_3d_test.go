@@ -4,7 +4,7 @@ import "testing"
 
 func TestMarchand3DSansMateriaux(t *testing.T) {
 	articles := BoutiqueMarchand3D()
-	attendus := map[string]bool{ItemPotionDeVie: true, ItemPotionDePoison: true, ItemPotionDeMana: true, ItemLivreBouleDeFeu: true, ItemAugmentationInventaire: true}
+	attendus := map[string]bool{ItemPotionDeVie: true, ItemPotionDePoison: true, ItemPotionDeMana: true, ItemLivreGrosseBouleDeFeu: true, ItemAugmentationInventaire: true}
 	if len(articles) != len(attendus) {
 		t.Fatal("catalogue 3D incorrect")
 	}

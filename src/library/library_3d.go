@@ -116,7 +116,7 @@ type EnnemiCombat struct {
 type CombatArene struct {
 	Mode              ModeCombat
 	Butins            []string
-	avantEntrainement *Character
+	joueurCommence    bool
 	tirageButin       func(int) int
 	Joueur            *Character
 	Vagues            [][]EnnemiCombat
@@ -182,6 +182,12 @@ func (c Character) Inventaire3D() []ObjetInventaire3D {
 }
 
 func IconeObjet3D(nom string) string {
+	if _, ok := SortDuLivre(nom); ok {
+		return "fireball_spellbook.png"
+	}
+	if _, ok := AttaqueDuManuel(nom); ok {
+		return "fireball_spellbook.png"
+	}
 	switch nom {
 	case ItemPotionDeVie:
 		return "health_potion.png"
@@ -189,7 +195,7 @@ func IconeObjet3D(nom string) string {
 		return "poison_potion.png"
 	case ItemPotionDeMana:
 		return "mana_potion.png"
-	case ItemLivreBouleDeFeu:
+	case ItemLivreGrosseBouleDeFeu:
 		return "fireball_spellbook.png"
 	case ItemFourrureDeLoup:
 		return "wolf_fur.png"
@@ -213,12 +219,18 @@ func IconeObjet3D(nom string) string {
 }
 
 func objetUtilisable3D(nom string) bool {
+	if _, ok := SortDuLivre(nom); ok {
+		return true
+	}
+	if _, ok := AttaqueDuManuel(nom); ok {
+		return true
+	}
 	if _, equipable := TrouverEquipement(nom); equipable {
 		return true
 	}
 	switch nom {
 	case ItemPotionDeVie, ItemPotionDePoison, ItemPotionDeMana,
-		ItemLivreBouleDeFeu, ItemAugmentationInventaire:
+		ItemLivreGrosseBouleDeFeu, ItemAugmentationInventaire:
 		return true
 	default:
 		return false
@@ -227,17 +239,8 @@ func objetUtilisable3D(nom string) bool {
 
 // AcheterMarchand3D applique les mêmes règles que le marchand textuel,
 // mais renvoie un résultat affichable au lieu d'écrire dans le terminal.
-// La boutique CLI reste inchangée ; en 3D les matériaux viennent des combats.
 func BoutiqueMarchand3D() []Item {
-	articles := []Item{}
-	for _, article := range Boutique {
-		switch article.Nom {
-		case ItemFourrureDeLoup, ItemPeauDeTroll, ItemCuirDeSanglier, ItemPlumeDeCorbeau:
-			continue
-		}
-		articles = append(articles, article)
-	}
-	return articles
+	return append([]Item(nil), Boutique...)
 }
 
 func (c *Character) AcheterMarchand3D(index int) ResultatAction {
@@ -246,6 +249,9 @@ func (c *Character) AcheterMarchand3D(index int) ResultatAction {
 		return actionRefusee3D("Article inconnu.")
 	}
 	article := articles[index]
+	if c.Niveau < article.NiveauMin {
+		return actionRefusee3D(fmt.Sprintf("Niveau %d requis.", article.NiveauMin))
+	}
 	prix := c.PrixPour(article)
 	if c.Argent < prix {
 		return actionRefusee3D(fmt.Sprintf("Il manque %d pièces d'or.", prix-c.Argent))
@@ -303,6 +309,26 @@ func (c *Character) UtiliserObjet3D(nom string) ResultatAction {
 		return actionRefusee3D("Le personnage est absent.")
 	}
 
+	if sort, ok := SortDuLivre(nom); ok {
+		if contientTexte3D(c.Skill, sort) {
+			return actionRefusee3D("Ce sort est déjà connu.")
+		}
+		if !c.RemoveInventory(nom) {
+			return actionRefusee3D("Ce livre est absent de l'inventaire.")
+		}
+		c.Skill = append(c.Skill, sort)
+		return actionReussie3D("Sort appris : " + sort)
+	}
+	if attaque, ok := AttaqueDuManuel(nom); ok {
+		if contientTexte3D(c.AttaquesPhysiques, attaque) {
+			return actionRefusee3D("Cette attaque est déjà connue.")
+		}
+		if !c.RemoveInventory(nom) {
+			return actionRefusee3D("Ce manuel est absent de l'inventaire.")
+		}
+		c.ApprentissageAttaque(attaque)
+		return actionReussie3D("Attaque apprise : " + attaque)
+	}
 	switch nom {
 	case ItemPotionDeVie:
 		return c.utiliserPotionVie3D()
@@ -310,15 +336,6 @@ func (c *Character) UtiliserObjet3D(nom string) ResultatAction {
 		return c.utiliserPotionMana3D()
 	case ItemPotionDePoison:
 		return actionRefusee3D("La potion de poison s'utilise uniquement pendant un combat.")
-	case ItemLivreBouleDeFeu:
-		if contientTexte3D(c.Skill, SortBouleDeFeu) {
-			return actionRefusee3D("Le sort Boule de feu est déjà connu.")
-		}
-		if !c.RemoveInventory(nom) {
-			return actionRefusee3D("Ce livre n'est pas dans l'inventaire.")
-		}
-		c.Skill = append(c.Skill, SortBouleDeFeu)
-		return actionReussie3D("Le personnage apprend Boule de feu.")
 	case ItemAugmentationInventaire:
 		if c.Inventaire[nom] <= 0 {
 			return actionRefusee3D("Cette amélioration n'est pas dans l'inventaire.")
@@ -399,26 +416,26 @@ func (c *Character) equiper3D(nouveau Stuff) ResultatAction {
 }
 
 func (c *Character) utiliserPotionVie3D() ResultatAction {
-	if c.PVActuel <= 0 {
+	if c.PvActuel <= 0 {
 		return actionRefusee3D("Le personnage ne peut pas utiliser de potion.")
 	}
-	if c.PVActuel >= c.PVMaxTotal {
+	if c.PvActuel >= c.PvMaxTotal {
 		return actionRefusee3D("Les points de vie sont déjà au maximum.")
 	}
 	if c.Inventaire[ItemPotionDeVie] <= 0 {
 		return actionRefusee3D("Aucune potion de vie dans l'inventaire.")
 	}
 
-	avant := c.PVActuel
+	avant := c.PvActuel
 	c.RemoveInventory(ItemPotionDeVie)
-	c.PVActuel += 50
-	if c.PVActuel > c.PVMaxTotal {
-		c.PVActuel = c.PVMaxTotal
+	c.PvActuel += 50
+	if c.PvActuel > c.PvMaxTotal {
+		c.PvActuel = c.PvMaxTotal
 	}
 	return ResultatAction{
 		Reussite: true, Type: "objet", Source: c.Nom, Cible: c.Nom,
-		Soin: c.PVActuel - avant, PVAvant: avant, PVApres: c.PVActuel,
-		Message: fmt.Sprintf("%s récupère %d PV.", c.Nom, c.PVActuel-avant),
+		Soin: c.PvActuel - avant, PVAvant: avant, PVApres: c.PvActuel,
+		Message: fmt.Sprintf("%s récupère %d PV.", c.Nom, c.PvActuel-avant),
 	}
 }
 
@@ -449,25 +466,25 @@ func NouveauGobelinCombat() EnnemiCombat {
 
 func NouveauGobelinCuirasseCombat() EnnemiCombat {
 	return nouvelEnnemi3D(TypeGobelinCuirasse, "gobelin_cuirasse.json", Monster{
-		Nom: "Gobelin cuirassé", PVMax: 65, PVActuel: 65, Attaque: 8, ExperienceDonnee: 65,
+		Nom: "Gobelin cuirassé", PvMax: 65, PvActuel: 65, Attaque: 8, ExperienceDonnee: 65,
 	})
 }
 
 func NouveauChamanCombat() EnnemiCombat {
 	return nouvelEnnemi3D(TypeChaman, "chaman.json", Monster{
-		Nom: "Chaman gobelin", PVMax: 45, PVActuel: 45, Attaque: 7, ExperienceDonnee: 60,
+		Nom: "Chaman gobelin", PvMax: 45, PvActuel: 45, Attaque: 7, ExperienceDonnee: 60,
 	})
 }
 
 func NouveauLoupCombat() EnnemiCombat {
 	return nouvelEnnemi3D(TypeLoup, "loup.json", Monster{
-		Nom: "Loup des bois", PVMax: 35, PVActuel: 35, Attaque: 7, ExperienceDonnee: 45,
+		Nom: "Loup des bois", PvMax: 35, PvActuel: 35, Attaque: 7, ExperienceDonnee: 45,
 	})
 }
 
 func NouveauTrollCombat() EnnemiCombat {
 	return nouvelEnnemi3D(TypeTroll, "troll.json", Monster{
-		Nom: "Troll de l'arène", PVMax: 160, PVActuel: 160, Attaque: 14, ExperienceDonnee: 180,
+		Nom: "Troll de l'arène", PvMax: 160, PvActuel: 160, Attaque: 14, ExperienceDonnee: 180,
 	})
 }
 
@@ -495,9 +512,9 @@ func EnnemiDuel3D(genre TypeMonstre) (EnnemiCombat, error) {
 	case TypeTroll:
 		return NouveauTrollCombat(), nil
 	case TypeSanglier:
-		return nouvelEnnemi3D(genre, "sanglier.json", Monster{Nom: "Sanglier", PVMax: 30, PVActuel: 30, Attaque: 5, ExperienceDonnee: 30}), nil
+		return nouvelEnnemi3D(genre, "sanglier.json", Monster{Nom: "Sanglier", PvMax: 30, PvActuel: 30, Attaque: 5, ExperienceDonnee: 30}), nil
 	case TypeCorbeau:
-		return nouvelEnnemi3D(genre, "corbeau.json", Monster{Nom: "Corbeau", PVMax: 20, PVActuel: 20, Attaque: 4, ExperienceDonnee: 20}), nil
+		return nouvelEnnemi3D(genre, "corbeau.json", Monster{Nom: "Corbeau", PvMax: 20, PvActuel: 20, Attaque: 4, ExperienceDonnee: 20}), nil
 	default:
 		return EnnemiCombat{}, fmt.Errorf("créature de duel inconnue")
 	}
@@ -507,7 +524,7 @@ func NouveauCombat3D(joueur *Character, mode ModeCombat, genre TypeMonstre) (*Co
 	if joueur == nil {
 		return nil, fmt.Errorf("le personnage du combat est absent")
 	}
-	if joueur.PVActuel <= 0 {
+	if joueur.PvActuel <= 0 {
 		return nil, fmt.Errorf("le personnage doit être vivant pour entrer dans l'arène")
 	}
 
@@ -524,18 +541,11 @@ func NouveauCombat3D(joueur *Character, mode ModeCombat, genre TypeMonstre) (*Co
 		}
 		combat.Vagues = [][]EnnemiCombat{{ennemi}}
 	case ModeEntrainement:
-		copie := *joueur
-		copie.Inventaire = make(map[string]int)
-		for nom, q := range joueur.Inventaire {
-			copie.Inventaire[nom] = q
-		}
-		combat.avantEntrainement = &copie
 		combat.Vagues = [][]EnnemiCombat{{NouveauGobelinCombat()}}
 	default:
 		return nil, fmt.Errorf("mode de combat inconnu")
 	}
 	combat.preparerVague(0)
-	combat.Phase = PhaseTourJoueur
 	return combat, nil
 }
 
@@ -544,10 +554,7 @@ func (c *CombatArene) Quitter3D() {
 	if c == nil || c.Joueur == nil || c.Phase == PhaseAbandon {
 		return
 	}
-	if c.avantEntrainement != nil {
-		*c.Joueur = *c.avantEntrainement
-		c.avantEntrainement = nil
-	} else if c.Phase == PhaseDefaite {
+	if c.Phase == PhaseDefaite {
 		c.RessusciterApresDefaite()
 	}
 	c.poisonSecondes = 0
@@ -624,15 +631,15 @@ func (c *CombatArene) AttaquerPhysiquement(nomAttaque string, indexCible int) Re
 	}
 
 	cible := &c.Ennemis[indexCible].Monstre
-	avant := cible.PVActuel
-	cible.PVActuel -= degats
+	avant := cible.PvActuel
+	cible.PvActuel -= degats
 	bornerPVMonstre3D(cible)
 
 	resultat := ResultatAction{
 		Reussite: true, TourConsomme: true, Type: "attaque",
-		Source: c.Joueur.Nom, Cible: cible.Nom, Degats: avant - cible.PVActuel,
-		PVAvant: avant, PVApres: cible.PVActuel, CibleVaincue: cible.PVActuel == 0,
-		Message: fmt.Sprintf("%s utilise %s sur %s et inflige %d dégâts.", c.Joueur.Nom, nomAttaque, cible.Nom, avant-cible.PVActuel),
+		Source: c.Joueur.Nom, Cible: cible.Nom, Degats: avant - cible.PvActuel,
+		PVAvant: avant, PVApres: cible.PvActuel, CibleVaincue: cible.PvActuel == 0,
+		Message: fmt.Sprintf("%s utilise %s sur %s et inflige %d dégâts.", c.Joueur.Nom, nomAttaque, cible.Nom, avant-cible.PvActuel),
 	}
 	return c.terminerActionJoueur(indexCible, resultat)
 }
@@ -655,7 +662,7 @@ func (c *CombatArene) LancerSort(nomSort string, indexCible int) ResultatAction 
 
 	// Les sorts de soutien n'ont pas besoin d'une cible ennemie.
 	if nomSort == SortSoinDuCoeur || nomSort == SortBouclier {
-		if nomSort == SortSoinDuCoeur && c.Joueur.PVActuel >= c.Joueur.PVMaxTotal {
+		if nomSort == SortSoinDuCoeur && c.Joueur.PvActuel >= c.Joueur.PvMaxTotal {
 			return actionRefusee3D("Les points de vie sont déjà au maximum.")
 		}
 		return c.lancerSortSoutien3D(nomSort, coutMana)
@@ -672,30 +679,17 @@ func (c *CombatArene) LancerSort(nomSort string, indexCible int) ResultatAction 
 
 	manaAvant := c.Joueur.ManaActuel
 	c.Joueur.ManaActuel -= coutMana
-	avant := cible.PVActuel
-	cible.PVActuel -= degats
+	avant := cible.PvActuel
+	cible.PvActuel -= degats
 	bornerPVMonstre3D(cible)
 
 	resultat := ResultatAction{
 		Reussite: true, TourConsomme: true, Type: "sort",
-		Source: c.Joueur.Nom, Cible: cible.Nom, Degats: avant - cible.PVActuel,
-		PVAvant: avant, PVApres: cible.PVActuel,
+		Source: c.Joueur.Nom, Cible: cible.Nom, Degats: avant - cible.PvActuel,
+		PVAvant: avant, PVApres: cible.PvActuel,
 		ManaAvant: manaAvant, ManaApres: c.Joueur.ManaActuel,
-		CibleVaincue: cible.PVActuel == 0,
-		Message:      fmt.Sprintf("%s lance %s sur %s et inflige %d dégâts.", c.Joueur.Nom, nomSort, cible.Nom, avant-cible.PVActuel),
-	}
-
-	if nomSort == SortDevotion && rand.Intn(4) == 0 {
-		c.Joueur.PVActuel -= 8
-		if c.Joueur.PVActuel < 0 {
-			c.Joueur.PVActuel = 0
-		}
-		resultat.Message += " Le lanceur subit 8 dégâts en retour."
-		if c.Joueur.PVActuel == 0 {
-			c.Phase = PhaseDefaite
-			resultat.CombatTermine = true
-			return resultat
-		}
+		CibleVaincue: cible.PvActuel == 0,
+		Message:      fmt.Sprintf("%s lance %s sur %s et inflige %d dégâts.", c.Joueur.Nom, nomSort, cible.Nom, avant-cible.PvActuel),
 	}
 
 	return c.terminerActionJoueur(indexCible, resultat)
@@ -712,15 +706,15 @@ func (c *CombatArene) lancerSortSoutien3D(nomSort string, coutMana int) Resultat
 
 	switch nomSort {
 	case SortSoinDuCoeur:
-		avant := c.Joueur.PVActuel
-		soin := c.Joueur.PVMaxTotal / 5
-		c.Joueur.PVActuel += soin
-		if c.Joueur.PVActuel > c.Joueur.PVMaxTotal {
-			c.Joueur.PVActuel = c.Joueur.PVMaxTotal
+		avant := c.Joueur.PvActuel
+		soin := c.Joueur.PvMaxTotal / 5
+		c.Joueur.PvActuel += soin
+		if c.Joueur.PvActuel > c.Joueur.PvMaxTotal {
+			c.Joueur.PvActuel = c.Joueur.PvMaxTotal
 		}
-		resultat.Soin = c.Joueur.PVActuel - avant
+		resultat.Soin = c.Joueur.PvActuel - avant
 		resultat.PVAvant = avant
-		resultat.PVApres = c.Joueur.PVActuel
+		resultat.PVApres = c.Joueur.PvActuel
 		resultat.Message = fmt.Sprintf("%s récupère %d PV avec %s.", c.Joueur.Nom, resultat.Soin, nomSort)
 	case SortBouclier:
 		c.DefenseActive = true
@@ -732,51 +726,16 @@ func (c *CombatArene) lancerSortSoutien3D(nomSort string, coutMana int) Resultat
 }
 
 func (c *CombatArene) degatsSort3D(nomSort string) (int, bool) {
-	if degats, _, connu := InfosSort(nomSort); connu {
-		return degats, true
-	}
-	switch nomSort {
-	case SortFoudreCeleste:
-		return 30, true
-	case SortDevotion:
-		return rand.Intn(11) + 20, true
-	case SortDernierEspoir:
-		if c.Joueur.PVActuel*100 > c.Joueur.PVMaxTotal*30 {
-			return 0, false
-		}
-		return 40, true
-	default:
-		return 0, false
-	}
+	degats, _, connu := InfosSort(nomSort)
+	return degats, connu
 }
 
 func coutManaSort3D(nomSort string) int {
-	switch nomSort {
-	case SortCoupDePoing:
-		return coutManaCoupDePoing
-	case SortBouleDeFeu:
-		return coutManaBouleDeFeu
-	case SortLameDuDestin:
-		return coutManaLameDuDestin
-	case SortEclateDuGardien:
-		return coutManaEclatDuGardien
-	case SortFlecheDeLumiere:
-		return coutManaFlecheDeLumiere
-	case SortFoudreCeleste:
-		return coutManaFoudreCeleste
-	case SortSoinDuCoeur:
-		return coutManaSoinDuCoeur
-	case SortBouclier:
-		return coutManaBouclier
-	case SortDevotion:
-		return coutManaDevotion
-	case SortDernierEspoir:
-		return coutManaDernierEspoir
-	case SortJugementDesGeants:
-		return coutManaJugementDesGeants
-	default:
+	_, cout, connu := InfosSort(nomSort)
+	if !connu {
 		return -1
 	}
+	return cout
 }
 
 // CoutSort3D expose le coût existant à l'interface, sans lancer le sort.
@@ -802,7 +761,7 @@ func (c *CombatArene) UtiliserObjet(nomObjet string) ResultatAction {
 		c.poisonTempsAccumule = 0
 		resultat = actionReussie3D(fmt.Sprintf("%s utilise une potion de poison.", c.Joueur.Nom))
 	default:
-		return actionRefusee3D("Cet objet ne peut pas être utilisé pendant un combat.")
+		resultat = c.Joueur.UtiliserObjet3D(nomObjet)
 	}
 
 	if resultat.Reussite {
@@ -825,10 +784,10 @@ func (c *CombatArene) Defendre() ResultatAction {
 }
 
 func (c *CombatArene) ProchaineActionMonstre() ResultatAction {
-	if c == nil || c.Phase != PhaseTourMonstres {
+	if c == nil || c.Phase != PhaseTourMonstres || c.poisonSecondes > 0 {
 		return actionRefusee3D("Les monstres ne peuvent pas jouer maintenant.")
 	}
-	for c.IndexMonstreActif < len(c.Ennemis) && c.Ennemis[c.IndexMonstreActif].Monstre.PVActuel <= 0 {
+	for c.IndexMonstreActif < len(c.Ennemis) && c.Ennemis[c.IndexMonstreActif].Monstre.PvActuel <= 0 {
 		c.IndexMonstreActif++
 	}
 	if c.IndexMonstreActif >= len(c.Ennemis) {
@@ -855,18 +814,18 @@ func (c *CombatArene) ProchaineActionMonstre() ResultatAction {
 		c.DefenseActive = false
 	}
 
-	avant := c.Joueur.PVActuel
-	c.Joueur.PVActuel -= degats
-	if c.Joueur.PVActuel < 0 {
-		c.Joueur.PVActuel = 0
+	avant := c.Joueur.PvActuel
+	c.Joueur.PvActuel -= degats
+	if c.Joueur.PvActuel < 0 {
+		c.Joueur.PvActuel = 0
 	}
 
 	resultat := ResultatAction{
 		Reussite: true, TourConsomme: true, Type: "attaque_monstre",
 		Source: ennemi.Monstre.Nom, Cible: c.Joueur.Nom,
-		Degats: avant - c.Joueur.PVActuel, PVAvant: avant, PVApres: c.Joueur.PVActuel,
-		CibleVaincue: c.Joueur.PVActuel == 0,
-		Message:      fmt.Sprintf("%s attaque %s et inflige %d dégâts.", ennemi.Monstre.Nom, c.Joueur.Nom, avant-c.Joueur.PVActuel),
+		Degats: avant - c.Joueur.PvActuel, PVAvant: avant, PVApres: c.Joueur.PvActuel,
+		CibleVaincue: c.Joueur.PvActuel == 0,
+		Message:      fmt.Sprintf("%s attaque %s et inflige %d dégâts.", ennemi.Monstre.Nom, c.Joueur.Nom, avant-c.Joueur.PvActuel),
 	}
 
 	c.IndexMonstreActif++
@@ -899,12 +858,12 @@ func (c *CombatArene) RessusciterApresDefaite() ResultatAction {
 	if c == nil || c.Joueur == nil || c.Phase != PhaseDefaite {
 		return actionRefusee3D("Le personnage n'a pas besoin d'être ressuscité.")
 	}
-	avant := c.Joueur.PVActuel
-	c.Joueur.PVActuel = c.Joueur.PVMaxTotal / 2
+	avant := c.Joueur.PvActuel
+	c.Joueur.PvActuel = c.Joueur.PvMaxTotal / 2
 	return ResultatAction{
 		Reussite: true, Type: "resurrection", Source: c.Joueur.Nom, Cible: c.Joueur.Nom,
-		Soin: c.Joueur.PVActuel - avant, PVAvant: avant, PVApres: c.Joueur.PVActuel,
-		Message: fmt.Sprintf("%s ressuscite avec %d PV.", c.Joueur.Nom, c.Joueur.PVActuel),
+		Soin: c.Joueur.PvActuel - avant, PVAvant: avant, PVApres: c.Joueur.PvActuel,
+		Message: fmt.Sprintf("%s ressuscite avec %d PV.", c.Joueur.Nom, c.Joueur.PvActuel),
 	}
 }
 
@@ -917,15 +876,15 @@ func (c *CombatArene) MettreAJourEffets(delta time.Duration) []ResultatAction {
 	for c.poisonTempsAccumule >= time.Second && c.poisonSecondes > 0 {
 		c.poisonTempsAccumule -= time.Second
 		c.poisonSecondes--
-		avant := c.Joueur.PVActuel
-		c.Joueur.PVActuel -= 10
-		if c.Joueur.PVActuel < 0 {
-			c.Joueur.PVActuel = 0
+		avant := c.Joueur.PvActuel
+		c.Joueur.PvActuel -= 10
+		if c.Joueur.PvActuel < 0 {
+			c.Joueur.PvActuel = 0
 		}
 		resultat := ResultatAction{
 			Reussite: true, Type: "poison", Source: ItemPotionDePoison, Cible: c.Joueur.Nom,
-			Degats: avant - c.Joueur.PVActuel, PVAvant: avant, PVApres: c.Joueur.PVActuel,
-			CibleVaincue: c.Joueur.PVActuel == 0,
+			Degats: avant - c.Joueur.PvActuel, PVAvant: avant, PVApres: c.Joueur.PvActuel,
+			CibleVaincue: c.Joueur.PvActuel == 0,
 			Message:      fmt.Sprintf("Le poison inflige 10 dégâts à %s.", c.Joueur.Nom),
 		}
 		if resultat.CibleVaincue {
@@ -944,7 +903,7 @@ func (c *CombatArene) CiblesVivantes() []int {
 		return indices
 	}
 	for index := range c.Ennemis {
-		if c.Ennemis[index].Monstre.PVActuel > 0 {
+		if c.Ennemis[index].Monstre.PvActuel > 0 {
 			indices = append(indices, index)
 		}
 	}
@@ -962,7 +921,8 @@ func (c *CombatArene) preparerVague(index int) {
 			initiativeEnnemie = c.Ennemis[index].Monstre.Initiative
 		}
 	}
-	if c.Joueur.Initiative >= initiativeEnnemie {
+	c.joueurCommence = c.Joueur.Initiative >= initiativeEnnemie
+	if c.joueurCommence {
 		c.Phase = PhaseTourJoueur
 	} else {
 		c.Phase = PhaseTourMonstres
@@ -979,7 +939,7 @@ func (c *CombatArene) verifierTourJoueur(indexCible int) ResultatAction {
 	if indexCible < 0 || indexCible >= len(c.Ennemis) {
 		return actionRefusee3D("La cible sélectionnée n'existe pas.")
 	}
-	if c.Ennemis[indexCible].Monstre.PVActuel <= 0 {
+	if c.Ennemis[indexCible].Monstre.PvActuel <= 0 {
 		return actionRefusee3D("La cible est déjà vaincue.")
 	}
 	return ResultatAction{Reussite: true}
@@ -989,12 +949,14 @@ func (c *CombatArene) terminerActionJoueur(indexCible int, resultat ResultatActi
 	if !resultat.Reussite || !resultat.TourConsomme {
 		return resultat
 	}
-	if resultat.CibleVaincue && c.Mode != ModeEntrainement {
+	if resultat.CibleVaincue {
 		gain := c.Ennemis[indexCible].Monstre.ExperienceDonnee
 		resultat.ExperienceGagnee = gain
 		resultat.NiveauxGagnes = ajouterExperience3D(c.Joueur, gain)
 		c.ExperienceTotale += gain
-		resultat.OrGagne = OrMonstre3D(c.Ennemis[indexCible].Type)
+		if c.Mode != ModeEntrainement {
+			resultat.OrGagne = OrMonstre3D(c.Ennemis[indexCible].Type)
+		}
 		c.Joueur.Argent += resultat.OrGagne
 		c.OrTotal += resultat.OrGagne
 		resultat.Message += fmt.Sprintf(" +%d or.", resultat.OrGagne)
@@ -1016,12 +978,17 @@ func (c *CombatArene) terminerActionJoueur(indexCible int, resultat ResultatActi
 }
 
 func (c *CombatArene) commencerTourMonstres() {
+	if !c.joueurCommence {
+		c.Tour++
+	}
 	c.Phase = PhaseTourMonstres
 	c.IndexMonstreActif = 0
 }
 
 func (c *CombatArene) finirTourMonstres() {
-	c.Tour++
+	if c.joueurCommence {
+		c.Tour++
+	}
 	c.Phase = PhaseTourJoueur
 	c.IndexMonstreActif = 0
 }
@@ -1030,10 +997,10 @@ func (c *CombatArene) soinChaman3D(chaman *EnnemiCombat) ResultatAction {
 	indexCible := -1
 	for index := range c.Ennemis {
 		monstre := &c.Ennemis[index].Monstre
-		if monstre.PVActuel <= 0 || monstre.PVActuel >= monstre.PVMax {
+		if monstre.PvActuel <= 0 || monstre.PvActuel >= monstre.PvMax {
 			continue
 		}
-		if indexCible == -1 || monstre.PVActuel < c.Ennemis[indexCible].Monstre.PVActuel {
+		if indexCible == -1 || monstre.PvActuel < c.Ennemis[indexCible].Monstre.PvActuel {
 			indexCible = index
 		}
 	}
@@ -1042,14 +1009,14 @@ func (c *CombatArene) soinChaman3D(chaman *EnnemiCombat) ResultatAction {
 	}
 
 	cible := &c.Ennemis[indexCible].Monstre
-	avant := cible.PVActuel
-	cible.PVActuel += 12
+	avant := cible.PvActuel
+	cible.PvActuel += 12
 	bornerPVMonstre3D(cible)
 	return ResultatAction{
 		Reussite: true, TourConsomme: true, Type: "soin_monstre",
-		Source: chaman.Monstre.Nom, Cible: cible.Nom, Soin: cible.PVActuel - avant,
-		PVAvant: avant, PVApres: cible.PVActuel,
-		Message: fmt.Sprintf("%s rend %d PV à %s.", chaman.Monstre.Nom, cible.PVActuel-avant, cible.Nom),
+		Source: chaman.Monstre.Nom, Cible: cible.Nom, Soin: cible.PvActuel - avant,
+		PVAvant: avant, PVApres: cible.PvActuel,
+		Message: fmt.Sprintf("%s rend %d PV à %s.", chaman.Monstre.Nom, cible.PvActuel-avant, cible.Nom),
 	}
 }
 
@@ -1062,8 +1029,8 @@ func ajouterExperience3D(personnage *Character, gain int) int {
 	for personnage.ExperienceActuelle >= personnage.ExperienceMax {
 		personnage.ExperienceActuelle -= personnage.ExperienceMax
 		personnage.Niveau++
-		personnage.ExperienceMax = personnage.ExperienceMax * augmentationExperienceNumerateur / augmentationExperienceDenominateur
-		personnage.PVMaxBase += personnage.GainPvMax
+		personnage.ExperienceMax = personnage.ExperienceMax * AugmentationExperienceNumerateur / AugmentationExperienceDenominateur
+		personnage.PvMaxBase += personnage.GainPvMax
 		personnage.MettreAJourPvMax()
 		personnage.ManaMax += personnage.GainManaMax
 		personnage.Attaque += personnage.GainAttaque
@@ -1079,11 +1046,11 @@ func copierEnnemis3D(source []EnnemiCombat) []EnnemiCombat {
 }
 
 func bornerPVMonstre3D(monstre *Monster) {
-	if monstre.PVActuel < 0 {
-		monstre.PVActuel = 0
+	if monstre.PvActuel < 0 {
+		monstre.PvActuel = 0
 	}
-	if monstre.PVActuel > monstre.PVMax {
-		monstre.PVActuel = monstre.PVMax
+	if monstre.PvActuel > monstre.PvMax {
+		monstre.PvActuel = monstre.PvMax
 	}
 }
 
@@ -1102,4 +1069,69 @@ func actionReussie3D(message string) ResultatAction {
 
 func actionRefusee3D(message string) ResultatAction {
 	return ResultatAction{Reussite: false, Message: message}
+}
+
+// CreerPersonnage3D valide les mêmes noms et classes que la création CLI.
+func CreerPersonnage3D(nom, nomClasse string) (Character, error) {
+	nom, valide := FormatName(nom)
+	if !valide {
+		return Character{}, fmt.Errorf("Le nom doit contenir uniquement des lettres.")
+	}
+	classe, valide := ClasseDepuisNom3D(nomClasse)
+	if !valide {
+		return Character{}, fmt.Errorf("Choisissez Humain, Elfe ou Nain.")
+	}
+	return InitCharacter(nom, 1, classe), nil
+}
+
+func (c *CombatArene) EffetEnCours3D() bool { return c != nil && c.poisonSecondes > 0 }
+
+// EffetsPersonnage3D conserve le chronomètre du poison hors combat.
+// L'interface appelle MettreAJour à chaque image, jamais time.Sleep.
+type EffetsPersonnage3D struct {
+	Joueur   *Character
+	secondes int
+	temps    time.Duration
+}
+
+func (e *EffetsPersonnage3D) Actif() bool { return e.secondes > 0 }
+
+func (e *EffetsPersonnage3D) Utiliser(nom string) ResultatAction {
+	if e.Joueur == nil {
+		return actionRefusee3D("Personnage absent.")
+	}
+	if e.Actif() {
+		return actionRefusee3D("Attendez la fin du poison.")
+	}
+	if nom != ItemPotionDePoison {
+		return e.Joueur.UtiliserObjet3D(nom)
+	}
+	if !e.Joueur.RemoveInventory(nom) {
+		return actionRefusee3D("Aucune potion de poison.")
+	}
+	e.secondes, e.temps = 3, 0
+	return actionReussie3D("Poison : 10 dégâts par seconde pendant 3 secondes.")
+}
+
+func (e *EffetsPersonnage3D) MettreAJour(delta time.Duration) []ResultatAction {
+	if !e.Actif() || e.Joueur == nil {
+		return nil
+	}
+	e.temps += delta
+	var resultats []ResultatAction
+	for e.temps >= time.Second && e.secondes > 0 {
+		e.temps -= time.Second
+		e.secondes--
+		avant := e.Joueur.PvActuel
+		e.Joueur.SubirDegats(10)
+		r := ResultatAction{Reussite: true, Type: "poison", PVAvant: avant, PVApres: e.Joueur.PvActuel, Degats: avant - e.Joueur.PvActuel}
+		r.Message = fmt.Sprintf("Poison : -%d PV (%d / %d).", r.Degats, e.Joueur.PvActuel, e.Joueur.PvMaxTotal)
+		if e.Joueur.PvActuel == 0 {
+			e.secondes = 0
+			e.Joueur.PvActuel = e.Joueur.PvMaxTotal / 2
+			r.Message += fmt.Sprintf(" Résurrection : %d PV.", e.Joueur.PvActuel)
+		}
+		resultats = append(resultats, r)
+	}
+	return resultats
 }

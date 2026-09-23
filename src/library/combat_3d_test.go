@@ -11,7 +11,7 @@ import (
 
 func joueurCombatTest() Character {
 	p := NouveauPersonnage3D("Test", "Humain")
-	p.PVActuel = p.PVMaxTotal
+	p.PvActuel = p.PvMaxTotal
 	return p
 }
 
@@ -114,7 +114,7 @@ func TestEntrainementRestaureSansRecompense(t *testing.T) {
 			avant.Inventaire[n] = q
 		}
 		c, _ := NouveauCombat3D(&p, ModeEntrainement, TypeGobelin)
-		p.PVActuel = 20
+		p.PvActuel = 20
 		p.ManaActuel = 10
 		p.RemoveInventory(ItemPotionDeVie)
 		if victoire {
@@ -138,11 +138,11 @@ func TestAbandonStoppeActionsEtPoison(t *testing.T) {
 		c.Phase = phase
 		c.poisonSecondes = 3
 		c.Quitter3D()
-		pv := p.PVActuel
+		pv := p.PvActuel
 		if c.Attaquer(0).Reussite || c.ProchaineActionMonstre().Reussite || len(c.MettreAJourEffets(time.Minute)) != 0 {
 			t.Fatal("action après abandon")
 		}
-		if p.PVActuel != pv || len(c.Butins) > 0 || c.ExperienceTotale != 0 {
+		if p.PvActuel != pv || len(c.Butins) > 0 || c.ExperienceTotale != 0 {
 			t.Fatal("abandon modifie PV ou récompenses")
 		}
 	}

@@ -37,6 +37,15 @@ func NouveauMenuJeu(scene *core.Node, largeur, hauteur float32) *MenuJeu {
 	quitter.SetSize(300, 60)
 	quitter.SetPosition(largeur/2-150, hauteur/2+45)
 	fond.Add(quitter)
+	artistes := gui.NewButton("QUI SONT-ILS ?")
+	artistes.SetSize(300, 50)
+	artistes.SetPosition(largeur/2-150, hauteur/2+125)
+	fond.Add(artistes)
+	reponse := gui.NewLabel("Ordta RPG, Gautier, Guillaume, Quentin, Lalie")
+	reponse.SetPosition(largeur/2-140, hauteur/2+195)
+	reponse.SetVisible(false)
+	fond.Add(reponse)
+	artistes.Subscribe(gui.OnClick, func(_ string, _ interface{}) { reponse.SetVisible(true) })
 	scene.Add(fond)
 	return &MenuJeu{Panneau: fond, Titre: titre, BoutonDemarrer: demarrer, BoutonReprendre: reprendre, BoutonQuitter: quitter, Ouvert: true}
 }

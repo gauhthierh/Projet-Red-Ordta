@@ -43,3 +43,21 @@ func TestSauvegarde3DAbsenteEtCorrompue(t *testing.T) {
 		t.Fatal("corruption non signalée")
 	}
 }
+
+func TestAncienneSauvegardeMigration(t *testing.T) {
+	chemin := filepath.Join(t.TempDir(), "ancienne.json")
+	p := library.NouveauPersonnage3D("Ancien", "Nain")
+	p.Inventaire = map[string]int{"Potion de Mana": 2, "Peau de Troll": 1, "Livre de sort : Boule de feu": 1}
+	p.Skill = []string{"Coup de poing", "Boule de feu"}
+	p.AttaquesPhysiques = []string{"Attaque Basique"}
+	if err := SauvegarderPartie3D(chemin, Partie3D{Personnage: p}); err != nil {
+		t.Fatal(err)
+	}
+	relue, err := ChargerPartie3D(chemin)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if relue.Personnage.Nom != "Ancien" || relue.Personnage.Classe != "Nain" || relue.Personnage.Inventaire[library.ItemPotionDeMana] != 2 || relue.Personnage.Skill[1] != library.SortGrosseBouleDeFeu || relue.Personnage.AttaquesPhysiques[0] != library.AttaqueBasique {
+		t.Fatalf("migration incomplète : %+v", relue.Personnage)
+	}
+}

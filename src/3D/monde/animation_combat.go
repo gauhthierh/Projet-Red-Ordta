@@ -43,14 +43,12 @@ func (a *AnimationCombat) Demarrer(action string, acteur, cible *core.Node, memb
 	a.acteur, a.cible, a.membres, a.fin = acteur, cible, membres, fin
 	couleur := math32.Color{R: .4, G: .75, B: 1}
 	switch action {
-	case library.SortBouleDeFeu:
+	case library.SortGrosseBouleDeFeu:
 		couleur = math32.Color{R: 1, G: .25, B: .04}
 	case library.SortSoinDuCoeur, "soin_monstre":
 		couleur = math32.Color{R: .2, G: 1, B: .3}
 	case library.SortFlecheDeLumiere, library.SortJugementDesGeants:
 		couleur = math32.Color{R: 1, G: .85, B: .25}
-	case library.SortDevotion, library.SortDernierEspoir:
-		couleur = math32.Color{R: .8, G: .2, B: 1}
 	}
 	a.matiere.SetColor(&couleur)
 	// Conserver les poses permet une restauration exacte, même après une sortie.
@@ -111,19 +109,29 @@ func (a *AnimationCombat) MettreAJour(delta float32) {
 	a.effet.SetScale(1, 1, 1)
 	// Chaque sort a sa propre gestuelle, sans modifier les statistiques.
 	switch a.action {
-	case "Attaque Basique", "attaque":
+	case library.AttaqueBasique, "attaque":
 		// Le bras pend vers -Z et le personnage regarde vers -Y :
 		// une rotation X négative fait partir la main vers l'avant.
 		rotation("bras_droit", -1.8, 0, -.5)
 		rotation("arme", -1.8, 0, -.5)
+	case library.AttaqueCoupsDePied:
+		rotation("jambe_droite", -1.4, 0, 0)
+	case library.AttaqueMorsure:
+		rotation("tete", .6, 0, 0)
+	case library.AttaqueClaquounette:
+		rotation("bras_droit", -1.2, 0, -1.4)
+	case library.AttaquePichenette:
+		rotation("bras_droit", -.9, -.4, 0)
+	case library.AttaqueUppercut:
+		rotation("bras_droit", -2.5, 0, 0)
 	case library.SortCoupDePoing:
 		rotation("bras_droit", 1.7, 0, 0)
 	case library.SortLameDuDestin:
 		rotation("bras_droit", 1.2, 0, -1.5)
-	case library.SortBouleDeFeu:
+	case library.SortGrosseBouleDeFeu:
 		rotation("bras_droit", 1.6, .4, 0)
 		magie = true
-	case library.SortEclateDuGardien:
+	case library.SortEclatsDuGardien:
 		a.effet.SetScale(2, 2, .5)
 		rotation("bras_droit", 1, 0, -1)
 		rotation("bras_gauche", 1, 0, 1)
@@ -133,10 +141,6 @@ func (a *AnimationCombat) MettreAJour(delta float32) {
 		rotation("bras_gauche", 1.6, 0, 0)
 		rotation("bras_droit", .8, -1.2, 0)
 		magie = true
-	case library.SortFoudreCeleste:
-		a.effet.SetScale(.4, .4, 7)
-		rotation("bras_droit", 3, 0, .3)
-		magie = true
 	case library.SortSoinDuCoeur:
 		a.effet.SetScale(2, 2, .25)
 		rotation("bras_droit", .8, -.5, 0)
@@ -144,16 +148,6 @@ func (a *AnimationCombat) MettreAJour(delta float32) {
 		magie = true
 	case library.SortBouclier, "defense":
 		rotation("bras_gauche", 1.5, .7, .5)
-	case library.SortDevotion:
-		a.effet.SetScale(1.5, 1.5, 1.5)
-		rotation("bras_droit", 0, -1.5, 0)
-		rotation("bras_gauche", 0, 1.5, 0)
-		magie = true
-	case library.SortDernierEspoir:
-		a.effet.SetScale(2, .5, 2)
-		rotation("jambe_droite", -.7, 0, 0)
-		rotation("bras_droit", 2.8, 0, -1)
-		magie = true
 	case library.SortJugementDesGeants:
 		a.effet.SetScale(3, 3, 3)
 		rotation("bras_droit", 2.8, -.4, 0)
@@ -194,7 +188,7 @@ func (a *AnimationCombat) MettreAJour(delta float32) {
 	if magie {
 		a.effet.SetVisible(true)
 		a.effet.SetPosition(p.X+(q.X-p.X)*t, p.Y+(q.Y-p.Y)*t, p.Z+1.2+v*.5)
-		if a.action == library.SortFoudreCeleste || a.action == library.SortJugementDesGeants {
+		if a.action == library.SortJugementDesGeants {
 			a.effet.SetPosition(q.X, q.Y, q.Z+1+(1-t)*4)
 		}
 	} else if a.acteur != a.cible {

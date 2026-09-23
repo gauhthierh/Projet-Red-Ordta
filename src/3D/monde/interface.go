@@ -261,8 +261,8 @@ func (i *InterfacePersonnage) MettreAJourPersonnage(p *library.Character) {
 	// Calcul de la proportion de vie restante.
 	proportionVie := float32(0)
 
-	if p.PVMaxTotal > 0 {
-		proportionVie = float32(p.PVActuel) / float32(p.PVMaxTotal)
+	if p.PvMaxTotal > 0 {
+		proportionVie = float32(p.PvActuel) / float32(p.PvMaxTotal)
 	}
 
 	// Empêche la barre de dépasser ses limites.
@@ -280,7 +280,7 @@ func (i *InterfacePersonnage) MettreAJourPersonnage(p *library.Character) {
 
 	// Mise à jour des textes.
 	i.TexteVie.SetText(
-		fmt.Sprintf("PV : %d / %d", p.PVActuel, p.PVMaxTotal),
+		fmt.Sprintf("PV : %d / %d", p.PvActuel, p.PvMaxTotal),
 	)
 
 	i.NomClasse.SetText(
@@ -428,10 +428,10 @@ func (i *InterfaceMonstres) MettreAJourMonstres(ennemis []library.EnnemiCombat) 
 		// Calcul de la proportion de vie restante.
 		proportionVie := float32(0)
 
-		if monstre.PVMax > 0 {
+		if monstre.PvMax > 0 {
 			proportionVie =
-				float32(monstre.PVActuel) /
-					float32(monstre.PVMax)
+				float32(monstre.PvActuel) /
+					float32(monstre.PvMax)
 		}
 
 		if proportionVie < 0 {
@@ -450,7 +450,7 @@ func (i *InterfaceMonstres) MettreAJourMonstres(ennemis []library.EnnemiCombat) 
 		fiche.Nom.SetText(monstre.Nom)
 
 		fiche.TexteVie.SetText(
-			fmt.Sprintf("PV : %d / %d", monstre.PVActuel, monstre.PVMax),
+			fmt.Sprintf("PV : %d / %d", monstre.PvActuel, monstre.PvMax),
 		)
 
 		fiche.Statistiques.SetText(

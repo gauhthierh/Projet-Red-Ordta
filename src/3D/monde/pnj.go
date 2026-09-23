@@ -40,9 +40,11 @@ type InterfaceCommerce struct {
 	Boutons []*gui.Button
 	Fermer  *gui.Button
 
-	Ouvert bool
-	Mode   TypePNJ
-	Joueur *library.Character
+	Page       int
+	Pagination *gui.Label
+	Ouvert     bool
+	Mode       TypePNJ
+	Joueur     *library.Character
 }
 
 func AjouterPNJMarche(scene *core.Node) []*PNJ {
@@ -125,8 +127,8 @@ func NouvelleInterfaceCommerce(scene *core.Node, joueur *library.Character) *Int
 	message.SetPosition(30, 610)
 	panneau.Add(message)
 
-	boutons := make([]*gui.Button, 0, 10)
-	for index := 0; index < 10; index++ {
+	boutons := make([]*gui.Button, 0, 8)
+	for index := 0; index < 8; index++ {
 		bouton := gui.NewButton("")
 		bouton.SetSize(740, 45)
 		bouton.SetPosition(30, 115+float32(index)*50)
@@ -151,7 +153,7 @@ func NouvelleInterfaceCommerce(scene *core.Node, joueur *library.Character) *Int
 			var resultat library.ResultatAction
 			switch commerce.Mode {
 			case PNJMarchand:
-				resultat = commerce.Joueur.AcheterMarchand3D(indexArticle)
+				resultat = commerce.Joueur.AcheterMarchand3D(commerce.Page*8 + indexArticle)
 			case PNJForgeron:
 				resultat = commerce.Joueur.FabriquerForgeron3D(indexArticle)
 			default:
@@ -161,6 +163,31 @@ func NouvelleInterfaceCommerce(scene *core.Node, joueur *library.Character) *Int
 		})
 	}
 
+	commerce.Pagination = gui.NewLabel("")
+	commerce.Pagination.SetPosition(330, 550)
+	panneau.Add(commerce.Pagination)
+	for index, sens := range []int{-1, 1} {
+		direction := sens
+		texte := "PRÉCÉDENT"
+		if sens > 0 {
+			texte = "SUIVANT"
+		}
+		bouton := gui.NewButton(texte)
+		bouton.SetSize(180, 40)
+		bouton.SetPosition(30+float32(index)*560, 540)
+		bouton.Subscribe(gui.OnClick, func(_ string, _ interface{}) {
+			pages := 1
+			if commerce.Mode == PNJMarchand {
+				pages = (len(library.BoutiqueMarchand3D()) + 7) / 8
+			}
+			page := commerce.Page + direction
+			if page >= 0 && page < pages {
+				commerce.Page = page
+				commerce.MettreAJour()
+			}
+		})
+		panneau.Add(bouton)
+	}
 	panneau.SetVisible(false)
 	scene.Add(panneau)
 	return commerce
@@ -171,10 +198,11 @@ func (i *InterfaceCommerce) Ouvrir(typePNJ TypePNJ) {
 		return
 	}
 	i.Mode = typePNJ
+	i.Page = 0
 	i.Ouvert = true
 	i.Message.SetText("Choisissez un article.")
 	if typePNJ == PNJMarchand {
-		i.Message.SetText("Les matériaux d'armure se récoltent en combat.")
+		i.Message.SetText("Les achats respectent le niveau indiqué.")
 	}
 	i.Panneau.SetVisible(true)
 	i.MettreAJour()
@@ -199,11 +227,17 @@ func (i *InterfaceCommerce) MettreAJour() {
 		i.Joueur.CapaciteInventaire,
 	))
 
+	pages := 1
+	if i.Mode == PNJMarchand {
+		pages = (len(library.BoutiqueMarchand3D()) + 7) / 8
+	}
+	i.Pagination.SetText(fmt.Sprintf("Page %d / %d", i.Page+1, pages))
 	switch i.Mode {
 	case PNJMarchand:
 		i.Titre.SetText("MARCHAND")
 		articles := library.BoutiqueMarchand3D()
-		for index, bouton := range i.Boutons {
+		for numero, bouton := range i.Boutons {
+			index := i.Page*8 + numero
 			if index >= len(articles) {
 				bouton.SetVisible(false)
 				continue
@@ -214,7 +248,7 @@ func (i *InterfaceCommerce) MettreAJour() {
 			if prix == 0 {
 				textePrix = "Gratuit"
 			}
-			bouton.Label.SetText(fmt.Sprintf("%s — %s", article.Nom, textePrix))
+			bouton.Label.SetText(fmt.Sprintf("%s — %s — niv. %d", article.Nom, textePrix, article.NiveauMin))
 			bouton.SetVisible(true)
 		}
 	case PNJForgeron:

@@ -9,7 +9,8 @@ import (
 
 func TestCombatAnimationRestaureLesPoses(t *testing.T) {
 	for _, action := range []string{"attaque", "gobelin", "gobelin_cuirasse", "loup", "sanglier", "corbeau", "troll", "chaman", "soin_monstre", "defense", "objet",
-		library.SortCoupDePoing, library.SortLameDuDestin, library.SortBouleDeFeu, library.SortEclateDuGardien, library.SortFlecheDeLumiere, library.SortFoudreCeleste, library.SortSoinDuCoeur, library.SortBouclier, library.SortDevotion, library.SortDernierEspoir, library.SortJugementDesGeants} {
+		library.SortCoupDePoing, library.SortLameDuDestin, library.SortGrosseBouleDeFeu, library.SortEclatsDuGardien, library.SortFlecheDeLumiere, library.SortJugementDesGeants,
+		library.AttaqueBasique, library.AttaqueCoupsDePied, library.AttaqueMorsure, library.AttaqueClaquounette, library.AttaquePichenette, library.AttaqueUppercut} {
 		t.Run(action, func(t *testing.T) {
 			scene, acteur, cible, bras := core.NewNode(), core.NewNode(), core.NewNode(), core.NewNode()
 			acteur.SetPosition(1, 2, 3)
@@ -49,7 +50,7 @@ func TestTexteCombatContientLesChiffres(t *testing.T) {
 }
 
 func TestAttaqueBasiqueBrasVersAvant(t *testing.T) {
-	for _, action := range []string{"Attaque Basique", "attaque"} {
+	for _, action := range []string{library.AttaqueBasique, "attaque"} {
 		bras := core.NewNode()
 		a := NouvelleAnimationCombat(core.NewNode())
 		a.Demarrer(action, core.NewNode(), core.NewNode(), map[string]*core.Node{"bras_droit": bras}, nil)

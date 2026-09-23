@@ -15,7 +15,7 @@ type ChoixCombat struct {
 	Creatures                          map[library.TypeMonstre]*gui.Button
 }
 
-const aideChoixCombat = "CHOISIR UN COMBAT\nEntraînement : aucun gain, PV / mana / objets restaurés à la sortie.\nArène : vagues actuelles. Duel : un seul monstre pour les matériaux.\nVous pouvez quitter à tout moment. Prévoyez des places pour le butin."
+const aideChoixCombat = "CHOISIR UN COMBAT\nEntraînement : gobelin, expérience gagnée, consommations conservées.\nArène : vagues actuelles. Duel : un seul monstre pour les matériaux.\nVous pouvez quitter à tout moment. Prévoyez des places pour le butin."
 
 func NouveauChoixCombat(scene *core.Node) *ChoixCombat {
 	c := &ChoixCombat{Panneau: gui.NewPanel(860, 550), Creatures: map[library.TypeMonstre]*gui.Button{}}
@@ -37,7 +37,7 @@ func NouveauChoixCombat(scene *core.Node) *ChoixCombat {
 	for index, genre := range []library.TypeMonstre{library.TypeCorbeau, library.TypeSanglier, library.TypeLoup, library.TypeTroll} {
 		ennemi, _ := library.EnnemiDuel3D(genre)
 		butin := library.ButinPossible3D(genre)
-		b := bouton(fmt.Sprintf("%s — %d PV", ennemi.Monstre.Nom, ennemi.Monstre.PVMax), 25+float32(index%2)*410, 220+float32(index/2)*100)
+		b := bouton(fmt.Sprintf("%s — %d PV", ennemi.Monstre.Nom, ennemi.Monstre.PvMax), 25+float32(index%2)*410, 220+float32(index/2)*100)
 		b.SetSize(385, 50)
 		b.SetVisible(false)
 		c.Creatures[genre] = b
