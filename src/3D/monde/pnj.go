@@ -173,6 +173,9 @@ func (i *InterfaceCommerce) Ouvrir(typePNJ TypePNJ) {
 	i.Mode = typePNJ
 	i.Ouvert = true
 	i.Message.SetText("Choisissez un article.")
+	if typePNJ == PNJMarchand {
+		i.Message.SetText("Les matériaux d'armure se récoltent en combat.")
+	}
 	i.Panneau.SetVisible(true)
 	i.MettreAJour()
 }
@@ -199,12 +202,13 @@ func (i *InterfaceCommerce) MettreAJour() {
 	switch i.Mode {
 	case PNJMarchand:
 		i.Titre.SetText("MARCHAND")
+		articles := library.BoutiqueMarchand3D()
 		for index, bouton := range i.Boutons {
-			if index >= len(library.Boutique) {
+			if index >= len(articles) {
 				bouton.SetVisible(false)
 				continue
 			}
-			article := library.Boutique[index]
+			article := articles[index]
 			prix := i.Joueur.PrixPour(article)
 			textePrix := fmt.Sprintf("%d pièces d'or", prix)
 			if prix == 0 {

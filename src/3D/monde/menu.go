@@ -22,7 +22,7 @@ func NouveauMenuJeu(scene *core.Node, largeur, hauteur float32) *MenuJeu {
 	fond.SetColor4(&math32.Color4{R: .025, G: .035, B: .055, A: .94})
 	titre := gui.NewLabel("Ordta")
 	titre.SetFontSize(32)
-	titre.SetPosition(largeur/2-110, hauteur/2-145)
+	titre.SetPosition(largeur/2-40, hauteur/2-145)
 	fond.Add(titre)
 	demarrer := gui.NewButton("DÉMARRER")
 	demarrer.SetSize(300, 60)

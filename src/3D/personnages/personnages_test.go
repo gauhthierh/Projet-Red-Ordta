@@ -7,8 +7,8 @@ import (
 	"github.com/g3n/engine/math32"
 )
 
-func TestPersonnageZDirect(t *testing.T) {
-	p := Nouveau()
+func TestAncienPersonnageZDirect(t *testing.T) {
+	p := NouveauAncienModele()
 	if p.Noeud() == nil || p.jambeGauche == nil || p.jambeDroite == nil || p.brasGauche == nil || p.brasDroit == nil {
 		t.Fatal("le personnage ou ses articulations sont absents")
 	}

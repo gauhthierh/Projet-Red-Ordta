@@ -1,0 +1,23 @@
+{
+  "nom":"Corbeau",
+  "parties":[
+    {"nom":"corps","pivot":[0,0,0],"pieces":[
+      {"forme":"ellipsoide","position":[0,0,0.64],"taille":[0.65,0.85,0.94],"couleur":[0.09,0.1,0.15],"texture":"peau"},
+      {"forme":"boite","position":[0,0.52,0.43],"taille":[0.44,0.65,0.1],"couleur":[0.06,0.07,0.1]},
+      {"forme":"boite","position":[-0.15,0,0.17],"taille":[0.07,0.07,0.34],"couleur":[0.25,0.24,0.2]},
+      {"forme":"boite","position":[0.15,0,0.17],"taille":[0.07,0.07,0.34],"couleur":[0.25,0.24,0.2]},
+      {"forme":"boite","position":[-0.15,-0.12,0.04],"taille":[0.18,0.3,0.07],"couleur":[0.25,0.24,0.2]},
+      {"forme":"boite","position":[0.15,-0.12,0.04],"taille":[0.18,0.3,0.07],"couleur":[0.25,0.24,0.2]}
+    ]},
+    {"nom":"tete","pivot":[0,-0.28,1.13],"pieces":[
+      {"forme":"ellipsoide","position":[0,0,0],"taille":[0.44,0.48,0.47],"couleur":[0.08,0.08,0.11]},
+      {"forme":"boite","position":[0,-0.36,-0.05],"taille":[0.15,0.42,0.12],"couleur":[0.21,0.21,0.23]},
+      {"forme":"boite","position":[-0.19,-0.13,0.07],"taille":[0.065,0.08,0.07],"couleur":[0.85,0.65,0.22]},
+      {"forme":"boite","position":[0.19,-0.13,0.07],"taille":[0.065,0.08,0.07],"couleur":[0.85,0.65,0.22]}
+    ]},
+    {"nom":"ailes","pivot":[0,0,0],"pieces":[
+      {"forme":"ellipsoide","position":[-0.36,0.12,0.71],"taille":[0.2,0.81,0.62],"couleur":[0.12,0.14,0.22]},
+      {"forme":"ellipsoide","position":[0.36,0.12,0.71],"taille":[0.2,0.81,0.62],"couleur":[0.12,0.14,0.22]}
+    ]}
+  ]
+}

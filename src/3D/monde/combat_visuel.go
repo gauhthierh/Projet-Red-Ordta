@@ -25,6 +25,9 @@ func ChargerMontres(scene *core.Node, concurrents []library.EnnemiCombat) ([]*mo
 
 		modele, err := monstres.Charger(chemin)
 		if err != nil {
+			for _, dejaCharge := range modeles {
+				scene.Remove(dejaCharge.Noeud())
+			}
 			return nil, fmt.Errorf(
 				"charger %s : %w",
 				concurrent.Modele3D,

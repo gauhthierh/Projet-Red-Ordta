@@ -3,6 +3,7 @@ package monde
 import (
 	"fmt"
 	"ordta/library"
+	"strings"
 
 	"github.com/g3n/engine/core"
 	"github.com/g3n/engine/gui"
@@ -16,6 +17,7 @@ type InterfaceCombat struct {
 	BoutonInventaire *gui.Button
 	BoutonDefendre   *gui.Button
 	BoutonQuitter    *gui.Button
+	BoutonRejouer    *gui.Button
 	BoutonsChoix     []*gui.Button
 	ModeChoix        string
 	OptionsChoix     []string
@@ -61,6 +63,7 @@ type InterfaceEtatCombat struct {
 	Tour    *gui.Label
 	Phase   *gui.Label
 	Message *gui.Label
+	Butin   *gui.Label
 }
 
 func NouvelleInterfaceCombat(scene *core.Node) *InterfaceCombat {
@@ -86,8 +89,13 @@ func NouvelleInterfaceCombat(scene *core.Node) *InterfaceCombat {
 
 	boutonQuitter := gui.NewButton("QUITTER L'ARÈNE")
 	boutonQuitter.SetSize(220, 55)
-	boutonQuitter.SetPosition(290, 165)
+	boutonQuitter.SetPosition(565, 110)
 	boutonQuitter.SetVisible(false)
+	boutonRejouer := gui.NewButton("CHOISIR UN AUTRE COMBAT")
+	boutonRejouer.SetPosition(15, 110)
+	boutonRejouer.SetSize(260, 50)
+	boutonRejouer.SetVisible(false)
+	panneau.Add(boutonRejouer)
 
 	panneau.Add(bouton)
 	panneau.Add(boutonSorts)
@@ -95,13 +103,14 @@ func NouvelleInterfaceCombat(scene *core.Node) *InterfaceCombat {
 	panneau.Add(boutonDefendre)
 	panneau.Add(boutonQuitter)
 
-	boutonsChoix := make([]*gui.Button, 0, 10)
-	for index := 0; index < 10; index++ {
-		colonne := index % 5
-		ligne := index / 5
+	boutonsChoix := make([]*gui.Button, 0, 12)
+	for index := 0; index < 12; index++ {
+		colonne := index % 6
+		ligne := index / 6
 		boutonChoix := gui.NewButton("")
-		boutonChoix.SetSize(145, 45)
-		boutonChoix.SetPosition(15+float32(colonne)*155, 10+float32(ligne)*55)
+		boutonChoix.Label.SetFontSize(11)
+		boutonChoix.SetSize(120, 45)
+		boutonChoix.SetPosition(15+float32(colonne)*130, 10+float32(ligne)*55)
 		boutonChoix.SetVisible(false)
 		panneau.Add(boutonChoix)
 		boutonsChoix = append(boutonsChoix, boutonChoix)
@@ -118,6 +127,7 @@ func NouvelleInterfaceCombat(scene *core.Node) *InterfaceCombat {
 		BoutonInventaire: boutonInventaire,
 		BoutonDefendre:   boutonDefendre,
 		BoutonQuitter:    boutonQuitter,
+		BoutonRejouer:    boutonRejouer,
 		BoutonsChoix:     boutonsChoix,
 	}
 }
@@ -134,6 +144,9 @@ func (i *InterfaceCombat) AfficherChoix(mode string, options []string) {
 			continue
 		}
 		bouton.Label.SetText(options[index])
+		if mode == "sort" {
+			bouton.Label.SetText(fmt.Sprintf("%s\n%d mana", options[index], library.CoutSort3D(options[index])))
+		}
 		bouton.SetVisible(true)
 	}
 }
@@ -447,7 +460,7 @@ func (i *InterfaceMonstres) MettreAJourMonstres(ennemis []library.EnnemiCombat) 
 }
 
 func NouvelleInterfaceEtatCombat(scene *core.Node) *InterfaceEtatCombat {
-	panneau := gui.NewPanel(600, 125)
+	panneau := gui.NewPanel(780, 235)
 	panneau.SetPosition(660, 30)
 	panneau.SetColor4(&math32.Color4{
 		R: 0.05,
@@ -472,6 +485,9 @@ func NouvelleInterfaceEtatCombat(scene *core.Node) *InterfaceEtatCombat {
 	panneau.Add(tour)
 	panneau.Add(phase)
 	panneau.Add(message)
+	butin := gui.NewLabel("")
+	butin.SetPosition(20, 115)
+	panneau.Add(butin)
 
 	panneau.SetVisible(false)
 	scene.Add(panneau)
@@ -482,6 +498,7 @@ func NouvelleInterfaceEtatCombat(scene *core.Node) *InterfaceEtatCombat {
 		Tour:    tour,
 		Phase:   phase,
 		Message: message,
+		Butin:   butin,
 	}
 }
 
@@ -520,7 +537,7 @@ func (i *InterfaceEtatCombat) MettreAJour(combat *library.CombatArene, dernierMe
 	i.Panneau.SetVisible(true)
 
 	i.Vague.SetText(
-		fmt.Sprintf("Vague : %d / %d", combat.NumeroVague, len(combat.Vagues)),
+		fmt.Sprintf("%s : %d / %d", combat.Mode, combat.NumeroVague, len(combat.Vagues)),
 	)
 
 	i.Tour.SetText(
@@ -535,5 +552,15 @@ func (i *InterfaceEtatCombat) MettreAJour(combat *library.CombatArene, dernierMe
 		dernierMessage = "Préparez-vous au combat."
 	}
 
-	i.Message.SetText(dernierMessage)
+	// Couper les messages longs pour qu'un butin ne déborde pas du panneau.
+	texte, ligne := "", ""
+	for _, mot := range strings.Fields(dernierMessage) {
+		if len([]rune(ligne+mot)) > 85 {
+			texte += strings.TrimSpace(ligne) + "\n"
+			ligne = ""
+		}
+		ligne += mot + " "
+	}
+	i.Message.SetText(texte + strings.TrimSpace(ligne))
+	i.Butin.SetText(fmt.Sprintf("Or gagné : %d\nButin :\n", combat.OrTotal) + strings.Join(combat.Butins, "\n"))
 }

@@ -30,6 +30,9 @@ const (
 func Lancer() {
 	// Fenêtre G3N et racine de la scène 3D.
 	ordta := app.App()
+	sons := NouvelAudioJeu("../assets/audio")
+	// Libérer les sons avant que G3N ne ferme le périphérique audio.
+	ordta.Subscribe(app.OnExit, func(_ string, _ interface{}) { sons.Fermer() })
 	scene := core.NewNode()
 
 	// Gestion de la map
@@ -101,9 +104,12 @@ func Lancer() {
 	interfacePersonnage := NouvelleInterfacePersonnage(interfaceJeu)
 	interfaceMonstres := NouvelleInterfaceMonstres(interfaceJeu, len(PositionsMonstresArene))
 	interfaceEtatCombat := NouvelleInterfaceEtatCombat(interfaceJeu)
+	journalCombat := NouveauJournalCombat(interfaceJeu)
+	animationCombat := NouvelleAnimationCombat(scene)
 	interfaceInventaire := NouvelleInterfaceInventaire(interfaceJeu)
 	interfaceInteraction := NouvelleInterfaceInteraction(interfaceJeu)
 	interfaceCommerce := NouvelleInterfaceCommerce(interfaceJeu, &PersonnageBackend)
+	choixCombat := NouveauChoixCombat(interfaceJeu)
 	dernierMessageCombat := ""
 
 	gui.Manager().Set(scene)
@@ -186,6 +192,9 @@ func Lancer() {
 	}
 
 	ouvrirInventaire := func() {
+		if animationCombat.Active {
+			return
+		}
 		if interfaceCommerce.Ouvert {
 			return
 		}
@@ -205,14 +214,19 @@ func Lancer() {
 		VerrouillerSourisSimulation()
 	}
 
-	appliquerResultat := func(resultat library.ResultatAction, indexCible int) {
+	appliquerResultat := func(action string, resultat library.ResultatAction, indexCible int) {
 		dernierMessageCombat = resultat.Message
-		if resultat.CibleVaincue &&
-			indexCible >= 0 &&
-			indexCible < len(modelesAdversaires) {
-			modelesAdversaires[indexCible].Noeud().SetVisible(false)
-		}
+		journalCombat.Ajouter(texteResultatCombat(action, resultat))
 		if resultat.Reussite && resultat.TourConsomme {
+			cible := noeudPersonnage
+			if indexCible >= 0 && indexCible < len(modelesAdversaires) && resultat.Degats > 0 {
+				cible = modelesAdversaires[indexCible].Noeud()
+			}
+			animationCombat.Demarrer(action, noeudPersonnage, cible, personnage3d.MembresCombat(), func() {
+				if resultat.CibleVaincue && indexCible >= 0 && indexCible < len(modelesAdversaires) {
+					modelesAdversaires[indexCible].Noeud().SetVisible(false)
+				}
+			})
 			interfaceCombat.MasquerChoix()
 		}
 	}
@@ -233,13 +247,13 @@ func Lancer() {
 	}
 
 	interfaceCombat.BoutonAttaquer.Subscribe(gui.OnClick, func(nomEvenement string, evenement interface{}) {
-		if combatBackend != nil && combatBackend.Phase == library.PhaseTourJoueur {
+		if !animationCombat.Active && combatBackend != nil && combatBackend.Phase == library.PhaseTourJoueur {
 			interfaceCombat.AfficherChoix("attaque", combatBackend.AttaquesDisponibles())
 		}
 	})
 
 	interfaceCombat.BoutonSorts.Subscribe(gui.OnClick, func(nomEvenement string, evenement interface{}) {
-		if combatBackend != nil && combatBackend.Phase == library.PhaseTourJoueur {
+		if !animationCombat.Active && combatBackend != nil && combatBackend.Phase == library.PhaseTourJoueur {
 			interfaceCombat.AfficherChoix("sort", combatBackend.SortsDisponibles())
 		}
 	})
@@ -249,17 +263,17 @@ func Lancer() {
 	})
 
 	interfaceCombat.BoutonDefendre.Subscribe(gui.OnClick, func(nomEvenement string, evenement interface{}) {
-		if combatBackend == nil {
+		if combatBackend == nil || animationCombat.Active {
 			return
 		}
 		resultat := combatBackend.Defendre()
-		appliquerResultat(resultat, -1)
+		appliquerResultat("defense", resultat, -1)
 	})
 
 	for index, bouton := range interfaceCombat.BoutonsChoix {
 		indexOption := index
 		bouton.Subscribe(gui.OnClick, func(nomEvenement string, evenement interface{}) {
-			if combatBackend == nil ||
+			if animationCombat.Active || combatBackend == nil ||
 				combatBackend.Phase != library.PhaseTourJoueur ||
 				indexOption >= len(interfaceCombat.OptionsChoix) {
 				return
@@ -284,7 +298,14 @@ func Lancer() {
 			default:
 				return
 			}
-			appliquerResultat(resultat, cibleSelectionnee)
+			if resultat.Reussite {
+				if interfaceCombat.ModeChoix == "sort" {
+					sons.Effet("sort")
+				} else {
+					sons.Effet("attaque")
+				}
+			}
+			appliquerResultat(option, resultat, cibleSelectionnee)
 		})
 	}
 
@@ -304,12 +325,16 @@ func Lancer() {
 		}
 
 		if combatEnCours {
-			if combatBackend == nil {
+			if combatBackend == nil || animationCombat.Active {
 				return
 			}
 			resultat := combatBackend.UtiliserObjet(nomObjet)
+			if resultat.Reussite {
+				sons.Effet("potion")
+			}
 			interfaceInventaire.AfficherMessage(resultat.Message)
-			appliquerResultat(resultat, -1)
+			journalCombat.Ajouter("Objet utilisé : " + nomObjet)
+			appliquerResultat("objet", resultat, -1)
 			if resultat.Reussite && resultat.TourConsomme {
 				fermerInventaire()
 			}
@@ -317,6 +342,9 @@ func Lancer() {
 		}
 
 		resultat := PersonnageBackend.UtiliserObjet3D(nomObjet)
+		if resultat.Reussite {
+			sons.Effet("potion")
+		}
 		interfaceInventaire.AfficherMessage(resultat.Message)
 	})
 
@@ -337,49 +365,71 @@ func Lancer() {
 		})
 	}
 
-	// Le bouton de sortie n'est utilisable qu'après une victoire ou une défaite.
-	interfaceCombat.BoutonQuitter.Subscribe(
-		gui.OnClick,
-		func(nomEvenement string, evenement interface{}) {
-			if combatBackend == nil {
-				return
-			}
-
-			combatTermine := combatBackend.Phase == library.PhaseVictoire ||
-				combatBackend.Phase == library.PhaseDefaite
-			if !combatTermine {
-				return
-			}
-
-			// Après une défaite, le joueur ressort avec la moitié de sa vie.
-			if combatBackend.Phase == library.PhaseDefaite {
-				combatBackend.RessusciterApresDefaite()
-			}
-
-			for _, modele := range modelesAdversaires {
-				scene.Remove(modele.Noeud())
-			}
-
-			modelesAdversaires = nil
-			combatBackend = nil
-			combatEnCours = false
-			cibleSelectionnee = 0
-			dernierMessageCombat = ""
-			tempsAvantActionMonstre = 0
-			tempsAvantVagueSuivante = 0
-
-			noeudPersonnage.SetPosition(
-				PositionSortieArene.X,
-				PositionSortieArene.Y,
-				PositionSortieArene.Z,
-			)
-
-			interfaceCombat.MasquerChoix()
-			interfaceInventaire.Fermer()
-			sauvegarder()
-			VerrouillerSourisSimulation()
-		},
-	)
+	// Une seule remise à zéro, partagée par la sortie et le choix du combat suivant.
+	nettoyerCombat := func() {
+		animationCombat.Arreter()
+		journalCombat.Reinitialiser()
+		if combatBackend != nil {
+			combatBackend.Quitter3D()
+		}
+		for _, modele := range modelesAdversaires {
+			scene.Remove(modele.Noeud())
+		}
+		modelesAdversaires = nil
+		combatBackend = nil
+		cibleSelectionnee = 0
+		dernierMessageCombat = ""
+		tempsAvantActionMonstre = 0
+		tempsAvantVagueSuivante = 0
+		interfaceCombat.MasquerChoix()
+		interfaceInventaire.Fermer()
+		sons.ArreterEffets()
+	}
+	quitterArene := func() {
+		nettoyerCombat()
+		combatEnCours = false
+		choixCombat.Panneau.SetVisible(false)
+		noeudPersonnage.SetPosition(PositionSortieArene.X, PositionSortieArene.Y, PositionSortieArene.Z)
+		sauvegarder()
+		VerrouillerSourisSimulation()
+	}
+	interfaceCombat.BoutonQuitter.Subscribe(gui.OnClick, func(_ string, _ interface{}) { quitterArene() })
+	choixCombat.Quitter.Subscribe(gui.OnClick, func(_ string, _ interface{}) { quitterArene() })
+	interfaceCombat.BoutonRejouer.Subscribe(gui.OnClick, func(_ string, _ interface{}) {
+		if combatBackend == nil || (combatBackend.Phase != library.PhaseVictoire && combatBackend.Phase != library.PhaseDefaite) {
+			return
+		}
+		nettoyerCombat()
+		choixCombat.Ouvrir()
+	})
+	demarrerCombat := func(mode library.ModeCombat, genre library.TypeMonstre) {
+		if combatBackend != nil {
+			return
+		}
+		nouveau, err := library.NouveauCombat3D(&PersonnageBackend, mode, genre)
+		if err != nil {
+			choixCombat.Message.SetText(err.Error())
+			return
+		}
+		modeles, err := ChargerMontres(scene, nouveau.Ennemis)
+		if err != nil {
+			nouveau.Quitter3D()
+			choixCombat.Message.SetText(err.Error())
+			return
+		}
+		combatBackend = nouveau
+		journalCombat.Reinitialiser()
+		journalCombat.Etat(nouveau)
+		modelesAdversaires = modeles
+		choixCombat.Panneau.SetVisible(false)
+		dernierMessageCombat = "À vous de jouer. Vous pouvez quitter à tout moment."
+	}
+	choixCombat.Entrainement.Subscribe(gui.OnClick, func(_ string, _ interface{}) { demarrerCombat(library.ModeEntrainement, library.TypeGobelin) })
+	choixCombat.Arene.Subscribe(gui.OnClick, func(_ string, _ interface{}) { demarrerCombat(library.ModeArene, library.TypeGobelin) })
+	for genre, bouton := range choixCombat.Creatures {
+		typeChoisi := genre
+		bouton.Subscribe(gui.OnClick, func(_ string, _ interface{}) { demarrerCombat(library.ModeDuel, typeChoisi) })
+	}
 
 	// Lumière dans le jeu
 	scene.Add(light.NewAmbient(&math32.Color{R: 1, G: 1, B: 1}, 1))
@@ -394,12 +444,29 @@ func Lancer() {
 				reprendreJeu()
 			} else {
 				menu.Pause()
+				sons.ArreterEffets()
 				interfaceJeu.SetVisible(false)
 				gui.Manager().Set(menu.Panneau)
 				LibererSourisSimulation()
 			}
 		}
 		echapEtaitAppuye = echapAppuye
+		ambiance := "monde"
+		if menu.Ouvert {
+			ambiance = "menu"
+		} else if combatEnCours && combatBackend != nil {
+			ambiance = "combat"
+			if combatBackend.Mode == library.ModeArene && combatBackend.NumeroVague == len(combatBackend.Vagues) {
+				ambiance = "boss"
+			}
+			if combatBackend.Phase == library.PhaseVictoire {
+				ambiance = "victoire"
+			}
+			if combatBackend.Phase == library.PhaseDefaite {
+				ambiance = "defaite"
+			}
+		}
+		sons.Ambiance(ambiance, float32(tempsImage.Seconds()))
 		if menu.Ouvert {
 			// Rien ne progresse : déplacement, animations, effets et tours de combat.
 			// Mémoriser les touches empêche TAB/E/F5 de se déclencher à la reprise.
@@ -487,40 +554,8 @@ func Lancer() {
 
 				LibererSourisSimulation()
 
-				// Système de combat
-				nouveuCombat, err := library.NouveauCombatArene(&PersonnageBackend)
-
-				if err != nil {
-					panic(err)
-				}
-
-				combatBackend = nouveuCombat
-
-				// Le joueur commence toujours la première vague.
-				combatBackend.Phase = library.PhaseTourJoueur
-				combatBackend.IndexMonstreActif = 0
-				cibleSelectionnee = 0
-				interfaceCombat.MasquerChoix()
-				dernierMessageCombat = "Le combat commence. À vous de jouer."
-
-				modelesVague, err := ChargerMontres(scene, combatBackend.Ennemis)
-				if err != nil {
-					panic(err)
-				}
-				modelesAdversaires = modelesVague
-
-				fmt.Println("Vague :", combatBackend.NumeroVague)
-				fmt.Println("Phase :", combatBackend.Phase)
-				fmt.Println("Modèles 3D chargés :", len(modelesAdversaires))
-
-				for _, adversaire := range combatBackend.Ennemis {
-					fmt.Println(
-						adversaire.Monstre.Nom,
-						adversaire.Monstre.PVActuel,
-						"/",
-						adversaire.Monstre.PVMax,
-					)
-				}
+				// L'entrée ouvre le choix : aucun monstre n'attaque avant validation.
+				choixCombat.Ouvrir()
 
 			}
 		}
@@ -570,12 +605,48 @@ func Lancer() {
 		if combatEnCours &&
 			combatBackend != nil &&
 			combatBackend.Phase == library.PhaseTourMonstres &&
-			!interfaceInventaire.Ouvert {
+			!interfaceInventaire.Ouvert && !animationCombat.Active {
 
 			tempsAvantActionMonstre += tempsImage
 
 			if tempsAvantActionMonstre >= time.Second {
+				indexActeur := combatBackend.IndexMonstreActif
+				for indexActeur < len(combatBackend.Ennemis) && combatBackend.Ennemis[indexActeur].Monstre.PVActuel <= 0 {
+					indexActeur++
+				}
+				defenseAvant := combatBackend.DefenseActive
+				tourAvant := combatBackend.Tour
 				resultat := combatBackend.ProchaineActionMonstre()
+				if resultat.Type == "attaque_monstre" {
+					if defenseAvant {
+						resultat.Message += " Protection consommée : dégâts réduits de moitié."
+					}
+					if indexActeur < len(combatBackend.Ennemis) {
+						genre := combatBackend.Ennemis[indexActeur].Type
+						if tourAvant%3 == 0 && (genre == library.TypeGobelin || genre == library.TypeTroll) {
+							resultat.Message += " Coup renforcé : puissance doublée."
+						}
+					}
+				}
+				journalCombat.Ajouter(texteResultatCombat("Action monstre", resultat))
+				if resultat.Reussite && indexActeur < len(modelesAdversaires) {
+					acteur := modelesAdversaires[indexActeur]
+					cible := noeudPersonnage
+					action := string(combatBackend.Ennemis[indexActeur].Type)
+					if resultat.Type == "soin_monstre" {
+						action = "soin_monstre"
+						cible = acteur.Noeud()
+						for index, ennemi := range combatBackend.Ennemis {
+							if ennemi.Monstre.Nom == resultat.Cible {
+								cible = modelesAdversaires[index].Noeud()
+							}
+						}
+					}
+					animationCombat.Demarrer(action, acteur.Noeud(), cible, acteur.Membres, nil)
+				}
+				if resultat.Degats > 0 {
+					sons.Effet("impact")
+				}
 				dernierMessageCombat = resultat.Message
 
 				fmt.Println(resultat.Message)
@@ -596,13 +667,14 @@ func Lancer() {
 		if combatEnCours && combatBackend != nil && !interfaceInventaire.Ouvert {
 			for _, resultat := range combatBackend.MettreAJourEffets(tempsImage) {
 				dernierMessageCombat = resultat.Message
+				journalCombat.Ajouter(texteResultatCombat("Effet temporaire", resultat))
 			}
 		}
 
 		// Une courte transition sépare deux vagues.
 		if combatEnCours &&
 			combatBackend != nil &&
-			combatBackend.Phase == library.PhaseEntreVagues {
+			combatBackend.Phase == library.PhaseEntreVagues && !animationCombat.Active {
 
 			tempsAvantVagueSuivante += tempsImage
 
@@ -641,17 +713,18 @@ func Lancer() {
 		afficherCommandes := combatEnCours &&
 			combatBackend != nil &&
 			combatBackend.Phase == library.PhaseTourJoueur &&
-			!interfaceInventaire.Ouvert
+			!interfaceInventaire.Ouvert && !animationCombat.Active
 		combatTermine := combatEnCours && combatBackend != nil &&
 			(combatBackend.Phase == library.PhaseVictoire || combatBackend.Phase == library.PhaseDefaite) &&
-			!interfaceInventaire.Ouvert
+			!interfaceInventaire.Ouvert && !animationCombat.Active
 
-		interfaceCombat.Panneau.SetVisible(afficherCommandes || combatTermine)
+		interfaceCombat.Panneau.SetVisible(combatEnCours && combatBackend != nil && !interfaceInventaire.Ouvert)
 		interfaceCombat.BoutonAttaquer.SetVisible(afficherCommandes)
 		interfaceCombat.BoutonSorts.SetVisible(afficherCommandes)
 		interfaceCombat.BoutonInventaire.SetVisible(afficherCommandes)
 		interfaceCombat.BoutonDefendre.SetVisible(afficherCommandes)
-		interfaceCombat.BoutonQuitter.SetVisible(combatTermine)
+		interfaceCombat.BoutonQuitter.SetVisible(combatEnCours && combatBackend != nil)
+		interfaceCombat.BoutonRejouer.SetVisible(combatTermine)
 
 		// Vie et Statistiques
 		interfacePersonnage.MettreAJourPersonnage(&PersonnageBackend)
@@ -678,7 +751,15 @@ func Lancer() {
 		}
 
 		// 6. Animations du personnage.
-		personnage3d.Animer(float32(tempsImage.Seconds()), deplacementEffectue)
+		if animationCombat.Active {
+			animationCombat.MettreAJour(float32(tempsImage.Seconds()))
+		} else {
+			personnage3d.Animer(float32(tempsImage.Seconds()), deplacementEffectue)
+		}
+		journalCombat.Panneau.SetVisible(combatEnCours && combatBackend != nil && !interfaceInventaire.Ouvert)
+		if combatBackend != nil && !animationCombat.Active {
+			journalCombat.Etat(combatBackend)
+		}
 
 		// 7. Effacer l'image précédente, puis dessiner la nouvelle scène.
 		ordta.Gls().Clear(gls.COLOR_BUFFER_BIT | gls.DEPTH_BUFFER_BIT)

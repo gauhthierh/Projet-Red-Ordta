@@ -12,10 +12,11 @@ type Personnage struct {
 	brasGauche  *core.Node
 	brasDroit   *core.Node
 
-	phasemarche float32
-	chapeau     *core.Node
-	tunique     *core.Node
-	bottes      []*core.Node
+	phasemarche     float32
+	chapeau         *core.Node
+	tunique         *core.Node
+	bottes          []*core.Node
+	protectionsBras []*core.Node
 }
 
 func NouveauAncienModele() *Personnage {
@@ -45,4 +46,12 @@ func ajouterMembre(parent *core.Node, x, hauteur float32, pieces []piece) *core.
 // Noeud renvoie la racine à ajouter à la scène et à déplacer sur le sol XY.
 func (p *Personnage) Noeud() *core.Node {
 	return p.noeud
+}
+
+// Les animations de combat utilisent les mêmes pivots que la marche.
+func (p *Personnage) MembresCombat() map[string]*core.Node {
+	return map[string]*core.Node{
+		"bras_gauche": p.brasGauche, "bras_droit": p.brasDroit,
+		"jambe_gauche": p.jambeGauche, "jambe_droite": p.jambeDroite,
+	}
 }

@@ -18,6 +18,7 @@ const (
 	PhaseEntreVagues  PhaseCombat = "entre_vagues"
 	PhaseVictoire     PhaseCombat = "victoire"
 	PhaseDefaite      PhaseCombat = "defaite"
+	PhaseAbandon      PhaseCombat = "abandon"
 )
 
 type TypeMonstre string
@@ -28,7 +29,60 @@ const (
 	TypeChaman          TypeMonstre = "chaman"
 	TypeLoup            TypeMonstre = "loup"
 	TypeTroll           TypeMonstre = "troll"
+	TypeSanglier        TypeMonstre = "sanglier"
+	TypeCorbeau         TypeMonstre = "corbeau"
 )
+
+type ModeCombat string
+
+const (
+	ModeEntrainement ModeCombat = "Entraînement"
+	ModeArene        ModeCombat = "Arène"
+	ModeDuel         ModeCombat = "Duel"
+)
+
+type ButinMonstre struct {
+	Objet       string
+	Pourcentage int
+}
+
+// L'or récompense chaque victoire sur une créature, indépendamment du butin.
+func OrMonstre3D(monstre TypeMonstre) int {
+	switch monstre {
+	case TypeCorbeau:
+		return 2
+	case TypeSanglier:
+		return 3
+	case TypeGobelin:
+		return 4
+	case TypeLoup:
+		return 5
+	case TypeChaman:
+		return 7
+	case TypeGobelinCuirasse:
+		return 8
+	case TypeTroll:
+		return 20
+	default:
+		return 0
+	}
+}
+
+// Les mêmes matériaux sont utilisés par les recettes de l'Armurerie.
+func ButinPossible3D(monstre TypeMonstre) ButinMonstre {
+	switch monstre {
+	case TypeLoup:
+		return ButinMonstre{ItemFourrureDeLoup, 60}
+	case TypeSanglier:
+		return ButinMonstre{ItemCuirDeSanglier, 70}
+	case TypeCorbeau:
+		return ButinMonstre{ItemPlumeDeCorbeau, 75}
+	case TypeTroll:
+		return ButinMonstre{ItemPeauDeTroll, 45}
+	default:
+		return ButinMonstre{}
+	}
+}
 
 // ResultatAction contient les informations nécessaires aux interfaces 3D.
 type ResultatAction struct {
@@ -49,6 +103,7 @@ type ResultatAction struct {
 	CombatTermine    bool
 	Victoire         bool
 	ExperienceGagnee int
+	OrGagne          int
 	NiveauxGagnes    int
 }
 
@@ -59,6 +114,10 @@ type EnnemiCombat struct {
 }
 
 type CombatArene struct {
+	Mode              ModeCombat
+	Butins            []string
+	avantEntrainement *Character
+	tirageButin       func(int) int
 	Joueur            *Character
 	Vagues            [][]EnnemiCombat
 	Ennemis           []EnnemiCombat
@@ -67,6 +126,7 @@ type CombatArene struct {
 	Phase             PhaseCombat
 	IndexMonstreActif int
 	ExperienceTotale  int
+	OrTotal           int
 	DefenseActive     bool
 
 	poisonSecondes      int
@@ -167,11 +227,25 @@ func objetUtilisable3D(nom string) bool {
 
 // AcheterMarchand3D applique les mêmes règles que le marchand textuel,
 // mais renvoie un résultat affichable au lieu d'écrire dans le terminal.
+// La boutique CLI reste inchangée ; en 3D les matériaux viennent des combats.
+func BoutiqueMarchand3D() []Item {
+	articles := []Item{}
+	for _, article := range Boutique {
+		switch article.Nom {
+		case ItemFourrureDeLoup, ItemPeauDeTroll, ItemCuirDeSanglier, ItemPlumeDeCorbeau:
+			continue
+		}
+		articles = append(articles, article)
+	}
+	return articles
+}
+
 func (c *Character) AcheterMarchand3D(index int) ResultatAction {
-	if c == nil || index < 0 || index >= len(Boutique) {
+	articles := BoutiqueMarchand3D()
+	if c == nil || index < 0 || index >= len(articles) {
 		return actionRefusee3D("Article inconnu.")
 	}
-	article := Boutique[index]
+	article := articles[index]
 	prix := c.PrixPour(article)
 	if c.Argent < prix {
 		return actionRefusee3D(fmt.Sprintf("Il manque %d pièces d'or.", prix-c.Argent))
@@ -411,6 +485,25 @@ func VaguesAreneParDefaut() [][]EnnemiCombat {
 }
 
 func NouveauCombatArene(joueur *Character) (*CombatArene, error) {
+	return NouveauCombat3D(joueur, ModeArene, TypeGobelin)
+}
+
+func EnnemiDuel3D(genre TypeMonstre) (EnnemiCombat, error) {
+	switch genre {
+	case TypeLoup:
+		return NouveauLoupCombat(), nil
+	case TypeTroll:
+		return NouveauTrollCombat(), nil
+	case TypeSanglier:
+		return nouvelEnnemi3D(genre, "sanglier.json", Monster{Nom: "Sanglier", PVMax: 30, PVActuel: 30, Attaque: 5, ExperienceDonnee: 30}), nil
+	case TypeCorbeau:
+		return nouvelEnnemi3D(genre, "corbeau.json", Monster{Nom: "Corbeau", PVMax: 20, PVActuel: 20, Attaque: 4, ExperienceDonnee: 20}), nil
+	default:
+		return EnnemiCombat{}, fmt.Errorf("créature de duel inconnue")
+	}
+}
+
+func NouveauCombat3D(joueur *Character, mode ModeCombat, genre TypeMonstre) (*CombatArene, error) {
 	if joueur == nil {
 		return nil, fmt.Errorf("le personnage du combat est absent")
 	}
@@ -419,10 +512,67 @@ func NouveauCombatArene(joueur *Character) (*CombatArene, error) {
 	}
 
 	combat := &CombatArene{
-		Joueur: joueur, Vagues: VaguesAreneParDefaut(), NumeroVague: 1, Tour: 1,
+		Joueur: joueur, Mode: mode, NumeroVague: 1, Tour: 1, tirageButin: rand.Intn,
+	}
+	switch mode {
+	case ModeArene:
+		combat.Vagues = VaguesAreneParDefaut()
+	case ModeDuel:
+		ennemi, err := EnnemiDuel3D(genre)
+		if err != nil {
+			return nil, err
+		}
+		combat.Vagues = [][]EnnemiCombat{{ennemi}}
+	case ModeEntrainement:
+		copie := *joueur
+		copie.Inventaire = make(map[string]int)
+		for nom, q := range joueur.Inventaire {
+			copie.Inventaire[nom] = q
+		}
+		combat.avantEntrainement = &copie
+		combat.Vagues = [][]EnnemiCombat{{NouveauGobelinCombat()}}
+	default:
+		return nil, fmt.Errorf("mode de combat inconnu")
 	}
 	combat.preparerVague(0)
+	combat.Phase = PhaseTourJoueur
 	return combat, nil
+}
+
+// Quitter n'accorde rien pour un ennemi vivant et bloque toute nouvelle action.
+func (c *CombatArene) Quitter3D() {
+	if c == nil || c.Joueur == nil || c.Phase == PhaseAbandon {
+		return
+	}
+	if c.avantEntrainement != nil {
+		*c.Joueur = *c.avantEntrainement
+		c.avantEntrainement = nil
+	} else if c.Phase == PhaseDefaite {
+		c.RessusciterApresDefaite()
+	}
+	c.poisonSecondes = 0
+	c.Phase = PhaseAbandon
+}
+
+func (c *CombatArene) donnerButin(genre TypeMonstre) string {
+	butin := ButinPossible3D(genre)
+	if butin.Objet == "" || c.Mode == ModeEntrainement {
+		return ""
+	}
+	tirage := c.tirageButin
+	if tirage == nil {
+		tirage = rand.Intn
+	}
+	if tirage(100) >= butin.Pourcentage {
+		return " Aucun matériau cette fois."
+	}
+	if !c.Joueur.AddInventory(butin.Objet) {
+		message := "Perdu (inventaire plein) : " + butin.Objet
+		c.Butins = append(c.Butins, message)
+		return " " + message + "."
+	}
+	c.Butins = append(c.Butins, butin.Objet)
+	return " Butin : " + butin.Objet + "."
 }
 
 func (c *CombatArene) AttaquesDisponibles() []string {
@@ -629,6 +779,9 @@ func coutManaSort3D(nomSort string) int {
 	}
 }
 
+// CoutSort3D expose le coût existant à l'interface, sans lancer le sort.
+func CoutSort3D(nom string) int { return coutManaSort3D(nom) }
+
 func (c *CombatArene) UtiliserObjet(nomObjet string) ResultatAction {
 	if c == nil || c.Joueur == nil || c.Phase != PhaseTourJoueur {
 		return actionRefusee3D("Ce n'est pas le tour du joueur.")
@@ -756,7 +909,7 @@ func (c *CombatArene) RessusciterApresDefaite() ResultatAction {
 }
 
 func (c *CombatArene) MettreAJourEffets(delta time.Duration) []ResultatAction {
-	if c == nil || c.poisonSecondes <= 0 || c.Phase == PhaseDefaite || c.Phase == PhaseVictoire {
+	if c == nil || c.poisonSecondes <= 0 || c.Phase == PhaseDefaite || c.Phase == PhaseVictoire || c.Phase == PhaseAbandon {
 		return nil
 	}
 	c.poisonTempsAccumule += delta
@@ -836,11 +989,16 @@ func (c *CombatArene) terminerActionJoueur(indexCible int, resultat ResultatActi
 	if !resultat.Reussite || !resultat.TourConsomme {
 		return resultat
 	}
-	if resultat.CibleVaincue {
+	if resultat.CibleVaincue && c.Mode != ModeEntrainement {
 		gain := c.Ennemis[indexCible].Monstre.ExperienceDonnee
 		resultat.ExperienceGagnee = gain
 		resultat.NiveauxGagnes = ajouterExperience3D(c.Joueur, gain)
 		c.ExperienceTotale += gain
+		resultat.OrGagne = OrMonstre3D(c.Ennemis[indexCible].Type)
+		c.Joueur.Argent += resultat.OrGagne
+		c.OrTotal += resultat.OrGagne
+		resultat.Message += fmt.Sprintf(" +%d or.", resultat.OrGagne)
+		resultat.Message += c.donnerButin(c.Ennemis[indexCible].Type)
 	}
 	if len(c.CiblesVivantes()) == 0 {
 		resultat.VagueTerminee = true
