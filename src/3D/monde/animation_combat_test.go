@@ -7,6 +7,7 @@ import (
 	"testing"
 )
 
+// TestCombatAnimationRestaureLesPoses : Vérifie que la fin d'une animation restitue exactement les poses mémorisées.
 func TestCombatAnimationRestaureLesPoses(t *testing.T) {
 	for _, action := range []string{"attaque", "gobelin", "gobelin_cuirasse", "loup", "sanglier", "corbeau", "troll", "chaman", "soin_monstre", "defense", "objet",
 		library.SortCoupDePoing, library.SortLameDuDestin, library.SortGrosseBouleDeFeu, library.SortEclatsDuGardien, library.SortFlecheDeLumiere, library.SortJugementDesGeants,
@@ -39,6 +40,7 @@ func TestCombatAnimationRestaureLesPoses(t *testing.T) {
 	}
 }
 
+// TestTexteCombatContientLesChiffres : Vérifie que le journal conserve les valeurs utiles du résultat de combat.
 func TestTexteCombatContientLesChiffres(t *testing.T) {
 	r := library.ResultatAction{Message: "Impact", Cible: "Gobelin", Degats: 12, PVAvant: 40, PVApres: 28, ManaAvant: 50, ManaApres: 30, ExperienceGagnee: 10, OrGagne: 4}
 	texte := texteResultatCombat("Sort", r)
@@ -49,6 +51,7 @@ func TestTexteCombatContientLesChiffres(t *testing.T) {
 	}
 }
 
+// TestAttaqueBasiqueBrasVersAvant : Empêche le retour du bug où le bras partait vers l'arrière.
 func TestAttaqueBasiqueBrasVersAvant(t *testing.T) {
 	for _, action := range []string{library.AttaqueBasique, "attaque"} {
 		bras := core.NewNode()

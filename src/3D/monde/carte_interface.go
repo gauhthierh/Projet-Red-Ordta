@@ -7,6 +7,7 @@ import (
 	"github.com/g3n/engine/math32"
 )
 
+// CarteInterface : Regroupe le plan, son marqueur et l'état d'ouverture, séparés de la carte 3D.
 type CarteInterface struct {
 	Panneau                               *gui.Panel
 	Marqueur                              *gui.Panel
@@ -56,6 +57,7 @@ func NouvelleCarteInterface(scene *core.Node, largeur, hauteur, tailleMonde floa
 	return c, nil
 }
 
+// Actualiser : Déplace le marqueur en conservant une marge pour qu'il reste visible sur la carte.
 func (c *CarteInterface) Actualiser(position math32.Vector3) {
 	x, y := positionSurCarte(position.X, position.Y, c.tailleMonde, c.cote)
 	// Le cadre reste entièrement visible même aux limites du monde.

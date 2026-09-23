@@ -67,6 +67,7 @@ var teintesCarte = map[string]math32.Color{
 	"cloth_blue":  {R: .12, G: .34, B: .78},
 }
 
+// ChargerMap3D : Assemble les géométries OBJ avec leurs matériaux et leurs textures répétées.
 func ChargerMap3D(cheminOBJ, cheminMTL string) (*core.Node, error) {
 	decodeur, err := obj.Decode(cheminOBJ, cheminMTL)
 	if err != nil {
@@ -106,6 +107,7 @@ func ChargerMap3D(cheminOBJ, cheminMTL string) (*core.Node, error) {
 	return map3d, nil
 }
 
+// lireMateriauDansNom : Retrouve le matériau selon la convention de nommage utilisée par les objets de cette carte.
 func lireMateriauDansNom(nomObjet string) (string, error) {
 	const debut = "__material_"
 	const fin = "__part_"
@@ -120,6 +122,7 @@ func lireMateriauDansNom(nomObjet string) (string, error) {
 	return nomObjet[positionDebut:positionFin], nil
 }
 
+// creerMateriauCarte : Associe une couleur et une texture au matériau en réutilisant les images déjà chargées.
 func creerMateriauCarte(nom string, decodeur *obj.Decoder, dossierTextures string, texturesChargees map[string]*texture.Texture2D) (*material.Standard, error) {
 	description, existe := decodeur.Materials[nom]
 	if !existe {
@@ -154,6 +157,7 @@ func creerMateriauCarte(nom string, decodeur *obj.Decoder, dossierTextures strin
 	return matiere, nil
 }
 
+// chargerTextureRepetee : Autorise la répétition de l'image et filtre les textures lointaines pour limiter le scintillement.
 func chargerTextureRepetee(chemin string) (*texture.Texture2D, error) {
 	imageTexture, err := texture.NewTexture2DFromImage(chemin)
 	if err != nil {

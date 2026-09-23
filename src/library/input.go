@@ -8,12 +8,15 @@ import (
 	"strings"
 )
 
-/* Ce fichier centralise la lecture et la conversion des saisies entrées par le joueur. */
+// ============================================= //
+// === Ce fichier gère les saisies du joueur === //
+// ============================================= //
 
-/* La variable Reader est l'unique lecteur utilisé pour récupérer les saisies du joueur. */
+// Unique lecteur du clavier, partagé par tout le jeu //
+// En créer plusieurs ferait perdre des saisies gardées en mémoire //
 var Reader = bufio.NewReader(os.Stdin)
 
-/* La fonction ReadLine affiche une demande, lit une ligne entière et retire les espaces inutiles. */
+// Affiche une question et renvoie la ligne tapée, sans espaces au début ni à la fin //
 func ReadLine(prompt string) string {
 	fmt.Print(prompt)
 	line, err := Reader.ReadString('\n')
@@ -24,12 +27,15 @@ func ReadLine(prompt string) string {
 	return strings.TrimSpace(line)
 }
 
-/* La fonction ReadChoice lit une saisie et indique si elle peut être convertie en nombre entier. */
+// Lit une ligne et la convertit en nombre //
+// Renvoie false si la saisie n'est pas un nombre //
 func ReadChoice(prompt string) (int, bool) {
 	choice, err := strconv.Atoi(ReadLine(prompt))
 	return choice, err == nil
 }
 
+// Redemande tant que la saisie n'est pas un nombre entre 0 et maximum //
+// Renvoie toujours un choix valide //
 func ReadChoiceEntre(prompt string, maximum int) int {
 	for {
 		choix, ok := ReadChoice(prompt)

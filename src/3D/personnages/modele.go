@@ -19,6 +19,7 @@ type Personnage struct {
 	protectionsBras []*core.Node
 }
 
+// NouveauAncienModele : Reconstruit l'ancien personnage à partir du fichier embarqué, avec Z déjà vertical.
 func NouveauAncienModele() *Personnage {
 	modele := lireModele()
 	p := &Personnage{noeud: core.NewNode()}

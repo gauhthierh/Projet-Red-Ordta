@@ -2,6 +2,7 @@ package monde
 
 import "testing"
 
+// TestTroncNonTraversablePendantUneImageLente : Vérifie qu'un grand déplacement ne saute pas la collision d'un tronc.
 func TestTroncNonTraversablePendantUneImageLente(t *testing.T) {
 	d := DonneesMonde{Taille: 600, Obstacles: []Collision{{Forme: "circle", Categorie: "tree", Rayon: .7}}}
 	x, _ := deplacerAvecCollisions(-3, 0, 6, 0, .3, d)
@@ -10,6 +11,7 @@ func TestTroncNonTraversablePendantUneImageLente(t *testing.T) {
 	}
 }
 
+// TestPontAutoriseSeulementLaRiviere : Vérifie qu'un pont ne désactive pas les autres obstacles du passage.
 func TestPontAutoriseSeulementLaRiviere(t *testing.T) {
 	d := DonneesMonde{Taille: 600, Obstacles: []Collision{{Forme: "rectangle", Categorie: "river", Largeur: 50, Hauteur: 15}}, Ponts: []Collision{{Forme: "rectangle", Largeur: 25, Hauteur: 8, Rotation: 90}}}
 	if !positionAutorisee(0, 0, .3, d) {

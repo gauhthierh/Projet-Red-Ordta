@@ -22,11 +22,14 @@ type Monstre struct {
 	Membres map[string]*core.Node
 }
 
+// partie : Décrit un pivot du monstre et les pièces attachées à ce pivot.
 type partie struct {
 	Nom    string     `json:"nom"`
 	Pivot  [3]float32 `json:"pivot"`
 	Pieces []piece    `json:"pieces"`
 }
+
+// piece : Décrit une forme simple dans le repère local de son membre.
 type piece struct {
 	Forme    string     `json:"forme"`
 	Position [3]float32 `json:"position"`
@@ -34,6 +37,8 @@ type piece struct {
 	Couleur  [3]float32 `json:"couleur"`
 	Texture  string     `json:"texture,omitempty"`
 }
+
+// modele : Décrit les parties articulées d'un fichier de monstre.
 type modele struct {
 	Nom     string   `json:"nom"`
 	Parties []partie `json:"parties"`
@@ -92,4 +97,5 @@ func Charger(chemin string) (*Monstre, error) {
 	return m, nil
 }
 
+// Noeud : Expose la racine à déplacer ou retirer ; les membres restent attachés à cette racine.
 func (m *Monstre) Noeud() *core.Node { return m.noeud }

@@ -2,6 +2,7 @@ package monde
 
 import "math"
 
+// Collision : Décrit une empreinte au sol : Hauteur est une dimension sur Y, pas une altitude Z. Rotation est en degrés.
 type Collision struct {
 	Identifiant string  `json:"id"`
 	Categorie   string  `json:"category"`
@@ -14,6 +15,7 @@ type Collision struct {
 	Rotation    float32 `json:"rotation_degrees"`
 }
 
+// estDansMap : Garde tout le disque du personnage à l'intérieur des limites de la carte.
 func estDansMap(x float32, y float32, taillemap float32, margeperso float32) bool {
 	demiTaille := taillemap / 2
 	limite := demiTaille - margeperso
@@ -21,6 +23,7 @@ func estDansMap(x float32, y float32, taillemap float32, margeperso float32) boo
 	return x >= -limite && x <= limite && y >= -limite && y <= limite
 }
 
+// personnageToucheObstacleRond : Compare la distance entre centres à la somme des rayons dans le plan du sol.
 func personnageToucheObstacleRond(xPersonnage float32, yPersonnage float32, rayonPersonnage float32, obstacles []Collision) bool {
 	for _, obstacle := range obstacles {
 		if obstacle.Forme != "circle" {
@@ -44,6 +47,7 @@ func personnageToucheObstacleRond(xPersonnage float32, yPersonnage float32, rayo
 	return false
 }
 
+// personnageToucheRectangle : Ramène le joueur dans le repère de chaque rectangle pour tester aussi les obstacles tournés.
 func personnageToucheRectangle(xPersonnage float32, yPersonnage float32, rayonPersonnage float32, obstacles []Collision) bool {
 	for _, obstacle := range obstacles {
 		if obstacle.Forme != "rectangle" {
@@ -70,6 +74,8 @@ func personnageToucheRectangle(xPersonnage float32, yPersonnage float32, rayonPe
 		minY := -demiHauteur
 		maxY := demiHauteur
 
+		// Ramener le point dans les bornes donne le point du rectangle le plus
+		// proche du joueur, y compris près d'un coin.
 		plusProcheX := positionLocaleX
 		plusProcheY := positionLocaleY
 
@@ -99,6 +105,7 @@ func personnageToucheRectangle(xPersonnage float32, yPersonnage float32, rayonPe
 	return false
 }
 
+// positionAutorisee : Vérifie les limites et les obstacles ; un pont n'autorise que le franchissement de la rivière.
 func positionAutorisee(x float32, y float32, rayonPersonnage float32, donnees DonneesMonde) bool {
 	if !estDansMap(x, y, donnees.Taille, rayonPersonnage) {
 		return false

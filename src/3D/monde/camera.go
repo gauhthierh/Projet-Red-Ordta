@@ -7,6 +7,7 @@ import (
 	"github.com/g3n/engine/window"
 )
 
+// ActiverRegardSouris : Convertit les déplacements de souris en angles, uniquement lorsque autorise le permet.
 func ActiverRegardSouris(fenetre core.IDispatcher, angleHorizontal *float32, angleVertical *float32, autorise func() bool) {
 	const sensibilite = float32(0.0025)
 
@@ -49,6 +50,7 @@ func ActiverRegardSouris(fenetre core.IDispatcher, angleHorizontal *float32, ang
 	})
 }
 
+// PlacerCameraPersonnage : Place le regard à hauteur des yeux. Les angles sont en radians et Z représente la hauteur.
 func PlacerCameraPersonnage(
 	vue *camera.Camera,
 	personnage *core.Node,

@@ -11,6 +11,7 @@ import (
 	"github.com/g3n/engine/math32"
 )
 
+// poseCombat : Conserve une position et une rotation locales pour les restaurer après l'action.
 type poseCombat struct {
 	noeud              *core.Node
 	position, rotation math32.Vector3
@@ -29,6 +30,7 @@ type AnimationCombat struct {
 	matiere       *material.Standard
 }
 
+// NouvelleAnimationCombat : Prépare le contrôleur visuel ; les dégâts restent calculés par library.
 func NouvelleAnimationCombat(scene *core.Node) *AnimationCombat {
 	m := material.NewStandard(&math32.Color{R: .4, G: .75, B: 1})
 	orbe := graphic.NewMesh(geometry.NewSphere(.18, 12, 8), m)
@@ -37,6 +39,7 @@ func NouvelleAnimationCombat(scene *core.Node) *AnimationCombat {
 	return &AnimationCombat{effet: orbe, matiere: m}
 }
 
+// Demarrer : Mémorise la pose initiale puis lance l'animation de l'action choisie.
 func (a *AnimationCombat) Demarrer(action string, acteur, cible *core.Node, membres map[string]*core.Node, fin func()) {
 	a.Arreter()
 	a.Active, a.temps, a.action = true, 0, action
@@ -66,6 +69,7 @@ func (a *AnimationCombat) Demarrer(action string, acteur, cible *core.Node, memb
 	}
 }
 
+// restaurer : Remet les nœuds à leur pose de départ pour éviter que les mouvements s'accumulent.
 func (a *AnimationCombat) restaurer() {
 	for _, p := range a.poses {
 		p.noeud.SetPositionVec(&p.position)
@@ -73,6 +77,7 @@ func (a *AnimationCombat) restaurer() {
 	}
 }
 
+// Arreter : Interrompt l'animation et restaure les poses avant de retirer ses effets.
 func (a *AnimationCombat) Arreter() {
 	a.restaurer()
 	a.Active = false
@@ -83,6 +88,7 @@ func (a *AnimationCombat) Arreter() {
 	}
 }
 
+// MettreAJour : Fait avancer l'animation avec delta en secondes, puis restaure la pose et appelle la fin.
 func (a *AnimationCombat) MettreAJour(delta float32) {
 	if !a.Active {
 		return
@@ -97,6 +103,8 @@ func (a *AnimationCombat) MettreAJour(delta float32) {
 		return
 	}
 	a.restaurer()
+	// t parcourt l'animation de 0 à 1. Le sinus fait l'aller-retour :
+	// pose de départ, amplitude maximale à mi-parcours, retour au repos.
 	t := a.temps / 1.25
 	v := float32(math.Sin(float64(t) * math.Pi))
 	rotation := func(nom string, x, y, z float32) {

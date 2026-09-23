@@ -35,7 +35,8 @@ func Lancer() {
 	ordta.Subscribe(app.OnExit, func(_ string, _ interface{}) { sons.Fermer() })
 	scene := core.NewNode()
 
-	// Gestion de la map
+	// Décor visible (OBJ/MTL) et données de jeu (JSON) partagent le même repère.
+	// Charger l'un ne crée pas automatiquement les collisions de l'autre.
 	CheminOBJ := "../assets/maps/red_world/red_world_map_3d.obj"
 	CheminMTL := "../assets/maps/red_world/red_world_map_3d.mtl"
 
@@ -54,7 +55,7 @@ func Lancer() {
 	scene.Add(maps3d)
 	AjouterCabanons(scene)
 
-	// Marchand et forgeron placés devant les deux premiers cabanons du marché.
+	// Les PNJ occupent les comptoirs. Leur obstacle rond empêche de les traverser.
 	pnjs := AjouterPNJMarche(scene)
 	for index, pnj := range pnjs {
 		donneesMonde.Obstacles = append(donneesMonde.Obstacles, Collision{
@@ -67,10 +68,12 @@ func Lancer() {
 		})
 	}
 
-	// Arène
+	// Être dans l'arène ne signifie pas qu'un combat est déjà créé :
+	// on laisse d'abord le joueur choisir son mode dans le menu.
 	combatEnCours := false
 
-	// Personnage
+	// Une seule instance backend contient la progression du joueur.
+	// Les menus et les combats gardent un pointeur vers cette même variable.
 	PersonnageBackend := library.NouveauPersonnage3D("Joueur", "Humain")
 	partieChargee, erreurSauvegarde := ChargerPartie3D(cheminSauvegarde)
 	if partieChargee != nil {
@@ -88,14 +91,15 @@ func Lancer() {
 	eEtaitAppuye := false
 	var pnjActif *PNJ
 
-	// Chargement des monstres
+	// Même index dans cette liste et dans combatBackend.Ennemis :
+	// cela permet de cibler, animer ou masquer le bon modèle.
 	var modelesAdversaires []*monstres.Monstre
 
-	// Chronomètre
+	// Ces compteurs avancent avec le temps des images, sans attente bloquante.
 	tempsAvantActionMonstre := time.Duration(0)
 	tempsAvantVagueSuivante := time.Duration(0)
 
-	// GUI / Interface
+	// Construire les panneaux une fois, puis les actualiser pendant le jeu.
 	interfaceJeu := core.NewNode()
 	scene.Add(interfaceJeu)
 	interfaceCombat := NouvelleInterfaceCombat(interfaceJeu)
@@ -157,6 +161,7 @@ func Lancer() {
 	}
 	tempsSauvegarde := time.Duration(0)
 	f5EtaitAppuye := false
+	// Ne pas enregistrer un état provisoire : accueil, combat ou poison en cours.
 	sauvegarder := func() {
 		if combatEnCours || !menu.Demarre || effetsPersonnage.Actif() {
 			return
@@ -169,8 +174,9 @@ func Lancer() {
 			fmt.Println("Échec sauvegarde :", err)
 		}
 	}
+	// À la sortie normale, terminer le poison avant la dernière sauvegarde.
 	defer func() {
-		effetsPersonnage.MettreAJour(3 * time.Second)
+		effetsPersonnage.MettreAJour(time.Duration(library.DureePoison) * time.Second)
 		sauvegarder()
 	}()
 
@@ -207,6 +213,7 @@ func Lancer() {
 		gui.Manager().SetKeyFocus(nil)
 		gui.Manager().Set(menu.Panneau)
 	})
+	// La validation et les statistiques de départ restent du côté de library.
 	creation.Valider.Subscribe(gui.OnClick, func(_ string, _ interface{}) {
 		personnage, err := library.CreerPersonnage3D(creation.Nom.Text(), creation.Classe)
 		if err != nil {
@@ -270,6 +277,8 @@ func Lancer() {
 		VerrouillerSourisSimulation()
 	}
 
+	// Le backend a déjà résolu l'action : ici on raconte et anime son résultat.
+	// Un ennemi vaincu reste visible jusqu'à la fin du coup pour éviter de disparaître trop tôt.
 	appliquerResultat := func(action string, resultat library.ResultatAction, indexCible int) {
 		dernierMessageCombat = resultat.Message
 		journalCombat.Ajouter(texteResultatCombat(action, resultat))
@@ -326,6 +335,8 @@ func Lancer() {
 		appliquerResultat("defense", resultat, -1)
 	})
 
+	// Chaque bouton capture son propre index. Le clic vérifie à nouveau le tour,
+	// car la phase a pu changer depuis l'affichage du sous-menu.
 	for index, bouton := range interfaceCombat.BoutonsChoix {
 		indexOption := index
 		bouton.Subscribe(gui.OnClick, func(nomEvenement string, evenement interface{}) {
@@ -373,6 +384,8 @@ func Lancer() {
 		fermerCommerce()
 	})
 
+	// Le même inventaire sert en exploration et en combat, mais le contrôleur
+	// de combat décide aussi si l'objet termine le tour du joueur.
 	interfaceInventaire.BoutonUtiliser.Subscribe(gui.OnClick, func(nomEvenement string, evenement interface{}) {
 		nomObjet, existe := interfaceInventaire.ObjetSelectionne()
 		if !existe {
@@ -456,8 +469,9 @@ func Lancer() {
 			return
 		}
 		nettoyerCombat()
-		choixCombat.Ouvrir()
+		choixCombat.Ouvrir(PersonnageBackend.Niveau)
 	})
+	// Ne publier le nouveau combat qu'après chargement réussi de ses modèles.
 	demarrerCombat := func(mode library.ModeCombat, genre library.TypeMonstre) {
 		if effetsPersonnage.Actif() {
 			choixCombat.Message.SetText("Attendez la fin du poison.")
@@ -497,6 +511,8 @@ func Lancer() {
 	// Boucle principale : mise à jour du jeu, puis affichage de chaque image.
 	ordta.Gls().ClearColor(0.15, 0.25, 0.30, 1)
 	ordta.Run(func(rendu *renderer.Renderer, tempsImage time.Duration) {
+		// GLFW nomme les positions du clavier en QWERTY : cette position est M
+		// sur l'AZERTY utilisé ici. Le front d'appui évite les ouvertures répétées.
 		mAppuye := ordta.KeyState().Pressed(window.KeySemicolon)
 		if mAppuye && !mEtaitAppuye && menu.Demarre && !menu.Ouvert {
 			if carte.Ouverte {
@@ -580,7 +596,7 @@ func Lancer() {
 		interactionDemandee := eAppuye && !eEtaitAppuye
 		eEtaitAppuye = eAppuye
 
-		// 1. Déplacement autorisé uniquement hors course.
+		// 1. Déplacement seulement en exploration, sans inventaire ni commerce.
 		if !combatEnCours && !interfaceInventaire.Ouvert && !interfaceCommerce.Ouvert {
 			positionActuelle := noeudPersonnage.Position()
 			vitessePersonnage := vitesseMarche
@@ -634,7 +650,7 @@ func Lancer() {
 				LibererSourisSimulation()
 
 				// L'entrée ouvre le choix : aucun monstre n'attaque avant validation.
-				choixCombat.Ouvrir()
+				choixCombat.Ouvrir(PersonnageBackend.Niveau)
 
 			}
 		}
@@ -680,7 +696,8 @@ func Lancer() {
 			noeudPersonnage.SetRotationZ(angle)
 		}
 
-		// Mise à jour du combat à chaque image.
+		// 4. Attendre la fin de l'animation et du poison avant l'action ennemie.
+		// Un appel joue un seul monstre ; le backend décide du prochain camp.
 		if combatEnCours &&
 			combatBackend != nil &&
 			combatBackend.Phase == library.PhaseTourMonstres && !combatBackend.EffetEnCours3D() &&
@@ -750,7 +767,8 @@ func Lancer() {
 			}
 		}
 
-		// Une courte transition sépare deux vagues.
+		// 5. Après la dernière animation, remplacer les modèles de la vague.
+		// La pause de deux secondes laisse le temps de lire le résultat.
 		if combatEnCours &&
 			combatBackend != nil &&
 			combatBackend.Phase == library.PhaseEntreVagues && !animationCombat.Active {
@@ -787,22 +805,8 @@ func Lancer() {
 			tempsAvantVagueSuivante = 0
 		}
 
-		// Visibilité de l’interface
-		afficherCommandes := combatEnCours &&
-			combatBackend != nil &&
-			combatBackend.Phase == library.PhaseTourJoueur &&
-			!interfaceInventaire.Ouvert && !animationCombat.Active
-		combatTermine := combatEnCours && combatBackend != nil &&
-			(combatBackend.Phase == library.PhaseVictoire || combatBackend.Phase == library.PhaseDefaite) &&
-			!interfaceInventaire.Ouvert && !animationCombat.Active
-
-		interfaceCombat.Panneau.SetVisible(combatEnCours && combatBackend != nil && !interfaceInventaire.Ouvert)
-		interfaceCombat.BoutonAttaquer.SetVisible(afficherCommandes)
-		interfaceCombat.BoutonSorts.SetVisible(afficherCommandes)
-		interfaceCombat.BoutonInventaire.SetVisible(afficherCommandes)
-		interfaceCombat.BoutonDefendre.SetVisible(afficherCommandes)
-		interfaceCombat.BoutonQuitter.SetVisible(combatEnCours && combatBackend != nil)
-		interfaceCombat.BoutonRejouer.SetVisible(combatTermine)
+		// Les règles de visibilité sont regroupées avec les widgets concernés.
+		interfaceCombat.ActualiserVisibilite(combatBackend, interfaceInventaire.Ouvert, animationCombat.Active)
 
 		// Vie et Statistiques
 		interfacePersonnage.MettreAJourPersonnage(&PersonnageBackend)

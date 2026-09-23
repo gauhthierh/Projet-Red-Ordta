@@ -7,6 +7,7 @@ import (
 	"github.com/g3n/engine/graphic"
 )
 
+// TestChargerMap3DAvecTextureRepetee : Vérifie que le terrain chargé reçoit sa texture sans doublon.
 func TestChargerMap3DAvecTextureRepetee(t *testing.T) {
 	dossierCarte := filepath.Join("..", "..", "..", "assets", "maps", "red_world")
 	carte, err := ChargerMap3D(

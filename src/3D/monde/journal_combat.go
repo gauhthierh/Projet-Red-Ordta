@@ -18,6 +18,7 @@ type JournalCombat struct {
 	phase   string
 }
 
+// NouveauJournalCombat : Crée un historique paginé afin de conserver les détails des actions.
 func NouveauJournalCombat(scene *core.Node) *JournalCombat {
 	j := &JournalCombat{Panneau: gui.NewPanel(480, 310)}
 	j.Panneau.SetPosition(30, 290)
@@ -43,6 +44,7 @@ func NouveauJournalCombat(scene *core.Node) *JournalCombat {
 	return j
 }
 
+// afficher : Affiche la page sélectionnée, ou un texte d'attente si le journal est vide.
 func (j *JournalCombat) afficher() {
 	if len(j.entrees) == 0 {
 		j.texte.SetText("")
@@ -51,6 +53,7 @@ func (j *JournalCombat) afficher() {
 	j.texte.SetText(fmt.Sprintf("JOURNAL — %d / %d\n\n%s", j.index+1, len(j.entrees), j.entrees[j.index]))
 }
 
+// Ajouter : Découpe le message en lignes et pages lisibles, puis affiche la dernière page.
 func (j *JournalCombat) Ajouter(message string) {
 	// Une page courte par événement : aucune récompense ne disparaît du journal.
 	var lignes []string
@@ -74,8 +77,10 @@ func (j *JournalCombat) Ajouter(message string) {
 	j.afficher()
 }
 
+// Reinitialiser : Vide l'historique lorsque l'on prépare un nouveau combat.
 func (j *JournalCombat) Reinitialiser() { j.entrees = nil; j.phase = ""; j.index = 0; j.afficher() }
 
+// Etat : Ajoute un message seulement si la phase ou le tour a changé, pas à chaque image.
 func (j *JournalCombat) Etat(c *library.CombatArene) {
 	cle := fmt.Sprintf("Vague %d — tour %d — %s", c.NumeroVague, c.Tour, c.Phase)
 	if cle != j.phase {
@@ -84,6 +89,7 @@ func (j *JournalCombat) Etat(c *library.CombatArene) {
 	}
 }
 
+// texteResultatCombat : Compose le bilan chiffré à partir des valeurs réellement renvoyées par le backend.
 func texteResultatCombat(action string, r library.ResultatAction) string {
 	t := action + "\n" + r.Message
 	if r.Degats > 0 {

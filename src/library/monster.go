@@ -2,9 +2,11 @@ package library
 
 import "fmt"
 
-/* Ce fichier définit les monstres, leur initialisation et leur comportement pendant les combats. */
+// ==================================== //
+// === Ce fichier gère les monstres === //
+// ==================================== //
 
-/* La structure Monster contient les statistiques et les récompenses associées à un monstre. */
+// Représente un monstre //
 type Monster struct {
 	Nom              string
 	PvMax            int
@@ -12,21 +14,30 @@ type Monster struct {
 	Attaque          int
 	Initiative       int
 	ExperienceDonnee int
+	OrMin            int
+	OrMax            int
+	Niveau           int
 }
 
-/* La fonction InitGoblin crée un gobelin d'entraînement avec ses statistiques et sa récompense d'expérience. */
-func InitGoblin() Monster {
-	gobelin := Monster{
+// Crée un gobelin d'entraînement du niveau demandé //
+// Ses statistiques et ses récompenses augmentent avec son niveau //
+func InitGoblin(niveau int) Monster {
+	bonus := niveau - 1
+	pv := PvGobelin + GainPvGobelin*bonus
+	return Monster{
 		Nom:              "Gobelin d'entraînement",
-		PvMax:            40,
-		Attaque:          5,
-		ExperienceDonnee: 40,
+		Niveau:           niveau,
+		PvMax:            pv,
+		PvActuel:         pv,
+		Attaque:          AttaqueGobelin + GainAttaqueGobelin*bonus,
+		ExperienceDonnee: ExperienceGobelin + GainExperienceGobelin*bonus,
+		OrMin:            OrMinGobelin + GainOrMinGobelin*bonus,
+		OrMax:            OrMaxGobelin + GainOrMaxGobelin*bonus,
 	}
-	gobelin.PvActuel = gobelin.PvMax
-	return gobelin
 }
 
-/* La méthode GoblinPattern fait attaquer le gobelin et double ses dégâts tous les trois tours. */
+// Fait attaquer le gobelin selon son schéma de combat //
+// Tous les 3 tours, il inflige le double de dégâts //
 func (m Monster) GoblinPattern(c *Character, tour int) {
 	degats := m.Attaque
 	if tour%3 == 0 {
@@ -38,6 +49,7 @@ func (m Monster) GoblinPattern(c *Character, tour int) {
 	fmt.Printf("Pv de %s : %d / %d\n", c.Nom, c.PvActuel, c.PvMaxTotal)
 }
 
+// Retire des Pv au monstre sans descendre sous 0 //
 func (m *Monster) SubirDegats(degats int) {
 	m.PvActuel -= degats
 	if m.PvActuel < 0 {

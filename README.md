@@ -253,7 +253,7 @@ Les emplacements du backend sont tête, torse et pieds. La protection des jambes
 
 La boutique 3D reprend tous les articles de `library.Boutique`, avec leur prix et leur niveau minimum, sur plusieurs pages. Elle contient potions, matériaux, extensions, livres de sorts et manuels d’attaques physiques. La première potion de vie est offerte ; les suivantes coûtent 3 or.
 
-Les matériaux peuvent donc être **achetés ou obtenus en combat 3D**. Le niveau, l’or et la place disponible sont vérifiés avant l’achat. Le niveau exigé est affiché sur chaque article.
+Les matériaux peuvent donc être **achetés ou obtenus en combat 3D**. Le niveau, l’or et la place disponible sont vérifiés avant l’achat. Le niveau exigé est affiché sur chaque article. Comme dans le CLI, un livre ou manuel déjà possédé/appris et une extension devenue inutile sont refusés, sans dépense d’or.
 
 ### Forgeron
 
@@ -271,7 +271,7 @@ Chaque fabrication coûte 5 or en plus des matériaux :
 
 L’entrée dans l’arène ouvre le choix du mode. La caméra devient latérale et surélevée ; sélectionner les actions avec la souris.
 
-- **Entraînement** : gobelin de 40 PV, attaque 5, 40 XP en cas de victoire. Les dégâts, le mana dépensé et les objets consommés sont conservés, comme dans le CLI. Pas d’or ni de matériau.
+- **Entraînement** : gobelin au niveau du joueur, expérience et or selon le backend. Au niveau 1 : 40 PV, attaque 5, 50 XP et 5 à 10 or. Les dégâts, le mana dépensé et les objets consommés sont conservés, comme dans le CLI. Aucun matériau.
 - **Arène** : quatre vagues — gobelin ; loup et gobelin ; gobelin cuirassé et chaman ; troll.
 - **Duel** : un corbeau, sanglier, loup ou troll, pour gagner de l’expérience, de l’or et éventuellement des matériaux.
 
@@ -279,7 +279,7 @@ L’initiative est tirée entre 1 et 10. Le camp à la valeur la plus élevée c
 
 Le gobelin et le troll doublent leurs dégâts tous les trois tours. Le chaman peut soigner ses alliés. La défense 3D réduit de moitié, arrondi au supérieur, la prochaine attaque reçue.
 
-Attaquer, lancer un sort ou utiliser un objet valide consomme le tour. Une action refusée ne dépense ni tour ni mana. Les livres, manuels et équipements peuvent aussi être utilisés depuis le sac pendant le tour du joueur. Le poison finit ses dégâts avant l’action ennemie.
+Attaquer, lancer un sort ou utiliser un objet valide consomme le tour. Une action refusée ne dépense ni tour ni mana. Les livres et manuels peuvent aussi être utilisés depuis le sac pendant le tour du joueur. Équiper ou retirer une armure reste réservé à l’exploration. Le poison finit ses dégâts avant l’action ennemie.
 
 Le journal présente les actions, dégâts, PV, dépenses de mana et récompenses. Les animations sont visuelles : les calculs restent dans l’adaptateur.
 
@@ -288,29 +288,35 @@ Le journal présente les actions, dégâts, PV, dépenses de mana et récompense
 | Sort | Dégâts | Mana |
 |---|---:|---:|
 | Coup de poing | 8 | 5 |
-| Grosse boule de feu | 22 | 30 |
-| Lame du destin | 10 | 10 |
-| Éclats du gardien | 12 | 15 |
-| Flèche de lumière | 12 | 20 |
+| Grosse boule de feu | 26 | 30 |
+| Lame du destin | 12 | 10 |
+| Éclats du gardien | 16 | 15 |
+| Flèche de lumière | 20 | 20 |
 | Jugement des géants | 60 | 60 |
 
 Coup de poing est connu au départ ; les cinq autres sorts s’apprennent grâce aux livres vendus selon le niveau requis. Les anciens sorts supprimés du backend ne sont plus exécutables.
 
 Les attaques physiques disponibles sont l’attaque basique puis Pichenette, Claquounette, Coups de pied, Morsure et Uppercut, apprises avec les manuels. Les dégâts sont ceux de `InfosAttaquePhysique` plus le bonus d’attaque du personnage.
 
-### Récompenses 3D hors entraînement
+### Niveau des ennemis et récompenses 3D
+
+Le niveau des ennemis est fixé au début de chaque combat ou vague d’après le niveau actuel du joueur. Une montée de niveau ne change pas les ennemis déjà présents. Le menu des duels affiche les PV et l’or adaptés ; les fiches de combat affichent le niveau.
+
+Le gobelin utilise directement `InitGoblin(niveau)`. Les autres créatures conservent leurs bases propres et reprennent les gains du gobelin pour chaque niveau supplémentaire : **+10 PV, +2 attaque, +20 XP, +3 or minimum et +5 or maximum**. Ces règles complémentaires restent dans `library_3d.go`.
+
+Fourchettes au **niveau 1**, tirage uniforme avec les deux bornes incluses :
 
 | Créature | Or | Matériau possible | Probabilité |
 |---|---:|---|---:|
-| Corbeau | 2 | Plume de corbeau | 75 % |
-| Sanglier | 3 | Cuir de sanglier | 70 % |
-| Gobelin | 4 | Aucun | — |
-| Loup | 5 | Fourrure de loup | 60 % |
-| Chaman | 7 | Aucun | — |
-| Gobelin cuirassé | 8 | Aucun | — |
-| Troll | 20 | Peau de troll | 45 % |
+| Corbeau | 2–4 | Plume de corbeau | 75 % |
+| Sanglier | 3–6 | Cuir de sanglier | 70 % |
+| Gobelin | 5–10 | Aucun | — |
+| Loup | 5–10 | Fourrure de loup | 60 % |
+| Chaman | 7–14 | Aucun | — |
+| Gobelin cuirassé | 8–16 | Aucun | — |
+| Troll | 20–40 | Peau de troll | 45 % |
 
-L’or n’occupe aucune case. Un matériau est perdu si le sac est plein, avec un message dans le journal. Quitter l’arène est possible à tout moment ; seules les créatures déjà vaincues rapportent quelque chose.
+L’or est attribué une seule fois par créature vaincue, **entraînement compris**, et n’occupe aucune case. Un matériau est perdu si le sac est plein, avec un message dans le journal. Quitter l’arène est possible à tout moment ; seules les créatures déjà vaincues rapportent quelque chose.
 
 ## Sauvegarde 3D
 
@@ -392,7 +398,7 @@ Depuis `src/` :
 go test ./tests
 ```
 
-Cette suite vérifie notamment création, classes, niveaux d’achat, apprentissage, doublons, initiative, tours, mana, poison, capacité et récompenses d’entraînement, sans importer G3N.
+Cette suite vérifie notamment création, classes, niveaux d’achat, apprentissage, doublons, initiative, tours, mana, poison et capacité, sans importer G3N. `progression_3d_test.go` couvre aussi les sept créatures à plusieurs niveaux, l’or dans les trois modes, l’absence de double récompense, la progression entre vagues et l’interdiction d’équiper en combat.
 
 Après préparation de l’environnement natif décrite plus haut :
 
@@ -401,7 +407,7 @@ go test ./3D/...
 go build -o "$env:TEMP/ordta-verification.exe" ./3D
 ```
 
-Ces tests couvrent notamment modèles, animations, sauvegardes et données du monde. Ils ne remplacent pas un essai visuel et sonore.
+Ces tests couvrent notamment modèles, animations, sauvegardes et données du monde, ainsi que la visibilité des commandes selon la phase et le rejet des fichiers audio tronqués. Ils ne remplacent pas un essai visuel et sonore.
 
 Pour afficher le nom et le résultat de chaque test, ajouter `-v` :
 
@@ -425,7 +431,7 @@ go test -count=1 ./tests
 
 Un échec ne signifie donc pas toujours que le jeu est inutilisable : le test peut lui-même employer un ancien nom de champ, comme dans le cas ci-dessous. Inversement, des tests réussis ne garantissent pas l’absence de tous les bugs, notamment visuels ou sonores.
 
-**Limite actuelle des anciens tests :** les fichiers `src/library/*_test.go` référencent encore des champs et constantes supprimés ou renommés par la dernière révision du backend. Ils ont été laissés intacts. `go test ./library` et donc `go test ./...` échouent tant que ces tests ne sont pas adaptés ; cela n’empêche pas la compilation du jeu ni les suites ciblées ci-dessus.
+**Limite actuelle des anciens tests :** les tests de `src/library/` compilent, mais plusieurs attendent encore les anciennes règles : joueur toujours premier, entraînement sans récompense avec restauration du personnage, marchand sans matériaux et or fixe. Ils ont été laissés intacts. `go test ./library` et donc `go test ./...` échouent tant que ces attentes ne sont pas adaptées à l’initiative aléatoire et aux règles actuelles du backend ; cela n’empêche pas la compilation du jeu ni les suites ciblées ci-dessus.
 
 ### Outils de génération : à ne pas confondre avec les tests
 
@@ -437,6 +443,24 @@ go run ./tools/musicgen
 ```
 
 Attention : ces commandes remplacent les fichiers générés de la carte ou de la musique. Sauvegarder ses retouches avant de les utiliser. Elles ne sont pas nécessaires pour jouer.
+
+## Lire et comprendre le code 3D
+
+Les fichiers Go de `src/3D/` et l'adaptateur `src/library/library_3d.go` sont commentés en français : rôle des fonctions, étapes importantes et raisons des calculs moins évidents. Les commentaires des tests expliquent aussi ce qu'ils vérifient.
+
+Pour commencer, suivre cet ordre :
+
+1. [`src/3D/main.go`](src/3D/main.go) appelle le démarrage de la 3D.
+2. [`monde.go`](src/3D/monde/monde.go) construit la scène, branche les boutons et met à jour le jeu à chaque image.
+3. Les autres fichiers de [`monde`](src/3D/monde/) séparent les caméras, collisions, menus, sons, sauvegardes et affichages.
+4. [`personnages`](src/3D/personnages/) et [`monstres`](src/3D/monstres/) construisent ou chargent les modèles et leurs membres articulés.
+5. [`library_3d.go`](src/library/library_3d.go) fournit les actions sans saisie terminal : il calcule les résultats que la scène affiche et anime.
+
+Quelques repères pour lire les calculs : X et Y forment le sol, Z est la hauteur. Un membre tourne autour de son pivot local, tandis que le nœud racine déplace le personnage entier. Les angles G3N sont en radians ; les rotations du JSON de collisions sont en degrés. Les animations reçoivent un temps en secondes, et les effets backend utilisent `time.Duration`.
+
+L’adaptation aux nouvelles règles reste dans `library_3d.go` : niveau des créatures, or et utilisation des constantes backend. La visibilité des commandes est regroupée dans `InterfaceCombat.ActualiserVisibilite`, et les branches de sorts de soutien absents du catalogue ont été retirées de l’adaptateur. Les autres fichiers backend et les assets ne sont pas modifiés par cette adaptation.
+
+Le chargement audio vérifie séparément le format des WAV livrés. Si OpenAL échoue lors du chargement, les buffers déjà créés sont libérés et la partie continue sans audio, sans répéter l’erreur pour chaque piste.
 
 ## Correspondance avec le sujet
 

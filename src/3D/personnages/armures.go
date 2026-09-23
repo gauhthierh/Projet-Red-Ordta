@@ -38,6 +38,7 @@ func pieceArmure(parent *core.Node, ronde bool, x, y, z, w, d, h float32, couleu
 	return mesh
 }
 
+// creerChapeauDetaille : Assemble les éléments visibles de la protection de tête.
 func creerChapeauDetaille(parent *core.Node) {
 	// Bord large, calotte, bande de cuir et boucle frontale ajourée.
 	pieceArmure(parent, true, 0, 0, 2.035, .79, .68, .085, cuirSombre)
@@ -63,6 +64,7 @@ func creerChapeauDetaille(parent *core.Node) {
 	}
 }
 
+// creerTuniqueDetaillee : Assemble le vêtement et ses détails autour du torse.
 func creerTuniqueDetaillee(parent *core.Node) {
 	// Vêtement rembourré et coutures latérales.
 	pieceArmure(parent, false, 0, 0, 1.17, .69, .40, .64, tissuArmure)
@@ -109,6 +111,7 @@ func creerTuniqueDetaillee(parent *core.Node) {
 	pieceArmure(parent, false, 0, -.328, 1.30, .095, .018, .095, laitonArmure).SetRotationY(math32.Pi / 4)
 }
 
+// creerProtectionBras : Attache la protection au pivot du bras pour qu'elle suive son animation.
 func creerProtectionBras(bras *core.Node) *core.Node {
 	protection := core.NewNode()
 	bras.Add(protection)
@@ -130,6 +133,7 @@ func creerProtectionBras(bras *core.Node) *core.Node {
 	return protection
 }
 
+// creerBotteDetaillee : Attache la botte et la protection de jambe au même pivot que la jambe.
 func creerBotteDetaillee(jambe *core.Node) *core.Node {
 	botte := core.NewNode()
 	jambe.Add(botte)

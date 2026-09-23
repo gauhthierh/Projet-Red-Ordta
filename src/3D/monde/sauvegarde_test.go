@@ -8,6 +8,7 @@ import (
 	"testing"
 )
 
+// TestSauvegarde3DRetrouveProgression : Vérifie l'écriture, la relecture et le remplacement d'une sauvegarde.
 func TestSauvegarde3DRetrouveProgression(t *testing.T) {
 	chemin := filepath.Join(t.TempDir(), "partie.json")
 	joueur := library.NouveauPersonnage3D("Test", "Humain")
@@ -30,6 +31,7 @@ func TestSauvegarde3DRetrouveProgression(t *testing.T) {
 	}
 }
 
+// TestSauvegarde3DAbsenteEtCorrompue : Vérifie qu'une absence de sauvegarde ne se confond pas avec un fichier abîmé.
 func TestSauvegarde3DAbsenteEtCorrompue(t *testing.T) {
 	chemin := filepath.Join(t.TempDir(), "partie.json")
 	partie, err := ChargerPartie3D(chemin)
@@ -44,6 +46,7 @@ func TestSauvegarde3DAbsenteEtCorrompue(t *testing.T) {
 	}
 }
 
+// TestAncienneSauvegardeMigration : Vérifie que les anciens noms sont convertis au chargement.
 func TestAncienneSauvegardeMigration(t *testing.T) {
 	chemin := filepath.Join(t.TempDir(), "ancienne.json")
 	p := library.NouveauPersonnage3D("Ancien", "Nain")
