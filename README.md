@@ -6,23 +6,90 @@ Les deux interfaces utilisent le package `library`. L’adaptateur `library_3d.g
 
 ## Installation et lancement
 
-### Prérequis
+### Windows : le minimum pour jouer en 3D
 
-- Go 1.21 minimum, conformément à `src/go.mod`.
-- Git pour cloner le dépôt ; connexion au premier téléchargement des dépendances.
-- Pour la 3D sous Windows : GCC/MinGW-w64 64 bits accessible dans le terminal, un pilote OpenGL et les bibliothèques audio de G3N. L’interface est principalement prévue pour 1920 × 1080.
-
-Le code du jeu est en Go, mais G3N utilise aussi des composants natifs via CGO. Installer une nouvelle version de Go ne remplace pas l’installation de GCC.
-
-### Une seule commande depuis src
+Installer **Go 64 bits** et **GCC/MinGW-w64 64 bits**, puis récupérer le projet. Cette installation se fait **une seule fois**. Ensuite, depuis le dossier `src`, la seule commande à taper sera :
 
 ```powershell
-git clone https://github.com/gauhthierh/Projet-Red-Ordta.git
-cd Projet-Red-Ordta/src
 go run .
 ```
 
-Le terminal propose :
+Choisir ensuite **1** dans le terminal pour ouvrir le jeu 3D.
+
+### 1. Installer Go
+
+Télécharger l’installateur **Windows x86-64** sur la [page officielle de téléchargement de Go](https://go.dev/dl/), puis l’installer avec les options par défaut. Le projet demande Go 1.21 minimum ; une version stable récente convient.
+
+Si Go est déjà installé, passer à l’étape suivante. On vérifiera son fonctionnement à l’étape 4.
+
+### 2. Installer GCC/MinGW-w64 64 bits
+
+Utiliser **MSYS2**, qui permet d’installer GCC pour Windows :
+
+1. Ouvrir la [page officielle de téléchargement de MSYS2](https://www.msys2.org/).
+2. Télécharger l’installateur **x86_64**, l’exécuter et conserver le dossier proposé : `C:\msys64`.
+3. Ouvrir **MSYS2 UCRT64** depuis le menu Démarrer de Windows.
+4. Dans cette fenêtre MSYS2, copier la commande suivante puis appuyer sur Entrée :
+
+```sh
+pacman -S --needed mingw-w64-ucrt-x86_64-gcc
+```
+
+Accepter l’installation lorsqu’une confirmation est demandée et attendre sa fin.
+
+**Installer MSYS2 seul ne suffit pas.** La commande ci-dessus installe réellement GCC et ses dépendances. Elle se lance dans **MSYS2 UCRT64**, pas dans PowerShell. Il n’est pas nécessaire d’installer VS Code, Visual Studio ou CMake pour ce projet.
+
+Cette méthode est documentée par [MinGW-w64 : installation avec MSYS2](https://www.mingw-w64.org/getting-started/msys2/).
+
+### 3. Ajouter GCC aux variables d’environnement Windows
+
+Cette étape permet à PowerShell et à Go de trouver GCC.
+
+1. Dans la recherche du menu Démarrer, taper **variables d’environnement**.
+2. Ouvrir **Modifier les variables d’environnement système**, puis cliquer sur **Variables d’environnement…**.
+3. Dans la partie **Variables utilisateur**, sélectionner **Path**, puis **Modifier…**.
+4. Cliquer sur **Nouveau** et ajouter cette ligne :
+
+```text
+C:\msys64\ucrt64\bin
+```
+
+5. Valider toutes les fenêtres avec **OK**.
+6. Fermer puis rouvrir PowerShell. Si le terminal est ouvert dans un éditeur, fermer puis rouvrir aussi cet éditeur.
+
+**Ne pas supprimer les lignes déjà présentes dans Path.** Ajouter le dossier `bin`, pas le fichier `gcc.exe`. Si MSYS2 a été installé ailleurs, adapter le début du chemin. Ne pas utiliser `C:\msys64\usr\bin` à la place de `ucrt64\bin` : ce n’est pas le compilateur Windows choisi ici.
+
+### 4. Vérifier l’installation dans PowerShell
+
+Dans une **nouvelle fenêtre PowerShell**, exécuter :
+
+```powershell
+go version
+where.exe gcc
+gcc --version
+```
+
+Résultat attendu :
+
+- `go version` affiche une version de Go et `windows/amd64`.
+- `where.exe gcc` affiche `C:\msys64\ucrt64\bin\gcc.exe` si vous avez conservé le dossier par défaut.
+- `gcc --version` affiche la version de GCC, sans erreur.
+
+Si GCC fonctionne dans MSYS2 mais pas dans PowerShell, **le Path Windows n’est pas correctement configuré ou le terminal n’a pas été rouvert**. Reprendre l’étape 3. Si plusieurs GCC apparaissent, vérifier que celui de `ucrt64\bin` est utilisé en premier.
+
+### 5. Récupérer le projet et jouer
+
+Sur le [dépôt du projet](https://github.com/gauhthierh/Projet-Red-Ordta), cliquer sur **Code → Download ZIP**, puis **extraire toute l’archive**. Git n’est pas obligatoire si vous utilisez cette méthode.
+
+Ouvrir le dossier extrait, puis son sous-dossier **src**. Dans l’Explorateur Windows, cliquer sur la barre d’adresse, taper `powershell` et appuyer sur Entrée : le terminal s’ouvre directement dans ce dossier.
+
+Exécuter :
+
+```powershell
+go run .
+```
+
+Le menu propose :
 
 ```text
 1 — Jouer en 3D
@@ -30,33 +97,45 @@ Le terminal propose :
 0 — Quitter
 ```
 
-Le CLI ne charge pas G3N : il fonctionne sans les dépendances natives de la 3D.
+Taper **1**, puis Entrée. Le premier lancement peut prendre plus de temps : Go télécharge les dépendances et compile le jeu. **Une connexion Internet est nécessaire pour ces premiers téléchargements.**
 
-Pour le choix 3D, le lanceur active CGO uniquement pour le processus enfant et ajoute les DLL audio livrées avec G3N à son environnement Windows. Il ne modifie pas la configuration globale du PC. GCC doit déjà être accessible :
+Le lanceur active automatiquement CGO pour la 3D, récupère G3N et ajoute ses bibliothèques audio au processus du jeu. **Pas de commande CGO à taper, pas de DLL audio à télécharger ou copier à la main.** Seul le Path de GCC doit avoir été configuré à l’étape 3.
+
+Pour les lancements suivants : ouvrir un terminal dans `src`, taper **`go run .`**, puis choisir **1**. Ne pas déplacer `src` ou supprimer `assets` : le jeu a besoin de l’arborescence complète.
+
+Pour le CLI seulement, choisir **2** : GCC et les dépendances graphiques ne sont pas nécessaires.
+
+### À savoir
+
+- La 3D nécessite une carte graphique et un pilote compatibles OpenGL. Si la création de la fenêtre échoue, vérifier le pilote graphique.
+- L’interface est principalement conçue pour 1920 × 1080.
+- Le code est en Go, mais G3N utilise des composants natifs : Go seul ne suffit pas pour compiler la 3D.
+- Cette procédure concerne Windows 64 bits sur processeur Intel/AMD. La configuration Linux/macOS n’est pas automatisée ici.
+
+<details>
+<summary>Développeurs uniquement : Git, lancement direct et environnement de test</summary>
+
+Si Git est déjà installé, il peut remplacer le téléchargement ZIP :
 
 ```powershell
-where.exe gcc
-gcc --version
+git clone https://github.com/gauhthierh/Projet-Red-Ordta.git
+cd Projet-Red-Ordta/src
+go run .
 ```
 
-Avec MSYS2, ajouter le dossier correspondant à votre installation, par exemple `C:\msys64\ucrt64\bin`, au PATH du terminal. Les architectures Go et GCC doivent correspondre.
-
-**Toujours lancer depuis `src/`** et conserver `assets/` à côté : les chemins des modèles, textures et sons en dépendent.
-
-### Lancement direct de la 3D et tests graphiques
-
-Le lanceur principal effectue cette préparation automatiquement. Pour lancer directement `./3D` ou exécuter ses tests sous PowerShell :
+**Ne pas suivre les commandes suivantes pour jouer normalement.** Elles servent au lancement direct de la 3D et aux tests graphiques, sans passer par le lanceur. Depuis `src` :
 
 ```powershell
 $env:CGO_ENABLED = "1"
+go mod download github.com/g3n/engine
 $dossierG3N = go list -m -f '{{.Dir}}' github.com/g3n/engine
 $env:PATH = "$dossierG3N/audio/windows/bin;$env:PATH"
 go run ./3D
 ```
 
-La configuration native Linux/macOS n’est pas automatisée par ce lanceur. Les dépendances OpenGL, GLFW, OpenAL et Vorbis adaptées au système restent nécessaires.
+Un exécutable du lanceur peut être compilé avec `go build -o ordta.exe .`, mais le choix 3D appelle encore Go : ce n’est pas une distribution autonome.
 
-Un exécutable du lanceur peut être compilé avec `go build -o ordta.exe .`, mais son choix 3D appelle encore Go : ce n’est pas une distribution autonome du jeu.
+</details>
 
 ## Démarrer une partie
 
