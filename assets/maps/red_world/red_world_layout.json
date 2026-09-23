@@ -1382,166 +1382,6 @@
       "rotation_degrees": 88.59374999999991
     },
     {
-      "id": "river_bank_rock_00",
-      "category": "rock",
-      "shape": "circle",
-      "x": -2,
-      "y": 112,
-      "radius": 2
-    },
-    {
-      "id": "river_bank_rock_01",
-      "category": "rock",
-      "shape": "circle",
-      "x": -20,
-      "y": 92,
-      "radius": 3
-    },
-    {
-      "id": "river_bank_rock_02",
-      "category": "rock",
-      "shape": "circle",
-      "x": -52,
-      "y": 73,
-      "radius": 4
-    },
-    {
-      "id": "river_bank_rock_03",
-      "category": "rock",
-      "shape": "circle",
-      "x": -82,
-      "y": 43,
-      "radius": 2
-    },
-    {
-      "id": "river_bank_rock_04",
-      "category": "rock",
-      "shape": "circle",
-      "x": -99,
-      "y": 12,
-      "radius": 3
-    },
-    {
-      "id": "river_bank_rock_05",
-      "category": "rock",
-      "shape": "circle",
-      "x": -101,
-      "y": -34,
-      "radius": 4
-    },
-    {
-      "id": "river_bank_rock_06",
-      "category": "rock",
-      "shape": "circle",
-      "x": -94,
-      "y": -71,
-      "radius": 2
-    },
-    {
-      "id": "river_bank_rock_07",
-      "category": "rock",
-      "shape": "circle",
-      "x": -65,
-      "y": -92,
-      "radius": 3
-    },
-    {
-      "id": "river_bank_rock_08",
-      "category": "rock",
-      "shape": "circle",
-      "x": -25,
-      "y": -103,
-      "radius": 4
-    },
-    {
-      "id": "river_bank_rock_09",
-      "category": "rock",
-      "shape": "circle",
-      "x": 25,
-      "y": -103,
-      "radius": 2
-    },
-    {
-      "id": "river_bank_rock_10",
-      "category": "rock",
-      "shape": "circle",
-      "x": 69,
-      "y": -96,
-      "radius": 3
-    },
-    {
-      "id": "river_bank_rock_11",
-      "category": "rock",
-      "shape": "circle",
-      "x": 108,
-      "y": -78,
-      "radius": 4
-    },
-    {
-      "id": "river_bank_rock_12",
-      "category": "rock",
-      "shape": "circle",
-      "x": 134,
-      "y": -49,
-      "radius": 2
-    },
-    {
-      "id": "river_bank_rock_13",
-      "category": "rock",
-      "shape": "circle",
-      "x": 169,
-      "y": -41,
-      "radius": 3
-    },
-    {
-      "id": "river_bank_rock_14",
-      "category": "rock",
-      "shape": "circle",
-      "x": 213,
-      "y": -46,
-      "radius": 4
-    },
-    {
-      "id": "river_bank_rock_15",
-      "category": "rock",
-      "shape": "circle",
-      "x": 258,
-      "y": -51,
-      "radius": 2
-    },
-    {
-      "id": "waterfall_cliff_00",
-      "category": "cliff",
-      "shape": "circle",
-      "x": -17,
-      "y": 145,
-      "radius": 7
-    },
-    {
-      "id": "waterfall_cliff_01",
-      "category": "cliff",
-      "shape": "circle",
-      "x": -12,
-      "y": 170,
-      "radius": 9
-    },
-    {
-      "id": "waterfall_cliff_02",
-      "category": "cliff",
-      "shape": "circle",
-      "x": 21,
-      "y": 148,
-      "radius": 7
-    },
-    {
-      "id": "waterfall_cliff_03",
-      "category": "cliff",
-      "shape": "circle",
-      "x": 18,
-      "y": 176,
-      "radius": 9
-    },
-    {
       "id": "river_water_00",
       "category": "river",
       "shape": "rectangle",
@@ -2037,64 +1877,64 @@
       "id": "plaza_lamp_00",
       "category": "lamp",
       "shape": "circle",
-      "x": 22,
-      "y": 0,
+      "x": 20.325349715248308,
+      "y": 8.419035512031975,
       "radius": 0.5
     },
     {
       "id": "plaza_lamp_01",
       "category": "lamp",
       "shape": "circle",
-      "x": 15.556349186104047,
-      "y": 15.556349186104043,
+      "x": 8.419035512031977,
+      "y": 20.325349715248308,
       "radius": 0.5
     },
     {
       "id": "plaza_lamp_02",
       "category": "lamp",
       "shape": "circle",
-      "x": 1.3471114790620866e-15,
-      "y": 22,
+      "x": -8.419035512031973,
+      "y": 20.325349715248308,
       "radius": 0.5
     },
     {
       "id": "plaza_lamp_03",
       "category": "lamp",
       "shape": "circle",
-      "x": -15.556349186104043,
-      "y": 15.556349186104047,
+      "x": -20.325349715248308,
+      "y": 8.419035512031977,
       "radius": 0.5
     },
     {
       "id": "plaza_lamp_04",
       "category": "lamp",
       "shape": "circle",
-      "x": -22,
-      "y": 2.6942229581241733e-15,
+      "x": -20.32534971524831,
+      "y": -8.419035512031973,
       "radius": 0.5
     },
     {
       "id": "plaza_lamp_05",
       "category": "lamp",
       "shape": "circle",
-      "x": -15.556349186104049,
-      "y": -15.556349186104043,
+      "x": -8.419035512031988,
+      "y": -20.325349715248304,
       "radius": 0.5
     },
     {
       "id": "plaza_lamp_06",
       "category": "lamp",
       "shape": "circle",
-      "x": -4.04133443718626e-15,
-      "y": -22,
+      "x": 8.41903551203198,
+      "y": -20.325349715248304,
       "radius": 0.5
     },
     {
       "id": "plaza_lamp_07",
       "category": "lamp",
       "shape": "circle",
-      "x": 15.556349186104043,
-      "y": -15.556349186104049,
+      "x": 20.325349715248304,
+      "y": -8.41903551203199,
       "radius": 0.5
     },
     {
@@ -2110,8 +1950,8 @@
       "id": "village_house_01",
       "category": "building",
       "shape": "rectangle",
-      "x": -31,
-      "y": 55,
+      "x": -40,
+      "y": 60,
       "width": 15,
       "height": 12
     },
@@ -2119,8 +1959,8 @@
       "id": "village_house_02",
       "category": "building",
       "shape": "rectangle",
-      "x": 31,
-      "y": 55,
+      "x": 40,
+      "y": 60,
       "width": 15,
       "height": 12
     },
@@ -2138,21 +1978,12 @@
       "category": "building",
       "shape": "rectangle",
       "x": -54,
-      "y": 8,
+      "y": 12,
       "width": 16,
       "height": 13
     },
     {
       "id": "village_house_05",
-      "category": "building",
-      "shape": "rectangle",
-      "x": 56,
-      "y": 8,
-      "width": 16,
-      "height": 13
-    },
-    {
-      "id": "village_house_06",
       "category": "building",
       "shape": "rectangle",
       "x": -50,
@@ -2161,7 +1992,7 @@
       "height": 15
     },
     {
-      "id": "village_house_07",
+      "id": "village_house_06",
       "category": "building",
       "shape": "rectangle",
       "x": -27,
@@ -2170,7 +2001,7 @@
       "height": 13
     },
     {
-      "id": "village_house_08",
+      "id": "village_house_07",
       "category": "building",
       "shape": "rectangle",
       "x": 27,
@@ -2179,7 +2010,7 @@
       "height": 13
     },
     {
-      "id": "village_house_09",
+      "id": "village_house_08",
       "category": "building",
       "shape": "rectangle",
       "x": 50,
@@ -2188,7 +2019,7 @@
       "height": 15
     },
     {
-      "id": "village_house_10",
+      "id": "village_house_09",
       "category": "building",
       "shape": "rectangle",
       "x": -8,
@@ -2244,7 +2075,7 @@
       "category": "stall",
       "shape": "rectangle",
       "x": 39,
-      "y": 1,
+      "y": -5,
       "width": 8,
       "height": 6
     },
@@ -2253,7 +2084,7 @@
       "category": "stall",
       "shape": "rectangle",
       "x": 55,
-      "y": -2,
+      "y": -5,
       "width": 8,
       "height": 6
     },
@@ -2280,8 +2111,8 @@
       "category": "fence",
       "shape": "rectangle",
       "x": 26.5,
-      "y": -0.75,
-      "width": 4.5,
+      "y": -2,
+      "width": 2,
       "height": 0.8,
       "rotation_degrees": 90
     },
@@ -2290,8 +2121,8 @@
       "category": "fence",
       "shape": "rectangle",
       "x": 26.5,
-      "y": 15.75,
-      "width": 10.5,
+      "y": 16,
+      "width": 10,
       "height": 0.8,
       "rotation_degrees": 90
     },
@@ -2318,36 +2149,37 @@
       "id": "guild_training_fence_000",
       "category": "fence",
       "shape": "rectangle",
-      "x": -148,
+      "x": -150,
       "y": 99,
-      "width": 48,
+      "width": 52,
       "height": 0.8
     },
     {
       "id": "guild_training_fence_001",
       "category": "fence",
       "shape": "rectangle",
-      "x": -169.25,
+      "x": -153.75,
       "y": 141,
-      "width": 13.5,
+      "width": 44.5,
       "height": 0.8
     },
     {
       "id": "guild_training_fence_002",
       "category": "fence",
       "shape": "rectangle",
-      "x": -136.75,
-      "y": 141,
-      "width": 25.5,
-      "height": 0.8
+      "x": -176,
+      "y": 106.25,
+      "width": 14.5,
+      "height": 0.8,
+      "rotation_degrees": 90
     },
     {
       "id": "guild_training_fence_003",
       "category": "fence",
       "shape": "rectangle",
       "x": -176,
-      "y": 128.75,
-      "width": 24.5,
+      "y": 136.5,
+      "width": 9,
       "height": 0.8,
       "rotation_degrees": 90
     },
@@ -2362,14 +2194,89 @@
       "rotation_degrees": 90
     },
     {
-      "id": "guild_training_fence_005",
-      "category": "fence",
+      "id": "guild_training_rail_0",
+      "category": "training",
       "shape": "rectangle",
-      "x": -124,
-      "y": 133.25,
-      "width": 15.5,
-      "height": 0.8,
-      "rotation_degrees": 90
+      "x": -166,
+      "y": 120,
+      "width": 0.4,
+      "height": 5
+    },
+    {
+      "id": "guild_banner_0",
+      "category": "prop",
+      "shape": "circle",
+      "x": -172,
+      "y": 148,
+      "radius": 0.25
+    },
+    {
+      "id": "guild_training_rail_1",
+      "category": "training",
+      "shape": "rectangle",
+      "x": -158,
+      "y": 120,
+      "width": 0.4,
+      "height": 5
+    },
+    {
+      "id": "guild_banner_1",
+      "category": "prop",
+      "shape": "circle",
+      "x": -161,
+      "y": 148,
+      "radius": 0.25
+    },
+    {
+      "id": "guild_training_rail_2",
+      "category": "training",
+      "shape": "rectangle",
+      "x": -150,
+      "y": 120,
+      "width": 0.4,
+      "height": 5
+    },
+    {
+      "id": "guild_banner_2",
+      "category": "prop",
+      "shape": "circle",
+      "x": -150,
+      "y": 148,
+      "radius": 0.25
+    },
+    {
+      "id": "guild_training_rail_3",
+      "category": "training",
+      "shape": "rectangle",
+      "x": -142,
+      "y": 120,
+      "width": 0.4,
+      "height": 5
+    },
+    {
+      "id": "guild_banner_3",
+      "category": "prop",
+      "shape": "circle",
+      "x": -139,
+      "y": 148,
+      "radius": 0.25
+    },
+    {
+      "id": "guild_training_rail_4",
+      "category": "training",
+      "shape": "rectangle",
+      "x": -134,
+      "y": 120,
+      "width": 0.4,
+      "height": 5
+    },
+    {
+      "id": "guild_banner_4",
+      "category": "prop",
+      "shape": "circle",
+      "x": -128,
+      "y": 148,
+      "radius": 0.25
     },
     {
       "id": "guild_target_00",
@@ -2424,10 +2331,10 @@
       "id": "forge_fire",
       "category": "forge",
       "shape": "rectangle",
-      "x": -190,
-      "y": -6,
-      "width": 5.2,
-      "height": 4.2
+      "x": -216,
+      "y": 4,
+      "width": 7,
+      "height": 4.6
     },
     {
       "id": "forge_anvil_00",
@@ -2469,50 +2376,23 @@
       "id": "forge_yard_fence_000",
       "category": "fence",
       "shape": "rectangle",
-      "x": -210,
-      "y": -28,
-      "width": 28,
+      "x": -195,
+      "y": 24,
+      "width": 58,
       "height": 0.8
     },
     {
       "id": "forge_yard_fence_001",
       "category": "fence",
       "shape": "rectangle",
-      "x": -175.5,
-      "y": -28,
-      "width": 19,
-      "height": 0.8
-    },
-    {
-      "id": "forge_yard_fence_002",
-      "category": "fence",
-      "shape": "rectangle",
-      "x": -211.75,
-      "y": 24,
-      "width": 24.5,
-      "height": 0.8
-    },
-    {
-      "id": "forge_yard_fence_003",
-      "category": "fence",
-      "shape": "rectangle",
-      "x": -177.25,
-      "y": 24,
-      "width": 22.5,
-      "height": 0.8
-    },
-    {
-      "id": "forge_yard_fence_004",
-      "category": "fence",
-      "shape": "rectangle",
       "x": -224,
-      "y": -2,
-      "width": 52,
+      "y": 2.75,
+      "width": 42.5,
       "height": 0.8,
       "rotation_degrees": 90
     },
     {
-      "id": "forge_yard_fence_005",
+      "id": "forge_yard_fence_002",
       "category": "fence",
       "shape": "rectangle",
       "x": -166,
@@ -2520,6 +2400,30 @@
       "width": 20.500000000000004,
       "height": 0.8,
       "rotation_degrees": 90
+    },
+    {
+      "id": "forge_woodpile_0",
+      "category": "prop",
+      "shape": "circle",
+      "x": -220,
+      "y": -10,
+      "radius": 0.8
+    },
+    {
+      "id": "forge_woodpile_1",
+      "category": "prop",
+      "shape": "circle",
+      "x": -217.8,
+      "y": -10,
+      "radius": 0.8
+    },
+    {
+      "id": "forge_woodpile_2",
+      "category": "prop",
+      "shape": "circle",
+      "x": -215.6,
+      "y": -10,
+      "radius": 0.8
     },
     {
       "id": "forge_crate_00",
@@ -3399,13 +3303,22 @@
       "id": "cemetery_fence_001",
       "category": "fence",
       "shape": "rectangle",
-      "x": -21.5,
+      "x": -33.75,
       "y": -168,
-      "width": 33,
+      "width": 8.5,
       "height": 0.8
     },
     {
       "id": "cemetery_fence_002",
+      "category": "fence",
+      "shape": "rectangle",
+      "x": -11.75,
+      "y": -168,
+      "width": 13.5,
+      "height": 0.8
+    },
+    {
+      "id": "cemetery_fence_003",
       "category": "fence",
       "shape": "rectangle",
       "x": 21.5,
@@ -3414,22 +3327,12 @@
       "height": 0.8
     },
     {
-      "id": "cemetery_fence_003",
-      "category": "fence",
-      "shape": "rectangle",
-      "x": -38,
-      "y": -216.25,
-      "width": 51.5,
-      "height": 0.8,
-      "rotation_degrees": 90
-    },
-    {
       "id": "cemetery_fence_004",
       "category": "fence",
       "shape": "rectangle",
       "x": -38,
-      "y": -173.75,
-      "width": 11.5,
+      "y": -219.75,
+      "width": 44.5,
       "height": 0.8,
       "rotation_degrees": 90
     },
@@ -3437,9 +3340,9 @@
       "id": "cemetery_fence_005",
       "category": "fence",
       "shape": "rectangle",
-      "x": 38,
-      "y": -215.25,
-      "width": 53.5,
+      "x": -38,
+      "y": -177.25,
+      "width": 18.5,
       "height": 0.8,
       "rotation_degrees": 90
     },
@@ -3448,8 +3351,8 @@
       "category": "fence",
       "shape": "rectangle",
       "x": 38,
-      "y": -172.75,
-      "width": 9.5,
+      "y": -205,
+      "width": 74,
       "height": 0.8,
       "rotation_degrees": 90
     },
@@ -3876,54 +3779,6 @@
       "radius": 2.5
     },
     {
-      "id": "wolf_forest_boulder_00",
-      "category": "rock",
-      "shape": "circle",
-      "x": -228,
-      "y": 62,
-      "radius": 4
-    },
-    {
-      "id": "wolf_forest_boulder_01",
-      "category": "rock",
-      "shape": "circle",
-      "x": -220,
-      "y": 112,
-      "radius": 5
-    },
-    {
-      "id": "wolf_forest_boulder_02",
-      "category": "rock",
-      "shape": "circle",
-      "x": -202,
-      "y": 145,
-      "radius": 6
-    },
-    {
-      "id": "wolf_forest_boulder_03",
-      "category": "rock",
-      "shape": "circle",
-      "x": -185,
-      "y": 55,
-      "radius": 4
-    },
-    {
-      "id": "wolf_forest_boulder_04",
-      "category": "rock",
-      "shape": "circle",
-      "x": -133,
-      "y": 78,
-      "radius": 5
-    },
-    {
-      "id": "wolf_forest_boulder_05",
-      "category": "rock",
-      "shape": "circle",
-      "x": -118,
-      "y": 118,
-      "radius": 6
-    },
-    {
       "id": "wolf_den",
       "category": "cave",
       "shape": "rectangle",
@@ -3931,142 +3786,6 @@
       "y": 92,
       "width": 9.5,
       "height": 4.5
-    },
-    {
-      "id": "raven_cliff_00",
-      "category": "cliff",
-      "shape": "circle",
-      "x": 35,
-      "y": 230,
-      "radius": 8
-    },
-    {
-      "id": "raven_cliff_01",
-      "category": "cliff",
-      "shape": "circle",
-      "x": 32.63652802915245,
-      "y": 239.39228332086597,
-      "radius": 11
-    },
-    {
-      "id": "raven_cliff_02",
-      "category": "cliff",
-      "shape": "circle",
-      "x": 25.865312102723067,
-      "y": 247.51608673481047,
-      "radius": 14
-    },
-    {
-      "id": "raven_cliff_03",
-      "category": "cliff",
-      "shape": "circle",
-      "x": 15.60084245217884,
-      "y": 253.27424557523162,
-      "radius": 8
-    },
-    {
-      "id": "raven_cliff_04",
-      "category": "cliff",
-      "shape": "circle",
-      "x": 3.22939258121557,
-      "y": 255.8890885836709,
-      "radius": 11
-    },
-    {
-      "id": "raven_cliff_05",
-      "category": "cliff",
-      "shape": "circle",
-      "x": -9.578204652522901,
-      "y": 255.0074667224933,
-      "radius": 14
-    },
-    {
-      "id": "raven_cliff_06",
-      "category": "cliff",
-      "shape": "circle",
-      "x": -21.09221227327397,
-      "y": 250.74844790928623,
-      "radius": 8
-    },
-    {
-      "id": "raven_cliff_07",
-      "category": "cliff",
-      "shape": "circle",
-      "x": -29.75759975053649,
-      "y": 243.68723623481125,
-      "radius": 11
-    },
-    {
-      "id": "raven_cliff_08",
-      "category": "cliff",
-      "shape": "circle",
-      "x": -34.40405848893656,
-      "y": 234.77748746323084,
-      "radius": 14
-    },
-    {
-      "id": "raven_cliff_09",
-      "category": "cliff",
-      "shape": "circle",
-      "x": -34.40405848893656,
-      "y": 225.2225125367692,
-      "radius": 8
-    },
-    {
-      "id": "raven_cliff_10",
-      "category": "cliff",
-      "shape": "circle",
-      "x": -29.757599750536492,
-      "y": 216.31276376518875,
-      "radius": 11
-    },
-    {
-      "id": "raven_cliff_11",
-      "category": "cliff",
-      "shape": "circle",
-      "x": -21.092212273274,
-      "y": 209.2515520907138,
-      "radius": 14
-    },
-    {
-      "id": "raven_cliff_12",
-      "category": "cliff",
-      "shape": "circle",
-      "x": -9.578204652522908,
-      "y": 204.9925332775067,
-      "radius": 8
-    },
-    {
-      "id": "raven_cliff_13",
-      "category": "cliff",
-      "shape": "circle",
-      "x": 3.2293925812155853,
-      "y": 204.1109114163291,
-      "radius": 11
-    },
-    {
-      "id": "raven_cliff_14",
-      "category": "cliff",
-      "shape": "circle",
-      "x": 15.60084245217882,
-      "y": 206.72575442476838,
-      "radius": 14
-    },
-    {
-      "id": "raven_cliff_15",
-      "category": "cliff",
-      "shape": "circle",
-      "x": 25.865312102723053,
-      "y": 212.4839132651895,
-      "radius": 8
-    },
-    {
-      "id": "raven_cliff_16",
-      "category": "cliff",
-      "shape": "circle",
-      "x": 32.63652802915245,
-      "y": 220.60771667913403,
-      "radius": 11
     },
     {
       "id": "raven_watchtower",
@@ -4149,33 +3868,6 @@
       "height": 2.4
     },
     {
-      "id": "raven_pillar_08",
-      "category": "ruin",
-      "shape": "rectangle",
-      "x": -11.50000000000001,
-      "y": 213.54551732809568,
-      "width": 2.4,
-      "height": 2.4
-    },
-    {
-      "id": "raven_pillar_09",
-      "category": "ruin",
-      "shape": "rectangle",
-      "x": -4.225031457058363e-15,
-      "y": 211,
-      "width": 2.4,
-      "height": 2.4
-    },
-    {
-      "id": "raven_pillar_10",
-      "category": "ruin",
-      "shape": "rectangle",
-      "x": 11.5,
-      "y": 213.54551732809566,
-      "width": 2.4,
-      "height": 2.4
-    },
-    {
       "id": "raven_pillar_11",
       "category": "ruin",
       "shape": "rectangle",
@@ -4183,94 +3875,6 @@
       "y": 220.5,
       "width": 2.4,
       "height": 2.4
-    },
-    {
-      "id": "troll_cave_rock_00",
-      "category": "rock",
-      "shape": "circle",
-      "x": 208,
-      "y": 198,
-      "radius": 8
-    },
-    {
-      "id": "troll_cave_rock_01",
-      "category": "rock",
-      "shape": "circle",
-      "x": 203.55509891927306,
-      "y": 207.19089389674517,
-      "radius": 11
-    },
-    {
-      "id": "troll_cave_rock_02",
-      "category": "rock",
-      "shape": "circle",
-      "x": 191.63162036405282,
-      "y": 213.4637439210268,
-      "radius": 14
-    },
-    {
-      "id": "troll_cave_rock_03",
-      "category": "rock",
-      "shape": "circle",
-      "x": 176.01518452834802,
-      "y": 214.82696451197586,
-      "radius": 8
-    },
-    {
-      "id": "troll_cave_rock_04",
-      "category": "rock",
-      "shape": "circle",
-      "x": 161.663899449532,
-      "y": 210.8477427640224,
-      "radius": 11
-    },
-    {
-      "id": "troll_cave_rock_05",
-      "category": "rock",
-      "shape": "circle",
-      "x": 153.13419673879406,
-      "y": 202.7894534663043,
-      "radius": 14
-    },
-    {
-      "id": "troll_cave_rock_06",
-      "category": "rock",
-      "shape": "circle",
-      "x": 153.13419673879406,
-      "y": 193.2105465336957,
-      "radius": 8
-    },
-    {
-      "id": "troll_cave_rock_07",
-      "category": "rock",
-      "shape": "circle",
-      "x": 161.663899449532,
-      "y": 185.1522572359776,
-      "radius": 11
-    },
-    {
-      "id": "troll_cave_rock_08",
-      "category": "rock",
-      "shape": "circle",
-      "x": 176.01518452834802,
-      "y": 181.17303548802414,
-      "radius": 14
-    },
-    {
-      "id": "troll_cave_rock_09",
-      "category": "rock",
-      "shape": "circle",
-      "x": 191.63162036405282,
-      "y": 182.5362560789732,
-      "radius": 8
-    },
-    {
-      "id": "troll_cave_rock_10",
-      "category": "rock",
-      "shape": "circle",
-      "x": 203.55509891927306,
-      "y": 188.80910610325483,
-      "radius": 11
     },
     {
       "id": "troll_cave_entrance",
@@ -4464,14 +4068,6 @@
       "radius": 1.2
     },
     {
-      "id": "mana_crystal_08",
-      "category": "crystal",
-      "shape": "circle",
-      "x": 182.97093396292743,
-      "y": 1.9834878264732598,
-      "radius": 1.2
-    },
-    {
       "id": "mana_crystal_09",
       "category": "crystal",
       "shape": "circle",
@@ -4512,24 +4108,6 @@
       "radius": 1.2
     },
     {
-      "id": "mana_ruin_arch_00_a",
-      "category": "ruin",
-      "shape": "rectangle",
-      "x": 241,
-      "y": 15,
-      "width": 3.4,
-      "height": 3.4
-    },
-    {
-      "id": "mana_ruin_arch_00_b",
-      "category": "ruin",
-      "shape": "rectangle",
-      "x": 241,
-      "y": 21,
-      "width": 3.4,
-      "height": 3.4
-    },
-    {
       "id": "mana_ruin_arch_01_a",
       "category": "ruin",
       "shape": "rectangle",
@@ -4544,24 +4122,6 @@
       "shape": "rectangle",
       "x": 204,
       "y": 46,
-      "width": 3.4,
-      "height": 3.4
-    },
-    {
-      "id": "mana_ruin_arch_02_a",
-      "category": "ruin",
-      "shape": "rectangle",
-      "x": 179,
-      "y": 15.000000000000004,
-      "width": 3.4,
-      "height": 3.4
-    },
-    {
-      "id": "mana_ruin_arch_02_b",
-      "category": "ruin",
-      "shape": "rectangle",
-      "x": 179,
-      "y": 9.000000000000004,
       "width": 3.4,
       "height": 3.4
     },
@@ -4720,14 +4280,6 @@
       "radius": 0.71
     },
     {
-      "id": "wolf_forest_tree_06",
-      "category": "tree",
-      "shape": "circle",
-      "x": -179.52848623981444,
-      "y": 120.00574753397818,
-      "radius": 0.878
-    },
-    {
       "id": "wolf_forest_tree_09",
       "category": "tree",
       "shape": "circle",
@@ -4782,14 +4334,6 @@
       "x": -141.52046060880508,
       "y": 61.668536492602314,
       "radius": 0.878
-    },
-    {
-      "id": "wolf_forest_tree_20",
-      "category": "tree",
-      "shape": "circle",
-      "x": -221.33487578982897,
-      "y": 32.88088269601662,
-      "radius": 0.71
     },
     {
       "id": "wolf_forest_tree_21",
@@ -4896,28 +4440,12 @@
       "radius": 0.71
     },
     {
-      "id": "wolf_forest_tree_37",
-      "category": "tree",
-      "shape": "circle",
-      "x": -117.57679154143645,
-      "y": 151.99261938835258,
-      "radius": 0.794
-    },
-    {
       "id": "wolf_forest_tree_38",
       "category": "tree",
       "shape": "circle",
       "x": -269.5818836094628,
       "y": 82.95699213595067,
       "radius": 0.878
-    },
-    {
-      "id": "wolf_forest_tree_40",
-      "category": "tree",
-      "shape": "circle",
-      "x": -178.62205806701954,
-      "y": 128.40258709153818,
-      "radius": 0.71
     },
     {
       "id": "wolf_forest_tree_42",
@@ -4936,6 +4464,14 @@
       "radius": 0.9620000000000001
     },
     {
+      "id": "wolf_forest_tree_45",
+      "category": "tree",
+      "shape": "circle",
+      "x": -161.81958980708794,
+      "y": 117.00718393390292,
+      "radius": 0.794
+    },
+    {
       "id": "wolf_forest_tree_46",
       "category": "tree",
       "shape": "circle",
@@ -4952,35 +4488,19 @@
       "radius": 0.9620000000000001
     },
     {
-      "id": "magic_grove_tree_00",
-      "category": "tree",
-      "shape": "circle",
-      "x": 249,
-      "y": 15,
-      "radius": 0.745
-    },
-    {
-      "id": "magic_grove_tree_01",
-      "category": "tree",
-      "shape": "circle",
-      "x": 246.64801221065042,
-      "y": 26.628684873072736,
-      "radius": 0.745
-    },
-    {
-      "id": "magic_grove_tree_02",
-      "category": "tree",
-      "shape": "circle",
-      "x": 239.87573328164015,
-      "y": 36.854778729342335,
-      "radius": 0.745
-    },
-    {
       "id": "magic_grove_tree_03",
       "category": "tree",
       "shape": "circle",
       "x": 229.5,
       "y": 44.44486372867091,
+      "radius": 0.745
+    },
+    {
+      "id": "magic_grove_tree_04",
+      "category": "tree",
+      "shape": "circle",
+      "x": 216.7722789290103,
+      "y": 48.48346360241508,
       "radius": 0.745
     },
     {
@@ -5016,51 +4536,11 @@
       "radius": 0.745
     },
     {
-      "id": "magic_grove_tree_11",
+      "id": "magic_grove_tree_09",
       "category": "tree",
       "shape": "circle",
-      "x": 180.12426671835985,
-      "y": -6.854778729342325,
-      "radius": 0.745
-    },
-    {
-      "id": "magic_grove_tree_12",
-      "category": "tree",
-      "shape": "circle",
-      "x": 190.49999999999997,
-      "y": -14.444863728670903,
-      "radius": 0.745
-    },
-    {
-      "id": "magic_grove_tree_14",
-      "category": "tree",
-      "shape": "circle",
-      "x": 216.77227892901027,
-      "y": -18.48346360241508,
-      "radius": 0.745
-    },
-    {
-      "id": "magic_grove_tree_15",
-      "category": "tree",
-      "shape": "circle",
-      "x": 229.49999999999997,
-      "y": -14.444863728670931,
-      "radius": 0.745
-    },
-    {
-      "id": "magic_grove_tree_16",
-      "category": "tree",
-      "shape": "circle",
-      "x": 239.87573328164012,
-      "y": -6.854778729342346,
-      "radius": 0.745
-    },
-    {
-      "id": "magic_grove_tree_17",
-      "category": "tree",
-      "shape": "circle",
-      "x": 246.64801221065042,
-      "y": 3.3713151269272696,
+      "x": 171,
+      "y": 15.000000000000004,
       "radius": 0.745
     },
     {
@@ -5128,14 +4608,6 @@
       "radius": 0.605
     },
     {
-      "id": "background_tree_008",
-      "category": "tree",
-      "shape": "circle",
-      "x": 214.86867019819874,
-      "y": -47.23827438907672,
-      "radius": 0.668
-    },
-    {
       "id": "background_tree_009",
       "category": "tree",
       "shape": "circle",
@@ -5158,14 +4630,6 @@
       "x": 126.78112311615027,
       "y": 221.2499645681498,
       "radius": 0.605
-    },
-    {
-      "id": "background_tree_012",
-      "category": "tree",
-      "shape": "circle",
-      "x": -205.7816398744852,
-      "y": -65.64995575449909,
-      "radius": 0.668
     },
     {
       "id": "background_tree_013",
@@ -5264,14 +4728,6 @@
       "radius": 0.668
     },
     {
-      "id": "background_tree_028",
-      "category": "tree",
-      "shape": "circle",
-      "x": -218.2957037464859,
-      "y": -50.2293313296768,
-      "radius": 0.794
-    },
-    {
       "id": "background_tree_029",
       "category": "tree",
       "shape": "circle",
@@ -5336,14 +4792,6 @@
       "radius": 0.731
     },
     {
-      "id": "background_tree_037",
-      "category": "tree",
-      "shape": "circle",
-      "x": -185.07146846903441,
-      "y": 115.20656039790094,
-      "radius": 0.668
-    },
-    {
       "id": "background_tree_038",
       "category": "tree",
       "shape": "circle",
@@ -5358,14 +4806,6 @@
       "x": 115.7700485057708,
       "y": 228.32716848630056,
       "radius": 0.794
-    },
-    {
-      "id": "background_tree_040",
-      "category": "tree",
-      "shape": "circle",
-      "x": -203.09675660654338,
-      "y": -76.42452129979276,
-      "radius": 0.605
     },
     {
       "id": "background_tree_041",
@@ -5408,14 +4848,6 @@
       "radius": 0.794
     },
     {
-      "id": "background_tree_046",
-      "category": "tree",
-      "shape": "circle",
-      "x": -229.61533022271155,
-      "y": -33.17830807493252,
-      "radius": 0.668
-    },
-    {
       "id": "background_tree_048",
       "category": "tree",
       "shape": "circle",
@@ -5432,14 +4864,6 @@
       "radius": 0.668
     },
     {
-      "id": "background_tree_050",
-      "category": "tree",
-      "shape": "circle",
-      "x": -192.39823938883026,
-      "y": 86.6251550075286,
-      "radius": 0.731
-    },
-    {
       "id": "background_tree_051",
       "category": "tree",
       "shape": "circle",
@@ -5454,14 +4878,6 @@
       "x": 81.98462518344309,
       "y": 235.1159740075743,
       "radius": 0.605
-    },
-    {
-      "id": "background_tree_054",
-      "category": "tree",
-      "shape": "circle",
-      "x": 221.99507377331315,
-      "y": -56.206647475020674,
-      "radius": 0.731
     },
     {
       "id": "background_tree_055",
@@ -5494,14 +4910,6 @@
       "x": 108.01048664398066,
       "y": 175.4130404928051,
       "radius": 0.668
-    },
-    {
-      "id": "background_tree_059",
-      "category": "tree",
-      "shape": "circle",
-      "x": -216.4078154459258,
-      "y": -61.584554994918335,
-      "radius": 0.731
     },
     {
       "id": "background_tree_060",
@@ -5640,20 +5048,404 @@
       "radius": 0.731
     },
     {
-      "id": "background_tree_078",
-      "category": "tree",
-      "shape": "circle",
-      "x": -228.60268191998972,
-      "y": -45.053455128191814,
-      "radius": 0.605
-    },
-    {
       "id": "background_tree_079",
       "category": "tree",
       "shape": "circle",
       "x": 215.22495295399077,
       "y": -131.08096591783442,
       "radius": 0.668
+    },
+    {
+      "id": "river_bank_rock_00",
+      "category": "rock",
+      "shape": "circle",
+      "x": -2,
+      "y": 112,
+      "radius": 2.4200000000000004
+    },
+    {
+      "id": "river_bank_rock_01",
+      "category": "rock",
+      "shape": "circle",
+      "x": -20,
+      "y": 92,
+      "radius": 3.5200000000000005
+    },
+    {
+      "id": "river_bank_rock_02",
+      "category": "rock",
+      "shape": "circle",
+      "x": -52,
+      "y": 73,
+      "radius": 4.620000000000001
+    },
+    {
+      "id": "river_bank_rock_03",
+      "category": "rock",
+      "shape": "circle",
+      "x": -82,
+      "y": 43,
+      "radius": 2.4200000000000004
+    },
+    {
+      "id": "river_bank_rock_04",
+      "category": "rock",
+      "shape": "circle",
+      "x": -99,
+      "y": 12,
+      "radius": 3.5200000000000005
+    },
+    {
+      "id": "river_bank_rock_05",
+      "category": "rock",
+      "shape": "circle",
+      "x": -101,
+      "y": -34,
+      "radius": 4.620000000000001
+    },
+    {
+      "id": "river_bank_rock_06",
+      "category": "rock",
+      "shape": "circle",
+      "x": -94,
+      "y": -71,
+      "radius": 2.4200000000000004
+    },
+    {
+      "id": "river_bank_rock_07",
+      "category": "rock",
+      "shape": "circle",
+      "x": -65,
+      "y": -92,
+      "radius": 3.5200000000000005
+    },
+    {
+      "id": "river_bank_rock_08",
+      "category": "rock",
+      "shape": "circle",
+      "x": -25,
+      "y": -103,
+      "radius": 4.620000000000001
+    },
+    {
+      "id": "river_bank_rock_09",
+      "category": "rock",
+      "shape": "circle",
+      "x": 25,
+      "y": -103,
+      "radius": 2.4200000000000004
+    },
+    {
+      "id": "river_bank_rock_10",
+      "category": "rock",
+      "shape": "circle",
+      "x": 69,
+      "y": -96,
+      "radius": 3.5200000000000005
+    },
+    {
+      "id": "river_bank_rock_11",
+      "category": "rock",
+      "shape": "circle",
+      "x": 108,
+      "y": -78,
+      "radius": 4.620000000000001
+    },
+    {
+      "id": "river_bank_rock_12",
+      "category": "rock",
+      "shape": "circle",
+      "x": 134,
+      "y": -49,
+      "radius": 2.4200000000000004
+    },
+    {
+      "id": "river_bank_rock_13",
+      "category": "rock",
+      "shape": "circle",
+      "x": 169,
+      "y": -41,
+      "radius": 3.5200000000000005
+    },
+    {
+      "id": "river_bank_rock_14",
+      "category": "rock",
+      "shape": "circle",
+      "x": 213,
+      "y": -46,
+      "radius": 4.620000000000001
+    },
+    {
+      "id": "river_bank_rock_15",
+      "category": "rock",
+      "shape": "circle",
+      "x": 258,
+      "y": -51,
+      "radius": 2.4200000000000004
+    },
+    {
+      "id": "waterfall_cliff_01",
+      "category": "rock",
+      "shape": "circle",
+      "x": -12,
+      "y": 170,
+      "radius": 9.9
+    },
+    {
+      "id": "waterfall_cliff_02",
+      "category": "rock",
+      "shape": "circle",
+      "x": 21,
+      "y": 148,
+      "radius": 7.700000000000001
+    },
+    {
+      "id": "waterfall_cliff_03",
+      "category": "rock",
+      "shape": "circle",
+      "x": 18,
+      "y": 176,
+      "radius": 9.9
+    },
+    {
+      "id": "wolf_forest_boulder_00",
+      "category": "rock",
+      "shape": "circle",
+      "x": -228,
+      "y": 62,
+      "radius": 4.4
+    },
+    {
+      "id": "wolf_forest_boulder_01",
+      "category": "rock",
+      "shape": "circle",
+      "x": -220,
+      "y": 112,
+      "radius": 5.5
+    },
+    {
+      "id": "wolf_forest_boulder_02",
+      "category": "rock",
+      "shape": "circle",
+      "x": -202,
+      "y": 145,
+      "radius": 6.6000000000000005
+    },
+    {
+      "id": "raven_cliff_00",
+      "category": "rock",
+      "shape": "circle",
+      "x": 35,
+      "y": 230,
+      "radius": 8.8
+    },
+    {
+      "id": "raven_cliff_01",
+      "category": "rock",
+      "shape": "circle",
+      "x": 32.63652802915245,
+      "y": 239.39228332086597,
+      "radius": 12.100000000000001
+    },
+    {
+      "id": "raven_cliff_02",
+      "category": "rock",
+      "shape": "circle",
+      "x": 25.865312102723067,
+      "y": 247.51608673481047,
+      "radius": 15.400000000000002
+    },
+    {
+      "id": "raven_cliff_03",
+      "category": "rock",
+      "shape": "circle",
+      "x": 15.60084245217884,
+      "y": 253.27424557523162,
+      "radius": 8.8
+    },
+    {
+      "id": "raven_cliff_04",
+      "category": "rock",
+      "shape": "circle",
+      "x": 3.22939258121557,
+      "y": 255.8890885836709,
+      "radius": 12.100000000000001
+    },
+    {
+      "id": "raven_cliff_05",
+      "category": "rock",
+      "shape": "circle",
+      "x": -9.578204652522901,
+      "y": 255.0074667224933,
+      "radius": 15.400000000000002
+    },
+    {
+      "id": "raven_cliff_06",
+      "category": "rock",
+      "shape": "circle",
+      "x": -21.09221227327397,
+      "y": 250.74844790928623,
+      "radius": 8.8
+    },
+    {
+      "id": "raven_cliff_07",
+      "category": "rock",
+      "shape": "circle",
+      "x": -29.75759975053649,
+      "y": 243.68723623481125,
+      "radius": 12.100000000000001
+    },
+    {
+      "id": "raven_cliff_08",
+      "category": "rock",
+      "shape": "circle",
+      "x": -34.40405848893656,
+      "y": 234.77748746323084,
+      "radius": 15.400000000000002
+    },
+    {
+      "id": "raven_cliff_09",
+      "category": "rock",
+      "shape": "circle",
+      "x": -34.40405848893656,
+      "y": 225.2225125367692,
+      "radius": 8.8
+    },
+    {
+      "id": "troll_cave_rock_00",
+      "category": "rock",
+      "shape": "circle",
+      "x": 208,
+      "y": 198,
+      "radius": 8.8
+    },
+    {
+      "id": "troll_cave_rock_01",
+      "category": "rock",
+      "shape": "circle",
+      "x": 203.55509891927306,
+      "y": 207.19089389674517,
+      "radius": 12.100000000000001
+    },
+    {
+      "id": "troll_cave_rock_02",
+      "category": "rock",
+      "shape": "circle",
+      "x": 191.63162036405282,
+      "y": 213.4637439210268,
+      "radius": 15.400000000000002
+    },
+    {
+      "id": "troll_cave_rock_03",
+      "category": "rock",
+      "shape": "circle",
+      "x": 176.01518452834802,
+      "y": 214.82696451197586,
+      "radius": 8.8
+    },
+    {
+      "id": "troll_cave_rock_04",
+      "category": "rock",
+      "shape": "circle",
+      "x": 161.663899449532,
+      "y": 210.8477427640224,
+      "radius": 12.100000000000001
+    },
+    {
+      "id": "troll_cave_rock_05",
+      "category": "rock",
+      "shape": "circle",
+      "x": 153.13419673879406,
+      "y": 202.7894534663043,
+      "radius": 15.400000000000002
+    },
+    {
+      "id": "troll_cave_rock_06",
+      "category": "rock",
+      "shape": "circle",
+      "x": 153.13419673879406,
+      "y": 193.2105465336957,
+      "radius": 8.8
+    },
+    {
+      "id": "troll_cave_rock_07",
+      "category": "rock",
+      "shape": "circle",
+      "x": 161.663899449532,
+      "y": 185.1522572359776,
+      "radius": 12.100000000000001
+    },
+    {
+      "id": "troll_cave_rock_09",
+      "category": "rock",
+      "shape": "circle",
+      "x": 191.63162036405282,
+      "y": 182.5362560789732,
+      "radius": 8.8
+    },
+    {
+      "id": "troll_cave_rock_10",
+      "category": "rock",
+      "shape": "circle",
+      "x": 203.55509891927306,
+      "y": 188.80910610325483,
+      "radius": 12.100000000000001
+    },
+    {
+      "id": "marsh_stepping_stone_00",
+      "category": "rock",
+      "shape": "circle",
+      "x": 145,
+      "y": 150,
+      "radius": 1.9800000000000002
+    },
+    {
+      "id": "marsh_stepping_stone_01",
+      "category": "rock",
+      "shape": "circle",
+      "x": 152,
+      "y": 155.0488259088474,
+      "radius": 1.9800000000000002
+    },
+    {
+      "id": "marsh_stepping_stone_02",
+      "category": "rock",
+      "shape": "circle",
+      "x": 159,
+      "y": 155.4557845609541,
+      "radius": 1.9800000000000002
+    },
+    {
+      "id": "marsh_stepping_stone_03",
+      "category": "rock",
+      "shape": "circle",
+      "x": 166,
+      "y": 150.8467200483592,
+      "radius": 1.9800000000000002
+    },
+    {
+      "id": "marsh_stepping_stone_06",
+      "category": "rock",
+      "shape": "circle",
+      "x": 187,
+      "y": 148.32350701080645,
+      "radius": 1.9800000000000002
+    },
+    {
+      "id": "marsh_stepping_stone_07",
+      "category": "rock",
+      "shape": "circle",
+      "x": 194,
+      "y": 153.94191959231273,
+      "radius": 1.9800000000000002
+    },
+    {
+      "id": "marsh_stepping_stone_08",
+      "category": "rock",
+      "shape": "circle",
+      "x": 201,
+      "y": 155.9361494797403,
+      "radius": 1.9800000000000002
     }
   ],
   "bridges": [
@@ -5908,277 +5700,297 @@
       "rotation_degrees": 180
     },
     {
+      "id": "road_2_4_17",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 0,
+      "y": 89.5,
+      "width": 2,
+      "height": 8,
+      "rotation_degrees": 90
+    },
+    {
+      "id": "road_2_4_18",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 0,
+      "y": 90.5,
+      "width": 2,
+      "height": 8,
+      "rotation_degrees": 90
+    },
+    {
+      "id": "road_2_4_19",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 0,
+      "y": 91.5,
+      "width": 2,
+      "height": 8,
+      "rotation_degrees": 90
+    },
+    {
+      "id": "road_2_4_20",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 0,
+      "y": 92.5,
+      "width": 2,
+      "height": 8,
+      "rotation_degrees": 90
+    },
+    {
+      "id": "road_2_4_21",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": 0,
+      "y": 93.5,
+      "width": 2,
+      "height": 8,
+      "rotation_degrees": 90
+    },
+    {
+      "id": "road_2_5_0",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -0.42424242424242425,
+      "y": 94.24242424242425,
+      "width": 1.977243363430127,
+      "height": 8,
+      "rotation_degrees": 150.2551187030578
+    },
+    {
+      "id": "road_2_5_1",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -1.2727272727272727,
+      "y": 94.72727272727272,
+      "width": 1.977243363430127,
+      "height": 8,
+      "rotation_degrees": 150.2551187030578
+    },
+    {
+      "id": "road_2_5_2",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -2.121212121212121,
+      "y": 95.21212121212122,
+      "width": 1.977243363430127,
+      "height": 8,
+      "rotation_degrees": 150.2551187030578
+    },
+    {
+      "id": "road_2_5_3",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -2.9696969696969697,
+      "y": 95.69696969696969,
+      "width": 1.9772433634301272,
+      "height": 8,
+      "rotation_degrees": 150.2551187030578
+    },
+    {
+      "id": "road_2_5_4",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -3.8181818181818183,
+      "y": 96.18181818181819,
+      "width": 1.977243363430127,
+      "height": 8,
+      "rotation_degrees": 150.2551187030578
+    },
+    {
+      "id": "road_2_5_5",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -4.666666666666666,
+      "y": 96.66666666666666,
+      "width": 1.9772433634301272,
+      "height": 8,
+      "rotation_degrees": 150.2551187030578
+    },
+    {
+      "id": "road_2_5_6",
+      "category": "bridge",
+      "shape": "rectangle",
+      "x": -5.515151515151516,
+      "y": 97.15151515151516,
+      "width": 1.9772433634301272,
+      "height": 8,
+      "rotation_degrees": 150.2551187030578
+    },
+    {
       "id": "road_2_5_7",
       "category": "bridge",
       "shape": "rectangle",
-      "x": -5.675675675675675,
-      "y": 86.66216216216216,
-      "width": 1.9793335638915326,
+      "x": -6.363636363636363,
+      "y": 97.63636363636363,
+      "width": 1.9772433634301272,
       "height": 8,
-      "rotation_degrees": 140.59933933652093
+      "rotation_degrees": 150.2551187030578
     },
     {
       "id": "road_2_5_8",
       "category": "bridge",
       "shape": "rectangle",
-      "x": -6.432432432432433,
-      "y": 87.28378378378378,
-      "width": 1.9793335638915415,
+      "x": -7.212121212121212,
+      "y": 98.12121212121212,
+      "width": 1.9772433634301263,
       "height": 8,
-      "rotation_degrees": 140.59933933652027
+      "rotation_degrees": 150.25511870305778
     },
     {
       "id": "road_2_5_9",
       "category": "bridge",
       "shape": "rectangle",
-      "x": -7.1891891891891895,
-      "y": 87.9054054054054,
-      "width": 1.9793335638915326,
+      "x": -8.06060606060606,
+      "y": 98.6060606060606,
+      "width": 1.9772433634301272,
       "height": 8,
-      "rotation_degrees": 140.59933933652093
+      "rotation_degrees": 150.2551187030578
     },
     {
       "id": "road_2_5_10",
       "category": "bridge",
       "shape": "rectangle",
-      "x": -7.9459459459459465,
-      "y": 88.52702702702703,
-      "width": 1.979333563891541,
+      "x": -8.909090909090908,
+      "y": 99.0909090909091,
+      "width": 1.9772433634301263,
       "height": 8,
-      "rotation_degrees": 140.59933933652027
+      "rotation_degrees": 150.25511870305778
     },
     {
       "id": "road_2_5_11",
       "category": "bridge",
       "shape": "rectangle",
-      "x": -8.702702702702702,
-      "y": 89.14864864864865,
-      "width": 1.979333563891532,
+      "x": -9.757575757575758,
+      "y": 99.57575757575756,
+      "width": 1.9772433634301279,
       "height": 8,
-      "rotation_degrees": 140.5993393365209
+      "rotation_degrees": 150.25511870305783
     },
     {
       "id": "road_2_5_12",
       "category": "bridge",
       "shape": "rectangle",
-      "x": -9.45945945945946,
-      "y": 89.77027027027026,
-      "width": 1.9793335638915424,
+      "x": -10.606060606060606,
+      "y": 100.06060606060606,
+      "width": 1.9772433634301263,
       "height": 8,
-      "rotation_degrees": 140.5993393365203
+      "rotation_degrees": 150.25511870305778
     },
     {
       "id": "road_2_5_13",
       "category": "bridge",
       "shape": "rectangle",
-      "x": -10.216216216216218,
-      "y": 90.3918918918919,
-      "width": 1.979333563891541,
+      "x": -11.454545454545453,
+      "y": 100.54545454545453,
+      "width": 1.9772433634301279,
       "height": 8,
-      "rotation_degrees": 140.59933933652027
+      "rotation_degrees": 150.25511870305783
     },
     {
       "id": "road_2_5_14",
       "category": "bridge",
       "shape": "rectangle",
-      "x": -10.972972972972974,
-      "y": 91.01351351351352,
-      "width": 1.9793335638915333,
+      "x": -12.303030303030303,
+      "y": 101.03030303030303,
+      "width": 1.9772433634301263,
       "height": 8,
-      "rotation_degrees": 140.59933933652096
+      "rotation_degrees": 150.25511870305778
     },
     {
       "id": "road_2_5_15",
       "category": "bridge",
       "shape": "rectangle",
-      "x": -11.72972972972973,
-      "y": 91.63513513513513,
-      "width": 1.979333563891541,
+      "x": -13.151515151515152,
+      "y": 101.5151515151515,
+      "width": 1.9772433634301279,
       "height": 8,
-      "rotation_degrees": 140.59933933652027
+      "rotation_degrees": 150.25511870305783
     },
     {
       "id": "road_2_5_16",
       "category": "bridge",
       "shape": "rectangle",
-      "x": -12.486486486486488,
-      "y": 92.25675675675676,
-      "width": 1.979333563891532,
+      "x": -14,
+      "y": 102,
+      "width": 1.9772433634301332,
       "height": 8,
-      "rotation_degrees": 140.5993393365209
+      "rotation_degrees": 150.25511870305706
     },
     {
       "id": "road_2_5_17",
       "category": "bridge",
       "shape": "rectangle",
-      "x": -13.243243243243244,
-      "y": 92.87837837837839,
-      "width": 1.9793335638915424,
+      "x": -14.848484848484848,
+      "y": 102.48484848484848,
+      "width": 1.9772433634301194,
       "height": 8,
-      "rotation_degrees": 140.5993393365203
+      "rotation_degrees": 150.2551187030585
     },
     {
       "id": "road_2_5_18",
       "category": "bridge",
       "shape": "rectangle",
-      "x": -14,
-      "y": 93.5,
-      "width": 1.9793335638915304,
+      "x": -15.696969696969695,
+      "y": 102.96969696969697,
+      "width": 1.977243363430135,
       "height": 8,
-      "rotation_degrees": 140.5993393365208
+      "rotation_degrees": 150.2551187030571
     },
     {
       "id": "road_2_5_19",
       "category": "bridge",
       "shape": "rectangle",
-      "x": -14.756756756756758,
-      "y": 94.12162162162161,
-      "width": 1.9793335638915437,
+      "x": -16.545454545454547,
+      "y": 103.45454545454547,
+      "width": 1.9772433634301263,
       "height": 8,
-      "rotation_degrees": 140.5993393365204
+      "rotation_degrees": 150.25511870305778
     },
     {
       "id": "road_2_5_20",
       "category": "bridge",
       "shape": "rectangle",
-      "x": -15.513513513513514,
-      "y": 94.74324324324324,
-      "width": 1.9793335638915304,
+      "x": -17.39393939393939,
+      "y": 103.93939393939394,
+      "width": 1.9772433634301263,
       "height": 8,
-      "rotation_degrees": 140.5993393365208
+      "rotation_degrees": 150.25511870305778
     },
     {
       "id": "road_2_5_21",
       "category": "bridge",
       "shape": "rectangle",
-      "x": -16.27027027027027,
-      "y": 95.36486486486487,
-      "width": 1.9793335638915424,
+      "x": -18.242424242424242,
+      "y": 104.42424242424244,
+      "width": 1.9772433634301263,
       "height": 8,
-      "rotation_degrees": 140.5993393365203
+      "rotation_degrees": 150.25511870305778
     },
     {
       "id": "road_2_5_22",
       "category": "bridge",
       "shape": "rectangle",
-      "x": -17.027027027027025,
-      "y": 95.98648648648648,
-      "width": 1.9793335638915304,
+      "x": -19.09090909090909,
+      "y": 104.9090909090909,
+      "width": 1.9772433634301296,
       "height": 8,
-      "rotation_degrees": 140.5993393365208
+      "rotation_degrees": 150.2551187030579
     },
     {
       "id": "road_2_5_23",
       "category": "bridge",
       "shape": "rectangle",
-      "x": -17.783783783783782,
-      "y": 96.6081081081081,
-      "width": 1.9793335638915424,
+      "x": -19.939393939393938,
+      "y": 105.3939393939394,
+      "width": 1.9772433634301263,
       "height": 8,
-      "rotation_degrees": 140.5993393365203
+      "rotation_degrees": 150.25511870305778
     },
     {
-      "id": "road_2_5_24",
-      "category": "bridge",
-      "shape": "rectangle",
-      "x": -18.54054054054054,
-      "y": 97.22972972972974,
-      "width": 1.9793335638915424,
-      "height": 8,
-      "rotation_degrees": 140.5993393365203
-    },
-    {
-      "id": "road_2_5_25",
-      "category": "bridge",
-      "shape": "rectangle",
-      "x": -19.2972972972973,
-      "y": 97.85135135135135,
-      "width": 1.9793335638915333,
-      "height": 8,
-      "rotation_degrees": 140.59933933652096
-    },
-    {
-      "id": "road_2_5_26",
-      "category": "bridge",
-      "shape": "rectangle",
-      "x": -20.054054054054056,
-      "y": 98.47297297297297,
-      "width": 1.9793335638915304,
-      "height": 8,
-      "rotation_degrees": 140.5993393365208
-    },
-    {
-      "id": "road_2_5_27",
-      "category": "bridge",
-      "shape": "rectangle",
-      "x": -20.81081081081081,
-      "y": 99.09459459459458,
-      "width": 1.9793335638915424,
-      "height": 8,
-      "rotation_degrees": 140.5993393365203
-    },
-    {
-      "id": "road_2_5_28",
-      "category": "bridge",
-      "shape": "rectangle",
-      "x": -21.567567567567565,
-      "y": 99.71621621621622,
-      "width": 1.9793335638915397,
-      "height": 8,
-      "rotation_degrees": 140.59933933652016
-    },
-    {
-      "id": "road_2_5_29",
-      "category": "bridge",
-      "shape": "rectangle",
-      "x": -22.324324324324323,
-      "y": 100.33783783783784,
-      "width": 1.979333563891536,
-      "height": 8,
-      "rotation_degrees": 140.5993393365211
-    },
-    {
-      "id": "road_2_5_30",
-      "category": "bridge",
-      "shape": "rectangle",
-      "x": -23.08108108108108,
-      "y": 100.95945945945945,
-      "width": 1.9793335638915397,
-      "height": 8,
-      "rotation_degrees": 140.59933933652016
-    },
-    {
-      "id": "road_2_5_31",
-      "category": "bridge",
-      "shape": "rectangle",
-      "x": -23.83783783783784,
-      "y": 101.5810810810811,
-      "width": 1.9793335638915424,
-      "height": 8,
-      "rotation_degrees": 140.5993393365203
-    },
-    {
-      "id": "road_2_5_32",
-      "category": "bridge",
-      "shape": "rectangle",
-      "x": -24.594594594594597,
-      "y": 102.20270270270271,
-      "width": 1.9793335638915304,
-      "height": 8,
-      "rotation_degrees": 140.5993393365208
-    },
-    {
-      "id": "road_2_5_33",
-      "category": "bridge",
-      "shape": "rectangle",
-      "x": -25.35135135135135,
-      "y": 102.82432432432432,
-      "width": 1.9793335638915333,
-      "height": 8,
-      "rotation_degrees": 140.59933933652096
-    },
-    {
-      "id": "road_6_4_11",
+      "id": "road_6_4_23",
       "category": "bridge",
       "shape": "rectangle",
       "x": 0,
@@ -6188,7 +6000,7 @@
       "rotation_degrees": -90
     },
     {
-      "id": "road_6_4_12",
+      "id": "road_6_5_0",
       "category": "bridge",
       "shape": "rectangle",
       "x": 0,
@@ -6198,7 +6010,7 @@
       "rotation_degrees": -90
     },
     {
-      "id": "road_6_4_13",
+      "id": "road_6_5_1",
       "category": "bridge",
       "shape": "rectangle",
       "x": 0,
@@ -6208,7 +6020,7 @@
       "rotation_degrees": -90
     },
     {
-      "id": "road_6_4_14",
+      "id": "road_6_5_2",
       "category": "bridge",
       "shape": "rectangle",
       "x": 0,
@@ -6218,7 +6030,7 @@
       "rotation_degrees": -90
     },
     {
-      "id": "road_6_4_15",
+      "id": "road_6_5_3",
       "category": "bridge",
       "shape": "rectangle",
       "x": 0,
@@ -6228,7 +6040,7 @@
       "rotation_degrees": -90
     },
     {
-      "id": "road_6_4_16",
+      "id": "road_6_5_4",
       "category": "bridge",
       "shape": "rectangle",
       "x": 0,
@@ -6238,7 +6050,7 @@
       "rotation_degrees": -90
     },
     {
-      "id": "road_6_4_17",
+      "id": "road_6_5_5",
       "category": "bridge",
       "shape": "rectangle",
       "x": 0,
@@ -6248,7 +6060,7 @@
       "rotation_degrees": -90
     },
     {
-      "id": "road_6_4_18",
+      "id": "road_6_5_6",
       "category": "bridge",
       "shape": "rectangle",
       "x": 0,
@@ -6258,7 +6070,7 @@
       "rotation_degrees": -90
     },
     {
-      "id": "road_6_4_19",
+      "id": "road_6_5_7",
       "category": "bridge",
       "shape": "rectangle",
       "x": 0,
@@ -6268,7 +6080,7 @@
       "rotation_degrees": -90
     },
     {
-      "id": "road_6_4_20",
+      "id": "road_6_5_8",
       "category": "bridge",
       "shape": "rectangle",
       "x": 0,
@@ -6278,7 +6090,7 @@
       "rotation_degrees": -90
     },
     {
-      "id": "road_6_4_21",
+      "id": "road_6_5_9",
       "category": "bridge",
       "shape": "rectangle",
       "x": 0,
@@ -6288,7 +6100,7 @@
       "rotation_degrees": -90
     },
     {
-      "id": "road_6_4_22",
+      "id": "road_6_5_10",
       "category": "bridge",
       "shape": "rectangle",
       "x": 0,
@@ -6298,7 +6110,7 @@
       "rotation_degrees": -90
     },
     {
-      "id": "road_6_4_23",
+      "id": "road_6_5_11",
       "category": "bridge",
       "shape": "rectangle",
       "x": 0,
@@ -6308,7 +6120,7 @@
       "rotation_degrees": -90
     },
     {
-      "id": "road_6_4_24",
+      "id": "road_6_5_12",
       "category": "bridge",
       "shape": "rectangle",
       "x": 0,
@@ -6318,7 +6130,7 @@
       "rotation_degrees": -90
     },
     {
-      "id": "road_6_4_25",
+      "id": "road_6_5_13",
       "category": "bridge",
       "shape": "rectangle",
       "x": 0,
@@ -6328,7 +6140,7 @@
       "rotation_degrees": -90
     },
     {
-      "id": "road_6_4_26",
+      "id": "road_6_5_14",
       "category": "bridge",
       "shape": "rectangle",
       "x": 0,
@@ -6338,7 +6150,7 @@
       "rotation_degrees": -90
     },
     {
-      "id": "road_6_4_27",
+      "id": "road_6_5_15",
       "category": "bridge",
       "shape": "rectangle",
       "x": 0,
@@ -6348,7 +6160,7 @@
       "rotation_degrees": -90
     },
     {
-      "id": "road_6_4_28",
+      "id": "road_6_5_16",
       "category": "bridge",
       "shape": "rectangle",
       "x": 0,
@@ -6358,7 +6170,7 @@
       "rotation_degrees": -90
     },
     {
-      "id": "road_6_4_29",
+      "id": "road_6_5_17",
       "category": "bridge",
       "shape": "rectangle",
       "x": 0,
@@ -6368,7 +6180,7 @@
       "rotation_degrees": -90
     },
     {
-      "id": "road_6_4_30",
+      "id": "road_6_5_18",
       "category": "bridge",
       "shape": "rectangle",
       "x": 0,
@@ -6378,7 +6190,7 @@
       "rotation_degrees": -90
     },
     {
-      "id": "road_6_4_31",
+      "id": "road_6_5_19",
       "category": "bridge",
       "shape": "rectangle",
       "x": 0,
@@ -6388,7 +6200,7 @@
       "rotation_degrees": -90
     },
     {
-      "id": "road_6_4_32",
+      "id": "road_6_5_20",
       "category": "bridge",
       "shape": "rectangle",
       "x": 0,
@@ -6398,7 +6210,7 @@
       "rotation_degrees": -90
     },
     {
-      "id": "road_6_4_33",
+      "id": "road_6_5_21",
       "category": "bridge",
       "shape": "rectangle",
       "x": 0,
@@ -6408,7 +6220,7 @@
       "rotation_degrees": -90
     },
     {
-      "id": "road_6_4_34",
+      "id": "road_6_5_22",
       "category": "bridge",
       "shape": "rectangle",
       "x": 0,
@@ -6418,254 +6230,220 @@
       "rotation_degrees": -90
     },
     {
-      "id": "road_8_4_15",
+      "id": "road_8_7_6",
       "category": "bridge",
       "shape": "rectangle",
-      "x": -10.096153846153847,
-      "y": 227.57692307692307,
-      "width": 1.988843087090958,
-      "height": 8,
-      "rotation_degrees": 13.495733280795541
+      "x": -9.5,
+      "y": 210,
+      "width": 2,
+      "height": 8
     },
     {
-      "id": "road_8_4_16",
+      "id": "road_8_7_7",
       "category": "bridge",
       "shape": "rectangle",
-      "x": -9.134615384615383,
-      "y": 227.80769230769232,
-      "width": 1.9888430870909626,
-      "height": 8,
-      "rotation_degrees": 13.495733280797165
+      "x": -8.5,
+      "y": 210,
+      "width": 2,
+      "height": 8
     },
     {
-      "id": "road_8_4_17",
+      "id": "road_8_7_8",
       "category": "bridge",
       "shape": "rectangle",
-      "x": -8.173076923076923,
-      "y": 228.03846153846155,
-      "width": 1.9888430870909546,
-      "height": 8,
-      "rotation_degrees": 13.495733280795587
+      "x": -7.5,
+      "y": 210,
+      "width": 2,
+      "height": 8
     },
     {
-      "id": "road_8_4_18",
+      "id": "road_8_7_9",
       "category": "bridge",
       "shape": "rectangle",
-      "x": -7.2115384615384635,
-      "y": 228.26923076923077,
-      "width": 1.9888430870909546,
-      "height": 8,
-      "rotation_degrees": 13.495733280795587
+      "x": -6.5,
+      "y": 210,
+      "width": 2,
+      "height": 8
     },
     {
-      "id": "road_8_4_19",
+      "id": "road_8_7_10",
       "category": "bridge",
       "shape": "rectangle",
-      "x": -6.25,
-      "y": 228.5,
-      "width": 1.9888430870909612,
-      "height": 8,
-      "rotation_degrees": 13.495733280795493
+      "x": -5.5,
+      "y": 210,
+      "width": 2,
+      "height": 8
     },
     {
-      "id": "road_8_4_20",
+      "id": "road_8_7_11",
       "category": "bridge",
       "shape": "rectangle",
-      "x": -5.2884615384615365,
-      "y": 228.73076923076923,
-      "width": 1.9888430870909546,
-      "height": 8,
-      "rotation_degrees": 13.495733280795587
+      "x": -4.5,
+      "y": 210,
+      "width": 2,
+      "height": 8
     },
     {
-      "id": "road_8_4_21",
+      "id": "road_8_7_12",
       "category": "bridge",
       "shape": "rectangle",
-      "x": -4.326923076923077,
-      "y": 228.96153846153845,
-      "width": 1.9888430870909546,
-      "height": 8,
-      "rotation_degrees": 13.495733280795587
+      "x": -3.5,
+      "y": 210,
+      "width": 2,
+      "height": 8
     },
     {
-      "id": "road_8_4_22",
+      "id": "road_8_7_13",
       "category": "bridge",
       "shape": "rectangle",
-      "x": -3.3653846153846168,
-      "y": 229.19230769230768,
-      "width": 1.9888430870909612,
-      "height": 8,
-      "rotation_degrees": 13.49573328079719
+      "x": -2.5,
+      "y": 210,
+      "width": 2,
+      "height": 8
     },
     {
-      "id": "road_8_4_23",
+      "id": "road_8_7_14",
       "category": "bridge",
       "shape": "rectangle",
-      "x": -2.403846153846155,
-      "y": 229.42307692307693,
-      "width": 1.988843087090958,
-      "height": 8,
-      "rotation_degrees": 13.495733280795541
+      "x": -1.5,
+      "y": 210,
+      "width": 2,
+      "height": 8
     },
     {
-      "id": "road_8_4_24",
+      "id": "road_8_7_15",
       "category": "bridge",
       "shape": "rectangle",
-      "x": -1.4423076923076916,
-      "y": 229.65384615384616,
-      "width": 1.988843087090958,
-      "height": 8,
-      "rotation_degrees": 13.495733280795541
-    },
-    {
-      "id": "road_8_4_25",
-      "category": "bridge",
-      "shape": "rectangle",
-      "x": -0.48076923076922995,
-      "y": 229.8846153846154,
-      "width": 1.9888430870909546,
-      "height": 8,
-      "rotation_degrees": 13.495733280795587
+      "x": -0.5,
+      "y": 210,
+      "width": 2,
+      "height": 8
     },
     {
       "id": "road_9_1_0",
       "category": "bridge",
       "shape": "rectangle",
-      "x": 0.48,
-      "y": 229.9,
-      "width": 1.9806120537704985,
-      "height": 8,
-      "rotation_degrees": -11.768288932019995
+      "x": 0.5,
+      "y": 210,
+      "width": 2,
+      "height": 8
     },
     {
       "id": "road_9_1_1",
       "category": "bridge",
       "shape": "rectangle",
-      "x": 1.44,
-      "y": 229.7,
-      "width": 1.9806120537705048,
-      "height": 8,
-      "rotation_degrees": -11.76828893202162
+      "x": 1.5,
+      "y": 210,
+      "width": 2,
+      "height": 8
     },
     {
       "id": "road_9_1_2",
       "category": "bridge",
       "shape": "rectangle",
-      "x": 2.4,
-      "y": 229.5,
-      "width": 1.9806120537704985,
-      "height": 8,
-      "rotation_degrees": -11.768288932019995
+      "x": 2.5,
+      "y": 210,
+      "width": 2,
+      "height": 8
     },
     {
       "id": "road_9_1_3",
       "category": "bridge",
       "shape": "rectangle",
-      "x": 3.36,
-      "y": 229.3,
-      "width": 1.9806120537705048,
-      "height": 8,
-      "rotation_degrees": -11.76828893202162
+      "x": 3.5,
+      "y": 210,
+      "width": 2,
+      "height": 8
     },
     {
       "id": "road_9_1_4",
       "category": "bridge",
       "shape": "rectangle",
-      "x": 4.32,
-      "y": 229.1,
-      "width": 1.9806120537704994,
-      "height": 8,
-      "rotation_degrees": -11.768288932019985
+      "x": 4.5,
+      "y": 210,
+      "width": 2,
+      "height": 8
     },
     {
       "id": "road_9_1_5",
       "category": "bridge",
       "shape": "rectangle",
-      "x": 5.28,
-      "y": 228.9,
-      "width": 1.980612053770498,
-      "height": 8,
-      "rotation_degrees": -11.768288932020004
+      "x": 5.5,
+      "y": 210,
+      "width": 2,
+      "height": 8
     },
     {
       "id": "road_9_1_6",
       "category": "bridge",
       "shape": "rectangle",
-      "x": 6.24,
-      "y": 228.7,
-      "width": 1.9806120537705052,
-      "height": 8,
-      "rotation_degrees": -11.76828893202161
+      "x": 6.5,
+      "y": 210,
+      "width": 2,
+      "height": 8
     },
     {
       "id": "road_9_1_7",
       "category": "bridge",
       "shape": "rectangle",
-      "x": 7.2,
-      "y": 228.5,
-      "width": 1.980612053770498,
-      "height": 8,
-      "rotation_degrees": -11.768288932020004
+      "x": 7.5,
+      "y": 210,
+      "width": 2,
+      "height": 8
     },
     {
       "id": "road_9_1_8",
       "category": "bridge",
       "shape": "rectangle",
-      "x": 8.16,
-      "y": 228.3,
-      "width": 1.9806120537705052,
-      "height": 8,
-      "rotation_degrees": -11.76828893202161
+      "x": 8.5,
+      "y": 210,
+      "width": 2,
+      "height": 8
     },
     {
       "id": "road_9_1_9",
       "category": "bridge",
       "shape": "rectangle",
-      "x": 9.120000000000001,
-      "y": 228.1,
-      "width": 1.9806120537704994,
-      "height": 8,
-      "rotation_degrees": -11.768288932019985
+      "x": 9.5,
+      "y": 210,
+      "width": 2,
+      "height": 8
     },
     {
       "id": "road_9_1_10",
       "category": "bridge",
       "shape": "rectangle",
-      "x": 10.080000000000002,
-      "y": 227.9,
-      "width": 1.980612053770498,
-      "height": 8,
-      "rotation_degrees": -11.768288932020004
+      "x": 10.5,
+      "y": 210,
+      "width": 2,
+      "height": 8
     },
     {
       "id": "road_9_1_11",
       "category": "bridge",
       "shape": "rectangle",
-      "x": 11.04,
-      "y": 227.7,
-      "width": 1.9806120537705036,
-      "height": 8,
-      "rotation_degrees": -11.768288932021633
+      "x": 11.5,
+      "y": 210,
+      "width": 2,
+      "height": 8
     },
     {
       "id": "road_9_1_12",
       "category": "bridge",
       "shape": "rectangle",
-      "x": 12,
-      "y": 227.5,
-      "width": 1.9806120537704994,
-      "height": 8,
-      "rotation_degrees": -11.768288932019985
+      "x": 12.5,
+      "y": 210,
+      "width": 2,
+      "height": 8
     },
     {
       "id": "road_9_1_13",
       "category": "bridge",
       "shape": "rectangle",
-      "x": 12.96,
-      "y": 227.3,
-      "width": 1.9806120537705052,
-      "height": 8,
-      "rotation_degrees": -11.76828893202161
+      "x": 13.5,
+      "y": 210,
+      "width": 2,
+      "height": 8
     },
     {
       "id": "road_11_2_1",

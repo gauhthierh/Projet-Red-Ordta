@@ -400,9 +400,9 @@ func (w *objWriter) lamp(name string, x, y float64) {
 	w.cone(x, y, 5.30, .82, .48, 4)
 	w.material("forge")
 	w.box(x, y-.54, 4.40, .66, .05, .62)
-	w.box(x, y+.49, 4.40, .66, .05, .62)
+	w.box(x, y+.54, 4.40, .66, .05, .62)
 	w.box(x-.54, y, 4.40, .05, .66, .62)
-	w.box(x+.49, y, 4.40, .05, .66, .62)
+	w.box(x+.54, y, 4.40, .05, .66, .62)
 }
 
 func (w *objWriter) crystal(name string, x, y, scale float64) {
@@ -412,6 +412,9 @@ func (w *objWriter) crystal(name string, x, y, scale float64) {
 }
 
 func (w *objWriter) bush(name string, x, y, scale float64) {
+	if onRoad(x, y, 4.5+2.5*scale) {
+		return
+	}
 	w.object(name)
 	w.material("leaf")
 	w.cone(x-.7*scale, y, .1, 1.8*scale, 2.2*scale, 8)
@@ -440,7 +443,7 @@ func (w *objWriter) house(name string, x, y, sx, sy, height float64, roof string
 }
 
 func (w *objWriter) tree(name string, x, y, scale float64) {
-	if onRoad(x, y, 5+3.9*scale) {
+	if onRoad(x, y, 5+3.9*scale) || overWater(x, y) {
 		return
 	}
 	generatedTrees = append(generatedTrees, circleCollision(name, "tree", x, y, .7*scale+.15))
@@ -456,13 +459,13 @@ func (w *objWriter) tree(name string, x, y, scale float64) {
 }
 
 func (w *objWriter) rock(name string, x, y, radius, height float64) {
-	w.object(name)
-	w.material("rock")
-	w.boulder(x, y, 0, radius, height)
+	pendingRocks = append(pendingRocks, zoneRock{name, x, y, radius, height})
 }
 
 func writeWorld(path string) {
 	generatedTrees = nil
+	generatedRocks = nil
+	pendingRocks = nil
 	w := newOBJ(path, "red_world_map_3d.mtl", true)
 	defer w.close()
 
@@ -494,22 +497,30 @@ func writeWorld(path string) {
 	// the winding paths of the illustrated 2D map instead of straight chords.
 	w.material("path")
 	routes := [][][2]float64{
-		{{-20, 0}, {-82, 0}, {-125, 0}, {-162, 0}, {-165, -22}, {-195, -22}},
+		{{-20, 0}, {-82, 0}, {-125, 0}, {-162, 0}, {-165, -24}, {-195, -24}},
 		{{-125, 0}, {-125, 75}, {-112, 122}, {-120, 120}},
-		{{0, 25}, {-22, 30}, {-22, 72}, {0, 72}, {0, 82}, {-28, 105}, {-28, 158}, {-48, 195}, {-48, 225}},
-		{{82, 0}, {110, 20}, {112, 102}, {147, 118}},
-		{{20, 0}, {25, -16}, {70, -16}, {70, 0}, {82, 0}, {135, 4}, {178, 11}, {183, 15}},
+		{{0, 25}, {-25, 30}, {-25, 72}, {0, 72}, {0, 94}, {-28, 110}, {-28, 158}, {-48, 195}, {-48, 210}},
+		{{82, 0}, {96, 0}, {110, 20}, {112, 102}, {147, 118}},
+		{{20, 0}, {25, -16}, {70, -16}, {70, 0}, {82, 0}, {135, 4}, {169, 4}, {185, 4}, {190, -12}},
 		{{0, -125}, {65, -125}, {105, -101}, {139, -137}, {150, -150}},
-		{{0, -20}, {10, -35}, {10, -70}, {0, -82}, {0, -125}, {0, -160}},
+		{{0, -20}, {10, -35}, {10, -65}, {0, -70}, {0, -94}, {0, -125}, {0, -155}},
 		{{0, -125}, {-72, -125}, {-115, -145}, {-118, -169}},
-		{{-150, 150}, {-108, 181}, {-62, 207}, {-25, 224}, {0, 230}},
-		{{0, 230}, {48, 220}, {93, 204}, {136, 187}, {175, 165}},
-		{{175, 165}, {193, 126}, {201, 87}, {218, 50}, {210, 15}},
-		{{210, 15}, {207, -30}, {194, -75}, {181, -122}, {170, -165}},
-		{{170, -165}, {126, -180}, {82, -188}, {40, -183}, {0, -180}},
-		{{0, -180}, {-45, -186}, {-90, -179}, {-132, -173}, {-170, -165}},
-		{{-170, -165}, {-187, -126}, {-195, -84}, {-188, -42}, {-195, 0}},
-		{{-195, 0}, {-193, 44}, {-184, 86}, {-166, 126}, {-150, 150}},
+		{{-150, 131}, {-126, 131}, {-126, 164}, {-108, 181}, {-62, 207}, {-48, 210}, {-16, 210}, {0, 210}},
+		{{0, 210}, {48, 210}, {93, 204}, {136, 170}, {175, 165}},
+		{{175, 165}, {182, 123}, {201, 87}, {238, 50}, {246, 15}, {240, -18}, {210, -25}, {190, -12}},
+		{{210, -25}, {207, -30}, {194, -75}, {181, -122}, {170, -165}},
+		{{170, -165}, {126, -180}, {82, -188}, {45, -155}, {0, -155}},
+		{{0, -155}, {-24, -155}, {-24, -192}, {-45, -192}, {-90, -179}, {-132, -173}, {-170, -165}},
+		{{-170, -165}, {-187, -126}, {-195, -84}, {-230, -42}, {-230, 0}},
+		{{-230, 0}, {-230, 30}, {-193, 44}, {-184, 86}, {-180, 126}, {-150, 131}},
+		// Allées locales : marché, cour de forge, cimetière et tanière.
+		{{25, 6}, {30, 3}, {48, 3}},
+		{{-195, -24}, {-230, -24}, {-230, 0}},
+		{{-24, -192}, {0, -196}, {25, -196}, {25, -235}},
+		{{-184, 86}, {-215, 82}, {-224, 82}},
+		{{0, 25}, {0, 38}},
+		{{0, -196}, {0, -193}},
+		{{175, 165}, {180, 171}},
 	}
 	mapRoutes = routes
 	w.connectedRoads(routes)
@@ -562,12 +573,12 @@ func writeWorld(path string) {
 	w.material("magic")
 	w.cone(0, 0, 7.7, 1.3, 3.4, 8)
 	for i := 0; i < 8; i++ {
-		a := float64(i) * 2 * math.Pi / 8
+		a := float64(i)*2*math.Pi/8 + math.Pi/8
 		w.lamp(fmt.Sprintf("plaza_lamp_%02d", i), math.Cos(a)*22, math.Sin(a)*22)
 	}
 
 	// Village houses and market.
-	houses := [][4]float64{{-49, 37, 17, 13}, {-31, 55, 14, 11}, {31, 55, 14, 11}, {50, 34, 17, 13}, {-54, 8, 15, 12}, {56, 8, 15, 12}, {-50, -30, 18, 14}, {-27, -51, 15, 12}, {27, -51, 15, 12}, {50, -29, 18, 14}, {-8, -56, 13, 10}}
+	houses := villageHouses
 	for i, h := range houses {
 		roof := "roof_red"
 		if i%3 == 0 {
@@ -586,7 +597,7 @@ func writeWorld(path string) {
 		w.material("roof_blue")
 		w.cone(x, 53, 17, 5.5, 5, 10)
 	}
-	for i, p := range [][2]float64{{35, 14}, {48, 10}, {39, 1}, {55, -2}} {
+	for i, p := range [][2]float64{{35, 14}, {48, 10}, {39, -5}, {55, -5}} {
 		// Les deux vendeurs ont des cabanons ouverts créés dans monde/cabanons.go.
 		// Ne pas générer ici les anciens blocs qui masqueraient leurs comptoirs.
 		if i < 2 {
@@ -594,16 +605,17 @@ func writeWorld(path string) {
 		}
 		w.object(fmt.Sprintf("market_stall_%02d", i))
 		w.material("wood")
-		w.box(p[0], p[1], .15, 7, 5, 3)
+		// Un véritable étal : comptoir bas, fond et poteaux sous un auvent.
+		w.box(p[0], p[1]+2.3, 0, 7, .25, 3.3)
+		w.box(p[0], p[1]-2.5, .1, 7, .65, 1.1)
+		w.box(p[0], p[1]-2.5, 1.2, 7.4, .9, .12)
+		for _, dx := range []float64{-3.35, 3.35} {
+			for _, dy := range []float64{-2.4, 2.3} {
+				w.box(p[0]+dx, p[1]+dy, 0, .22, .22, 3.4)
+			}
+		}
 		w.material([]string{"roof_red", "roof_blue"}[i%2])
-		w.box(p[0], p[1], 3.15, 8, 6, 1)
-		w.material("cloth_red")
-		if i%2 == 1 {
-			w.material("cloth_blue")
-		}
-		for stripe := -2; stripe <= 2; stripe++ {
-			w.box(p[0]+float64(stripe)*1.25, p[1]-3.1, 4.15, .65, .25, 1.5)
-		}
+		w.gableRoof(p[0], p[1], 3.4, 7.8, 5.9, 1.1)
 	}
 	w.fenceRect("market_fence", 44, 6, 35, 30, 8, "west")
 
@@ -640,8 +652,13 @@ func writeWorld(path string) {
 	w.material("stone")
 	w.cylinder(-205, 4, 9, 3.2, 17, 10)
 	w.object("forge_fire")
+	w.material("stone")
+	w.box(-216, 6, 0, 7, .6, 5)
+	w.box(-219, 4, 0, .6, 4, 5)
+	w.box(-213, 4, 0, .6, 4, 5)
+	w.box(-216, 4, 4.5, 7, 4, .7)
 	w.material("forge")
-	w.box(-190, -6, .3, 5, 4, 2)
+	w.box(-216, 4, .3, 5, 3, 1.2)
 	w.material("metal")
 	for i := 0; i < 4; i++ {
 		w.object(fmt.Sprintf("forge_anvil_%02d", i))
@@ -691,16 +708,23 @@ func writeWorld(path string) {
 	w.box(-170, -165, .08, 105, 85, .10)
 	for row := 0; row < 7; row++ {
 		w.material("crop")
-		w.segment(-210, -190+float64(row)*6, -165, -190+float64(row)*6, 2.2, .22, .35)
+		y := -190 + float64(row)*6
+		for x := -210.0; x < -165; x += 1 {
+			if !onRoad(x+.5, y, 5.5) {
+				w.segment(x, y, x+1, y, 2.2, .22, .35)
+			}
+		}
 	}
 	w.house("farmhouse", -205, -135, 22, 17, 7, "roof_red")
 	w.fenceRect("farm_fence", -175, -169, 108, 92, 12, "east")
 	w.object("windmill")
 	w.material("wall")
 	w.cylinder(-145, -135, 0, 6, 17, 10)
+	w.material("roof_red")
+	w.cone(-145, -135, 17, 7, 4, 16)
 	w.material("wood")
-	w.box(-145, -141, 13, 1, 13, 1)
-	w.box(-151, -135, 13, 13, 1, 1)
+	w.box(-145, -141.3, 7, 1, .5, 13)
+	w.box(-145, -141.3, 13, 13, .5, 1)
 	for i, p := range [][2]float64{{-217, -202}, {-210, -200}, {-202, -202}, {-194, -200}, {-217, -192}, {-208, -190}} {
 		w.object(fmt.Sprintf("hay_bale_%02d", i))
 		w.material("hay")
@@ -737,14 +761,17 @@ func writeWorld(path string) {
 	}
 	w.object("raven_watchtower")
 	w.material("stone")
-	w.cylinder(0, 230, 14, 7, 22, 10)
+	w.cylinder(0, 230, 0, 7, 22, 24)
 	w.material("roof_blue")
-	w.cone(0, 230, 36, 9, 7, 10)
+	w.cone(0, 230, 22, 9, 7, 24)
 	for i := 0; i < 12; i++ {
 		a := float64(i) * 2 * math.Pi / 12
+		if onRoad(math.Cos(a)*23, 230+math.Sin(a)*19, 6) {
+			continue
+		}
 		w.object(fmt.Sprintf("raven_pillar_%02d", i))
 		w.material("stone")
-		w.box(math.Cos(a)*23, 230+math.Sin(a)*19, 12, 2.2, 2.2, 7+float64(i%3)*2)
+		w.box(math.Cos(a)*23, 230+math.Sin(a)*19, 0, 2.2, 2.2, 7+float64(i%3)*2)
 	}
 
 	// Troll cave and marsh (northeast).
@@ -766,7 +793,8 @@ func writeWorld(path string) {
 	}
 	w.object("marsh_boardwalk")
 	w.material("wood")
-	w.segment(135, 137, 191, 171, 3.8, .45, .45)
+	// Même niveau de marche que les routes : le joueur ne traverse plus le tablier.
+	w.segment(135, 137, 191, 171, 3.8, .17, .03)
 	for i := 0; i < 9; i++ {
 		w.rock(fmt.Sprintf("marsh_stepping_stone_%02d", i), 145+float64(i)*7, 150+math.Sin(float64(i))*6, 1.8, .8)
 	}
@@ -789,6 +817,9 @@ func writeWorld(path string) {
 	for i := 0; i < 14; i++ {
 		a := float64(i) * 2 * math.Pi / 14
 		r := 12 + float64((i%3)*9)
+		if onRoad(210+math.Cos(a)*r, 15+math.Sin(a)*r, 6) {
+			continue
+		}
 		w.crystal(fmt.Sprintf("mana_crystal_%02d", i), 210+math.Cos(a)*r, 15+math.Sin(a)*r, .55+float64(i%3)*.18)
 	}
 	for i := 0; i < 4; i++ {
@@ -796,6 +827,9 @@ func writeWorld(path string) {
 		w.object(fmt.Sprintf("mana_ruin_arch_%02d", i))
 		w.material("light_stone")
 		x, y := 210+math.Cos(a)*31, 15+math.Sin(a)*31
+		if onRoad(x, y, 7) || onRoad(x+math.Cos(a+math.Pi/2)*6, y+math.Sin(a+math.Pi/2)*6, 7) {
+			continue
+		}
 		w.box(x, y, 0, 3.2, 3.2, 9)
 		w.box(x+math.Cos(a+math.Pi/2)*6, y+math.Sin(a+math.Pi/2)*6, 0, 3.2, 3.2, 9)
 		w.segment(x, y, x+math.Cos(a+math.Pi/2)*6, y+math.Sin(a+math.Pi/2)*6, 3.2, 8, 2)
@@ -815,6 +849,7 @@ func writeWorld(path string) {
 	} {
 		w.bush(fmt.Sprintf("roadside_bush_%02d", i), p[0], p[1], .75+float64(i%3)*.14)
 	}
+	w.zoneRocks()
 }
 
 func circleCollision(id, category string, x, y, radius float64) collision {
@@ -886,7 +921,7 @@ func worldCollisions() []collision {
 	}
 	result = append(result, circleCollision("central_fountain", "fountain", 0, 0, 7.2))
 	for i := 0; i < 8; i++ {
-		a := float64(i) * 2 * math.Pi / 8
+		a := float64(i)*2*math.Pi/8 + math.Pi/8
 		result = append(result, circleCollision(
 			fmt.Sprintf("plaza_lamp_%02d", i),
 			"lamp",
@@ -895,7 +930,7 @@ func worldCollisions() []collision {
 			.5,
 		))
 	}
-	houses := [][4]float64{{-49, 37, 17, 13}, {-31, 55, 14, 11}, {31, 55, 14, 11}, {50, 34, 17, 13}, {-54, 8, 15, 12}, {56, 8, 15, 12}, {-50, -30, 18, 14}, {-27, -51, 15, 12}, {27, -51, 15, 12}, {50, -29, 18, 14}, {-8, -56, 13, 10}}
+	houses := villageHouses
 	for i, h := range houses {
 		result = append(result, rectangleCollision(fmt.Sprintf("village_house_%02d", i), "building", h[0], h[1], h[2]+1, h[3]+1, 0))
 	}
@@ -904,7 +939,7 @@ func worldCollisions() []collision {
 		circleCollision("village_keep_tower_00", "tower", -15, 53, 4.7),
 		circleCollision("village_keep_tower_01", "tower", 15, 53, 4.7),
 	)
-	for i, p := range [][2]float64{{35, 14}, {48, 10}, {39, 1}, {55, -2}} {
+	for i, p := range [][2]float64{{35, 14}, {48, 10}, {39, -5}, {55, -5}} {
 		result = append(result, rectangleCollision(fmt.Sprintf("market_stall_%02d", i), "stall", p[0], p[1], 8, 6, 0))
 	}
 	result = appendFenceCollisions(result, "market_fence", 44, 6, 35, 30, 8, "west")
@@ -912,18 +947,25 @@ func worldCollisions() []collision {
 	// Guild and forge.
 	result = append(result, rectangleCollision("adventurers_guild", "building", -150, 150, 33, 25, 0))
 	result = appendFenceCollisions(result, "guild_training_fence", -150, 120, 52, 42, 10, "east")
+	for i := 0; i < 5; i++ {
+		result = append(result, rectangleCollision(fmt.Sprintf("guild_training_rail_%d", i), "training", -166+float64(i)*8, 120, .4, 5, 0))
+		result = append(result, circleCollision(fmt.Sprintf("guild_banner_%d", i), "prop", -172+float64(i)*11, 148, .25))
+	}
 	for i, p := range [][2]float64{{-168, 111}, {-156, 111}, {-144, 111}, {-132, 111}} {
 		result = append(result, circleCollision(fmt.Sprintf("guild_target_%02d", i), "training", p[0], p[1], 1.4))
 	}
 	result = append(result,
 		rectangleCollision("blacksmith_forge", "building", -195, 0, 29, 23, 0),
 		circleCollision("forge_chimney", "chimney", -205, 4, 3.4),
-		rectangleCollision("forge_fire", "forge", -190, -6, 5.2, 4.2, 0),
+		rectangleCollision("forge_fire", "forge", -216, 4, 7, 4.6, 0),
 	)
 	for i := 0; i < 4; i++ {
 		result = append(result, rectangleCollision(fmt.Sprintf("forge_anvil_%02d", i), "prop", -210+float64(i)*10, -18, 4.2, 2.7, 0))
 	}
 	result = appendFenceCollisions(result, "forge_yard_fence", -195, -2, 58, 52, 9, "east")
+	for i := 0; i < 3; i++ {
+		result = append(result, circleCollision(fmt.Sprintf("forge_woodpile_%d", i), "prop", -220+float64(i)*2.2, -10, .8))
+	}
 	for i, p := range [][2]float64{{-218, 17}, {-210, 19}, {-182, 19}, {-174, 13}} {
 		result = append(result, rectangleCollision(fmt.Sprintf("forge_crate_%02d", i), "prop", p[0], p[1], 4.2, 4.2, 0))
 	}
@@ -990,6 +1032,9 @@ func worldCollisions() []collision {
 	result = append(result, circleCollision("raven_watchtower", "tower", 0, 230, 7.2))
 	for i := 0; i < 12; i++ {
 		a := float64(i) * 2 * math.Pi / 12
+		if onRoad(math.Cos(a)*23, 230+math.Sin(a)*19, 6) {
+			continue
+		}
 		result = append(result, rectangleCollision(fmt.Sprintf("raven_pillar_%02d", i), "ruin", math.Cos(a)*23, 230+math.Sin(a)*19, 2.4, 2.4, 0))
 	}
 
@@ -1016,11 +1061,17 @@ func worldCollisions() []collision {
 	for i := 0; i < 14; i++ {
 		a := float64(i) * 2 * math.Pi / 14
 		r := 12 + float64((i%3)*9)
+		if onRoad(210+math.Cos(a)*r, 15+math.Sin(a)*r, 6) {
+			continue
+		}
 		result = append(result, circleCollision(fmt.Sprintf("mana_crystal_%02d", i), "crystal", 210+math.Cos(a)*r, 15+math.Sin(a)*r, 1.2))
 	}
 	for i := 0; i < 4; i++ {
 		a := float64(i) * math.Pi / 2
 		x, y := 210+math.Cos(a)*31, 15+math.Sin(a)*31
+		if onRoad(x, y, 7) || onRoad(x+math.Cos(a+math.Pi/2)*6, y+math.Sin(a+math.Pi/2)*6, 7) {
+			continue
+		}
 		result = append(result,
 			rectangleCollision(fmt.Sprintf("mana_ruin_arch_%02d_a", i), "ruin", x, y, 3.4, 3.4, 0),
 			rectangleCollision(fmt.Sprintf("mana_ruin_arch_%02d_b", i), "ruin", x+math.Cos(a+math.Pi/2)*6, y+math.Sin(a+math.Pi/2)*6, 3.4, 3.4, 0),
@@ -1041,7 +1092,18 @@ func worldCollisions() []collision {
 		}
 		result = append(filtered, generatedTrees...)
 	}
-	return result
+	// Ne garder que les rochers réellement dessinés, jamais leurs anciens volumes.
+	rockNames := make(map[string]bool)
+	for _, r := range pendingRocks {
+		rockNames[r.name] = true
+	}
+	filteredRocks := result[:0]
+	for _, c := range result {
+		if !rockNames[c.ID] {
+			filteredRocks = append(filteredRocks, c)
+		}
+	}
+	return append(filteredRocks, generatedRocks...)
 }
 
 func writeCollision(path string) {

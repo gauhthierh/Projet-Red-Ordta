@@ -95,13 +95,15 @@ func Lancer() {
 	tempsAvantVagueSuivante := time.Duration(0)
 
 	// GUI / Interface
-	interfaceCombat := NouvelleInterfaceCombat(scene)
-	interfacePersonnage := NouvelleInterfacePersonnage(scene)
-	interfaceMonstres := NouvelleInterfaceMonstres(scene, len(PositionsMonstresArene))
-	interfaceEtatCombat := NouvelleInterfaceEtatCombat(scene)
-	interfaceInventaire := NouvelleInterfaceInventaire(scene)
-	interfaceInteraction := NouvelleInterfaceInteraction(scene)
-	interfaceCommerce := NouvelleInterfaceCommerce(scene, &PersonnageBackend)
+	interfaceJeu := core.NewNode()
+	scene.Add(interfaceJeu)
+	interfaceCombat := NouvelleInterfaceCombat(interfaceJeu)
+	interfacePersonnage := NouvelleInterfacePersonnage(interfaceJeu)
+	interfaceMonstres := NouvelleInterfaceMonstres(interfaceJeu, len(PositionsMonstresArene))
+	interfaceEtatCombat := NouvelleInterfaceEtatCombat(interfaceJeu)
+	interfaceInventaire := NouvelleInterfaceInventaire(interfaceJeu)
+	interfaceInteraction := NouvelleInterfaceInteraction(interfaceJeu)
+	interfaceCommerce := NouvelleInterfaceCommerce(interfaceJeu, &PersonnageBackend)
 	dernierMessageCombat := ""
 
 	gui.Manager().Set(scene)
@@ -121,7 +123,12 @@ func Lancer() {
 		cameraSimulation,
 	)
 
-	VerrouillerSourisSimulation()
+	largeurMenu, hauteurMenu := ordta.GetSize()
+	menu := NouveauMenuJeu(scene, float32(largeurMenu), float32(hauteurMenu))
+	interfaceJeu.SetVisible(false)
+	gui.Manager().Set(menu.Panneau)
+	LibererSourisSimulation()
+	echapEtaitAppuye := false
 	angleHorizontal := float32(0)
 	angleVertical := float32(0)
 	if partieChargee != nil {
@@ -131,7 +138,7 @@ func Lancer() {
 	tempsSauvegarde := time.Duration(0)
 	f5EtaitAppuye := false
 	sauvegarder := func() {
-		if combatEnCours {
+		if combatEnCours || !menu.Demarre {
 			return
 		}
 		err := SauvegarderPartie3D(cheminSauvegarde, Partie3D{
@@ -144,8 +151,30 @@ func Lancer() {
 	}
 	defer sauvegarder()
 
+	// Reprendre conserve l'inventaire ou le commerce qui était ouvert.
+	reprendreJeu := func() {
+		menu.Reprendre()
+		interfaceJeu.SetVisible(true)
+		gui.Manager().Set(interfaceJeu)
+		if !combatEnCours && !interfaceInventaire.Ouvert && !interfaceCommerce.Ouvert {
+			VerrouillerSourisSimulation()
+		} else {
+			LibererSourisSimulation()
+		}
+	}
+	menu.BoutonReprendre.Subscribe(gui.OnClick, func(_ string, _ interface{}) {
+		reprendreJeu()
+	})
+	menu.BoutonDemarrer.Subscribe(gui.OnClick, func(_ string, _ interface{}) {
+		reprendreJeu()
+	})
+	menu.BoutonQuitter.Subscribe(gui.OnClick, func(_ string, _ interface{}) {
+		ordta.Exit() // La sauvegarde normale est effectuée par defer.
+	})
+	PlacerCameraPersonnage(cameraSimulation, noeudPersonnage, angleHorizontal, angleVertical)
+
 	ActiverRegardSouris(ordta, &angleHorizontal, &angleVertical, func() bool {
-		return !combatEnCours && !interfaceInventaire.Ouvert && !interfaceCommerce.Ouvert
+		return !menu.Ouvert && !combatEnCours && !interfaceInventaire.Ouvert && !interfaceCommerce.Ouvert
 	})
 
 	fermerInventaire := func() {
@@ -358,6 +387,29 @@ func Lancer() {
 	// Boucle principale : mise à jour du jeu, puis affichage de chaque image.
 	ordta.Gls().ClearColor(0.15, 0.25, 0.30, 1)
 	ordta.Run(func(rendu *renderer.Renderer, tempsImage time.Duration) {
+		// Échap ne démarre pas une partie depuis l'accueil ; il bascule la pause.
+		echapAppuye := ordta.KeyState().Pressed(window.KeyEscape)
+		if echapAppuye && !echapEtaitAppuye && menu.Demarre {
+			if menu.Ouvert {
+				reprendreJeu()
+			} else {
+				menu.Pause()
+				interfaceJeu.SetVisible(false)
+				gui.Manager().Set(menu.Panneau)
+				LibererSourisSimulation()
+			}
+		}
+		echapEtaitAppuye = echapAppuye
+		if menu.Ouvert {
+			// Rien ne progresse : déplacement, animations, effets et tours de combat.
+			// Mémoriser les touches empêche TAB/E/F5 de se déclencher à la reprise.
+			tabEtaitAppuye = ordta.KeyState().Pressed(window.KeyTab)
+			eEtaitAppuye = ordta.KeyState().Pressed(window.KeyE)
+			f5EtaitAppuye = ordta.KeyState().Pressed(window.KeyF5)
+			ordta.Gls().Clear(gls.COLOR_BUFFER_BIT | gls.DEPTH_BUFFER_BIT)
+			rendu.Render(scene, cameraSimulation)
+			return
+		}
 		deplacementEffectue := false
 		personnage3d.Equiper(PersonnageBackend.Equipement.Tete.Nom != "", PersonnageBackend.Equipement.Torse.Nom != "", PersonnageBackend.Equipement.Pied.Nom != "")
 		tempsSauvegarde += tempsImage

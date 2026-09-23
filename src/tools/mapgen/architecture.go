@@ -79,6 +79,7 @@ func (w *objWriter) boulder(x, y, z, radius, height float64) {
 	for level := 0; level < len(rings)-1; level++ {
 		for i := 0; i < sides; i++ {
 			vertex := func(j, k int) point {
+				j %= sides
 				a := float64(j) * 2 * math.Pi / sides
 				r := radius * rings[k][1] * (1 + .09*math.Sin(float64(j)*2.7))
 				return point{x + math.Cos(a)*r, y + math.Sin(a)*r, z + rings[k][0]*height}
@@ -88,7 +89,10 @@ func (w *objWriter) boulder(x, y, z, radius, height float64) {
 	}
 	for i := 0; i < sides; i++ {
 		a, b := float64(i)*2*math.Pi/sides, float64(i+1)*2*math.Pi/sides
-		w.triangle(point{x, y, z + height}, point{x + math.Cos(a)*radius*.38, y + math.Sin(a)*radius*.38, z + height}, point{x + math.Cos(b)*radius*.38, y + math.Sin(b)*radius*.38, z + height})
+		// Le couvercle reprend exactement l'anneau irrégulier des parois.
+		ra := radius * .38 * (1 + .09*math.Sin(float64(i)*2.7))
+		rb := radius * .38 * (1 + .09*math.Sin(float64((i+1)%sides)*2.7))
+		w.triangle(point{x, y, z + height}, point{x + math.Cos(a)*ra, y + math.Sin(a)*ra, z + height}, point{x + math.Cos(b)*rb, y + math.Sin(b)*rb, z + height})
 	}
 }
 

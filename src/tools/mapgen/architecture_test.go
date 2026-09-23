@@ -1,9 +1,36 @@
 package main
 
 import (
+	"fmt"
 	"math"
 	"testing"
 )
+
+func TestRockHasNoOpenSeamsAboveGround(t *testing.T) {
+	w := &objWriter{groupByMaterial: true, facesByMaterial: make(map[string][]triangleFace)}
+	w.material("rock")
+	w.boulder(0, 0, 0, 8, 15)
+	edges := map[string]int{}
+	bottom := map[string]bool{}
+	for _, f := range w.facesByMaterial["rock"] {
+		v := []point{f.a, f.b, f.c}
+		for i := range v {
+			a, b := v[i], v[(i+1)%3]
+			ka, kb := fmt.Sprintf("%.5f,%.5f,%.5f", a.x+0.0000001, a.y+0.0000001, a.z), fmt.Sprintf("%.5f,%.5f,%.5f", b.x+0.0000001, b.y+0.0000001, b.z)
+			if ka > kb {
+				ka, kb = kb, ka
+			}
+			key := ka + "/" + kb
+			edges[key]++
+			bottom[key] = a.z == 0 && b.z == 0
+		}
+	}
+	for edge, count := range edges {
+		if count != 2 && !bottom[edge] {
+			t.Errorf("fente dans le rocher : %s (%d faces)", edge, count)
+		}
+	}
+}
 
 func TestSegmentAndRoofOutwardFaces(t *testing.T) {
 	w := &objWriter{groupByMaterial: true, facesByMaterial: make(map[string][]triangleFace)}
