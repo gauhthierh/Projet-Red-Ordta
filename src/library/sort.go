@@ -4,7 +4,10 @@ package library
    Il définit les dégâts des sorts et permet au personnage de choisir
    un sort parmi ceux qu'il a appris*/
 
-import "fmt"
+import (
+	"fmt"
+	"slices"
+)
 
 /*La fonction ChoixSort affiche les sorts connus par le personnage et lui permet
   d'en utiliser un contre le monstre.
@@ -83,4 +86,13 @@ func SortDuLivre(objet string) (string, bool) {
 	default:
 		return "", false
 	}
+}
+
+/* La méthode spellBook apprend le sort Boule de Feu et refuse de l'ajouter lorsqu'il est déjà connu. */
+func (c *Character) SpellBook(sort string) bool {
+	if slices.Contains(c.Skill, sort) {
+		return false
+	}
+	c.Skill = append(c.Skill, sort)
+	return true
 }

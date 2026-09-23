@@ -10,7 +10,7 @@ import (
 
 /* La fonction trainingFight prépare et lance un combat d'entrainement*/
 
-func (c *Character) trainingFight() {
+func (c *Character) TrainingFight() {
 	adversaire := InitGoblin()
 	tour := 1
 	c.Initiative = rand.Intn(10) + 1
@@ -49,6 +49,36 @@ func (c *Character) trainingFight() {
 	}
 }
 
+func (c *Character) CharacterTurn(m *Monster) {
+	for {
+		fmt.Println("=== COMBAT ===")
+		fmt.Println("1. Attaque physique")
+		fmt.Println("2. Sort")
+		fmt.Println("3. Inventaire")
+		choix, ok := ReadChoice("Entrez votre choix :")
+		if !ok {
+			fmt.Println("Choix invalide, veuillez entrer une saisie valide !")
+			continue
+		}
+		switch choix {
+		case 1:
+			if c.ChoixAttaquePhysique(m) {
+				return
+			}
+		case 2:
+			if c.ChoixSort(m) {
+				return
+			}
+		case 3:
+			if c.ChoixInventaire() {
+				return
+			}
+		default:
+			fmt.Println("Choix invalide, veuillez entrer un choix valide")
+		}
+	}
+}
+
 func (c *Character) FinCombat(m *Monster) bool {
 	if m.PvActuel <= 0 {
 		fmt.Printf("%s est vaincu !\n", m.Nom)
@@ -62,4 +92,29 @@ func (c *Character) FinCombat(m *Monster) bool {
 		return true
 	}
 	return false
+}
+
+/* La méthode ChoixInventaire affiche les objets utilisables en combat et indique si le joueur en a utilisé un. */
+func (c *Character) ChoixInventaire() bool {
+	for {
+		objets := c.SortedItems()
+		if len(objets) == 0 {
+			fmt.Println("L'inventaire est vide !")
+			return false
+		}
+		for indice, objet := range objets {
+			fmt.Printf("%d. %s, quantité : %d\n", indice+1, objet, c.Inventaire[objet])
+		}
+		fmt.Println("0. Retour")
+		choix := ReadChoiceEntre("Votre choix : ", len(objets))
+		if choix == 0 {
+			return false
+		}
+		fmt.Printf("Vous utilisez %s\n", objets[choix-1])
+		if c.UseItem(objets[choix-1]) {
+			return true
+		} else {
+			fmt.Println("Choisissez un autre objet ou 0 pour revenir en arrière")
+		}
+	}
 }

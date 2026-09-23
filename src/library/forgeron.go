@@ -11,6 +11,9 @@ func (c *Character) forgeron() {
 		fmt.Printf("Bourse : %d Po\n", c.Argent)
 		for i, equipement := range Armurerie {
 			fmt.Printf("%d. %s - %d Po\n", i+1, equipement.Nom, equipement.Prix)
+			for materiau, quantite := range equipement.Materiaux {
+				fmt.Printf("\t%s : %d (Possède : %d)\n", materiau, quantite, c.Inventaire[materiau])
+			}
 		}
 		fmt.Println("0. Retour")
 		choix := ReadChoiceEntre("Votre choix : ", len(Armurerie))

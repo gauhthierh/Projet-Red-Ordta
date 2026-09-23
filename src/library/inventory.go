@@ -83,7 +83,7 @@ func (c *Character) InventoryMenu() {
 		if choice == 0 {
 			return
 		}
-		c.useItem(items[choice-1])
+		c.UseItem(items[choice-1])
 		c.IsDead()
 	}
 }

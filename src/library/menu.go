@@ -29,11 +29,11 @@ func (c *Character) MainMenu() {
 		case 2:
 			c.InventoryMenu()
 		case 3:
-			c.merchant()
+			c.Merchant()
 		case 4:
 			c.forgeron()
 		case 5:
-			c.trainingFight()
+			c.TrainingFight()
 		case 6:
 			fmt.Println("ABBA et Steven Spielberg")
 			WaitForReturn()

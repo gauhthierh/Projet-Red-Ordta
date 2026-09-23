@@ -11,7 +11,7 @@ import (
 /*La fonction merchant affiche le menu du marchand et permet au joueur de choisir
   entre acheter un objet ou revenir au menu principal*/
 
-func (c *Character) merchant() {
+func (c *Character) Merchant() {
 	for {
 		fmt.Println("\n=== MARCHAND ===")
 		fmt.Printf("Bourse : %d Po\n", c.Argent)
@@ -32,18 +32,6 @@ func (c *Character) merchant() {
 		}
 		c.AchatMarchand(Boutique[choix-1])
 	}
-}
-
-/*La fonction buy ajoute gratuitement un objet à l'inventaire
-  Si l'inventaire est plein l'ajout est refusé*/
-
-func (c *Character) buy(item string) {
-	if !c.AddInventory(item) {
-		fmt.Printf("Inventaire plein (%d / %d) : impossible d'ajouter %s.\n",
-			c.TotalInventaire(), c.CapaciteInventaire, item)
-		return
-	}
-	fmt.Println("Vous avez acheté :", item)
 }
 
 /* Item représente un objet vendu par le marchand avec son nom et son prix*/
