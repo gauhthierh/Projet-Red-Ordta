@@ -1,0 +1,655 @@
+{
+  "style": "RPG fantasy low-poly, couleurs plates, placeholders editables",
+  "assets": [
+    {
+      "path": "animations/goblin.json",
+      "kind": "animation-spec",
+      "description": "Keyframes simples pour goblin"
+    },
+    {
+      "path": "animations/player.json",
+      "kind": "animation-spec",
+      "description": "Keyframes simples pour player"
+    },
+    {
+      "path": "backgrounds/arena.svg",
+      "kind": "background-svg",
+      "description": "Arriere-plan de l'arene"
+    },
+    {
+      "path": "backgrounds/forge.svg",
+      "kind": "background-svg",
+      "description": "Arriere-plan de la forge"
+    },
+    {
+      "path": "backgrounds/village.svg",
+      "kind": "background-svg",
+      "description": "Arriere-plan du village"
+    },
+    {
+      "path": "materials/low_poly.mtl",
+      "kind": "material",
+      "description": "Palette commune de couleurs plates"
+    },
+    {
+      "path": "models/characters/dwarf.obj",
+      "kind": "model-obj",
+      "description": "Personnage nain low-poly"
+    },
+    {
+      "path": "models/characters/elf.obj",
+      "kind": "model-obj",
+      "description": "Personnage elfe low-poly"
+    },
+    {
+      "path": "models/characters/human.obj",
+      "kind": "model-obj",
+      "description": "Personnage humain low-poly"
+    },
+    {
+      "path": "models/characters/training_goblin.obj",
+      "kind": "model-obj",
+      "description": "Gobelin d'entrainement low-poly"
+    },
+    {
+      "path": "models/environment/combat_arena.obj",
+      "kind": "model-obj",
+      "description": "Petite arene de combat"
+    },
+    {
+      "path": "models/environment/forge.obj",
+      "kind": "model-obj",
+      "description": "Forge avec four et enclume"
+    },
+    {
+      "path": "models/environment/merchant_stall.obj",
+      "kind": "model-obj",
+      "description": "Etal du marchand"
+    },
+    {
+      "path": "models/environment/village_square.obj",
+      "kind": "model-obj",
+      "description": "Environnement principal de village"
+    },
+    {
+      "path": "models/equipment/adventurer_boots.obj",
+      "kind": "model-obj",
+      "description": "Bottes de l'aventurier"
+    },
+    {
+      "path": "models/equipment/adventurer_hat.obj",
+      "kind": "model-obj",
+      "description": "Chapeau de l'aventurier"
+    },
+    {
+      "path": "models/equipment/adventurer_tunic.obj",
+      "kind": "model-obj",
+      "description": "Tunique de l'aventurier"
+    },
+    {
+      "path": "models/items/boar_leather.obj",
+      "kind": "model-obj",
+      "description": "Cuir de sanglier"
+    },
+    {
+      "path": "models/items/fireball_spellbook.obj",
+      "kind": "model-obj",
+      "description": "Livre de sort Boule de Feu"
+    },
+    {
+      "path": "models/items/gold_coin.obj",
+      "kind": "model-obj",
+      "description": "Piece d'or"
+    },
+    {
+      "path": "models/items/health_potion.obj",
+      "kind": "model-obj",
+      "description": "Potion de vie"
+    },
+    {
+      "path": "models/items/inventory_upgrade.obj",
+      "kind": "model-obj",
+      "description": "Sac d'augmentation d'inventaire"
+    },
+    {
+      "path": "models/items/mana_potion.obj",
+      "kind": "model-obj",
+      "description": "Potion de mana bonus"
+    },
+    {
+      "path": "models/items/poison_potion.obj",
+      "kind": "model-obj",
+      "description": "Potion de poison"
+    },
+    {
+      "path": "models/items/raven_feather.obj",
+      "kind": "model-obj",
+      "description": "Plume de corbeau"
+    },
+    {
+      "path": "models/items/troll_hide.obj",
+      "kind": "model-obj",
+      "description": "Peau de troll"
+    },
+    {
+      "path": "models/items/wolf_fur.obj",
+      "kind": "model-obj",
+      "description": "Fourrure de loup"
+    },
+    {
+      "path": "models/vfx/basic_attack.obj",
+      "kind": "model-obj",
+      "description": "Impact de l'attaque basique"
+    },
+    {
+      "path": "models/vfx/fireball.obj",
+      "kind": "model-obj",
+      "description": "Effet de Boule de Feu"
+    },
+    {
+      "path": "models/vfx/heal_burst.obj",
+      "kind": "model-obj",
+      "description": "Effet de soin"
+    },
+    {
+      "path": "models/vfx/level_up.obj",
+      "kind": "model-obj",
+      "description": "Effet de montee de niveau"
+    },
+    {
+      "path": "models/vfx/poison_cloud.obj",
+      "kind": "model-obj",
+      "description": "Effet de poison"
+    },
+    {
+      "path": "models/vfx/punch_impact.obj",
+      "kind": "model-obj",
+      "description": "Impact du Coup de poing"
+    },
+    {
+      "path": "previews/icon_sheet.png",
+      "kind": "preview-png",
+      "description": "Planche de controle des icones"
+    },
+    {
+      "path": "ui/components/button_danger.svg",
+      "kind": "ui-component-svg",
+      "description": "Bouton de danger"
+    },
+    {
+      "path": "ui/components/button_primary.svg",
+      "kind": "ui-component-svg",
+      "description": "Bouton principal"
+    },
+    {
+      "path": "ui/components/experience_bar.svg",
+      "kind": "ui-component-svg",
+      "description": "Barre d'experience"
+    },
+    {
+      "path": "ui/components/health_bar.svg",
+      "kind": "ui-component-svg",
+      "description": "Barre de vie"
+    },
+    {
+      "path": "ui/components/inventory_slot.svg",
+      "kind": "ui-component-svg",
+      "description": "Case d'inventaire"
+    },
+    {
+      "path": "ui/components/mana_bar.svg",
+      "kind": "ui-component-svg",
+      "description": "Barre de mana"
+    },
+    {
+      "path": "ui/components/panel.svg",
+      "kind": "ui-component-svg",
+      "description": "Panneau d'interface"
+    },
+    {
+      "path": "ui/icons/png/adventurer_boots.png",
+      "kind": "icon-png",
+      "description": "Bottes de l'aventurier"
+    },
+    {
+      "path": "ui/icons/png/adventurer_hat.png",
+      "kind": "icon-png",
+      "description": "Chapeau de l'aventurier"
+    },
+    {
+      "path": "ui/icons/png/adventurer_tunic.png",
+      "kind": "icon-png",
+      "description": "Tunique de l'aventurier"
+    },
+    {
+      "path": "ui/icons/png/arena.png",
+      "kind": "icon-png",
+      "description": "Arene"
+    },
+    {
+      "path": "ui/icons/png/basic_attack.png",
+      "kind": "icon-png",
+      "description": "Attaque basique"
+    },
+    {
+      "path": "ui/icons/png/blacksmith.png",
+      "kind": "icon-png",
+      "description": "Forgeron"
+    },
+    {
+      "path": "ui/icons/png/boar_leather.png",
+      "kind": "icon-png",
+      "description": "Cuir de sanglier"
+    },
+    {
+      "path": "ui/icons/png/character_creation.png",
+      "kind": "icon-png",
+      "description": "Creation de personnage"
+    },
+    {
+      "path": "ui/icons/png/character_info.png",
+      "kind": "icon-png",
+      "description": "Informations du personnage"
+    },
+    {
+      "path": "ui/icons/png/combat.png",
+      "kind": "icon-png",
+      "description": "Combat"
+    },
+    {
+      "path": "ui/icons/png/crafting.png",
+      "kind": "icon-png",
+      "description": "Fabrication"
+    },
+    {
+      "path": "ui/icons/png/defeat.png",
+      "kind": "icon-png",
+      "description": "Defaite"
+    },
+    {
+      "path": "ui/icons/png/dwarf.png",
+      "kind": "icon-png",
+      "description": "Classe Nain"
+    },
+    {
+      "path": "ui/icons/png/elf.png",
+      "kind": "icon-png",
+      "description": "Classe Elfe"
+    },
+    {
+      "path": "ui/icons/png/experience.png",
+      "kind": "icon-png",
+      "description": "Experience"
+    },
+    {
+      "path": "ui/icons/png/fireball.png",
+      "kind": "icon-png",
+      "description": "Sort Boule de Feu"
+    },
+    {
+      "path": "ui/icons/png/fireball_spellbook.png",
+      "kind": "icon-png",
+      "description": "Livre de sort Boule de Feu"
+    },
+    {
+      "path": "ui/icons/png/gold_coin.png",
+      "kind": "icon-png",
+      "description": "Piece d'or"
+    },
+    {
+      "path": "ui/icons/png/heal.png",
+      "kind": "icon-png",
+      "description": "Effet de soin"
+    },
+    {
+      "path": "ui/icons/png/health_potion.png",
+      "kind": "icon-png",
+      "description": "Potion de vie"
+    },
+    {
+      "path": "ui/icons/png/human.png",
+      "kind": "icon-png",
+      "description": "Classe Humain"
+    },
+    {
+      "path": "ui/icons/png/initiative.png",
+      "kind": "icon-png",
+      "description": "Initiative"
+    },
+    {
+      "path": "ui/icons/png/inventory.png",
+      "kind": "icon-png",
+      "description": "Inventaire"
+    },
+    {
+      "path": "ui/icons/png/inventory_upgrade.png",
+      "kind": "icon-png",
+      "description": "Augmentation d'inventaire"
+    },
+    {
+      "path": "ui/icons/png/level_up.png",
+      "kind": "icon-png",
+      "description": "Montee de niveau"
+    },
+    {
+      "path": "ui/icons/png/main_menu.png",
+      "kind": "icon-png",
+      "description": "Menu principal"
+    },
+    {
+      "path": "ui/icons/png/mana.png",
+      "kind": "icon-png",
+      "description": "Ressource de mana"
+    },
+    {
+      "path": "ui/icons/png/mana_potion.png",
+      "kind": "icon-png",
+      "description": "Potion de mana"
+    },
+    {
+      "path": "ui/icons/png/merchant.png",
+      "kind": "icon-png",
+      "description": "Marchand"
+    },
+    {
+      "path": "ui/icons/png/poison.png",
+      "kind": "icon-png",
+      "description": "Effet de poison"
+    },
+    {
+      "path": "ui/icons/png/poison_potion.png",
+      "kind": "icon-png",
+      "description": "Potion de poison"
+    },
+    {
+      "path": "ui/icons/png/punch.png",
+      "kind": "icon-png",
+      "description": "Sort Coup de poing"
+    },
+    {
+      "path": "ui/icons/png/raven_feather.png",
+      "kind": "icon-png",
+      "description": "Plume de corbeau"
+    },
+    {
+      "path": "ui/icons/png/training_goblin.png",
+      "kind": "icon-png",
+      "description": "Gobelin d'entrainement"
+    },
+    {
+      "path": "ui/icons/png/troll_hide.png",
+      "kind": "icon-png",
+      "description": "Peau de troll"
+    },
+    {
+      "path": "ui/icons/png/victory.png",
+      "kind": "icon-png",
+      "description": "Victoire"
+    },
+    {
+      "path": "ui/icons/png/village.png",
+      "kind": "icon-png",
+      "description": "Village"
+    },
+    {
+      "path": "ui/icons/png/who_are_they.png",
+      "kind": "icon-png",
+      "description": "Qui sont-ils ?"
+    },
+    {
+      "path": "ui/icons/png/wolf_fur.png",
+      "kind": "icon-png",
+      "description": "Fourrure de loup"
+    },
+    {
+      "path": "ui/icons/svg/adventurer_boots.svg",
+      "kind": "icon-svg",
+      "description": "Bottes de l'aventurier (editable)"
+    },
+    {
+      "path": "ui/icons/svg/adventurer_hat.svg",
+      "kind": "icon-svg",
+      "description": "Chapeau de l'aventurier (editable)"
+    },
+    {
+      "path": "ui/icons/svg/adventurer_tunic.svg",
+      "kind": "icon-svg",
+      "description": "Tunique de l'aventurier (editable)"
+    },
+    {
+      "path": "ui/icons/svg/arena.svg",
+      "kind": "icon-svg",
+      "description": "Arene (editable)"
+    },
+    {
+      "path": "ui/icons/svg/basic_attack.svg",
+      "kind": "icon-svg",
+      "description": "Attaque basique (editable)"
+    },
+    {
+      "path": "ui/icons/svg/blacksmith.svg",
+      "kind": "icon-svg",
+      "description": "Forgeron (editable)"
+    },
+    {
+      "path": "ui/icons/svg/boar_leather.svg",
+      "kind": "icon-svg",
+      "description": "Cuir de sanglier (editable)"
+    },
+    {
+      "path": "ui/icons/svg/character_creation.svg",
+      "kind": "icon-svg",
+      "description": "Creation de personnage (editable)"
+    },
+    {
+      "path": "ui/icons/svg/character_info.svg",
+      "kind": "icon-svg",
+      "description": "Informations du personnage (editable)"
+    },
+    {
+      "path": "ui/icons/svg/combat.svg",
+      "kind": "icon-svg",
+      "description": "Combat (editable)"
+    },
+    {
+      "path": "ui/icons/svg/crafting.svg",
+      "kind": "icon-svg",
+      "description": "Fabrication (editable)"
+    },
+    {
+      "path": "ui/icons/svg/defeat.svg",
+      "kind": "icon-svg",
+      "description": "Defaite (editable)"
+    },
+    {
+      "path": "ui/icons/svg/dwarf.svg",
+      "kind": "icon-svg",
+      "description": "Classe Nain (editable)"
+    },
+    {
+      "path": "ui/icons/svg/elf.svg",
+      "kind": "icon-svg",
+      "description": "Classe Elfe (editable)"
+    },
+    {
+      "path": "ui/icons/svg/experience.svg",
+      "kind": "icon-svg",
+      "description": "Experience (editable)"
+    },
+    {
+      "path": "ui/icons/svg/fireball.svg",
+      "kind": "icon-svg",
+      "description": "Sort Boule de Feu (editable)"
+    },
+    {
+      "path": "ui/icons/svg/fireball_spellbook.svg",
+      "kind": "icon-svg",
+      "description": "Livre de sort Boule de Feu (editable)"
+    },
+    {
+      "path": "ui/icons/svg/gold_coin.svg",
+      "kind": "icon-svg",
+      "description": "Piece d'or (editable)"
+    },
+    {
+      "path": "ui/icons/svg/heal.svg",
+      "kind": "icon-svg",
+      "description": "Effet de soin (editable)"
+    },
+    {
+      "path": "ui/icons/svg/health_potion.svg",
+      "kind": "icon-svg",
+      "description": "Potion de vie (editable)"
+    },
+    {
+      "path": "ui/icons/svg/human.svg",
+      "kind": "icon-svg",
+      "description": "Classe Humain (editable)"
+    },
+    {
+      "path": "ui/icons/svg/initiative.svg",
+      "kind": "icon-svg",
+      "description": "Initiative (editable)"
+    },
+    {
+      "path": "ui/icons/svg/inventory.svg",
+      "kind": "icon-svg",
+      "description": "Inventaire (editable)"
+    },
+    {
+      "path": "ui/icons/svg/inventory_upgrade.svg",
+      "kind": "icon-svg",
+      "description": "Augmentation d'inventaire (editable)"
+    },
+    {
+      "path": "ui/icons/svg/level_up.svg",
+      "kind": "icon-svg",
+      "description": "Montee de niveau (editable)"
+    },
+    {
+      "path": "ui/icons/svg/main_menu.svg",
+      "kind": "icon-svg",
+      "description": "Menu principal (editable)"
+    },
+    {
+      "path": "ui/icons/svg/mana.svg",
+      "kind": "icon-svg",
+      "description": "Ressource de mana (editable)"
+    },
+    {
+      "path": "ui/icons/svg/mana_potion.svg",
+      "kind": "icon-svg",
+      "description": "Potion de mana (editable)"
+    },
+    {
+      "path": "ui/icons/svg/merchant.svg",
+      "kind": "icon-svg",
+      "description": "Marchand (editable)"
+    },
+    {
+      "path": "ui/icons/svg/poison.svg",
+      "kind": "icon-svg",
+      "description": "Effet de poison (editable)"
+    },
+    {
+      "path": "ui/icons/svg/poison_potion.svg",
+      "kind": "icon-svg",
+      "description": "Potion de poison (editable)"
+    },
+    {
+      "path": "ui/icons/svg/punch.svg",
+      "kind": "icon-svg",
+      "description": "Sort Coup de poing (editable)"
+    },
+    {
+      "path": "ui/icons/svg/raven_feather.svg",
+      "kind": "icon-svg",
+      "description": "Plume de corbeau (editable)"
+    },
+    {
+      "path": "ui/icons/svg/training_goblin.svg",
+      "kind": "icon-svg",
+      "description": "Gobelin d'entrainement (editable)"
+    },
+    {
+      "path": "ui/icons/svg/troll_hide.svg",
+      "kind": "icon-svg",
+      "description": "Peau de troll (editable)"
+    },
+    {
+      "path": "ui/icons/svg/victory.svg",
+      "kind": "icon-svg",
+      "description": "Victoire (editable)"
+    },
+    {
+      "path": "ui/icons/svg/village.svg",
+      "kind": "icon-svg",
+      "description": "Village (editable)"
+    },
+    {
+      "path": "ui/icons/svg/who_are_they.svg",
+      "kind": "icon-svg",
+      "description": "Qui sont-ils ? (editable)"
+    },
+    {
+      "path": "ui/icons/svg/wolf_fur.svg",
+      "kind": "icon-svg",
+      "description": "Fourrure de loup (editable)"
+    },
+    {
+      "path": "ui/screens/blacksmith.svg",
+      "kind": "ui-screen-svg",
+      "description": "Ecran du forgeron"
+    },
+    {
+      "path": "ui/screens/character_creation.svg",
+      "kind": "ui-screen-svg",
+      "description": "Ecran de creation du personnage"
+    },
+    {
+      "path": "ui/screens/character_info.svg",
+      "kind": "ui-screen-svg",
+      "description": "Ecran d'informations du personnage"
+    },
+    {
+      "path": "ui/screens/combat.svg",
+      "kind": "ui-screen-svg",
+      "description": "Interface de combat"
+    },
+    {
+      "path": "ui/screens/crafting.svg",
+      "kind": "ui-screen-svg",
+      "description": "Ecran de fabrication"
+    },
+    {
+      "path": "ui/screens/defeat.svg",
+      "kind": "ui-screen-svg",
+      "description": "Ecran de defaite"
+    },
+    {
+      "path": "ui/screens/inventory.svg",
+      "kind": "ui-screen-svg",
+      "description": "Ecran d'inventaire"
+    },
+    {
+      "path": "ui/screens/main_menu.svg",
+      "kind": "ui-screen-svg",
+      "description": "Ecran du menu principal"
+    },
+    {
+      "path": "ui/screens/merchant.svg",
+      "kind": "ui-screen-svg",
+      "description": "Ecran du marchand"
+    },
+    {
+      "path": "ui/screens/victory.svg",
+      "kind": "ui-screen-svg",
+      "description": "Ecran de victoire"
+    },
+    {
+      "path": "ui/screens/who_are_they.svg",
+      "kind": "ui-screen-svg",
+      "description": "Ecran des artistes caches"
+    }
+  ]
+}

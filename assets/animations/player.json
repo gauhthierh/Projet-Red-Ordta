@@ -1,0 +1,310 @@
+{
+  "actor": "player",
+  "clips": [
+    {
+      "name": "idle",
+      "duration_seconds": 1.2,
+      "loop": true,
+      "keyframes": [
+        {
+          "time": 0,
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "time": 0.6,
+          "position": [
+            0,
+            0.04,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1.02,
+            1
+          ]
+        },
+        {
+          "time": 1.2,
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "name": "walk",
+      "duration_seconds": 0.7,
+      "loop": true,
+      "keyframes": [
+        {
+          "time": 0,
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            -8,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "time": 0.35,
+          "position": [
+            0,
+            0.07,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            8,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "time": 0.7,
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            -8,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "name": "attack",
+      "duration_seconds": 0.42,
+      "loop": false,
+      "keyframes": [
+        {
+          "time": 0,
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            -18,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "time": 0.18,
+          "position": [
+            0,
+            0,
+            -0.18
+          ],
+          "rotation_degrees": [
+            0,
+            34,
+            0
+          ],
+          "scale": [
+            1.05,
+            0.95,
+            1.05
+          ]
+        },
+        {
+          "time": 0.42,
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "name": "hurt",
+      "duration_seconds": 0.32,
+      "loop": false,
+      "keyframes": [
+        {
+          "time": 0,
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "time": 0.12,
+          "position": [
+            0,
+            0,
+            0.25
+          ],
+          "rotation_degrees": [
+            -12,
+            0,
+            0
+          ],
+          "scale": [
+            0.94,
+            1.04,
+            0.94
+          ]
+        },
+        {
+          "time": 0.32,
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "name": "death",
+      "duration_seconds": 0.9,
+      "loop": false,
+      "keyframes": [
+        {
+          "time": 0,
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "time": 0.5,
+          "position": [
+            0,
+            -0.3,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            65
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "time": 0.9,
+          "position": [
+            0,
+            -0.72,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            90
+          ],
+          "scale": [
+            1,
+            0.92,
+            1
+          ]
+        }
+      ]
+    }
+  ]
+}

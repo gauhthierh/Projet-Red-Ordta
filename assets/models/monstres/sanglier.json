@@ -1,0 +1,26 @@
+{
+  "nom": "Sanglier",
+  "parties": [
+    {"nom":"corps","pivot":[0,0,0],"pieces":[
+      {"forme":"ellipsoide","position":[0,0.1,0.85],"taille":[1.05,1.6,1.05],"couleur":[0.35,0.22,0.12],"texture":"peau"},
+      {"forme":"boite","position":[0,0.15,1.4],"taille":[0.18,1.1,0.17],"couleur":[0.15,0.1,0.07]},
+      {"forme":"boite","position":[0,0.96,0.93],"taille":[0.12,0.35,0.12],"couleur":[0.24,0.15,0.09]}
+    ]},
+    {"nom":"tete","pivot":[0,-0.73,0.9],"pieces":[
+      {"forme":"ellipsoide","position":[0,0,0],"taille":[0.8,0.8,0.75],"couleur":[0.3,0.18,0.1],"texture":"peau"},
+      {"forme":"ellipsoide","position":[0,-0.42,-0.09],"taille":[0.45,0.42,0.35],"couleur":[0.46,0.28,0.19]},
+      {"forme":"boite","position":[-0.28,0.03,0.4],"taille":[0.18,0.18,0.3],"couleur":[0.25,0.15,0.1]},
+      {"forme":"boite","position":[0.28,0.03,0.4],"taille":[0.18,0.18,0.3],"couleur":[0.25,0.15,0.1]},
+      {"forme":"boite","position":[-0.32,-0.26,0.13],"taille":[0.09,0.09,0.08],"couleur":[0.03,0.02,0.01]},
+      {"forme":"boite","position":[0.32,-0.26,0.13],"taille":[0.09,0.09,0.08],"couleur":[0.03,0.02,0.01]},
+      {"forme":"boite","position":[-0.29,-0.43,-0.04],"taille":[0.1,0.12,0.37],"couleur":[0.9,0.85,0.69]},
+      {"forme":"boite","position":[0.29,-0.43,-0.04],"taille":[0.1,0.12,0.37],"couleur":[0.9,0.85,0.69]}
+    ]},
+    {"nom":"pattes","pivot":[0,0,0],"pieces":[
+      {"forme":"boite","position":[-0.36,-0.48,0.28],"taille":[0.23,0.24,0.56],"couleur":[0.19,0.12,0.08]},
+      {"forme":"boite","position":[0.36,-0.48,0.28],"taille":[0.23,0.24,0.56],"couleur":[0.19,0.12,0.08]},
+      {"forme":"boite","position":[-0.36,0.63,0.28],"taille":[0.23,0.24,0.56],"couleur":[0.19,0.12,0.08]},
+      {"forme":"boite","position":[0.36,0.63,0.28],"taille":[0.23,0.24,0.56],"couleur":[0.19,0.12,0.08]}
+    ]}
+  ]
+}
