@@ -337,28 +337,49 @@ Pour recommencer, fermer le jeu puis déplacer ou renommer le fichier de sauvega
 
 ## Organisation
 
+Arborescence simplifiée du dossier actuel : les fichiers Go et les assets ne sont pas tous détaillés. Le nom du dossier racine peut varier selon le téléchargement ou le clonage.
+
 ```text
 Projet-Red/
 ├── README.md
-├── Projet RED - Sujet.pdf
-├── docs/                     Sujet et documents du projet
-├── assets/                   Carte, modèles, textures, icônes et audio
-├── src/
-│   ├── main.go               Choix terminal CLI / 3D
-│   ├── lancement/            Préparation macOS (macos.go) et ses tests
-│   ├── go.mod, go.sum        Dépendances
-│   ├── library/              Règles du jeu et interface CLI
-│   │   └── library_3d.go     Adaptateur non bloquant pour la 3D
-│   ├── 3D/
-│   │   ├── main.go           Entrée graphique
-│   │   ├── monde/            Scène, interfaces, caméra, audio, sauvegarde
-│   │   ├── personnages/      Personnage et équipements visibles
-│   │   └── monstres/         Modèles et articulations des ennemis
-│   ├── tests/                Vérifications de compatibilité de l’adaptateur
-│   ├── tools/                Générateurs de carte et de musique
-│   └── sauvegardes/          Créé à l’exécution, non versionné
-└── test_game/                Ancien exemple, non utilisé et laissé intact
+├── .gitignore               Fichiers locaux exclus de Git
+├── .gitattributes           Réglages Git du dépôt
+├── docs/
+│   ├── Projet RED - Sujet.pdf
+│   └── Lore_Ordta.txt        Histoire et univers du jeu
+├── assets/
+│   ├── animations/
+│   ├── audio/
+│   ├── backgrounds/
+│   ├── maps/
+│   ├── materials/
+│   ├── models/
+│   ├── pixel_art/
+│   ├── previews/
+│   └── ui/
+└── src/                     Dossier depuis lequel lancer go run .
+    ├── main.go              Menu terminal : choisir CLI ou 3D
+    ├── go.mod               Module Go et dépendances
+    ├── go.sum               Empreintes des dépendances
+    ├── lancement/
+    │   ├── macos.go         Préparation des dépendances natives sur Mac
+    │   └── macos_test.go
+    ├── library/             Règles du jeu, menus CLI et tests backend
+    │   └── library_3d.go    Adaptation des règles pour l’interface 3D
+    ├── 3D/
+    │   ├── main.go          Point d’entrée du jeu graphique
+    │   ├── monde/           Scène, menus, caméras, collisions, audio et sauvegarde
+    │   ├── personnages/     Modèles du joueur, tenues, armures et animations
+    │   │   └── assets/      Données et textures embarquées du personnage
+    │   └── monstres/        Chargement des modèles articulés des ennemis
+    ├── tests/               Tests de compatibilité et de progression 3D
+    ├── tools/
+    │   ├── mapgen/          Générateur de carte et ses tests
+    │   └── musicgen/        Générateur de musique et ses tests
+    └── sauvegardes/         Parties locales ; créé au besoin, ignoré par Git
 ```
+
+Le sujet se trouve uniquement dans `docs/`, pas à la racine. Le dossier `test_game/` n’est plus présent dans cette version du projet.
 
 Les fonctions terminal interactives du backend ne doivent pas être appelées depuis la boucle graphique. L’adaptateur utilise les structures, catalogues et fonctions de calcul disponibles, puis renvoie des résultats affichables. Les changements de noms ou de règles doivent également être répercutés dans cet adaptateur.
 
@@ -388,7 +409,8 @@ Il est utile de les conserver et de les relancer après une modification. Lorsqu
 | `src/tests/` | Vérifier la compatibilité de l’adaptateur 3D avec les règles du backend, sans charger le moteur graphique. |
 | Fichiers `_test.go` dans `src/3D/` | Vérifier notamment les modèles, animations, sauvegardes et données du monde. |
 | Fichiers `_test.go` dans `src/library/` | Anciens tests du backend et de l’adaptateur ; certains nécessitent une mise à jour, expliquée ci-dessous. |
-| `test_game/` | Ancien exemple de jeu indépendant : ce dossier n’est pas une suite de tests automatiques et n’est pas utilisé par le jeu actuel. |
+| `src/lancement/macos_test.go` | Vérifier la construction des chemins des dépendances Mac, sans lancer le jeu sur un Mac. |
+| Fichiers `_test.go` dans `src/tools/` | Vérifier les générateurs de carte et de musique. |
 
 ### Comment les lancer ?
 
