@@ -22,7 +22,7 @@ import (
 
 const (
 	vitesseMarche   float32 = 10 // Unités parcourues par seconde.
-	vitesseSprint   float32 = 25
+	vitesseSprint   float32 = 15
 	rayonPersonnage float32 = 0.3
 )
 
