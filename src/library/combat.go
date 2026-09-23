@@ -13,61 +13,53 @@ import (
 func (c *Character) trainingFight() {
 	adversaire := InitGoblin()
 	tour := 1
-
 	c.Initiative = rand.Intn(10) + 1
 	adversaire.Initiative = rand.Intn(10) + 1
-
 	fmt.Printf("\nDébut du combat contre %s !\n", adversaire.Nom)
 	fmt.Printf("Initiative de %s : %d\n", c.Nom, c.Initiative)
 	fmt.Printf("Initiative de %s : %d\n", adversaire.Nom, adversaire.Initiative)
-
 	personnageCommence := c.Initiative >= adversaire.Initiative
-
 	if personnageCommence {
 		fmt.Printf("%s commence le combat !\n", c.Nom)
 	} else {
 		fmt.Printf("%s commence le combat !\n", adversaire.Nom)
 	}
-
 	for c.PVActuel > 0 && adversaire.PVActuel > 0 {
 		fmt.Printf("\n=== TOUR %d ===\n", tour)
-
 		if personnageCommence {
 			c.CharacterTurn(&adversaire)
-
-			if adversaire.PVActuel <= 0 {
-				fmt.Printf("%s est vaincu !\n", adversaire.Nom)
-				fmt.Println("Vous avez gagné l'entraînement, bien joué !")
-				c.gagnerExperience(adversaire.ExperienceDonnee)
+			if c.FinCombat(&adversaire) {
 				return
 			}
-
 			adversaire.GoblinPattern(c, tour)
-
-			if c.PVActuel <= 0 {
-				c.isDead()
-				fmt.Println("Le combat d'entraînement est terminé.")
+			if c.FinCombat(&adversaire) {
 				return
 			}
 		} else {
 			adversaire.GoblinPattern(c, tour)
-
-			if c.PVActuel <= 0 {
-				c.isDead()
-				fmt.Println("Le combat d'entraînement est terminé.")
+			if c.FinCombat(&adversaire) {
 				return
 			}
-
 			c.CharacterTurn(&adversaire)
-
-			if adversaire.PVActuel <= 0 {
-				fmt.Printf("%s est vaincu !\n", adversaire.Nom)
-				fmt.Println("Vous avez gagné l'entraînement, bien joué !")
-				c.gagnerExperience(adversaire.ExperienceDonnee)
+			if c.FinCombat(&adversaire) {
 				return
 			}
 		}
-
 		tour++
 	}
+}
+
+func (c *Character) FinCombat(m *Monster) bool {
+	if m.PVActuel <= 0 {
+		fmt.Printf("%s est vaincu !\n", m.Nom)
+		fmt.Println("Vous avez gagné l'entraînement, bien joué !")
+		c.GagnerExperience(m.ExperienceDonnee)
+		return true
+	}
+	if c.PVActuel <= 0 {
+		c.IsDead()
+		fmt.Println("Le combat d'entraînement est terminé.")
+		return true
+	}
+	return false
 }

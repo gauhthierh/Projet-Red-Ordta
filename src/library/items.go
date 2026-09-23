@@ -138,7 +138,7 @@ func (c *Character) poisonPot() bool {
 			c.PVActuel = 0
 		}
 		fmt.Printf("%s a été empoisonné ! PV : %d / %d\n", c.Nom, c.PVActuel, c.PVMaxTotal)
-		if c.isDead() {
+		if c.PVActuel <= 0 {
 			fmt.Println("Le poison cesse de faire effet.")
 			return true
 		}

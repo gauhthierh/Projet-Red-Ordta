@@ -9,7 +9,7 @@ import "fmt"
    Lorsque le maximum est atteint, le personnage gagne un niveau.
    L'expérience dépassant le maximum est conservée pour le niveau suivant.*/
 
-func (c *Character) gagnerExperience(gain int) {
+func (c *Character) GagnerExperience(gain int) {
 	fmt.Printf("%s gagne %d points d'expérience !\n", c.Nom, gain)
 	c.ExperienceActuelle += gain
 	for c.ExperienceActuelle >= c.ExperienceMax {

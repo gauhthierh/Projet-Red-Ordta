@@ -79,9 +79,7 @@ func (c *Character) InventoryMenu() {
 			fmt.Printf("%d. %s : %d\n", i+1, item, c.Inventaire[item])
 		}
 		fmt.Println("0. Retour")
-
 		choice, ok := ReadChoice("Votre choix : ")
-
 		if !ok || choice < 0 || choice > len(items) {
 			if len(items) == 0 {
 				fmt.Println("Choix invalide. Entrez 0 pour revenir au menu principal.")
@@ -90,12 +88,11 @@ func (c *Character) InventoryMenu() {
 			}
 			continue
 		}
-
 		if choice == 0 {
 			return
 		}
-
 		c.useItem(items[choice-1])
+		c.IsDead()
 	}
 }
 
