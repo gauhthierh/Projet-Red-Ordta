@@ -1,85 +1,170 @@
 package library
 
+// ================================================== //
+// === Ce fichier regroupe les réglages du jeu    === //
+// ================================================== //
+
+// ------------------------------------------------ //
+// --- Personnage                               --- //
+// ------------------------------------------------ //
+
 const (
-	CapaciteInventaireDepart           = 10
-	ArgentDepart                       = 100
-	MaxAugmentationsInventaire         = 3
-	BonusAugmentationInventaire        = 10
+	CapaciteInventaireDepart    = 10
+	ArgentDepart                = 100
+	MaxAugmentationsInventaire  = 3
+	BonusAugmentationInventaire = 10
+)
+
+// ------------------------------------------------ //
+// --- Expérience                               --- //
+// ------------------------------------------------ //
+
+// L'expérience requise est multipliée par 13/10 (x1,3) à chaque niveau //
+const (
 	Experienceinitiale                 = 0
 	Experiencemaximale                 = 100
 	AugmentationExperienceNumerateur   = 13
 	AugmentationExperienceDenominateur = 10
 )
 
+// ------------------------------------------------ //
+// --- Objets : consommables                    --- //
+// ------------------------------------------------ //
+
 const (
-	ItemPotionDeVie            = "Potion de vie"
-	ItemPotionDePoison         = "Potion de poison"
-	ItemLivreGrosseBouleDeFeu  = "Livre de sort : Grosse boule de feu"
-	ItemFourrureDeLoup         = "Fourrure de loup"
-	ItemPeauDeTroll            = "Peau de troll"
-	ItemCuirDeSanglier         = "Cuir de sanglier"
-	ItemPlumeDeCorbeau         = "Plume de corbeau"
-	ItemChapeauAventurier      = "Chapeau de l'aventurier"
-	ItemTuniqueAventurier      = "Tunique de l'aventurier"
-	ItemBottesAventurier       = "Bottes de l'aventurier"
-	EmplacementTete            = "tête"
-	EmplacementTorse           = "torse"
-	EmplacementPied            = "pied"
+	ItemPotionDeVie    = "Potion de vie"
+	ItemPotionDeMana   = "Potion de mana"
+	ItemPotionDePoison = "Potion de poison"
+)
+
+// Effets des consommables //
+const (
+	SoinPotionDeVie     = 50
+	ManaPotionDeMana    = 40
+	DegatsPoisonParTour = 10
+	DureePoison         = 3
+)
+
+// ------------------------------------------------ //
+// --- Objets : matériaux de fabrication        --- //
+// ------------------------------------------------ //
+
+const (
+	ItemFourrureDeLoup = "Fourrure de loup"
+	ItemPeauDeTroll    = "Peau de troll"
+	ItemCuirDeSanglier = "Cuir de sanglier"
+	ItemPlumeDeCorbeau = "Plume de corbeau"
+)
+
+// ------------------------------------------------ //
+// --- Objets : équipements                     --- //
+// ------------------------------------------------ //
+
+const (
+	ItemChapeauAventurier = "Chapeau de l'aventurier"
+	ItemTuniqueAventurier = "Tunique de l'aventurier"
+	ItemBottesAventurier  = "Bottes de l'aventurier"
+)
+
+// Emplacements où un équipement peut être porté //
+const (
+	EmplacementTete  = "tête"
+	EmplacementTorse = "torse"
+	EmplacementPied  = "pied"
+)
+
+// ------------------------------------------------ //
+// --- Objets : divers                          --- //
+// ------------------------------------------------ //
+
+const (
 	ItemAugmentationInventaire = "Augmentation d'inventaire"
-	ItemPotionDeMana           = "Potion de mana"
+)
+
+// ------------------------------------------------ //
+// --- Livres de sorts                          --- //
+// ------------------------------------------------ //
+
+const (
+	ItemLivreGrosseBouleDeFeu  = "Livre de sort : Grosse boule de feu"
 	ItemLivreLameDuDestin      = "Livre de sort : Lame du destin"
 	ItemLivreEclatsDuGardien   = "Livre de sort : Éclats du gardien"
 	ItemLivreFlecheDeLumiere   = "Livre de sort : Flèche de lumière"
 	ItemLivreJugementDesGeants = "Livre de sort : Jugement des géants"
 )
 
+// ------------------------------------------------ //
+// --- Manuels de combat                        --- //
+// ------------------------------------------------ //
+
 const (
-	SortCoupDePoing           = "Coup de poing"
-	SortGrosseBouleDeFeu      = "Grosse boule de feu"
-	SortLameDuDestin          = "Lame du destin"
-	SortEclatsDuGardien       = "Éclats du gardien"
-	SortFlecheDeLumiere       = "Flèche de lumière"
-	SortSoinDuCoeur           = "Soin du coeur"
-	SortBouclier              = "Bouclier"
+	ItemLivreAttaquePichenette   = "Manuel de combat : Pichenette"
+	ItemLivreAttaqueClaquounette = "Manuel de combat : Claquounette"
+	ItemLivreAttaqueCoupsDePied  = "Manuel de combat : Coups de pied"
+	ItemLivreAttaqueMorsure      = "Manuel de combat : Morsure"
+	ItemLivreAttaqueUppercut     = "Manuel de combat : Uppercut"
+)
+
+// ------------------------------------------------ //
+// --- Sorts : nom, dégâts, coût en mana        --- //
+// ------------------------------------------------ //
+
+const (
+	SortCoupDePoing     = "Coup de poing"
+	DegatsCoupDePoing   = 8
+	CoutManaCoupDePoing = 5
+
+	SortLameDuDestin     = "Lame du destin"
+	DegatsLameDuDestin   = 10
+	CoutManaLameDuDestin = 10
+
+	SortEclatsDuGardien     = "Éclats du gardien"
+	DegatsEclatsDuGardien   = 12
+	CoutManaEclatsDuGardien = 15
+
+	SortFlecheDeLumiere     = "Flèche de lumière"
+	DegatsFlecheDeLumiere   = 12
+	CoutManaFlecheDeLumiere = 20
+
+	SortGrosseBouleDeFeu     = "Grosse boule de feu"
+	DegatsGrosseBouleDeFeu   = 22
+	CoutManaGrosseBouleDeFeu = 30
+
 	SortJugementDesGeants     = "Jugement des géants"
-	DegatsCoupDePoing         = 8
-	DegatsGrosseBouleDeFeu    = 22
-	DegatsLameDuDestin        = 10
-	DegatsEclatsDuGardien     = 12
-	DegatsFlecheDeLumiere     = 12
 	DegatsJugementDesGeants   = 60
-	CoutManaCoupDePoing       = 5
-	CoutManaGrosseBouleDeFeu  = 30
-	CoutManaLameDuDestin      = 10
-	CoutManaEclatsDuGardien   = 15
-	CoutManaFlecheDeLumiere   = 20
-	CoutManaSoinDuCoeur       = 25
-	CoutManaBouclier          = 30
 	CoutManaJugementDesGeants = 60
 )
 
+// Sorts prévus, pas encore implémentés //
 const (
-	AttaqueBasique      = "Attaque basique"
-	AttaqueCoupsDePied  = "Coups de pied"
-	AttaqueMorsure      = "Morsure"
-	AttaqueClaquounette = "Claquounette"
-	AttaquePichenette   = "Pichenette"
-	AttaqueUppercut     = "Uppercut"
+	SortSoinDuCoeur     = "Soin du coeur"
+	CoutManaSoinDuCoeur = 25
+
+	SortBouclier     = "Bouclier"
+	CoutManaBouclier = 30
 )
 
+// ------------------------------------------------ //
+// --- Attaques physiques : nom, dégâts de base --- //
+// ------------------------------------------------ //
+
+// Le bonus d'attaque du joueur s'ajoute à ces dégâts //
 const (
+	AttaqueBasique       = "Attaque basique"
 	DegatsAttaqueBasique = 5
-	DegatsCoupsDePied    = 11
-	DegatsMorsure        = 13
-	DegatsClaquounette   = 9
-	DegatsPichenette     = 7
-	DegatsUppercut       = 16
-)
 
-const (
-	ItemLivreAttaqueCoupsDePied  = "Manuel de combat : Coups de pied"
-	ItemLivreAttaqueMorsure      = "Manuel de combat : Morsure"
-	ItemLivreAttaqueClaquounette = "Manuel de combat : Claquounette"
-	ItemLivreAttaquePichenette   = "Manuel de combat : Pichenette"
-	ItemLivreAttaqueUppercut     = "Manuel de combat : Uppercut"
+	AttaquePichenette = "Pichenette"
+	DegatsPichenette  = 7
+
+	AttaqueClaquounette = "Claquounette"
+	DegatsClaquounette  = 9
+
+	AttaqueCoupsDePied = "Coups de pied"
+	DegatsCoupsDePied  = 11
+
+	AttaqueMorsure = "Morsure"
+	DegatsMorsure  = 13
+
+	AttaqueUppercut = "Uppercut"
+	DegatsUppercut  = 16
 )

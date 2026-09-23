@@ -4,9 +4,12 @@ import (
 	"fmt"
 )
 
-/* Ce fichier gère le menu principal du jeu et le retour depuis les différentes fonctionnalités. */
+// ================================================ //
+// === Ce fichier gère le menu principal du jeu === //
+// ================================================ //
 
-/* La méthode MainMenu affiche les fonctionnalités disponibles et dirige le joueur vers celle qu'il choisit. */
+// Affiche le menu principal et dirige le joueur vers la fonctionnalité choisie //
+// Le jeu s'arrête quand le joueur choisit de quitter //
 func (c *Character) MainMenu() {
 	for {
 		fmt.Println("\n=== MENU PRINCIPAL ===")
@@ -31,7 +34,7 @@ func (c *Character) MainMenu() {
 		case 3:
 			c.Merchant()
 		case 4:
-			c.forgeron()
+			c.Forgeron()
 		case 5:
 			c.TrainingFight()
 		case 6:
@@ -46,7 +49,8 @@ func (c *Character) MainMenu() {
 	}
 }
 
-/* La fonction WaitForReturn attend que le joueur choisisse zéro avant de revenir au menu principal. */
+// Attend que le joueur tape 0 pour revenir au menu //
+// le temps de lire l'écran //
 func WaitForReturn() {
 	for {
 		fmt.Println("\n0. Retour")

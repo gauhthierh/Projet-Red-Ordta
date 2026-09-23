@@ -9,6 +9,7 @@ import (
 // === Ce fichier définit le personnage === //
 // ======================================== //
 
+// Représente les joueur //
 type Character struct {
 	Nom                            string
 	Classe                         string
@@ -35,12 +36,11 @@ type Character struct {
 	GainAttaque                    int
 }
 
-/* La fonction InitCharacter crée et initialise un personnage avec ses statistiques, ses objets, son sort et ses ressources de départ. */
+// Crée un personnage à l'aide de sa structure //
 func InitCharacter(nom string, lvl int, cl Classe) Character {
 	inventaire := map[string]int{
 		ItemPotionDeVie: 3,
 	}
-
 	personnage := Character{
 		Nom:                nom,
 		Classe:             cl.Nom,
@@ -65,7 +65,7 @@ func InitCharacter(nom string, lvl int, cl Classe) Character {
 	return personnage
 }
 
-/* La méthode displayInfo affiche les statistiques, les sorts, l'argent, l'inventaire et les équipements du personnage. */
+// Affiche les infos du joueur //
 func (c Character) displayInfo() {
 	fmt.Println("\n=== PERSONNAGE ===")
 	fmt.Printf("Nom : %s\n", c.Nom)
@@ -86,7 +86,7 @@ func (c Character) displayInfo() {
 	fmt.Printf("-- Pied --\n %s\n", c.Equipement.Pied.DescriptionEquipement())
 }
 
-/* La méthode IsDead vérifie si le personnage est mort et le ressuscite avec la moitié de ses points de vie maximum. */
+// Ressuscite le joueur avec 50% de ses Pv en cas de décès //
 func (c *Character) IsDead() bool {
 	if c.PvActuel > 0 {
 		return false
@@ -97,12 +97,12 @@ func (c *Character) IsDead() bool {
 	return true
 }
 
-/* La méthode CalculPvAvecBonus calcule les points de vie maximum du personnage en ajoutant les bonus de ses équipements. */
+// Renvoie les Pv max du joueur avec le bonus d'équipement //
 func (c *Character) CalculPvAvecBonus() int {
 	return c.Equipement.Tete.BonusPv + c.Equipement.Torse.BonusPv + c.Equipement.Pied.BonusPv + c.PvMaxBase
 }
 
-/* La méthode MettreAJourPvMax actualise les points de vie maximum du personnage après un changement d'équipement. */
+// Recalcule les Pv du joueur après un changement de base ou d'équipement //
 func (c *Character) MettreAJourPvMax() {
 	c.PvMaxTotal = c.CalculPvAvecBonus()
 	if c.PvActuel > c.PvMaxTotal {
@@ -110,6 +110,7 @@ func (c *Character) MettreAJourPvMax() {
 	}
 }
 
+// Retire des Pv au joueur sans descendre en négatif //
 func (c *Character) SubirDegats(degats int) {
 	c.PvActuel -= degats
 	if c.PvActuel < 0 {

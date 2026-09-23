@@ -1,15 +1,16 @@
 package library
 
-/* Le fichier gère le déroulement d'un combat d'entrainement.
-   Il organise les tours du personnage et du monstre, vérifie les pv
-   après chaque attaque et met fin au combat à la mort de l'un des deux*/
 import (
 	"fmt"
 	"math/rand"
 )
 
-/* La fonction trainingFight prépare et lance un combat d'entrainement*/
+// ================================================= //
+// === Ce fichier gère le déroulement du combat  === //
+// ================================================= //
 
+// Lance un combat d'entraînement contre un gobelin //
+// Le combat est au tour par tour //
 func (c *Character) TrainingFight() {
 	adversaire := InitGoblin()
 	tour := 1
@@ -49,6 +50,8 @@ func (c *Character) TrainingFight() {
 	}
 }
 
+// Affiche le menu de combat du joueur //
+// Persiste jusqu'a ce qu'il ait joué //
 func (c *Character) CharacterTurn(m *Monster) {
 	for {
 		fmt.Println("=== COMBAT ===")
@@ -79,6 +82,8 @@ func (c *Character) CharacterTurn(m *Monster) {
 	}
 }
 
+// Vérifie si le joueur ou le monstre est à 0 Pv //
+// Annonce le résultat et renvoie true si le combat est terminé //
 func (c *Character) FinCombat(m *Monster) bool {
 	if m.PvActuel <= 0 {
 		fmt.Printf("%s est vaincu !\n", m.Nom)
@@ -94,7 +99,8 @@ func (c *Character) FinCombat(m *Monster) bool {
 	return false
 }
 
-/* La méthode ChoixInventaire affiche les objets utilisables en combat et indique si le joueur en a utilisé un. */
+// Affiche l'inventaire en combat et utilise l'objet choisi //
+// Renvoie true si l'objet a eu un effet //
 func (c *Character) ChoixInventaire() bool {
 	for {
 		objets := c.SortedItems()

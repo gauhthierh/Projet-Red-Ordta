@@ -1,16 +1,21 @@
 package library
 
-/*Ce fichier gère le marchand et les achats du personnage.
-  Il contient la liste des objets vendus, leur prix et les vérifications
-  nécessaires avant un achat : argent disponible et place dans l'inventaire*/
-
 import (
 	"fmt"
 )
 
-/*La fonction merchant affiche le menu du marchand et permet au joueur de choisir
-  entre acheter un objet ou revenir au menu principal*/
+// =================================== //
+// === Ce fichier gère le marchand === //
+// =================================== //
 
+// Représente un article du marchand //
+type Item struct {
+	Nom       string
+	Prix      int
+	NiveauMin int
+}
+
+// Affiche les articles, leur prix et leur niveau requis, puis achète l'article choisi //
 func (c *Character) Merchant() {
 	for {
 		fmt.Println("\n=== MARCHAND ===")
@@ -34,16 +39,7 @@ func (c *Character) Merchant() {
 	}
 }
 
-/* Item représente un objet vendu par le marchand avec son nom et son prix*/
-
-type Item struct {
-	Nom       string
-	Prix      int
-	NiveauMin int
-}
-
-/* Boutique contient tous les objets disponibles chez le marchand*/
-
+// Liste des articles vendus par le marchand //
 var Boutique = []Item{
 	{Nom: ItemPotionDeVie, Prix: 3, NiveauMin: 1},
 	{Nom: ItemPotionDePoison, Prix: 6, NiveauMin: 1},
@@ -65,8 +61,8 @@ var Boutique = []Item{
 	{Nom: ItemLivreAttaqueUppercut, Prix: 200, NiveauMin: 7},
 }
 
-/* La fonction PrixPour détermine le prix d'un article pour le personnage*/
-
+// Renvoie le prix d'un article pour ce joueur //
+// La première potion de vie est offerte //
 func (c *Character) PrixPour(i Item) int {
 	if i.Nom == ItemPotionDeVie && !c.PotionGratuitePrise {
 		return 0
@@ -74,10 +70,7 @@ func (c *Character) PrixPour(i Item) int {
 	return i.Prix
 }
 
-/* La fonction AchatMarchand tente d'acheter un article.
-   L'achat est refusé si le personnage manque d'argent ou si son inventaire
-   est plein. En cas de réussite, l'ajout à lieu et le prix est retiré*/
-
+// Achète un article si le joueur a le niveau, l'argent et la place nécessaires //
 func (c *Character) AchatMarchand(i Item) {
 	achat := c.PrixPour(i)
 	if c.Niveau < i.NiveauMin {

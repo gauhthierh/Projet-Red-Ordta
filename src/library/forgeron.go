@@ -2,10 +2,13 @@ package library
 
 import "fmt"
 
-/* Ce fichier gère le forgeron, les équipements disponibles et leur fabrication à partir de matériaux. */
+// =================================== //
+// === Ce fichier gère le forgeron === //
+// =================================== //
 
-/* La méthode forgeron affiche l'armurerie et permet au personnage de choisir un équipement à fabriquer. */
-func (c *Character) forgeron() {
+// Affiche les équipements fabricables, leur prix et leur recette //
+// Le joueur voit les matériaux qu'il possède déjà //
+func (c *Character) Forgeron() {
 	for {
 		fmt.Println("\n=== FORGERON ===")
 		fmt.Printf("Bourse : %d Po\n", c.Argent)
@@ -24,23 +27,15 @@ func (c *Character) forgeron() {
 	}
 }
 
-/* La structure Stuff représente un équipement avec son prix, ses matériaux, son bonus et son emplacement. */
-type Stuff struct {
-	Nom         string
-	Prix        int
-	Materiaux   map[string]int
-	BonusPv     int
-	Emplacement string
-}
-
-/* La variable Armurerie contient les équipements pouvant être fabriqués chez le forgeron. */
+// Liste des équipements que le forgeron peut fabriquer //
 var Armurerie = []Stuff{
 	{Nom: ItemChapeauAventurier, Prix: 5, Materiaux: map[string]int{ItemPlumeDeCorbeau: 1, ItemCuirDeSanglier: 1}, BonusPv: 10, Emplacement: EmplacementTete},
 	{Nom: ItemTuniqueAventurier, Prix: 5, Materiaux: map[string]int{ItemFourrureDeLoup: 2, ItemPeauDeTroll: 1}, BonusPv: 25, Emplacement: EmplacementTorse},
 	{Nom: ItemBottesAventurier, Prix: 5, Materiaux: map[string]int{ItemFourrureDeLoup: 1, ItemCuirDeSanglier: 1}, BonusPv: 15, Emplacement: EmplacementPied},
 }
 
-/* La méthode AchatForgeron vérifie les ressources et l'argent avant de fabriquer un équipement et de l'ajouter à l'inventaire. */
+// Fabrique un équipement si le joueur a l'argent, les matériaux et la place nécessaires //
+// Les matériaux sont retirés de l'inventaire //
 func (c *Character) AchatForgeron(s Stuff) {
 	achat := s.Prix
 	if c.Argent < achat {
@@ -64,7 +59,8 @@ func (c *Character) AchatForgeron(s Stuff) {
 	fmt.Printf("Vous avez fabriqué %s, il vous reste %d Po\n", s.Nom, c.Argent)
 }
 
-/* La méthode MateriauxManquants renvoie les matériaux et les quantités manquantes pour fabriquer un équipement. */
+// Renvoie les matériaux qu'il manque au joueur pour fabriquer un équipement //
+// La map est vide s'il ne manque rien //
 func (c *Character) MateriauxManquants(s Stuff) map[string]int {
 	manques := make(map[string]int)
 	for materiau, besoin := range s.Materiaux {

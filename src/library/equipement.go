@@ -2,16 +2,27 @@ package library
 
 import "fmt"
 
-/* Ce fichier gère les emplacements d'équipement, leur description et leur utilisation par le personnage. */
+// ======================================= //
+// === Ce fichier gère les équipements === //
+// ======================================= //
 
-/* La structure Equipment contient les équipements portés sur la tête, le torse et les pieds du personnage. */
+// Représente les emplacements d'équipement //
 type Equipment struct {
 	Tete  Stuff
 	Torse Stuff
 	Pied  Stuff
 }
 
-/* La méthode DescriptionEquipement renvoie une description de l'équipement avec son nom et son bonus de points de vie. */
+// Représente un équipement //
+type Stuff struct {
+	Nom         string
+	Prix        int
+	Materiaux   map[string]int
+	BonusPv     int
+	Emplacement string
+}
+
+// Renvoie le nom de l' équipement et son bonus de Pv //
 func (s Stuff) DescriptionEquipement() string {
 	if s.Nom == "" {
 		return "Aucun équipement"
@@ -19,7 +30,8 @@ func (s Stuff) DescriptionEquipement() string {
 	return fmt.Sprintf("%s, Bonus : + %d Pv", s.Nom, s.BonusPv)
 }
 
-/* La fonction TrouverEquipement recherche un équipement dans l'armurerie à partir de son nom. */
+// Cherche un équipement par son nom //
+// Renvoie false si l'objet n'est pas un équipement //
 func TrouverEquipement(nom string) (Stuff, bool) {
 	for _, s := range Armurerie {
 		if s.Nom == nom {
@@ -29,7 +41,8 @@ func TrouverEquipement(nom string) (Stuff, bool) {
 	return Stuff{}, false
 }
 
-/* La méthode ChangerEquipement équipe un objet, replace l'ancien dans l'inventaire et actualise les points de vie maximum. */
+// Équipe le joueur et met à jour ses Pv max //
+// Retourne dans l'inventaire l'ancien équipement //
 func (c *Character) ChangerEquipement(nouveau Stuff) {
 	if nouveau.Emplacement != EmplacementTete &&
 		nouveau.Emplacement != EmplacementTorse &&

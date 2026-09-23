@@ -5,9 +5,12 @@ import (
 	"time"
 )
 
-/* Ce fichier définit les objets et les sorts puis applique leurs effets lorsqu'ils sont utilisés par le personnage. */
+// ================================================== //
+// === Ce fichier gère l'utilisation des objets   === //
+// ================================================== //
 
-/* La méthode useItem applique l'effet correspondant à l'objet sélectionné dans l'inventaire. */
+// Applique l'effet de l'objet choisi //
+// Renvoie true si l'objet a eu un effet //
 func (c *Character) UseItem(item string) bool {
 	switch item {
 	case ItemPotionDeVie:
@@ -58,7 +61,8 @@ func (c *Character) UseItem(item string) bool {
 	return true
 }
 
-/* La méthode takePot consomme une potion de vie pour soigner le personnage sans dépasser ses points de vie maximum. */
+// Boit une potion de vie et rend des Pv, sans dépasser le maximum //
+// Renvoie false si le joueur est déjà en pleine santé ou n'a pas de potion //
 func (c *Character) TakePot() bool {
 	if c.Inventaire[ItemPotionDeVie] > 0 && c.PvActuel >= c.PvMaxTotal {
 		fmt.Println("Vous êtes déjà en pleine santé")
@@ -79,6 +83,8 @@ func (c *Character) TakePot() bool {
 	}
 }
 
+// Boit une potion de mana et rend du mana, sans dépasser le maximum //
+// Renvoie false si le mana est déjà plein ou s'il n'y a pas de potion //
 func (c *Character) TakePotMana() bool {
 	if c.Inventaire[ItemPotionDeMana] > 0 && c.ManaActuel >= c.ManaMax {
 		fmt.Println("Vous avez déjà votre mana au maximum")
@@ -99,7 +105,8 @@ func (c *Character) TakePotMana() bool {
 	}
 }
 
-/* La méthode poisonPot consomme une potion de poison qui inflige dix dégâts par seconde pendant trois secondes ou jusqu'à la mort. */
+// Boit une potion de poison qui inflige des dégâts chaque seconde pendant quelques secondes //
+// Renvoie false s'il n'y a pas de potion //
 func (c *Character) PoisonPot() bool {
 	if !c.RemoveInventory(ItemPotionDePoison) {
 		fmt.Println("Aucune potion de poison dans l'inventaire")

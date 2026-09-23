@@ -1,18 +1,16 @@
 package library
 
-/* Ce fichier gère l'utilisation des sorts pendant les combats.
-   Il définit les dégâts des sorts et permet au personnage de choisir
-   un sort parmi ceux qu'il a appris*/
-
 import (
 	"fmt"
 	"slices"
 )
 
-/*La fonction ChoixSort affiche les sorts connus par le personnage et lui permet
-  d'en utiliser un contre le monstre.
-  Elle renvoie true si un sort est utilisé et false si le joueur revient.*/
+// ================================================== //
+// === Ce fichier gère les sorts                  === //
+// ================================================== //
 
+// Affiche les sorts connus avec leur coût, et lance sur le monstre celui choisi //
+// Renvoie true si un sort a été lancé //
 func (c *Character) ChoixSort(m *Monster) bool {
 	if len(c.Skill) == 0 {
 		fmt.Println("Vous ne connaissez aucun sort.")
@@ -52,6 +50,8 @@ func (c *Character) ChoixSort(m *Monster) bool {
 	}
 }
 
+// Renvoie les dégâts et le coût en mana d'un sort //
+// Renvoie false si le sort est inconnu //
 func InfosSort(sort string) (int, int, bool) {
 	switch sort {
 	case SortCoupDePoing:
@@ -71,6 +71,8 @@ func InfosSort(sort string) (int, int, bool) {
 	}
 }
 
+// Renvoie le sort enseigné par un livre //
+// Renvoie false si l'objet n'est pas un livre de sort //
 func SortDuLivre(objet string) (string, bool) {
 	switch objet {
 	case ItemLivreGrosseBouleDeFeu:
@@ -88,7 +90,8 @@ func SortDuLivre(objet string) (string, bool) {
 	}
 }
 
-/* La méthode spellBook apprend le sort Boule de Feu et refuse de l'ajouter lorsqu'il est déjà connu. */
+// Ajoute un sort au joueur //
+// Renvoie false s'il le connaît déjà //
 func (c *Character) SpellBook(sort string) bool {
 	if slices.Contains(c.Skill, sort) {
 		return false

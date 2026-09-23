@@ -5,9 +5,11 @@ import (
 	"sort"
 )
 
-/* Ce fichier gère l'affichage, le contenu, la capacité et l'utilisation de l'inventaire du personnage. */
+// ============================================== //
+// === Ce fichier gère l'inventaire du joueur === //
+// ============================================== //
 
-/* La méthode AccessInventory affiche les objets possédés par le personnage dans un ordre stable. */
+// Affiche les objets de l'inventaire et leur quantité //
 func (c Character) AccessInventory() {
 	vide := true
 	for _, nom := range c.SortedItems() {
@@ -19,7 +21,8 @@ func (c Character) AccessInventory() {
 	}
 }
 
-/* La méthode AddInventory ajoute un objet à l'inventaire et renvoie false lorsqu'il est plein. */
+// Ajoute un exemplaire d'un objet à l'inventaire //
+// Renvoie false si l'inventaire est plein //
 func (c *Character) AddInventory(item string) bool {
 	if !c.VerifPlaceInventaire() {
 		return false
@@ -28,7 +31,7 @@ func (c *Character) AddInventory(item string) bool {
 	return true
 }
 
-/* La méthode TotalInventaire calcule le nombre total d'objets présents dans l'inventaire. */
+// Renvoie le nombre total d'objets, en comptant chaque exemplaire //
 func (c Character) TotalInventaire() int {
 	var total int
 	for _, quantite := range c.Inventaire {
@@ -37,12 +40,13 @@ func (c Character) TotalInventaire() int {
 	return total
 }
 
-/* La méthode VerifPlaceInventaire indique si l'inventaire possède encore une place disponible. */
+// Renvoie true si il reste de la place //
 func (c Character) VerifPlaceInventaire() bool {
 	return c.TotalInventaire() < c.CapaciteInventaire
 }
 
-/* La méthode RemoveInventory retire un objet et supprime son entrée lorsque sa quantité atteint zéro. */
+// Retire un exemplaire d'un objet de l'inventaire //
+// Renvoie false si l'objet n'y était pas //
 func (c *Character) RemoveInventory(item string) bool {
 	if c.Inventaire[item] <= 0 {
 		return false
@@ -54,7 +58,8 @@ func (c *Character) RemoveInventory(item string) bool {
 	return true
 }
 
-/* La méthode SortedItems renvoie les noms des objets possédés dans l'ordre alphabétique. */
+// Renvoie les noms des objets possédés //
+// triés par ordre alphabétique //
 func (c Character) SortedItems() []string {
 	items := []string{}
 	for item, quantite := range c.Inventaire {
@@ -66,7 +71,7 @@ func (c Character) SortedItems() []string {
 	return items
 }
 
-/* La méthode InventoryMenu affiche l'inventaire et permet au joueur de choisir un objet à utiliser. */
+// Affiche l'inventaire hors combat et utilise l'objet choisi //
 func (c *Character) InventoryMenu() {
 	for {
 		fmt.Println("\n=== INVENTAIRE ===")
@@ -88,7 +93,8 @@ func (c *Character) InventoryMenu() {
 	}
 }
 
-/* La méthode UpgradeInventorySlot augmente la capacité de l'inventaire tant que la limite d'améliorations n'est pas atteinte. */
+// Augmente la capacité de l'inventaire, dans la limite du nombre d'améliorations autorisé //
+// Renvoie false si la limite est atteinte //
 func (c *Character) UpgradeInventorySlot() bool {
 	if c.AugmentationInventaireUtilisee >= MaxAugmentationsInventaire {
 		return false

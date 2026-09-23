@@ -5,10 +5,12 @@ import (
 	"unicode"
 )
 
-/*
-Ce fichier gère la création du personnage, la validation de son nom et le choix de sa classe.
-*/
+// ================================================= //
+// === Ce fichier gère la création du personnage === //
+// ================================================= //
 
+// Demande le nom et la classe du joueur //
+// Puis crée son personnage //
 func CharacterCreation() Character {
 	var nom string
 	for {
@@ -24,12 +26,12 @@ func CharacterCreation() Character {
 		}
 		fmt.Println("Nom invalide : seules les lettres sont acceptées (sans espace, tiret, chiffre ni symbole).")
 	}
-
 	structureClasse := ChooseClass()
 	return InitCharacter(nom, 1, structureClasse)
 }
 
-/* La fonction FormatName vérifie que le nom contient uniquement des lettres et le reformate avec une majuscule suivie de minuscules. */
+// Vérifie que le nom ne contient que des lettres et le met en forme //
+// Renvoie false si le nom est invalide //
 func FormatName(saisie string) (string, bool) {
 	runes := []rune(saisie)
 	if len(runes) == 0 {
@@ -47,11 +49,10 @@ func FormatName(saisie string) (string, bool) {
 	return string(runes), true
 }
 
-/* La fonction ChooseClass demande au joueur de choisir une classe et renvoie son nom ainsi que ses points de vie maximum. */
+// Demande au joueur de choisir sa classe et renvoie sa fiche //
 func ChooseClass() Classe {
 	for {
 		choix, _ := ReadChoice("Entrez la classe du personnage (1 pour Humain, 2 pour Elfe, 3 pour Nain) : ")
-
 		switch choix {
 		case 1:
 			return Classe{Nom: "Humain", PvMax: 100, ManaMax: 100, Attaque: 5, GainPvMax: 10, GainManaMax: 10, GainAttaque: 1}
@@ -65,6 +66,7 @@ func ChooseClass() Classe {
 	}
 }
 
+// Représente les caractéristiques d'une classe //
 type Classe struct {
 	Nom         string
 	PvMax       int
