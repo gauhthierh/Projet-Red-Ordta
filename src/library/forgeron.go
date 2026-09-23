@@ -34,7 +34,7 @@ var Armurerie = []Stuff{
 	{Nom: ItemBottesAventurier, Prix: 5, Materiaux: map[string]int{ItemFourrureDeLoup: 1, ItemCuirDeSanglier: 1}, BonusPv: 15, Emplacement: EmplacementPied},
 }
 
-// Fabrique un équipement si le joueur a l'argent, les matériaux et la place nécessaires //
+// Fabrique un équipement si le joueur a l'argent et les matériaux nécessaires //
 // Les matériaux sont retirés de l'inventaire //
 func (c *Character) AchatForgeron(s Stuff) {
 	achat := s.Prix
@@ -49,13 +49,13 @@ func (c *Character) AchatForgeron(s Stuff) {
 		}
 		return
 	}
+	c.Argent -= achat
 	for materiel, quantite := range s.Materiaux {
 		for i := 1; i <= quantite; i++ {
 			c.RemoveInventory(materiel)
 		}
 	}
 	c.AddInventory(s.Nom)
-	c.Argent -= achat
 	fmt.Printf("Vous avez fabriqué %s, il vous reste %d Po\n", s.Nom, c.Argent)
 }
 

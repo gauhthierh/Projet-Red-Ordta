@@ -52,8 +52,7 @@ func (c *Character) UseItem(item string) bool {
 		}
 		equipement, ok := TrouverEquipement(item)
 		if ok {
-			c.ChangerEquipement(equipement)
-			return true
+			return c.ChangerEquipement(equipement)
 		}
 		fmt.Printf("%s n'a pas d'effet utilisable.\n", item)
 		return false
@@ -70,7 +69,7 @@ func (c *Character) TakePot() bool {
 	}
 	if c.RemoveInventory(ItemPotionDeVie) {
 		avant := c.PvActuel
-		c.PvActuel += 50
+		c.PvActuel += SoinPotionDeVie
 		if c.PvActuel >= c.PvMaxTotal {
 			c.PvActuel = c.PvMaxTotal
 		}
@@ -92,7 +91,7 @@ func (c *Character) TakePotMana() bool {
 	}
 	if c.RemoveInventory(ItemPotionDeMana) {
 		avant := c.ManaActuel
-		c.ManaActuel += 40
+		c.ManaActuel += ManaPotionDeMana
 		if c.ManaActuel >= c.ManaMax {
 			c.ManaActuel = c.ManaMax
 		}
@@ -113,9 +112,9 @@ func (c *Character) PoisonPot() bool {
 		return false
 	}
 	fmt.Printf("Vous buvez une %s...\n", ItemPotionDePoison)
-	for i := 0; i < 3; i++ {
+	for i := 0; i < DureePoison; i++ {
 		time.Sleep(time.Second)
-		c.SubirDegats(10)
+		c.SubirDegats(DegatsPoisonParSeconde)
 		fmt.Printf("%s a été empoisonné ! Pv : %d / %d\n", c.Nom, c.PvActuel, c.PvMaxTotal)
 		if c.PvActuel <= 0 {
 			fmt.Println("Le poison cesse de faire effet.")

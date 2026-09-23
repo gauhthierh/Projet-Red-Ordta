@@ -58,10 +58,10 @@ const (
 
 // Effets des consommables //
 const (
-	SoinPotionDeVie     = 50
-	ManaPotionDeMana    = 40
-	DegatsPoisonParTour = 10
-	DureePoison         = 3
+	SoinPotionDeVie        = 50
+	ManaPotionDeMana       = 40
+	DegatsPoisonParSeconde = 10
+	DureePoison            = 3
 )
 
 // ------------------------------------------------ //
@@ -134,19 +134,19 @@ const (
 	CoutManaCoupDePoing = 5
 
 	SortLameDuDestin     = "Lame du destin"
-	DegatsLameDuDestin   = 10
+	DegatsLameDuDestin   = 12
 	CoutManaLameDuDestin = 10
 
 	SortEclatsDuGardien     = "Éclats du gardien"
-	DegatsEclatsDuGardien   = 12
+	DegatsEclatsDuGardien   = 16
 	CoutManaEclatsDuGardien = 15
 
 	SortFlecheDeLumiere     = "Flèche de lumière"
-	DegatsFlecheDeLumiere   = 12
+	DegatsFlecheDeLumiere   = 20
 	CoutManaFlecheDeLumiere = 20
 
 	SortGrosseBouleDeFeu     = "Grosse boule de feu"
-	DegatsGrosseBouleDeFeu   = 22
+	DegatsGrosseBouleDeFeu   = 26
 	CoutManaGrosseBouleDeFeu = 30
 
 	SortJugementDesGeants     = "Jugement des géants"

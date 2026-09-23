@@ -16,8 +16,7 @@ import (
 // En créer plusieurs ferait perdre des saisies gardées en mémoire //
 var Reader = bufio.NewReader(os.Stdin)
 
-// Affiche une question et renvoie la ligne tapée //
-// sans espaces ni retour à la ligne //
+// Affiche une question et renvoie la ligne tapée, sans espaces au début ni à la fin //
 func ReadLine(prompt string) string {
 	fmt.Print(prompt)
 	line, err := Reader.ReadString('\n')

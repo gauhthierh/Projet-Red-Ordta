@@ -9,7 +9,7 @@ import (
 // === Ce fichier définit le personnage === //
 // ======================================== //
 
-// Représente les joueur //
+// Représente le joueur : statistiques, inventaire, sorts, attaques et équipement //
 type Character struct {
 	Nom                            string
 	Classe                         string

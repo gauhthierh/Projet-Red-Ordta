@@ -52,7 +52,7 @@ func FormatName(saisie string) (string, bool) {
 // Demande au joueur de choisir sa classe et renvoie sa fiche //
 func ChooseClass() Classe {
 	for {
-		choix, _ := ReadChoice("Entrez la classe du personnage (1 pour Humain, 2 pour Elfe, 3 pour Nain) : ")
+		choix := ReadChoiceEntre("Entrez la classe du personnage (1 pour Humain, 2 pour Elfe, 3 pour Nain) : ", 3)
 		switch choix {
 		case 1:
 			return Classe{Nom: "Humain", PvMax: 100, ManaMax: 100, Attaque: 5, GainPvMax: 10, GainManaMax: 10, GainAttaque: 1}

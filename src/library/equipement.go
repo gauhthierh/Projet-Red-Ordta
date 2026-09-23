@@ -43,16 +43,16 @@ func TrouverEquipement(nom string) (Stuff, bool) {
 
 // Équipe le joueur et met à jour ses Pv max //
 // Retourne dans l'inventaire l'ancien équipement //
-func (c *Character) ChangerEquipement(nouveau Stuff) {
+func (c *Character) ChangerEquipement(nouveau Stuff) bool {
 	if nouveau.Emplacement != EmplacementTete &&
 		nouveau.Emplacement != EmplacementTorse &&
 		nouveau.Emplacement != EmplacementPied {
 		fmt.Printf("%s ne peut pas être équipé : emplacement inconnu.\n", nouveau.Nom)
-		return
+		return false
 	}
 	if !c.RemoveInventory(nouveau.Nom) {
 		fmt.Printf("Vous ne possédez pas %s.\n", nouveau.Nom)
-		return
+		return false
 	}
 	ancien := ""
 	switch nouveau.Emplacement {
@@ -82,4 +82,5 @@ func (c *Character) ChangerEquipement(nouveau Stuff) {
 		fmt.Printf("Vous équipez %s\n", nouveau.Nom)
 	}
 	fmt.Printf("Vos nouveaux Pv : %d / %d\n", c.PvActuel, c.PvMaxTotal)
+	return true
 }

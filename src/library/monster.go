@@ -19,7 +19,8 @@ type Monster struct {
 	Niveau           int
 }
 
-// Crée le gobelin d'entraînement avec ses statistiques de départ //
+// Crée un gobelin d'entraînement du niveau demandé //
+// Ses statistiques et ses récompenses augmentent avec son niveau //
 func InitGoblin(niveau int) Monster {
 	bonus := niveau - 1
 	pv := PvGobelin + GainPvGobelin*bonus

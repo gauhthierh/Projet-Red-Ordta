@@ -40,7 +40,7 @@ func (c Character) TotalInventaire() int {
 	return total
 }
 
-// Renvoie true si il reste de la place //
+// Renvoie true s'il reste au moins une place dans l'inventaire //
 func (c Character) VerifPlaceInventaire() bool {
 	return c.TotalInventaire() < c.CapaciteInventaire
 }
@@ -89,12 +89,13 @@ func (c *Character) InventoryMenu() {
 			return
 		}
 		c.UseItem(items[choice-1])
-		c.IsDead()
+		if c.IsDead() {
+			return
+		}
 	}
 }
 
-// Augmente la capacité de l'inventaire, dans la limite du nombre d'améliorations autorisé //
-// Renvoie false si la limite est atteinte //
+/* La méthode UpgradeInventorySlot augmente la capacité de l'inventaire tant que la limite d'améliorations n'est pas atteinte. */
 func (c *Character) UpgradeInventorySlot() bool {
 	if c.AugmentationInventaireUtilisee >= MaxAugmentationsInventaire {
 		return false

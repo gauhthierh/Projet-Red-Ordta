@@ -20,11 +20,7 @@ func (c *Character) MainMenu() {
 		fmt.Println("5. Entraînement")
 		fmt.Println("6. Qui sont-ils ?")
 		fmt.Println("0. Quitter")
-		choice, ok := ReadChoice("Votre choix : ")
-		if !ok {
-			fmt.Println("Choix invalide !")
-			continue
-		}
+		choice := ReadChoiceEntre("Votre choix : ", 6)
 		switch choice {
 		case 1:
 			c.displayInfo()
@@ -43,25 +39,12 @@ func (c *Character) MainMenu() {
 		case 0:
 			fmt.Println("À bientôt !")
 			return
-		default:
-			fmt.Println("Choix invalide !")
 		}
 	}
 }
 
-// Attend que le joueur tape 0 pour revenir au menu //
-// le temps de lire l'écran //
+// Attend que le joueur tape 0 pour revenir au menu, le temps de lire l'écran //
 func WaitForReturn() {
-	for {
-		fmt.Println("\n0. Retour")
-		choice, ok := ReadChoice("Votre choix : ")
-		if !ok {
-			fmt.Println("Choix invalide. Entrez 0 pour revenir au menu principal.")
-			continue
-		}
-		if choice == 0 {
-			return
-		}
-		fmt.Println("Choix invalide. Entrez 0 pour revenir au menu principal.")
-	}
+	fmt.Println("\n0. Retour")
+	ReadChoiceEntre("Votre choix : ", 0)
 }

@@ -9,8 +9,8 @@ import (
 // === Ce fichier gère les attaques physiques === //
 // ============================================== //
 
-// Affiche les attaques physiques connues et attaque le monstre avec //
-// renvoie true si une attaque a été lancée //
+// Affiche les attaques physiques connues et attaque le monstre avec celle choisie //
+// Renvoie true si une attaque a été lancée //
 func (c *Character) ChoixAttaquePhysique(m *Monster) bool {
 	if len(c.AttaquesPhysiques) == 0 {
 		fmt.Println("Vous ne connaissez aucune attaque physique.")

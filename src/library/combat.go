@@ -58,11 +58,7 @@ func (c *Character) CharacterTurn(m *Monster) {
 		fmt.Println("1. Attaque physique")
 		fmt.Println("2. Sort")
 		fmt.Println("3. Inventaire")
-		choix, ok := ReadChoice("Entrez votre choix :")
-		if !ok {
-			fmt.Println("Choix invalide, veuillez entrer une saisie valide !")
-			continue
-		}
+		choix := ReadChoiceEntre("Votre choix : ", 3)
 		switch choix {
 		case 1:
 			if c.ChoixAttaquePhysique(m) {
