@@ -99,6 +99,7 @@ func (c *Character) FinCombat(m *Monster) bool {
 }
 
 // Affiche l'inventaire en combat et utilise l'objet choisi //
+// L'équipement ne peut être choisi en combat //
 // Renvoie true si l'objet a eu un effet //
 func (c *Character) ChoixInventaire() bool {
 	for {
@@ -115,7 +116,12 @@ func (c *Character) ChoixInventaire() bool {
 		if choix == 0 {
 			return false
 		}
-		fmt.Printf("Vous utilisez %s\n", objets[choix-1])
+		objet := objets[choix-1]
+		if _, estEquipement := TrouverEquipement(objet); estEquipement {
+			fmt.Println("L'équipement ne peut pas être changé pendant le combat.")
+			continue
+		}
+		fmt.Printf("Vous utilisez %s\n", objet)
 		if c.UseItem(objets[choix-1]) {
 			return true
 		} else {
