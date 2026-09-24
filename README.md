@@ -8,6 +8,8 @@ Les deux interfaces utilisent le package `library`. L’adaptateur `library_3d.g
 
 Le [lore d’Ordta est disponible ici](docs/Lore_Ordta.txt). Sa lecture est importante pour comprendre l’histoire, l’univers et les enjeux de l’aventure. Ce document constitue la référence narrative du projet ; il ne signifie pas que tous les événements décrits sont déjà jouables.
 
+Le CLI intègre déjà des passages narratifs de `src/library/lore.go` : réveil au sanctuaire avant la création, présentation des peuples, dialogues de Grei Thau à l’entraînement et accueils du marchand et du forgeron. L’introduction attend Entrée avant de poursuivre. Ces dialogues ne sont pas encore affichés dans les menus 3D.
+
 ## Installation et lancement
 
 ### Windows : le minimum pour jouer en 3D
@@ -118,7 +120,7 @@ Pour le CLI seulement, choisir **2** : GCC et les dépendances graphiques ne son
 
 ### Installation sur Mac (Intel ou Apple Silicon)
 
-**Prise en charge préparée dans le code, mais pas encore vérifiée sur un Mac réel.** Les tests effectués sous Windows ne garantissent pas le fonctionnement du rendu et de l’audio sur toutes les versions de macOS.
+**Le fonctionnement complet sur Mac reste à valider.** Un essai sur Apple Silicon a rencontré l’erreur de liaison `library 'resolv' not found`. Les tests effectués sous Windows ne garantissent pas le fonctionnement du rendu et de l’audio sur macOS.
 
 Sur Mac, **ne pas installer MinGW/MSYS2** : le compilateur utilisé est **Clang**, fourni par Apple.
 
@@ -162,6 +164,15 @@ Choisir **1** pour la 3D ou **2** pour le CLI. Le lanceur active CGO, choisit Cl
 
 Le CLI seul nécessite uniquement Go. Pour la 3D, le Mac doit aussi fournir un contexte OpenGL compatible avec G3N. Si une erreur de compilation ou de création de fenêtre persiste, transmettre le message complet avec la version de macOS et le type de puce.
 
+Si l’erreur indique **`library 'resolv' not found`**, essayer depuis `src/` :
+
+```sh
+export SDKROOT="$(xcrun --sdk macosx --show-sdk-path)"
+go run .
+```
+
+Cela indique le SDK Apple au compilateur pour ce terminal. Le lanceur actuel ne définit pas `SDKROOT` automatiquement. Si `xcrun` échoue ou si l’erreur persiste, vérifier l’installation des outils Apple avant de réinstaller Go ou les bibliothèques audio. Ce contournement reste à confirmer sur le Mac concerné.
+
 <details>
 <summary>Développeurs uniquement : Git, lancement direct et environnement de test</summary>
 
@@ -192,7 +203,7 @@ Un exécutable du lanceur peut être compilé avec `go build -o ordta.exe .`, ma
 
 ### CLI
 
-Après le choix 2, saisir un nom et une classe. Les menus donnent accès au personnage, à l’inventaire, au marchand, au forgeron et à l’entraînement. Le choix 0 permet de revenir ou quitter. Le CLI ne conserve pas de sauvegarde entre deux exécutions.
+Après le choix 2, lire l’introduction puis appuyer sur Entrée, saisir un nom et choisir une classe. Les menus donnent accès au personnage, à l’inventaire, au marchand, au forgeron, à l’entraînement et à « Qui sont-ils ? ». Le choix 0 permet de revenir ou quitter. Le CLI ne conserve pas de sauvegarde entre deux exécutions.
 
 ### 3D
 
@@ -210,7 +221,7 @@ Une sauvegarde illisible est conservée et le démarrage est bloqué avec un mes
 | ZQSD sur AZERTY / WASD sur QWERTY | Déplacement relatif à la caméra |
 | Maj gauche | Sprint |
 | TAB | Ouvrir ou fermer l’inventaire |
-| M | Ouvrir ou fermer la carte 2D avec votre position |
+| M sur AZERTY / ; sur QWERTY | Ouvrir ou fermer la carte 2D avec votre position |
 | E | Interagir avec un PNJ proche |
 | Échap | Pause / reprise après le démarrage |
 | F5 | Sauvegarder hors combat |
@@ -221,6 +232,8 @@ La souris est libérée dans les menus, le commerce, l’inventaire et l’arèn
 ### Carte du monde
 
 Appuyer sur **M** après le démarrage pour afficher la carte pixel art. Le carré rouge bordé de blanc indique votre position, avec vos coordonnées X/Y en bas. Le nord est en haut ; le marqueur utilise le repère et la taille du monde définis dans le JSON de la carte.
+
+Le raccourci utilise la position physique `KeySemicolon` de GLFW : M sur un clavier AZERTY français, point-virgule sur QWERTY. Il n’est pas configurable dans les menus.
 
 Fermer avec **M**, **Échap** ou le bouton **Fermer**. Pendant la consultation, les déplacements, combats et effets sont suspendus et la souris est libre. L’inventaire ou le commerce précédemment ouvert est retrouvé à la fermeture. L’illustration reste un plan artistique : les détails dessinés ne représentent pas les collisions au pixel près.
 
@@ -364,7 +377,8 @@ Projet-Red/
     ├── lancement/
     │   ├── macos.go         Préparation des dépendances natives sur Mac
     │   └── macos_test.go
-    ├── library/             Règles du jeu, menus CLI et tests backend
+    ├── library/             Règles du jeu, menus CLI et textes narratifs
+    │   ├── lore.go          Introduction et dialogues du CLI
     │   └── library_3d.go    Adaptation des règles pour l’interface 3D
     ├── 3D/
     │   ├── main.go          Point d’entrée du jeu graphique
@@ -408,9 +422,10 @@ Il est utile de les conserver et de les relancer après une modification. Lorsqu
 |---|---|
 | `src/tests/` | Vérifier la compatibilité de l’adaptateur 3D avec les règles du backend, sans charger le moteur graphique. |
 | Fichiers `_test.go` dans `src/3D/` | Vérifier notamment les modèles, animations, sauvegardes et données du monde. |
-| Fichiers `_test.go` dans `src/library/` | Anciens tests du backend et de l’adaptateur ; certains nécessitent une mise à jour, expliquée ci-dessous. |
 | `src/lancement/macos_test.go` | Vérifier la construction des chemins des dépendances Mac, sans lancer le jeu sur un Mac. |
 | Fichiers `_test.go` dans `src/tools/` | Vérifier les générateurs de carte et de musique. |
+
+Les anciens tests de `src/library/` sont maintenant regroupés dans `src/tests/` : `combat_3d_test.go`, `library_3d_test.go` et `or_3d_test.go`, en plus des tests d’adaptation et de progression. Les tests internes à la 3D, au lanceur Mac et aux générateurs restent dans leurs packages respectifs : tous les tests du dépôt ne sont donc pas dans un seul dossier.
 
 ### Comment les lancer ?
 
@@ -430,6 +445,15 @@ go build -o "$env:TEMP/ordta-verification.exe" ./3D
 ```
 
 Ces tests couvrent notamment modèles, animations, sauvegardes et données du monde, ainsi que la visibilité des commandes selon la phase et le rejet des fichiers audio tronqués. Ils ne remplacent pas un essai visuel et sonore.
+
+Pour vérifier **tout le module**, toujours depuis `src/` et avec l’environnement natif préparé :
+
+```powershell
+go test ./...
+go vet ./...
+```
+
+`go vet` recherche des erreurs courantes dans le code sans lancer le jeu. Pour vérifier seulement les règles et la préparation des chemins Mac, sans dépendances graphiques : `go test ./tests ./lancement`.
 
 Pour afficher le nom et le résultat de chaque test, ajouter `-v` :
 
@@ -451,9 +475,9 @@ go test -count=1 ./tests
 - `[no test files]` : aucun fichier de test dans ce package ; cela ne signifie pas que son fonctionnement a été vérifié.
 - `(cached)` : Go a réutilisé un résultat réussi encore valide.
 
-Un échec ne signifie donc pas toujours que le jeu est inutilisable : le test peut lui-même employer un ancien nom de champ, comme dans le cas ci-dessous. Inversement, des tests réussis ne garantissent pas l’absence de tous les bugs, notamment visuels ou sonores.
+Un échec peut venir du code, du test ou de l’environnement de compilation : lire le message avant de conclure. Inversement, des tests réussis ne garantissent pas l’absence de tous les bugs, notamment visuels ou sonores.
 
-**Limite actuelle des anciens tests :** les tests de `src/library/` compilent, mais plusieurs attendent encore les anciennes règles : joueur toujours premier, entraînement sans récompense avec restauration du personnage, marchand sans matériaux et or fixe. Ils ont été laissés intacts. `go test ./library` et donc `go test ./...` échouent tant que ces attentes ne sont pas adaptées à l’initiative aléatoire et aux règles actuelles du backend ; cela n’empêche pas la compilation du jeu ni les suites ciblées ci-dessus.
+**État vérifié le 24 septembre 2026 sous Windows amd64 :** `go test ./...` et `go vet ./...` réussissent, y compris les tests des générateurs. Les attentes obsolètes sur l’initiative, les récompenses et l’entraînement ont été corrigées. `go test ./library` affiche désormais `[no test files]` : les tests correspondants se lancent avec `go test ./tests`. Aucun essai visuel, sonore ou sur Mac n’est inclus dans cette validation.
 
 ### Outils de génération : à ne pas confondre avec les tests
 
@@ -496,6 +520,7 @@ Le [sujet](docs/Projet%20RED%20-%20Sujet.pdf) demande un jeu CLI, un dossier `sr
 | Fabrication et équipement | `forgeron.go`, `equipement.go` |
 | Gobelin, tours, initiative | `monster.go`, `combat.go` |
 | Expérience, attaques, sorts et mana | `experience.go`, `attaquesphysiques.go`, `sort.go` |
+| Introduction et dialogues de l’univers dans le CLI | `library/lore.go`, appelé par la création, le combat et les commerces |
 | « Qui sont-ils ? » : ABBA et Steven Spielberg | Menu CLI et menu 3D |
 | Interface graphique des règles | `library_3d.go` et `3D/monde/` |
 
@@ -521,10 +546,11 @@ La page 6 autorise des valeurs différentes tant que le principe des tâches est
 | Mac : Clang introuvable | Installer les outils Apple avec `xcode-select --install`. |
 | Mac : `al.h`, `codec.h` ou bibliothèque audio introuvable | Installer `brew install openal-soft libvorbis`, puis utiliser le lanceur `go run .`. |
 | Mac : architecture incompatible | Go, Terminal et Homebrew doivent utiliser la même architecture : ARM64 sur Apple Silicon, x86-64 sur Intel. |
+| Mac : `library 'resolv' not found` | Essayer la configuration de `SDKROOT` décrite dans « Installation sur Mac » ; vérifier les outils Apple si elle échoue. |
 | G3N : `uintUndef ... overflows` | Compilation en 32 bits. Le lanceur corrigé impose `GOARCH=amd64` uniquement pour la 3D Windows et vérifie GCC 64 bits. Relancer avec `go run .`. En lancement direct, définir aussi `$env:GOARCH = "amd64"`. |
 | Sauvegarde illisible | Ne pas la supprimer : conserver une copie avant de la renommer ou de la réparer. |
 | Audio indisponible | Vérifier les WAV de `assets/audio/`. |
-| Échec des anciens tests library | Adapter leurs anciennes références côté backend ; voir « Vérifications ». |
+| `go test ./library` indique `[no test files]` | Normal : les tests de ces règles ont été déplacés dans `src/tests/`. |
 
 ## Équipe et ressources
 
