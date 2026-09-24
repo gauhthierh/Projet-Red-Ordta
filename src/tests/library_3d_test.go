@@ -1,9 +1,16 @@
-package library
+package tests
 
-import "testing"
+import (
+	"testing"
+
+	"ordta/library"
+)
 
 func TestInventaire3DUneCaseParExemplaire(t *testing.T) {
-	p := Character{Inventaire: map[string]int{ItemPotionDeVie: 4, ItemPotionDeMana: 2}, CapaciteInventaire: 10}
+	p := library.Character{
+		Inventaire:         map[string]int{library.ItemPotionDeVie: 4, library.ItemPotionDeMana: 2},
+		CapaciteInventaire: 10,
+	}
 	verifier := func(vie, mana int) {
 		t.Helper()
 		objets := p.Inventaire3D()
@@ -17,14 +24,14 @@ func TestInventaire3DUneCaseParExemplaire(t *testing.T) {
 			}
 			comptes[objet.Nom]++
 		}
-		if comptes[ItemPotionDeVie] != vie || comptes[ItemPotionDeMana] != mana {
+		if comptes[library.ItemPotionDeVie] != vie || comptes[library.ItemPotionDeMana] != mana {
 			t.Fatalf("répartition incorrecte : %v", comptes)
 		}
 	}
 	verifier(4, 2)
-	p.RemoveInventory(ItemPotionDeVie)
+	p.RemoveInventory(library.ItemPotionDeVie)
 	verifier(3, 2)
-	p.Inventaire[ItemPotionDeVie] = 8
+	p.Inventaire[library.ItemPotionDeVie] = 8
 	verifier(8, 2)
 	if p.VerifPlaceInventaire() {
 		t.Fatal("10 exemplaires doivent remplir les 10 places")

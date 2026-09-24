@@ -1,20 +1,20 @@
-package library
+package tests
 
-import "testing"
+import (
+	"testing"
+
+	"ordta/library"
+)
 
 func TestOrCombat3D(t *testing.T) {
-	for _, genre := range []TypeMonstre{TypeCorbeau, TypeSanglier, TypeLoup, TypeTroll} {
-		p := joueurCombatTest()
+	for _, genre := range []library.TypeMonstre{library.TypeCorbeau, library.TypeSanglier, library.TypeLoup, library.TypeTroll} {
+		p := joueurPourCombat()
 		p.Attaque = 1000
-		// Une bourse n'occupe pas de case : récompense même avec le sac plein.
+		// Une bourse n'occupe pas de case : récompense même avec le sac plein //
 		p.CapaciteInventaire = p.TotalInventaire()
 		avant := p.Argent
-		c, err := NouveauCombat3D(&p, ModeDuel, genre)
-		if err != nil {
-			t.Fatal(err)
-		}
-		forcerJoueurCommence(c)
-		// L'or est tiré au hasard : on vérifie qu'il reste dans la fourchette du monstre.
+		c := combatOuJoueurCommence(t, &p, library.ModeDuel, genre)
+		// L'or est tiré au hasard : on vérifie qu'il reste dans la fourchette du monstre //
 		orMin := c.Ennemis[0].Monstre.OrMin
 		orMax := c.Ennemis[0].Monstre.OrMax
 		r := c.Attaquer(0)
@@ -34,10 +34,12 @@ func TestOrCombat3D(t *testing.T) {
 	}
 }
 
+// L'entraînement rapporte de l'or (règle de l'équipe) //
+// Seul l'abandon sans victoire ne doit rien rapporter //
 func TestPasOrApresAbandon(t *testing.T) {
-	p := joueurCombatTest()
+	p := joueurPourCombat()
 	avant := p.Argent
-	c, _ := NouveauCombat3D(&p, ModeDuel, TypeLoup)
+	c, _ := library.NouveauCombat3D(&p, library.ModeDuel, library.TypeLoup)
 	c.Quitter3D()
 	if p.Argent != avant || c.OrTotal != 0 {
 		t.Fatal("l'abandon donne de l'or")
