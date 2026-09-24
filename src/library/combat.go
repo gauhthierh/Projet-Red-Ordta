@@ -13,6 +13,7 @@ import (
 // Le combat est au tour par tour //
 func (c *Character) TrainingFight() {
 	adversaire := InitGoblin(c.Niveau)
+	AfficherIntroEntrainement()
 	tour := 1
 	c.Initiative = rand.Intn(10) + 1
 	adversaire.Initiative = rand.Intn(10) + 1
@@ -83,7 +84,7 @@ func (c *Character) CharacterTurn(m *Monster) {
 func (c *Character) FinCombat(m *Monster) bool {
 	if m.PvActuel <= 0 {
 		fmt.Printf("%s est vaincu !\n", m.Nom)
-		fmt.Println("Vous avez gagné l'entraînement, bien joué !")
+		AfficherVictoireEntrainement()
 		gainOr := m.OrMin + rand.Intn(m.OrMax-m.OrMin+1)
 		c.Argent += gainOr
 		fmt.Printf("Vous trouvez %d pièces d'or. Bourse : %d Po\n", gainOr, c.Argent)
@@ -92,7 +93,7 @@ func (c *Character) FinCombat(m *Monster) bool {
 	}
 	if c.PvActuel <= 0 {
 		c.IsDead()
-		fmt.Println("Le combat d'entraînement est terminé.")
+		AfficherDefaiteEntrainement()
 		return true
 	}
 	return false

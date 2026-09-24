@@ -9,6 +9,7 @@ import "fmt"
 // Affiche les équipements fabricables, leur prix et leur recette //
 // Le joueur voit les matériaux qu'il possède déjà //
 func (c *Character) Forgeron() {
+	AfficherAccueilForgeron()
 	for {
 		fmt.Println("\n=== FORGERON ===")
 		fmt.Printf("Bourse : %d Po\n", c.Argent)

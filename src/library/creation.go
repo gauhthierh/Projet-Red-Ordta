@@ -12,6 +12,7 @@ import (
 // Demande le nom et la classe du joueur //
 // Puis crée son personnage //
 func CharacterCreation() Character {
+	AfficherIntroduction()
 	var nom string
 	for {
 		saisie := ReadLine("Entrez le nom de votre personnage : ")
@@ -51,6 +52,7 @@ func FormatName(saisie string) (string, bool) {
 
 // Demande au joueur de choisir sa classe et renvoie sa fiche //
 func ChooseClass() Classe {
+	AfficherDescriptionClasses()
 	for {
 		choix := ReadChoiceEntre("Entrez la classe du personnage (1 pour Humain, 2 pour Elfe, 3 pour Nain) : ", 3)
 		switch choix {

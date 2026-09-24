@@ -18,6 +18,7 @@ type Item struct {
 
 // Affiche les articles, leur prix et leur niveau requis, puis achète l'article choisi //
 func (c *Character) Merchant() {
+	AfficherAccueilMarchand()
 	for {
 		fmt.Println("\n=== MARCHAND ===")
 		fmt.Printf("Bourse : %d Po\n", c.Argent)
